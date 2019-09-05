@@ -16,26 +16,31 @@
             </select>
         </div>
 
-        <TimeTableShow
-                v-if="is_show"
-                :grade="grade" :semester="semester"
-                :timetable_now="timetable_now[0][grade][semester]"></TimeTableShow>
+        <template v-for="(a_year_now,f_grade) in timetable_now" >
+            <template v-for="(a_semester_now,f_semester) in a_year_now">
+                <TimeTableShow
+                        v-show="is_show && f_grade === grade && f_semester === semester"
+                        :grade="f_grade" :semester="f_semester"
+                        :timetable_now="a_semester_now"></TimeTableShow>
 
-        <TimeTableEditor
-                v-else
-                v-on:set="set_now"
-                :grade="grade" :semester="semester" :timetable_now="timetable_now[0][grade][semester]"
-                :timetable_editor="timetable_editor[0][grade][semester]"></TimeTableEditor>
+                <TimeTableEditor
+                        v-show="!is_show && f_grade === grade && f_semester === semester"
+                        v-on:set="set_now"
+                        :grade="f_grade" :semester="f_semester"
+                        :timetable_now="a_semester_now"
+                        :timetable_editor="timetable_editor[f_grade][f_semester]"></TimeTableEditor>
+            </template>
+        </template>
 
-        <button v-if="is_show" v-on:click="is_show = false">
+        <button v-show="is_show" v-on:click="is_show = false">
             編集する
         </button>
 
-        <button v-else v-on:click="put_editor">
+        <button v-show="!is_show" v-on:click="put_editor">
             保存する
         </button>
 
-        <SchoolCreditCalculator></SchoolCreditCalculator>
+        <CreditCalculator :grade="grade" :now="timetable_now"></CreditCalculator>
 
     </div>
 </template>
@@ -46,7 +51,7 @@
 
 
     import TimeTableShow from "../components/ClassSchedule/TimeTableShow";
-    import SchoolCreditCalculator from "../components/ClassSchedule/SchoolCreditCalculator";
+    import CreditCalculator from "../components/ClassSchedule/CreditCalculator";
     import TimeTableEditor from "../components/ClassSchedule/TimeTableEditor";
 
     const URL_BASE = 'http://localhost:3000/travels/timetable';
@@ -59,7 +64,7 @@
                 grade: "year1",
                 semester: "first",
                 major: "kk",
-                timetable_now: [{
+                timetable_now: {
                     "year1": {
                         "first": {
                             "mon": {
@@ -68,10 +73,46 @@
                                     "name": "オブジェクト指向",
                                     "teacher1": "俺　やばい",
                                     "teacher2": "",
-                                    "credit": 0,
-                                    "division": "1",
+                                    "credit": 3,
+                                    "division": "専門",
                                     "type": "必修",
-                                    "syllabus": "",
+                                    "syllabus": "https://jp.vuejs.org/index.html",
+                                },
+                                "2nd": {
+                                    "code": "k1025",
+                                    "name": "マウンティング",
+                                    "teacher1": "桂箱　歌",
+                                    "teacher2": "",
+                                    "credit": 2,
+                                    "division": "総合A",
+                                    "type": "必修",
+                                    "syllabus": "https://vuetifyjs.com/ja/",
+                                },
+                                "3rd": {
+                                    "code": "k1000",
+                                    "name": "楽しい授業",
+                                    "teacher1": "楽氏　舞根",
+                                    "teacher2": "ソーシャル　セルフ　プラトン",
+                                    "credit": 10,
+                                    "division": "総合B",
+                                    "type": "選択",
+                                    "syllabus": "https://syllabus.aitech.ac.jp/ext_syllabus/syllabusReferenceContentsInit.do;jsessionid=6mk2X9OFYrt1rzDqu4P6JPIK.kmap3?subjectId=001300028348&formatCode=1&rowIndex=2&jikanwariSchoolYear=2019",
+                                },
+                                "4th": null,
+                                "5th": null,
+                                "6th": null,
+                                "7th": null
+                            },
+                            "tue": {
+                                "1st": {
+                                    "code": "k1025",
+                                    "name": "マウンティング",
+                                    "teacher1": "桂箱　歌",
+                                    "teacher2": "",
+                                    "credit": 2,
+                                    "division": "総合A",
+                                    "type": "必修",
+                                    "syllabus": "https://vuetifyjs.com/ja/",
                                 },
                                 "2nd": null,
                                 "3rd": null,
@@ -80,17 +121,17 @@
                                 "6th": null,
                                 "7th": null
                             },
-                            "tue": {
-                                "1st": null,
-                                "2nd": null,
-                                "3rd": null,
-                                "4th": null,
-                                "5th": null,
-                                "6th": null,
-                                "7th": null
-                            },
                             "wed": {
-                                "1st": null,
+                                "1st": {
+                                    "code": "k1025",
+                                    "name": "マウンティング",
+                                    "teacher1": "桂箱　歌",
+                                    "teacher2": "",
+                                    "credit": 2,
+                                    "division": "総合A",
+                                    "type": "必修",
+                                    "syllabus": "https://vuetifyjs.com/ja/",
+                                },
                                 "2nd": null,
                                 "3rd": null,
                                 "4th": null,
@@ -99,7 +140,16 @@
                                 "7th": null
                             },
                             "the": {
-                                "1st": null,
+                                "1st": {
+                                    "code": "k1025",
+                                    "name": "オブジェクト指向プログラミング及び演習",
+                                    "teacher1": "桂箱　歌",
+                                    "teacher2": "",
+                                    "credit": 2,
+                                    "division": "総合A",
+                                    "type": "必修",
+                                    "syllabus": "https://vuetifyjs.com/ja/",
+                                },
                                 "2nd": null,
                                 "3rd": null,
                                 "4th": null,
@@ -108,7 +158,16 @@
                                 "7th": null
                             },
                             "fri": {
-                                "1st": null,
+                                "1st": {
+                                    "code": "k1025",
+                                    "name": "マウンティング",
+                                    "teacher1": "桂箱　歌",
+                                    "teacher2": "",
+                                    "credit": 2,
+                                    "division": "総合A",
+                                    "type": "必修",
+                                    "syllabus": "https://vuetifyjs.com/ja/",
+                                },
                                 "2nd": null,
                                 "3rd": null,
                                 "4th": null,
@@ -516,9 +575,8 @@
                             }
                         }
                     }
-                }],
-                timetable_editor: [
-                    {
+                },
+                timetable_editor: {
                         "year1": {
                             "first": {
                                 "mon": {
@@ -528,7 +586,7 @@
                                             "name": "オブジェクト指向",
                                             "teacher1": "俺　やばい",
                                             "teacher2": "",
-                                            "credit": 0,
+                                            "credit": 3,
                                             "division": "1",
                                             "type": "必修",
                                             "syllabus": ""
@@ -538,7 +596,7 @@
                                             "name": "三点倒立",
                                             "teacher1": "俺　やばい",
                                             "teacher2": "",
-                                            "credit": 0,
+                                            "credit": 2,
                                             "division": "1",
                                             "type": "必修",
                                             "syllabus": ""
@@ -1009,14 +1067,13 @@
                             }
                         }
                     }
-                ]
             };
 
         },
         components: {
             TimeTableEditor,
             TimeTableShow,
-            SchoolCreditCalculator,
+            CreditCalculator,
         },
         created() {
             // Json取得
@@ -1044,19 +1101,19 @@
             get_data() {
                 return this.$data["timetable_now"];
             },
-            get_editor(user) {
-                return axios.get(URL_BASE + '/editor', {
-                    params: {
-                        // ここにクエリパラメータを指定する
-                        user: user,
-                    },
-                })
-                    .then((res) => {
-                        Vue.set(this, 'timetable_editor', res.data[0]['editor']);
-                    });
-            },
+            // get_editor(user) {
+            //     return axios.get(URL_BASE + '/editor', {
+            //         params: {
+            //             // ここにクエリパラメータを指定する
+            //             user: user,
+            //         },
+            //     })
+            //         .then((res) => {
+            //             Vue.set(this, 'timetable_editor', res.data['editor']);
+            //         });
+            // },
             set_now(data) {
-                this.$set(this.timetable_now[0][data['grade']][data['semester']][data['day']], data['time'], data['now']);
+                this.$set(this.timetable_now[data['grade']][data['semester']][data['day']], data['time'], data['now']);
                 // this.$emit('GET_NOW');
             },
             put_editor() {

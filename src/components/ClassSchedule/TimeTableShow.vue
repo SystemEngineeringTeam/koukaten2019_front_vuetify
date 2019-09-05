@@ -8,6 +8,7 @@
                     <template v-else-if="grade == 'year2'">2</template>
                     <template v-else-if="grade == 'year3'">3</template>
                     <template v-else>4</template>
+                    <br>
                     <template v-if="semester == 'first'">前期</template>
                     <template v-else>後期</template>
                 </th>
@@ -20,7 +21,7 @@
             </thead>
             <tbody>
             <tr v-for="(classes,day) in timetable_now['mon']">
-                <th>{{day}}</th>
+                <th>{{day.slice(0,1)}}</th>
                 <td v-for="piriods in timetable_now">
                     <TimeTableCell v-if="piriods[day] != null" :now="piriods[day]"></TimeTableCell>
                 </td>

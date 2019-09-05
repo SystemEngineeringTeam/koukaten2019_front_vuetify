@@ -1,11 +1,16 @@
 <template>
     <div>
 
-        {{now['name']}}
+        <b>{{now['name']}}</b>
         <br>
         {{now["type"]}}  {{now["credit"]}}単位
         <br>
         {{now["teacher1"]}}
+        <!--<template v-if="now['teacher2']"> 他</template>-->
+        <br>
+        <!--<v-icon>mdi-help</v-icon>-->
+        <a :href="now['syllabus']" target="_blank">シラバス</a>
+
     </div>
 </template>
 

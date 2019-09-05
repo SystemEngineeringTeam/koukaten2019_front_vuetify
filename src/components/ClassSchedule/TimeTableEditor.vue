@@ -30,8 +30,6 @@
                             :modal_id=grade+semester+day+piriod
                             :now="piriods[piriod]"
                             :data_list="timetable_editor[day][piriod]"
-                            :grade="grade"
-                            :semester="semester"
                             :day="day"
                             :time="piriod"
                             v-on:set_data="set_index_data"
@@ -68,7 +66,7 @@
                     }
                 )
             }
-        }
+        },
     }
 </script>
 
