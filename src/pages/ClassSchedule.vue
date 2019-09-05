@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="wrapper">
         <div>
             <select v-model="grade">
                 <option value="year1">1</option>
@@ -15,6 +15,15 @@
                 <option value="second">後期</option>
             </select>
         </div>
+
+        <v-toolbar>
+            <v-toolbar-items>
+                <template v-for="g in grades">
+                    <v-btn text v-on:click="set_grade(g); set_semester('first')"><b>{{g.slice(-1)}} 前期</b></v-btn>
+                    <v-btn text v-on:click="set_grade(g); set_semester('second')"><b>{{g.slice(-1)}} 後期</b></v-btn>
+                </template>
+            </v-toolbar-items>
+        </v-toolbar>
 
         <template v-for="(a_year_now,f_grade) in timetable_now" >
             <template v-for="(a_semester_now,f_semester) in a_year_now">
@@ -64,6 +73,8 @@
                 grade: "year1",
                 semester: "first",
                 major: "kk",
+                grades: ['year1', 'year2', 'year3', 'year4'],
+                semesters: ['first', 'second'],
                 timetable_now: {
                     "year1": {
                         "first": {
@@ -1086,6 +1097,12 @@
         },
         computed: {},
         methods: {
+            set_grade(g){
+                this.grade = g;
+            },
+            set_semester(s){
+                this.semester = s;
+            },
             // get_now(user) {
             //     return axios.get(URL_BASE, {
             //         params: {
@@ -1133,7 +1150,8 @@
 
 
 <style scoped>
-    p {
-        display: inline;
+    .wrapper {
+        padding-left: 20px;
+        padding-right: 20px;
     }
 </style>

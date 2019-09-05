@@ -1,5 +1,5 @@
 <template>
-    <div class="wrapper">
+    <div >
         <table class="table table-bordered">
             <thead class="thead-dark">
             <tr>
@@ -47,10 +47,7 @@
 </script>
 
 <style scoped>
-    .wrapper {
-        padding-left: 20px;
-        padding-right: 20px;
-    }
+
 
     table {
         height: 100%;

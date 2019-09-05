@@ -1,5 +1,6 @@
 <template>
-    <div class="wrapper">
+    <div>
+        {{get_credit(now[grade])}}
         <table class="table table-bordered">
             <thead class="thead-dark">
             <tr>
@@ -68,6 +69,21 @@
             'grade',
         ],
         methods: {
+            get_credit(obj) {
+                let c = 0;
+                if (typeof obj === 'object') {
+                    for (var key in obj) {
+                        if (key == 'credit') {
+                            c += obj['credit'];
+                        } else {
+                            c += this.get_credit(obj[key])
+                        }
+                    }
+                    return c
+                }else {
+                    return 0
+                }
+            }
             // get_kyoutu_credit: function (grade) {
             //     let num = 0;
             //     for (let semester in this.semesters) {
@@ -86,8 +102,4 @@
 </script>
 
 <style scoped>
-    .wrapper {
-        padding-left: 20px;
-        padding-right: 20px;
-    }
 </style>
