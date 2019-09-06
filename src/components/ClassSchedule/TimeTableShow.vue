@@ -1,34 +1,41 @@
 <template>
-    <div >
-        <table class="table table-bordered">
-            <thead class="thead-dark">
-            <tr>
-                <th scope="col">
-                    <template v-if="grade == 'year1'">1</template>
-                    <template v-else-if="grade == 'year2'">2</template>
-                    <template v-else-if="grade == 'year3'">3</template>
-                    <template v-else>4</template>
-                    <br>
-                    <template v-if="semester == 'first'">前期</template>
-                    <template v-else>後期</template>
-                </th>
-                <th scope="col">月</th>
-                <th scope="col">火</th>
-                <th scope="col">水</th>
-                <th scope="col">木</th>
-                <th scope="col">金</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr v-for="(classes,day) in timetable_now['mon']">
-                <th>{{day.slice(0,1)}}</th>
-                <td v-for="piriods in timetable_now">
-                    <TimeTableCell v-if="piriods[day] != null" :now="piriods[day]"></TimeTableCell>
-                </td>
-            </tr>
+    <div>
+        <!--<table class="table table-bordered">-->
+        <!--<thead class="thead-dark">-->
+        <!--<tr>-->
+        <!--<th scope="col">-->
+        <!--<template v-if="grade == 'year1'">1</template>-->
+        <!--<template v-else-if="grade == 'year2'">2</template>-->
+        <!--<template v-else-if="grade == 'year3'">3</template>-->
+        <!--<template v-else>4</template>-->
+        <!--<br>-->
+        <!--<template v-if="semester == 'first'">前期</template>-->
+        <!--<template v-else>後期</template>-->
+        <!--</th>-->
+        <!--<th scope="col">月</th>-->
+        <!--<th scope="col">火</th>-->
+        <!--<th scope="col">水</th>-->
+        <!--<th scope="col">木</th>-->
+        <!--<th scope="col">金</th>-->
+        <!--</tr>-->
+        <!--</thead>-->
+        <!--<tbody>-->
+        <!--<tr v-for="(classes,day) in timetable_now['mon']">-->
+        <!--<th>{{day.slice(0,1)}}</th>-->
+        <!--<td v-for="piriods in timetable_now">-->
+        <!--<TimeTableCell v-if="piriods[day] != null" :now="piriods[day]"></TimeTableCell>-->
+        <!--</td>-->
+        <!--</tr>-->
 
-            </tbody>
-        </table>
+        <!--</tbody>-->
+        <!--</table>-->
+        {{now[0]}}
+        <template v-for="n in now">
+            <template v-for="day in weekdays">
+                <!--{{n}}-->
+                <!--<h3 v-if="now[]"></h3>-->
+            </template>
+        </template>
     </div>
 
 
@@ -39,10 +46,15 @@
 
     export default {
         name: "TimeTableShow",
+        data() {
+            return {
+                weekdays: ['mon', 'tue', 'wed', 'thu', 'fry'],
+            }
+        },
         components: {
             TimeTableCell,
         },
-        props: ['grade', 'semester', 'timetable_now'],
+        props: ['now'],
     }
 </script>
 

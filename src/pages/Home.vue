@@ -1,5 +1,5 @@
 <template>
-    
+    <h1>ほーむ</h1>
 </template>
 
 <script>

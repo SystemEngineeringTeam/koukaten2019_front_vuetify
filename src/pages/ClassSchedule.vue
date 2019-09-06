@@ -3,29 +3,28 @@
         <v-toolbar>
             <v-toolbar-items>
                 <template v-for="grade in grades">
-                    <v-btn text v-for="semester in semesters" v-on:click="set_grade(grade); set_semester(semester)"><b>{{grade}}{{semester}}</b>
-                    </v-btn>
+                    <v-btn text v-for="semester in semesters" v-on:click="set_grade(grade); set_semester(semester)"><b>{{grade}}{{semester}}</b></v-btn>
                 </template>
             </v-toolbar-items>
         </v-toolbar>
 
-        <!--<template v-for="grade in grades">-->
-        <!--<template v-for="semester in semesters">-->
-        <!--<TimeTableShow-->
-        <!--v-show="is_show && f_grade === grade && f_semester === semester"-->
-        <!--:grade="f_grade" :semester="f_semester"-->
-        <!--:timetable_now="a_semester_now"></TimeTableShow>-->
+        <v-btn v-on:click="get_now()"></v-btn>
 
-        <!--<TimeTableEditor-->
-        <!--v-show="!is_show && f_grade === grade && f_semester === semester"-->
-        <!--v-on:set="set_now"-->
-        <!--:grade="f_grade" :semester="f_semester"-->
-        <!--:timetable_now="a_semester_now"-->
-        <!--:timetable_editor="timetable_editor[f_grade][f_semester]"></TimeTableEditor>-->
-        <!--</template>-->
-        <!--</template>-->
+        <template v-for="grade in grades">
+            <template v-for="semester in semesters">
+                <TimeTableShow v-if="grade == looking_grade && semester == looking_semester" :now="get_grade_half_lecture(timetable_now, grade, semester)"></TimeTableShow>
 
-        {{timetable}}
+                <!--<TimeTableEditor-->
+                <!--v-show="!is_show && f_grade === grade && f_semester === semester"-->
+                <!--v-on:set="set_now"-->
+                <!--:grade="f_grade" :semester="f_semester"-->
+                <!--:timetable_now="a_semester_now"-->
+                <!--:timetable_editor="timetable_editor[f_grade][f_semester]"></TimeTableEditor>-->
+            </template>
+        </template>
+
+        <!--{{timetable}}-->
+        <!--{{timetable_now}}-->
 
         <!--<button v-show="is_show" v-on:click="is_show = false">-->
         <!--編集する-->
@@ -46,11 +45,9 @@
 
     axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
 
-    // import TimeTableShow from "../components/ClassSchedule/TimeTableShow";
+    import TimeTableShow from "../components/ClassSchedule/TimeTableShow";
     // import CreditCalculator from "../components/ClassSchedule/CreditCalculator";
     // import TimeTableEditor from "../components/ClassSchedule/TimeTableEditor";
-
-    const URL_BASE = 'http://localhost:3000/timetable';
 
     export default {
         data() {
@@ -123,7 +120,7 @@
                         "classification": "専門",
                         "compulsory": "選択",
                         "isenglish": false,
-                        "grade": "1",
+                        "grade": 1,
                         "semester": "前期",
                         "weekday": "thu",
                         "lec_time": 1,
@@ -206,15 +203,13 @@
             };
 
         },
-        // components: {
-        //     TimeTableEditor,
-        //     TimeTableShow,
-        //     CreditCalculator,
-        // },
+        components: {
+            TimeTableShow,
+        },
         created() {
-            // Json取得
-            this.get_now();
-            // Json取得後に呼び出される
+            // // Json取得
+            // this.get_now();
+            // // Json取得後に呼び出される
             // this.$on('GET_NOW', () => {
             //     this.timetable = this.get_data();
             // });
@@ -223,27 +218,36 @@
         computed: {},
         methods: {
             set_grade(g) {
-                this.grade = g;
+                this.looking_grade = g;
             },
             set_semester(s) {
-                this.semester = s;
+                this.looking_semester = s;
             },
-            // get_registration_from_grade(g) {
-            //     let c = [];
-            //     this.timetable_now.forEach()
-            //     if (i.grade === g) {
-            //         c.push(i)
-            //     }
-            // },
+            get_grade_lecture(lectures, grade) {
+                let c = [];
+                lectures.forEach(function (obj) {
+                    if (obj.grade === grade) {
+                        c.push(obj)
+                    }
+                });
+                return c;
+            },
+            get_grade_half_lecture(lectures, grade, semester) {
+                let c = [];
+                lectures.forEach(function (obj) {
+                    if (obj.grade === grade && obj.semester === semester) {
+                        c.push(obj)
+                    }
+                });
+                return c;
+            },
             get_now() {
-                return axios.get(URL_BASE)
-                    .then((res) => {
-                        Vue.set(this, 'timetable', res.data);
-                        console.log(res);
-                    })
-                    .catch(error => {
-                        console.log(error);
-                    });
+                return axios.get(process.env.VUE_APP_URL_TIMETABLE
+                ).then((res) => {
+                    Vue.set(this, 'timetable', res.data);
+                }).catch(error => {
+                    console.log(error);
+                });
             },
             // プロパティ名を指定してデータを取得
             get_data() {
