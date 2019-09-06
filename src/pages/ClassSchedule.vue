@@ -44,12 +44,13 @@
     import Vue from 'vue';
     import axios from 'axios';
 
+    axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
 
-    import TimeTableShow from "../components/ClassSchedule/TimeTableShow";
-    import CreditCalculator from "../components/ClassSchedule/CreditCalculator";
-    import TimeTableEditor from "../components/ClassSchedule/TimeTableEditor";
+    // import TimeTableShow from "../components/ClassSchedule/TimeTableShow";
+    // import CreditCalculator from "../components/ClassSchedule/CreditCalculator";
+    // import TimeTableEditor from "../components/ClassSchedule/TimeTableEditor";
 
-    const URL_BASE = 'localhost:3000/timetable';
+    const URL_BASE = 'http://localhost:3000/timetable';
 
     export default {
         data() {
@@ -205,11 +206,11 @@
             };
 
         },
-        components: {
-            TimeTableEditor,
-            TimeTableShow,
-            CreditCalculator,
-        },
+        // components: {
+        //     TimeTableEditor,
+        //     TimeTableShow,
+        //     CreditCalculator,
+        // },
         created() {
             // Json取得
             this.get_now();
@@ -227,18 +228,22 @@
             set_semester(s) {
                 this.semester = s;
             },
-            get_registration_from_grade(g) {
-                let c = [];
-                this.timetable_now.forEach()
-                if (i.grade === g) {
-                    c.push(i)
-                }
-            },
+            // get_registration_from_grade(g) {
+            //     let c = [];
+            //     this.timetable_now.forEach()
+            //     if (i.grade === g) {
+            //         c.push(i)
+            //     }
+            // },
             get_now() {
-                return axios.get(URL_BASE).then((res) => {
-                    Vue.set(this, 'timetable', res.data);
-                    // this.$emit('GET_NOW');
-                });
+                return axios.get(URL_BASE)
+                    .then((res) => {
+                        Vue.set(this, 'timetable', res.data);
+                        console.log(res);
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    });
             },
             // プロパティ名を指定してデータを取得
             get_data() {
