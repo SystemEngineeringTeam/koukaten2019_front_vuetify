@@ -1,55 +1,41 @@
 <template>
     <div class="wrapper">
-        <div>
-            <select v-model="grade">
-                <option value="year1">1</option>
-                <option value="year2">2</option>
-                <option value="year3">3</option>
-                <option value="year4">4</option>
-            </select>
-
-            <p> {{ major }}</p>
-
-            <select v-model="semester">
-                <option value="first">前期</option>
-                <option value="second">後期</option>
-            </select>
-        </div>
-
         <v-toolbar>
             <v-toolbar-items>
-                <template v-for="g in grades">
-                    <v-btn text v-on:click="set_grade(g); set_semester('first')"><b>{{g.slice(-1)}} 前期</b></v-btn>
-                    <v-btn text v-on:click="set_grade(g); set_semester('second')"><b>{{g.slice(-1)}} 後期</b></v-btn>
+                <template v-for="grade in grades">
+                    <v-btn text v-for="semester in semesters" v-on:click="set_grade(grade); set_semester(semester)"><b>{{grade}}{{semester}}</b>
+                    </v-btn>
                 </template>
             </v-toolbar-items>
         </v-toolbar>
 
-        <template v-for="(a_year_now,f_grade) in timetable_now">
-            <template v-for="(a_semester_now,f_semester) in a_year_now">
-                <TimeTableShow
-                        v-show="is_show && f_grade === grade && f_semester === semester"
-                        :grade="f_grade" :semester="f_semester"
-                        :timetable_now="a_semester_now"></TimeTableShow>
+        <!--<template v-for="grade in grades">-->
+        <!--<template v-for="semester in semesters">-->
+        <!--<TimeTableShow-->
+        <!--v-show="is_show && f_grade === grade && f_semester === semester"-->
+        <!--:grade="f_grade" :semester="f_semester"-->
+        <!--:timetable_now="a_semester_now"></TimeTableShow>-->
 
-                <TimeTableEditor
-                        v-show="!is_show && f_grade === grade && f_semester === semester"
-                        v-on:set="set_now"
-                        :grade="f_grade" :semester="f_semester"
-                        :timetable_now="a_semester_now"
-                        :timetable_editor="timetable_editor[f_grade][f_semester]"></TimeTableEditor>
-            </template>
-        </template>
+        <!--<TimeTableEditor-->
+        <!--v-show="!is_show && f_grade === grade && f_semester === semester"-->
+        <!--v-on:set="set_now"-->
+        <!--:grade="f_grade" :semester="f_semester"-->
+        <!--:timetable_now="a_semester_now"-->
+        <!--:timetable_editor="timetable_editor[f_grade][f_semester]"></TimeTableEditor>-->
+        <!--</template>-->
+        <!--</template>-->
 
-        <button v-show="is_show" v-on:click="is_show = false">
-            編集する
-        </button>
+        {{timetable}}
 
-        <button v-show="!is_show" v-on:click="put_editor">
-            保存する
-        </button>
+        <!--<button v-show="is_show" v-on:click="is_show = false">-->
+        <!--編集する-->
+        <!--</button>-->
 
-        <CreditCalculator :grade="grade" :now="timetable_now"></CreditCalculator>
+        <!--<button v-show="!is_show" v-on:click="put_editor">-->
+        <!--保存する-->
+        <!--</button>-->
+
+        <!--<CreditCalculator :grade="grade" :now="timetable_now"></CreditCalculator>-->
 
     </div>
 </template>
@@ -63,29 +49,159 @@
     import CreditCalculator from "../components/ClassSchedule/CreditCalculator";
     import TimeTableEditor from "../components/ClassSchedule/TimeTableEditor";
 
-    const URL_BASE = 'http://localhost:3000/travels/timetable';
+    const URL_BASE = 'localhost:3000/timetable';
 
     export default {
         data() {
             return {
                 user: 1,
                 is_show: true,
-                grade: "year1",
-                semester: "first",
+                looking_grade: 1,
+                looking_semester: "前期",
                 major: "kk",
-                grades: ['year1', 'year2', 'year3', 'year4'],
-                semesters: ['first', 'second'],
-                timetable_now: [{
-
-                },{
-
-                }],
-                timetable_editor: [{
-
-                },{
-
-                }
-                ]
+                grades: [1, 2, 3, 4],
+                semesters: ['前期', '後期'],
+                timetable_now: [
+                    {
+                        "subject_code": "k1025",
+                        "class_code": "20",
+                        "name": "普通の授業",
+                        "teacher_name1": "秦 健心",
+                        "teacher_name2": "先 生名",
+                        "classification": "総合B",
+                        "compulsory": "選択",
+                        "isenglish": false,
+                        "grade": 1,
+                        "semester": "前期",
+                        "weekday": "mon",
+                        "lec_time": 1,
+                        "continuous": 1,
+                        "unit": 2,
+                        "syllabus": "https://hackmd.io/@8UP5vEhpRieQqC06SyUfsg/S1WpVJSBH",
+                    },
+                    {
+                        "subject_code": "k1025",
+                        "class_code": "20",
+                        "name": "英語の授業",
+                        "teacher_name1": "秦 健心",
+                        "teacher_name2": "先 生名",
+                        "classification": "総合A",
+                        "compulsory": "必修",
+                        "isenglish": true,
+                        "grade": 1,
+                        "semester": "前期",
+                        "weekday": "tue",
+                        "lec_time": 1,
+                        "continuous": 1,
+                        "unit": 2,
+                        "syllabus": "https://hackmd.io/@8UP5vEhpRieQqC06SyUfsg/S1WpVJSBH",
+                    },
+                    {
+                        "subject_code": "k1025",
+                        "class_code": "20",
+                        "name": "2コマの必修授業",
+                        "teacher_name1": "秦 健心",
+                        "teacher_name2": "先 生名",
+                        "classification": "共通",
+                        "compulsory": "選択",
+                        "isenglish": false,
+                        "grade": 1,
+                        "semester": "前期",
+                        "weekday": "wed",
+                        "lec_time": 1,
+                        "continuous": 2,
+                        "unit": 3,
+                        "syllabus": "https://hackmd.io/@8UP5vEhpRieQqC06SyUfsg/S1WpVJSBH",
+                    },
+                    {
+                        "subject_code": "k1025",
+                        "class_code": "20",
+                        "name": "2コマの選択授業",
+                        "teacher_name1": "秦 健心",
+                        "teacher_name2": "先 生名",
+                        "classification": "専門",
+                        "compulsory": "選択",
+                        "isenglish": false,
+                        "grade": "1",
+                        "semester": "前期",
+                        "weekday": "thu",
+                        "lec_time": 1,
+                        "continuous": 1,
+                        "unit": 2,
+                        "syllabus": "https://connpass.com/dashboard/",
+                    },
+                ],
+                timetable_editor: [
+                    {
+                        "subject_code": "k1025",
+                        "class_code": "20",
+                        "name": "普通の授業",
+                        "teacher_name1": "秦 健心",
+                        "teacher_name2": "先 生名",
+                        "classification": "総合B",
+                        "compulsory": "選択",
+                        "isenglish": false,
+                        "grade": 1,
+                        "semester": "前期",
+                        "weekday": "mon",
+                        "lec_time": 2,
+                        "continuous": 1,
+                        "unit": 2,
+                        "syllabus": "https://hackmd.io/@8UP5vEhpRieQqC06SyUfsg/S1WpVJSBH",
+                    },
+                    {
+                        "subject_code": "k1025",
+                        "class_code": "20",
+                        "name": "英語の授業",
+                        "teacher_name1": "秦 健心",
+                        "teacher_name2": "先 生名",
+                        "classification": "総合A",
+                        "compulsory": "必修",
+                        "isenglish": true,
+                        "grade": 1,
+                        "semester": "前期",
+                        "weekday": "tue",
+                        "lec_time": 2,
+                        "continuous": 1,
+                        "unit": 2,
+                        "syllabus": "https://hackmd.io/@8UP5vEhpRieQqC06SyUfsg/S1WpVJSBH",
+                    },
+                    {
+                        "subject_code": "k1025",
+                        "class_code": "20",
+                        "name": "2コマの必修授業",
+                        "teacher_name1": "秦 健心",
+                        "teacher_name2": "先 生名",
+                        "classification": "共通",
+                        "compulsory": "選択",
+                        "isenglish": false,
+                        "grade": 1,
+                        "semester": "前期",
+                        "weekday": "wed",
+                        "lec_time": 2,
+                        "continuous": 2,
+                        "unit": 3,
+                        "syllabus": "https://hackmd.io/@8UP5vEhpRieQqC06SyUfsg/S1WpVJSBH",
+                    },
+                    {
+                        "subject_code": "k1025",
+                        "class_code": "20",
+                        "name": "2コマの選択授業",
+                        "teacher_name1": "秦 健心",
+                        "teacher_name2": "先 生名",
+                        "classification": "専門",
+                        "compulsory": "選択",
+                        "isenglish": false,
+                        "grade": "1",
+                        "semester": "前期",
+                        "weekday": "thu",
+                        "lec_time": 2,
+                        "continuous": 1,
+                        "unit": 2,
+                        "syllabus": "https://connpass.com/dashboard/",
+                    },
+                ],
+                timetable: []
             };
 
         },
@@ -96,10 +212,10 @@
         },
         created() {
             // Json取得
-            // this.get_now(this.user);
+            this.get_now();
             // Json取得後に呼び出される
             // this.$on('GET_NOW', () => {
-            //     this.timetable_now = this.get_data();
+            //     this.timetable = this.get_data();
             // });
             // this.get_editor(this.user);
         },
@@ -111,17 +227,19 @@
             set_semester(s) {
                 this.semester = s;
             },
-            // get_now(user) {
-            //     return axios.get(URL_BASE, {
-            //         params: {
-            //             // ここにクエリパラメータを指定する
-            //             user: user,
-            //         },
-            //     }).then((res) => {
-            //         Vue.set(this, 'timetable_now', res.data);
-            //         this.$emit('GET_NOW');
-            //     });
-            // },
+            get_registration_from_grade(g) {
+                let c = [];
+                this.timetable_now.forEach()
+                if (i.grade === g) {
+                    c.push(i)
+                }
+            },
+            get_now() {
+                return axios.get(URL_BASE).then((res) => {
+                    Vue.set(this, 'timetable', res.data);
+                    // this.$emit('GET_NOW');
+                });
+            },
             // プロパティ名を指定してデータを取得
             get_data() {
                 return this.$data["timetable_now"];
@@ -152,14 +270,14 @@
                         console.log(error);
                     });
             },
-        }
+        },
     }
 </script>
 
 
 <style scoped>
     .wrapper {
-        padding-left: 20px;
-        padding-right: 20px;
+        padding-left: 1%;
+        padding-right: 1%;
     }
 </style>
