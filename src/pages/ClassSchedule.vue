@@ -6,7 +6,7 @@
         <v-btn v-on:click="is_edit = true"> 授業を登録する</v-btn>
         <v-btn v-on:click="is_edit = false"> 登録を終わる</v-btn>
 
-        {{ timetable_editor }}
+        <!-- {{ timetable_editor }} -->
 
         <v-tabs v-model="tabs">
             <v-tab v-for="timetable in timetables" :key="timetable.id"><b>{{timetable.grade}}{{timetable.semester}}</b>
