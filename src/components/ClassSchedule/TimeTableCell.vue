@@ -1,15 +1,15 @@
 <template>
     <div>
+        <div v-if="lecture==null">
+            <div> </div>
+        </div>
 
-        <b>{{now['name']}}</b>
-        <br>
-        {{now["type"]}}  {{now["credit"]}}単位
-        <br>
-        {{now["teacher1"]}}
-        <!--<template v-if="now['teacher2']"> 他</template>-->
-        <br>
-        <!--<v-icon>mdi-help</v-icon>-->
-        <a :href="now['syllabus']" target="_blank">シラバス</a>
+        <div v-else>
+            <v-card-text><b>{{lecture['name']}}</b> {{lecture["unit"]}}単位</v-card-text>
+            <v-card-actions>
+                <v-btn :href="lecture['syllabus']" target="_blank">シラバス</v-btn>
+            </v-card-actions>
+        </div>
 
     </div>
 </template>
@@ -19,21 +19,23 @@
     export default {
         name: "TimeTableCell",
         props: [
-            'now',
+            'lecture',
         ],
     }
 </script>
 
 <style scoped>
-    .height100{
+    .height100 {
         height: 100%;
     }
-    .register_button{
+
+    .register_button {
         width: 100%;
         height: 100%;
         padding: 5%;
     }
-    .pickup_button{
+
+    .pickup_button {
         border: none;
         outline: none;
         /*appearance: none;*/

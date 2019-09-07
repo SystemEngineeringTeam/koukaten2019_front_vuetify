@@ -29,12 +29,43 @@
 
         <!--</tbody>-->
         <!--</table>-->
-        {{now[0]}}
-        <template v-for="n in now">
-            <template v-for="day in weekdays">
-                <!--{{n}}-->
-                <!--<h3 v-if="now[]"></h3>-->
-            </template>
+
+
+        <!--<v-expansion-panels>-->
+        <!--<v-expansion-panel v-for="(day,i) in weekdays" :key="i">-->
+        <!--<v-expansion-panel-header>{{day}}</v-expansion-panel-header>-->
+        <!--<v-expansion-panel-content>-->
+        <!--&lt;!&ndash;<template v-for="(time, i) in 7">&ndash;&gt;-->
+        <!--<v-card max-width="344" class="mx-auto">-->
+        <!--<v-card-title>I'm a title</v-card-title>-->
+        <!--<v-card-text>I'm card text</v-card-text>-->
+        <!--<v-card-actions>-->
+        <!--<v-btn text>Click</v-btn>-->
+        <!--</v-card-actions>-->
+        <!--</v-card>-->
+        <!--&lt;!&ndash;</template>&ndash;&gt;-->
+        <!--</v-expansion-panel-content>-->
+        <!--</v-expansion-panel>-->
+        <!--</v-expansion-panels>-->
+
+
+        <template v-for="(day, i) in weekdays">
+            <v-card>
+                <v-card-title class="blue lighten-1">{{days_name[i]}}曜日</v-card-title>
+
+                <v-list>
+                    <template v-for="time in 7">
+                        <v-divider></v-divider>
+                        <v-subheader>{{time}}限目</v-subheader>
+                        <v-list-item>
+                            <TimeTableCell v-if="now" :lecture="get_one_lecture(now, day, time)"></TimeTableCell>
+                        </v-list-item>
+
+                    </template>
+                </v-list>
+
+
+            </v-card>
         </template>
     </div>
 
@@ -49,12 +80,24 @@
         data() {
             return {
                 weekdays: ['mon', 'tue', 'wed', 'thu', 'fry'],
+                days_name: ['月', '火', '水', '木', '金']
             }
         },
         components: {
             TimeTableCell,
         },
-        props: ['now'],
+        props: ['now', 'is_show'],
+        methods: {
+            get_one_lecture(lectures, day, time) {
+                let c;
+                lectures.forEach(function (obj) {
+                    if (obj.weekday === day && obj.lec_time === time) {
+                        c = obj;
+                    }
+                });
+                return c;
+            },
+        }
     }
 </script>
 
