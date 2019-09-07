@@ -1,7 +1,7 @@
 <template>
     <div class="wrapper">
 
-        <v-btn v-on:click="get_now()">GET</v-btn>
+        <v-btn v-on:click="get_editor('kk')">GET</v-btn>
         <v-btn v-on:click="is_show = false"> 授業を登録する</v-btn>
         <v-btn v-on:click="is_show = true"> 登録を終わる</v-btn>
 
@@ -286,17 +286,17 @@
             get_data() {
                 return this.$data["timetable_now"];
             },
-            // get_editor(user) {
-            //     return axios.get(URL_BASE + '/editor', {
-            //         params: {
-            //             // ここにクエリパラメータを指定する
-            //             user: user,
-            //         },
-            //     })
-            //         .then((res) => {
-            //             Vue.set(this, 'timetable_editor', res.data['editor']);
-            //         });
-            // },
+            get_editor(student) {
+                return axios.get(process.env.VUE_APP_URL_EDITOR, {
+                    params: {
+                        // ここにクエリパラメータを指定する
+                        student: student,
+                    },
+                })
+                    .then((res) => {
+                        Vue.set(this, 'timetable_editor', res.data['editor']);
+                    });
+            },
             set_now(data) {
                 this.$set(this.timetable_now[data['grade']][data['semester']][data['day']], data['time'], data['now']);
                 // this.$emit('GET_NOW');
