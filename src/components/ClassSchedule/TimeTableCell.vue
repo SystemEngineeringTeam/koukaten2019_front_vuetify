@@ -1,13 +1,18 @@
 <template>
     <div>
         <div v-if="lecture==null">
-            <div> </div>
+            <v-card-actions v-if="is_edit && can_register">
+                <v-btn>授業を登録する</v-btn>
+            </v-card-actions>
         </div>
 
         <div v-else>
             <v-card-text><b>{{lecture['name']}}</b> {{lecture["unit"]}}単位</v-card-text>
             <v-card-actions>
                 <v-btn :href="lecture['syllabus']" target="_blank">シラバス</v-btn>
+            </v-card-actions>
+            <v-card-actions v-if="is_edit && can_register">
+                <v-btn>授業を登録する</v-btn>
             </v-card-actions>
         </div>
 
@@ -20,6 +25,8 @@
         name: "TimeTableCell",
         props: [
             'lecture',
+            'is_edit',
+            'can_register'
         ],
     }
 </script>

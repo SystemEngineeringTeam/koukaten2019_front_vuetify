@@ -58,7 +58,7 @@
                         <v-divider></v-divider>
                         <v-subheader>{{time}}限目</v-subheader>
                         <v-list-item>
-                            <TimeTableCell v-if="now" :lecture="get_one_lecture(now, day, time)"></TimeTableCell>
+                            <TimeTableCell :is_edit="is_edit" :lecture="get_one_lecture(now_register, day, time)" :can_register="get_one_time_lectures(can_register, day, time)"></TimeTableCell>
                         </v-list-item>
 
                     </template>
@@ -86,13 +86,22 @@
         components: {
             TimeTableCell,
         },
-        props: ['now', 'is_show'],
+        props: ['now_register', 'can_register', 'is_edit'],
         methods: {
             get_one_lecture(lectures, day, time) {
                 let c;
                 lectures.forEach(function (obj) {
                     if (obj.weekday === day && obj.lec_time === time) {
                         c = obj;
+                    }
+                });
+                return c;
+            },
+            get_one_time_lectures(lectures, day, time) {
+                let c = [];
+                lectures.forEach(function (obj) {
+                    if (obj.weekday === day && obj.lec_time === time) {
+                        c.push(obj)
                     }
                 });
                 return c;

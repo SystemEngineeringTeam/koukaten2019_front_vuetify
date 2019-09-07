@@ -1,9 +1,12 @@
 <template>
     <div class="wrapper">
 
+
         <v-btn v-on:click="get_editor('kk')">GET</v-btn>
-        <v-btn v-on:click="is_show = false"> 授業を登録する</v-btn>
-        <v-btn v-on:click="is_show = true"> 登録を終わる</v-btn>
+        <v-btn v-on:click="is_edit = true"> 授業を登録する</v-btn>
+        <v-btn v-on:click="is_edit = false"> 登録を終わる</v-btn>
+
+        {{ timetable_editor }}
 
         <v-tabs v-model="tabs">
             <v-tab v-for="timetable in timetables" :key="timetable.id"><b>{{timetable.grade}}{{timetable.semester}}</b>
@@ -11,11 +14,7 @@
         </v-tabs>
         <v-tabs-items v-model="tabs">
             <v-tab-item v-for="timetable in timetables" :key="timetable.id">
-                <TimeTableShow v-if="is_show "
-                               :now="get_grade_half_lecture(timetable_now, timetable.grade, timetable.semester)"></TimeTableShow>
-
-                <TimeTableEditor v-if="!is_show"
-                                 :now="get_grade_half_lecture(timetable_now, timetable.grade, timetable.semester)"></TimeTableEditor>
+                <TimeTableShow :is_edit="is_edit" :now_register="get_grade_half_lectures(timetable_now, timetable.grade, timetable.semester)" :can_register="get_grade_half_lectures(timetable_now, timetable.grade, timetable.semester)"></TimeTableShow>
             </v-tab-item>
         </v-tabs-items>
 
@@ -80,6 +79,7 @@
                 tabs: null,
                 user: 1,
                 is_show: true,
+                is_edit: false,
                 looking_grade: 1,
                 looking_semester: "前期",
                 major: "kk",
@@ -265,7 +265,7 @@
                 });
                 return c;
             },
-            get_grade_half_lecture(lectures, grade, semester) {
+            get_grade_half_lectures(lectures, grade, semester) {
                 let c = [];
                 lectures.forEach(function (obj) {
                     if (obj.grade === grade && obj.semester === semester) {
@@ -294,7 +294,7 @@
                     },
                 })
                     .then((res) => {
-                        Vue.set(this, 'timetable_editor', res.data['editor']);
+                        Vue.set(this, 'timetable_editor', res.data);
                     });
             },
             set_now(data) {
