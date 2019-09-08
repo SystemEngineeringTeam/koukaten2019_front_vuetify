@@ -1,6 +1,6 @@
 <template>
-    <div>
-        {{get_credit(now[grade])}}
+  <div>
+    <!-- {{get_credit(now[grade])}}
         <table class="table table-bordered">
             <thead class="thead-dark">
             <tr>
@@ -28,78 +28,145 @@
             </tr>
 
             </tbody>
-        </table>
-    </div>
+    </table>-->
+    <v-simple-table>
+      <br>
+      <tr>
+        <td class="font_size">単位表</td>
+        <td class="font_size">総単位数</td>
+        <td class="font_size">共通教育科目</td>
+        <td class="font_size">専門共通科目</td>
+        <td class="font_size">総合A</td>
+        <td class="font_size">総合B</td>
+        <td class="font_size">外国語</td>
+      </tr>
+      <tr>
+        <td>１年次の履修単位</td>
+        <td>/48</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+      </tr>
+      <tr>
+        <td>2年次の履修単位</td>
+        <td>/48</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+      </tr>
+      <tr>
+        <td>3年次の履修単位</td>
+        <td>/48</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+      </tr>
+      <tr>
+        <td>4年次の履修単位</td>
+        <td>/48</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+      </tr>
+      <tr>
+        <td>必修</td>
+        <td>/48</td>
+        <td>/4</td>
+        <td>/31</td>
+        <td>/4</td>
+        <td>必修はありません</td>
+        <td>/4</td>
+      </tr>
+      <tr>
+        <td>合計</td>
+        <td>/124</td>
+        <td>4/10</td>
+        <td>31/94</td>
+        <td>4/8</td>
+        <td>/12</td>
+        <td>/8</td>
+      </tr>
+    </v-simple-table>
+  </div>
 </template>
 
 <script>
-    import CreditCalculatorCell from './CreditCalculatorCell'
+import CreditCalculatorCell from "./CreditCalculatorCell";
 
-    export default {
-        data() {
-            return {
-                grades: ['year1', 'year2', 'year3', 'year4'],
-                semesters: ['first', 'second'],
-                days: ['mon', 'tue', 'wed', 'thu', 'fri'],
-                times: ['1st', '2nd', '3rd', '4th', '5th', '6th', '7th'],
-                // oneyear_full_credit: 0,
-                // oneyear_lowest_full_credit: 48,
-                // oneyear_kyotu_credit: 0,
-                // oneyear_senmon_credit: 0,
-                // oneyear_A_credit: 0,
-                // oneyear_B_credit: 0,
-                // oneyear_gaikoku_credit: 0,
-                // full_credit: 0,
-                // lowest_full_credit: 124,
-                // kyotu_credit: 0,
-                // senmon_credit: 0,
-                // A_credit: 0,
-                // B_credit: 0,
-                // gaikoku_credit: 0,
-            };
-        },
-        created() {
-            // this.get_kyoutu_credit('year1')
-        },
-        components: {
-            CreditCalculatorCell,
-        },
-        props: [
-            'now',
-            'grade',
-        ],
-        methods: {
-            get_credit(obj) {
-                let c = 0;
-                if (typeof obj === 'object') {
-                    for (var key in obj) {
-                        if (key == 'credit') {
-                            c += obj['credit'];
-                        } else {
-                            c += this.get_credit(obj[key])
-                        }
-                    }
-                    return c
-                }else {
-                    return 0
-                }
-            }
-            // get_kyoutu_credit: function (grade) {
-            //     let num = 0;
-            //     for (let semester in this.semesters) {
-            //         for(let day in this.days){
-            //             for(let time in this.times){
-            //                 if(this.now[grade][semester][day] !== null) {
-            //                     // num += this.now[grade][semester][day][time]["credit"];
-            //                 }
-            //             }
-            //         }
-            //     }
-            //     this.c = num
-            // }
+export default {
+  data() {
+    return {
+      grades: ["year1", "year2", "year3", "year4"],
+      semesters: ["first", "second"],
+      days: ["mon", "tue", "wed", "thu", "fri"],
+      times: ["1st", "2nd", "3rd", "4th", "5th", "6th", "7th"]
+    };
+  },
+
+  created() {
+    // this.get_kyoutu_credit('year1')
+  },
+  components: {
+    CreditCalculatorCell
+  },
+  props: ["now", "grade"],
+  methods: {
+    get_credit(obj) {
+      let c = 0;
+      if (typeof obj === "object") {
+        for (var key in obj) {
+          if (key == "credit") {
+            c += obj["credit"];
+          } else {
+            c += this.get_credit(obj[key]);
+          }
         }
+        return c;
+      } else {
+        return 0;
+      }
+    },
+    getColor(total_unit) {
+      return "red";
     }
+
+    // get_kyoutu_credit: function (grade) {
+    //     let num = 0;
+    //     for (let semester in this.semesters) {
+    //         for(let day in this.days){
+    //             for(let time in this.times){
+    //                 if(this.now[grade][semester][day] !== null) {
+    //                     // num += this.now[grade][semester][day][time]["credit"];
+    //                 }
+    //             }
+    //         }
+    //     }
+    //     this.c = num
+    // }
+  }
+};
 </script>
 
 <style scoped>
+table {
+  border-collapse: collapse;
+}
+.font_size {
+  text-align: center;
+  font-size: 20px;
+}
+td {
+  text-align: right;
+  border: solid 1px;
+  border-color: rgb(239, 239, 239);
+  padding: 0.5em;
+}
 </style>

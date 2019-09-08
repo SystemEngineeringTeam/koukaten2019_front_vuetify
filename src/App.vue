@@ -2,7 +2,7 @@
   <!-- App.vue -->
 
   <v-app>
-    <v-navigation-drawer app v-model="drawer" absolute temporary>
+    <v-navigation-drawer app v-model="drawer" temporary>
       <v-list-item>
         <v-list-item-content>
           <v-list-item-title>未来予想図</v-list-item-title>
@@ -12,10 +12,10 @@
       <v-divider></v-divider>
 
       <v-list dense>
-        <v-list-item v-for="item in items" :key="item.title" :link="item.link">
+        <v-list-item v-for="item in items" :key="item.title" :value="item.link">
           <v-list-item-content>
             <v-list-item-title>
-              <router-link to="/ClassSchedule">{{ item.title }}</router-link>
+              <router-link :to="item.link">{{ item.title }}</router-link>
             </v-list-item-title>
           </v-list-item-content>
         </v-list-item>
@@ -61,9 +61,9 @@ export default {
       drawer: null,
       items: [
         { title: "時間割エディタ", link: "/ClassSchedule" },
-        { title: "授業アンケート" },
-        { title: "設定" },
-        { title: "ログイン" }
+        { title: "授業アンケート", link: "/ClassSchedule" },
+        { title: "設定", link: "/ClassSchedule" },
+        { title: "ログイン", link: "/ClassSchedule" }
       ],
       login: true //true:ログイン済み false:未ログイン
     };
