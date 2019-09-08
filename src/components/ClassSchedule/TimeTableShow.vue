@@ -48,7 +48,6 @@
         <!--</v-expansion-panel>-->
         <!--</v-expansion-panels>-->
 
-
         <template v-for="(day, i) in weekdays">
             <v-card>
                 <v-card-title class="blue lighten-1">{{days_name[i]}}曜日</v-card-title>
@@ -58,7 +57,8 @@
                         <v-divider></v-divider>
                         <v-subheader>{{time}}限目</v-subheader>
                         <v-list-item>
-                            <TimeTableCell :is_edit="is_edit" :lecture="get_one_lecture(now_register, day, time)" :can_register="get_one_time_lectures(can_register, day, time)"></TimeTableCell>
+                            <TimeTableCell :is_edit="is_edit" :lecture="get_one_lecture(now_register, day, time)"
+                                           :can_register="get_one_time_lectures(can_register, day, time)"></TimeTableCell>
                         </v-list-item>
 
                     </template>

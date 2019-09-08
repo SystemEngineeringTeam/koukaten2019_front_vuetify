@@ -2,37 +2,36 @@
     <div class="wrapper">
 
 
-        <v-btn v-on:click="get_editor('kk')">GET</v-btn>
-        <v-btn v-on:click="is_edit = true"> 授業を登録する</v-btn>
+        <v-btn v-on:click="is_edit = true; get_editor('kk')"> 授業を登録する</v-btn>
         <v-btn v-on:click="is_edit = false"> 登録を終わる</v-btn>
-
-        <!-- {{ timetable_editor }} -->
-
+        
         <v-tabs v-model="tabs">
             <v-tab v-for="timetable in timetables" :key="timetable.id"><b>{{timetable.grade}}{{timetable.semester}}</b>
             </v-tab>
         </v-tabs>
         <v-tabs-items v-model="tabs">
             <v-tab-item v-for="timetable in timetables" :key="timetable.id">
-                <TimeTableShow :is_edit="is_edit" :now_register="get_grade_half_lectures(timetable_now, timetable.grade, timetable.semester)" :can_register="get_grade_half_lectures(timetable_now, timetable.grade, timetable.semester)"></TimeTableShow>
+                <TimeTableShow :is_edit="is_edit"
+                               :now_register="get_grade_half_lectures(timetable_now, timetable.grade, timetable.semester)"
+                               :can_register="get_grade_half_lectures(timetable_editor, timetable.grade, timetable.semester)"></TimeTableShow>
             </v-tab-item>
         </v-tabs-items>
 
         <!--<template v-for="grade in grades">-->
-            <!--<template v-for="semester in semesters">-->
-                <!--<TimeTableShow v-if="is_show && grade == looking_grade && semester == looking_semester"-->
-                               <!--:now="get_grade_half_lecture(timetable_now, grade, semester)"></TimeTableShow>-->
+        <!--<template v-for="semester in semesters">-->
+        <!--<TimeTableShow v-if="is_show && grade == looking_grade && semester == looking_semester"-->
+        <!--:now="get_grade_half_lecture(timetable_now, grade, semester)"></TimeTableShow>-->
 
-                <!--<TimeTableEditor v-if="!is_show && grade == looking_grade && semester == looking_semester"-->
-                                 <!--:now="get_grade_half_lecture(timetable_now, grade, semester)"></TimeTableEditor>-->
+        <!--<TimeTableEditor v-if="!is_show && grade == looking_grade && semester == looking_semester"-->
+        <!--:now="get_grade_half_lecture(timetable_now, grade, semester)"></TimeTableEditor>-->
 
-                <!--&lt;!&ndash;<TimeTableEditor&ndash;&gt;-->
-                <!--&lt;!&ndash;v-show="!is_show && f_grade === grade && f_semester === semester"&ndash;&gt;-->
-                <!--&lt;!&ndash;v-on:set="set_now"&ndash;&gt;-->
-                <!--&lt;!&ndash;:grade="f_grade" :semester="f_semester"&ndash;&gt;-->
-                <!--&lt;!&ndash;:timetable_now="a_semester_now"&ndash;&gt;-->
-                <!--&lt;!&ndash;:timetable_editor="timetable_editor[f_grade][f_semester]"></TimeTableEditor>&ndash;&gt;-->
-            <!--</template>-->
+        <!--&lt;!&ndash;<TimeTableEditor&ndash;&gt;-->
+        <!--&lt;!&ndash;v-show="!is_show && f_grade === grade && f_semester === semester"&ndash;&gt;-->
+        <!--&lt;!&ndash;v-on:set="set_now"&ndash;&gt;-->
+        <!--&lt;!&ndash;:grade="f_grade" :semester="f_semester"&ndash;&gt;-->
+        <!--&lt;!&ndash;:timetable_now="a_semester_now"&ndash;&gt;-->
+        <!--&lt;!&ndash;:timetable_editor="timetable_editor[f_grade][f_semester]"></TimeTableEditor>&ndash;&gt;-->
+        <!--</template>-->
         <!--</template>-->
 
         <!--<v-expansion-panels>-->
@@ -174,7 +173,7 @@
                         "grade": 1,
                         "semester": "前期",
                         "weekday": "mon",
-                        "lec_time": 2,
+                        "lec_time": 1,
                         "continuous": 1,
                         "unit": 2,
                         "syllabus": "https://hackmd.io/@8UP5vEhpRieQqC06SyUfsg/S1WpVJSBH",
