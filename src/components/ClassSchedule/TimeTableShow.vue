@@ -58,7 +58,9 @@
                         <v-subheader>{{time}}限目</v-subheader>
                         <v-list-item>
                             <TimeTableCell :is_edit="is_edit" :lecture="get_one_lecture(now_register, day, time)"
-                                           :can_register="get_one_time_lectures(can_register, day, time)"></TimeTableCell>
+                                           :can_register="get_one_time_lectures(can_register, day, time)"
+                                           :day="day" :time="time"
+                            ></TimeTableCell>
                         </v-list-item>
 
                     </template>

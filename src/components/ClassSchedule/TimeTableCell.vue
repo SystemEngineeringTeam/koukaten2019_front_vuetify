@@ -12,7 +12,7 @@
                 <v-btn :href="lecture['syllabus']" target="_blank">シラバス</v-btn>
             </v-card-actions>
             <v-card-actions v-if="is_edit && can_register.length >= 1">
-                <v-btn>授業を登録する</v-btn>
+                <v-btn @click.stop="dialog = true">授業を登録する</v-btn>
             </v-card-actions>
         </div>
 
@@ -21,43 +21,23 @@
                 v-model="dialog"
                 max-width="290"
         >
-            <>
-            <v-card-title class="headline">授業登録</v-card-title>
-
             <v-card>
-                <v-card-title class="headline">取り消す</v-card-title>
-            </v-card>
-            <template v-for="c in can_register">
+                <v-card-title class="headline">授業登録</v-card-title>
 
-                <v-card>
-                    <v-card-title class="headline">{{c}}</v-card-title>
-                </v-card>
+                <v-card-actions>
+                    <div class="flex-grow-1"></div>
+                    <v-btn v-on:click="$store.commit('delete_registered_lecture', {'weekday':day, 'lec_time':time})">
+                        取り消す
+                    </v-btn>
+                    <template v-for="c in can_register">
 
-            </template>
-            <v-card-text>
-                Let Google help apps determine location. This means sending anonymous location data to Google, even
-                when no apps are running.
-            </v-card-text>
+                        <v-btn v-on:click="$store.commit('push_registered_lecture', c)">
+                            {{c.name}}
+                        </v-btn>
 
-            <v-card-actions>
-                <div class="flex-grow-1"></div>
+                    </template>
 
-                <v-btn
-                        color="green darken-1"
-                        text
-                        @click="dialog = false"
-                >
-                    Disagree
-                </v-btn>
-
-                <v-btn
-                        color="green darken-1"
-                        text
-                        @click="dialog = false"
-                >
-                    Agree
-                </v-btn>
-            </v-card-actions>
+                </v-card-actions>
             </v-card>
         </v-dialog>
     </div>
@@ -75,7 +55,9 @@
         props: [
             'lecture',
             'is_edit',
-            'can_register'
+            'can_register',
+            'day',
+            'time'
         ],
     }
 </script>
