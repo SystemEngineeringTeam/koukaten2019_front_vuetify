@@ -13,6 +13,9 @@
             </v-card-actions>
             <v-card-actions v-if="is_edit && can_register.length >= 1">
                 <v-btn @click.stop="dialog = true">授業を登録する</v-btn>
+                <v-btn v-on:click="$store.commit('delete_registered_lecture', {'weekday':day, 'lec_time':time})">
+                    授業を取り消す
+                </v-btn>
             </v-card-actions>
         </div>
 
@@ -26,12 +29,9 @@
 
                 <v-card-actions>
                     <div class="flex-grow-1"></div>
-                    <v-btn v-on:click="$store.commit('delete_registered_lecture', {'weekday':day, 'lec_time':time})">
-                        取り消す
-                    </v-btn>
                     <template v-for="c in can_register">
 
-                        <v-btn v-on:click="$store.commit('push_registered_lecture', c)">
+                        <v-btn v-on:click="$store.commit('push_registered_lecture', c); dialog = false">
                             {{c.name}}
                         </v-btn>
 
