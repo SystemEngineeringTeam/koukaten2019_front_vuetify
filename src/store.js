@@ -9,12 +9,13 @@ Vue.use(Vuex)
 export default new Vuex.Store({
     state: {
         timetables: [
-            {grade: 1, semester: '前期'}, {grade: 1, semester: '後期'},
-            {grade: 2, semester: '前期'}, {grade: 2, semester: '後期'},
-            {grade: 3, semester: '前期'}, {grade: 3, semester: '後期'},
-            {grade: 4, semester: '前期'}, {grade: 4, semester: '後期'},
+            { grade: 1, semester: '前期' }, { grade: 1, semester: '後期' },
+            { grade: 2, semester: '前期' }, { grade: 2, semester: '後期' },
+            { grade: 3, semester: '前期' }, { grade: 3, semester: '後期' },
+            { grade: 4, semester: '前期' }, { grade: 4, semester: '後期' },
         ],
-        looking_timetable: {grade: 1, semester: '前期'},
+        select_units: {},
+        looking_timetable: { grade: 1, semester: '前期' },
         registered_lectures: [
             {
                 "subject_code": "k1025",
