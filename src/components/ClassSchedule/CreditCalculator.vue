@@ -29,8 +29,8 @@
 
             </tbody>
     </table>-->
+
     <v-simple-table>
-      <br>
       <tr>
         <td class="font_size">単位表</td>
         <td class="font_size">総単位数</td>
@@ -41,7 +41,7 @@
         <td class="font_size">外国語</td>
       </tr>
       <tr>
-        <td>１年次の履修単位</td>
+        <td>１年次</td>
         <td>/48</td>
         <td>0</td>
         <td>0</td>
@@ -49,33 +49,33 @@
         <td>0</td>
         <td>0</td>
       </tr>
-      <tr>
-        <td>2年次の履修単位</td>
-        <td>/48</td>
-        <td>0</td>
-        <td>0</td>
-        <td>0</td>
-        <td>0</td>
-        <td>0</td>
-      </tr>
-      <tr>
-        <td>3年次の履修単位</td>
-        <td>/48</td>
-        <td>0</td>
-        <td>0</td>
-        <td>0</td>
-        <td>0</td>
-        <td>0</td>
-      </tr>
-      <tr>
-        <td>4年次の履修単位</td>
-        <td>/48</td>
-        <td>0</td>
-        <td>0</td>
-        <td>0</td>
-        <td>0</td>
-        <td>0</td>
-      </tr>
+      <!-- <tr>
+            <td>2年次の履修単位</td>
+            <td>/48</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <td>3年次の履修単位</td>
+            <td>/48</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <td>4年次の履修単位</td>
+            <td>/48</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+      </tr>-->
       <tr>
         <td>必修</td>
         <td>/48</td>
