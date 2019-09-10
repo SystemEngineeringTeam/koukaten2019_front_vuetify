@@ -22,22 +22,51 @@
         <!--ダイアログ-->
         <v-dialog
                 v-model="dialog"
-                max-width="290"
         >
             <v-card>
                 <v-card-title class="headline">授業登録</v-card-title>
+                <v-container>
+                    <v-row>
+                        <v-col
+                                v-for="c in can_register"
+                        >
+                            <v-card>
+                                <div class="flex-grow-1"></div>
+                                {{c.name}}
+                                <br>
+                                {{c.classification}}
+                                <br>
+                                {{c.compulsory}}
 
-                <v-card-actions>
-                    <div class="flex-grow-1"></div>
-                    <template v-for="c in can_register">
+                                <v-btn icon>
+                                    <v-icon>mdi-heart</v-icon>
+                                </v-btn>
 
-                        <v-btn v-on:click="$store.commit('push_registered_lecture', c); dialog = false">
-                            {{c.name}}
-                        </v-btn>
+                                <v-btn icon>
+                                    <v-icon>mdi-bookmark</v-icon>
+                                </v-btn>
 
-                    </template>
-
-                </v-card-actions>
+                                <v-btn icon>
+                                    <v-icon>mdi-share-variant</v-icon>
+                                </v-btn>
+                            </v-card>
+                        </v-col>
+                    </v-row>
+                    <!--<template v-for="c in can_register">-->
+                    <!--<v-crad>-->
+                    <!--{{c.name}}-->
+                    <!--<br>-->
+                    <!--{{c.classification}}-->
+                    <!--<br>-->
+                    <!--{{c.compulsory}}-->
+                    <!--<v-card-actions>-->
+                    <!--<v-btn v-on:click="$store.commit('push_registered_lecture', c); dialog = false">-->
+                    <!--登録-->
+                    <!--</v-btn>-->
+                    <!--</v-card-actions>-->
+                    <!--</v-crad>-->
+                    <!--</template>-->
+                </v-container>
             </v-card>
         </v-dialog>
     </div>
