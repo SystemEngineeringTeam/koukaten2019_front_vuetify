@@ -37,7 +37,7 @@
                 {{c.compulsory}}
                 <v-card-actions>
                   <v-btn v-on:click="$store.commit('push_registered_lecture', c); dialog = false">登録</v-btn>
-                  <v-btn :href="lecture['syllabus']" target="_blank">シラバス</v-btn>
+                  <v-btn :href="c.syllabus" target="_blank">シラバス</v-btn>
                 </v-card-actions>
               </v-card>
             </v-col>
