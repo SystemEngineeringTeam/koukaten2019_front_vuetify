@@ -1,10 +1,7 @@
 <template>
 
   <div class="wrapper">
-    <!--<v-switch-->
-    <!--v-model="is_edit"-->
-    <!--label="授業登録モード"-->
-    <!--&gt;</v-switch>-->
+    {{$store.state.unit_list}}
     <v-container>
       <v-row>
         <v-col cols="12">
@@ -120,7 +117,9 @@
             // });
             // this.get_editor(this.user);
         },
-        computed: {},
+        beforeUpdate() {
+          this.$store.commit('unit_calculate');
+        },
         methods: {
             table() {
                 return this.$store.state.registered_lectures;
