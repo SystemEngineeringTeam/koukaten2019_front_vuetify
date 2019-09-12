@@ -1,5 +1,4 @@
 <template>
-
     <div>
         <div v-if="lecture==null">
             <v-card-actions v-if="is_edit && can_register.length >= 1">
@@ -96,7 +95,12 @@
         background-color: white;
     }
 
+    .amargin {
+        margin-bottom: 300px;
+    }
+
     .pickup_button:hover {
         background-color: lightgreen;
     }
+
 </style>

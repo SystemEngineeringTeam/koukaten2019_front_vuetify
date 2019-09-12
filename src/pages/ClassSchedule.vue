@@ -4,7 +4,6 @@
         <!--v-model="is_edit"-->
         <!--label="授業登録モード"-->
         <!--&gt;</v-switch>-->
-        {{$store.state.unit_list}}
         <v-container>
             <v-row>
                 <v-col cols="12">
@@ -29,41 +28,43 @@
                         </v-tab-item>
                     </v-tabs-items>
                 </v-col>
-
-                <!--<v-footer app>-->
-                    <!--<CreditCalculator></CreditCalculator>-->
-                <!--</v-footer>-->
-
-
-                <v-btn
-                        fixed
-                        bottom
-                        dark
-                        right
-                        large
-                        rounded
-                        elevation="10"
-                        color="orange"
-                        v-if="!is_edit"
-                        v-on:click="is_edit = true; $store.dispatch('get_can_register_lectures','kk')"
-                >
-                    授業を登録
-                    <v-icon>mdi-pencil</v-icon>
-                </v-btn>
-                <v-btn
-                        fixed
-                        bottom
-                        large
-                        dark
-                        right
-                        rounded
-                        elevation="10"
-                        color="red"
-                        v-else v-on:click="is_edit = false"
-                >
-                    登録を保存
-                    <v-icon dark>mdi-cloud-upload</v-icon>
-                </v-btn>
+                <v-col cols="12">
+                    <v-footer app>
+                        <v-col>
+                            <CreditCalculator></CreditCalculator>
+                        </v-col>
+                        <v-btn
+                                fixed
+                                bottom
+                                dark
+                                large
+                                right
+                                rounded
+                                elevation="10"
+                                color="orange"
+                                v-if="!is_edit"
+                                v-on:click="is_edit = true; $store.dispatch('get_can_register_lectures','kk')"
+                        >
+                            授業を登録
+                            <v-icon>mdi-pencil</v-icon>
+                        </v-btn>
+                        <v-btn
+                                fixed
+                                bottom
+                                large
+                                dark
+                                right
+                                rounded
+                                elevation="10"
+                                color="red"
+                                v-else
+                                v-on:click="is_edit = false"
+                        >
+                            登録を保存
+                            <v-icon dark>mdi-cloud-upload</v-icon>
+                        </v-btn>
+                    </v-footer>
+                </v-col>
             </v-row>
         </v-container>
     </div>
@@ -78,6 +79,7 @@
     import TimeTableShow from "../components/ClassSchedule/TimeTableShow";
     import CreditCalculator from "../components/ClassSchedule/CreditCalculator";
     import TimeTableEditor from "../components/ClassSchedule/TimeTableEditor";
+
 
     export default {
         data() {
@@ -110,7 +112,6 @@
             CreditCalculator
         },
         created() {
-            this.$store.commit('unit_calculate');
             // // Json取得
             // this.get_now();
             // // Json取得後に呼び出される
@@ -118,9 +119,6 @@
             //     this.timetable = this.get_data();
             // });
             // this.get_editor(this.user);
-        },
-        beforeUpdate(){
-            this.$store.commit('unit_calculate');
         },
         computed: {},
         methods: {
@@ -191,5 +189,4 @@
 
 
 <style scoped>
-
 </style>
