@@ -28,41 +28,39 @@
             </v-tab-item>
           </v-tabs-items>
         </v-col>
+        <v-btn
+          absolute
+          fixed
+          dark
+          large
+          right
+          rounded
+          color="orange"
+          v-if="!is_edit"
+          v-on:click="is_edit = true; $store.dispatch('get_can_register_lectures','kk')"
+        >
+          授業を登録
+          <v-icon>mdi-pencil</v-icon>
+        </v-btn>
+        <v-btn
+          fixed
+          large
+          dark
+          right
+          rounded
+          elevation="10"
+          color="red"
+          v-else
+          v-on:click="is_edit = false"
+        >
+          登録を保存
+          <v-icon dark>mdi-cloud-upload</v-icon>
+        </v-btn>
         <v-col cols="12">
           <v-footer app>
             <v-col>
               <CreditCalculator></CreditCalculator>
             </v-col>
-            <v-btn
-              fixed
-              bottom
-              dark
-              large
-              right
-              rounded
-              elevation="10"
-              color="orange"
-              v-if="!is_edit"
-              v-on:click="is_edit = true; $store.dispatch('get_can_register_lectures','kk')"
-            >
-              授業を登録
-              <v-icon>mdi-pencil</v-icon>
-            </v-btn>
-            <v-btn
-              fixed
-              bottom
-              large
-              dark
-              right
-              rounded
-              elevation="10"
-              color="red"
-              v-else
-              v-on:click="is_edit = false"
-            >
-              登録を保存
-              <v-icon dark>mdi-cloud-upload</v-icon>
-            </v-btn>
           </v-footer>
         </v-col>
       </v-row>
