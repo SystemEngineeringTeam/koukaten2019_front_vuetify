@@ -29,6 +29,9 @@
 
             </tbody>
     </table>-->
+    <v-container>
+      <v-row>
+        <v-col cols="12">
     <v-simple-table>
       <br>
       <tr>
@@ -95,6 +98,9 @@
         <td>/8</td>
       </tr>
     </v-simple-table>
+        </v-col>
+      </v-row>
+    </v-container>
   </div>
 </template>
 

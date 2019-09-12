@@ -4,6 +4,7 @@
         <!--v-model="is_edit"-->
         <!--label="授業登録モード"-->
         <!--&gt;</v-switch>-->
+        {{$store.state.unit_list}}
         <v-container>
             <v-row>
                 <v-col cols="12">
@@ -28,9 +29,10 @@
                         </v-tab-item>
                     </v-tabs-items>
                 </v-col>
-                <v-col cols="12">
-                    <CreditCalculator></CreditCalculator>
-                </v-col>
+
+                <!--<v-footer app>-->
+                    <!--<CreditCalculator></CreditCalculator>-->
+                <!--</v-footer>-->
 
 
                 <v-btn
@@ -108,6 +110,7 @@
             CreditCalculator
         },
         created() {
+            this.$store.commit('unit_calculate');
             // // Json取得
             // this.get_now();
             // // Json取得後に呼び出される
@@ -115,6 +118,9 @@
             //     this.timetable = this.get_data();
             // });
             // this.get_editor(this.user);
+        },
+        beforeUpdate(){
+            this.$store.commit('unit_calculate');
         },
         computed: {},
         methods: {

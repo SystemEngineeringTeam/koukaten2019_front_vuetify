@@ -9,13 +9,13 @@ Vue.use(Vuex)
 export default new Vuex.Store({
     state: {
         timetables: [
-            { grade: 1, semester: '前期' }, { grade: 1, semester: '後期' },
-            { grade: 2, semester: '前期' }, { grade: 2, semester: '後期' },
-            { grade: 3, semester: '前期' }, { grade: 3, semester: '後期' },
-            { grade: 4, semester: '前期' }, { grade: 4, semester: '後期' },
+            {grade: 1, semester: '前期'}, {grade: 1, semester: '後期'},
+            {grade: 2, semester: '前期'}, {grade: 2, semester: '後期'},
+            {grade: 3, semester: '前期'}, {grade: 3, semester: '後期'},
+            {grade: 4, semester: '前期'}, {grade: 4, semester: '後期'},
         ],
         select_units: {},
-        looking_timetable: { grade: 1, semester: '前期' },
+        looking_timetable: {grade: 1, semester: '前期'},
         registered_lectures: [
             {
                 "subject_code": "k1025",
@@ -121,6 +121,40 @@ export default new Vuex.Store({
                 "syllabus": "https://connpass.com/dashboard/",
             },
         ],
+        unit_list: {
+            1: {
+                '共通': 0,
+                '専門': 0,
+                '総合A': 0,
+                '総合B': 0,
+                '外国語': 0,
+
+            },
+            2: {
+                '共通': 0,
+                '専門': 0,
+                '総合A': 0,
+                '総合B': 0,
+                '外国語': 0,
+
+            },
+            3: {
+                '共通': 0,
+                '専門': 0,
+                '総合A': 0,
+                '総合B': 0,
+                '外国語': 0,
+
+            },
+            4: {
+                '共通': 0,
+                '専門': 0,
+                '総合A': 0,
+                '総合B': 0,
+                '外国語': 0,
+
+            }
+        }
     },
     mutations: {
         // get_editor(student) {
@@ -148,11 +182,61 @@ export default new Vuex.Store({
             if (index >= 0) {
                 state.registered_lectures.splice(index, 1);
             }
+        },
+        unit_calculate(state) {
+            state.unit_list = {
+                1: {
+                    '共通': 0,
+                    '専門': 0,
+                    '総合A': 0,
+                    '総合B': 0,
+                    '外国語': 0,
+
+                },
+                2: {
+                    '共通': 0,
+                    '専門': 0,
+                    '総合A': 0,
+                    '総合B': 0,
+                    '外国語': 0,
+
+                },
+                3: {
+                    '共通': 0,
+                    '専門': 0,
+                    '総合A': 0,
+                    '総合B': 0,
+                    '外国語': 0,
+
+                },
+                4: {
+                    '共通': 0,
+                    '専門': 0,
+                    '総合A': 0,
+                    '総合B': 0,
+                    '外国語': 0,
+
+                }
+            };
+            state.registered_lectures.forEach(function (lecture) {
+                    if (lecture.classification === '共通') {
+                        state.unit_list[lecture.grade]['共通'] += lecture.unit
+                    } else if (lecture.classification === '専門') {
+                        state.unit_list[lecture.grade]['専門'] += lecture.unit
+                    } else if (lecture.classification === '総合A') {
+                        state.unit_list[lecture.grade]['総合A'] += lecture.unit
+                        if (lecture.isenglish) {
+                            state.unit_list[lecture.grade]['外国語'] += lecture.unit
+                        }
+                    } else if (lecture.classification === '総合B') {
+                        state.unit_list[lecture.grade]['総合B'] += lecture.unit
+                    }
+                }
+            )
         }
     },
     actions: {
         get_can_register_lectures(context, student) {
-            let tmp = {};
             axios.get(process.env.VUE_APP_URL_EDITOR, {
                 params: {
                     // ここにクエリパラメータを指定する
