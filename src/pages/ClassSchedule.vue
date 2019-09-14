@@ -55,9 +55,21 @@
           <v-icon dark>mdi-cloud-upload</v-icon>
         </v-btn>
         <v-col cols="12">
+          <v-tabs v-model="tabs">
+            <v-tab
+                    v-for="timetable in $store.state.timetables"
+                    :key="timetable.id"
+                    v-on:click="$store.commit('set_looking_timetable', timetable)"
+            >
+              <b>{{timetable.grade}}{{timetable.semester}}</b>
+            </v-tab>
+          </v-tabs>
+        </v-col>
+        <v-col cols="12">
           <v-footer app>
             <v-col>
-              <CreditCalculator></CreditCalculator>
+              <CreditCalculator :grade="$store.state.looking_timetable.grade"
+              ></CreditCalculator>
             </v-col>
           </v-footer>
         </v-col>

@@ -6,58 +6,33 @@
                     <v-simple-table>
                         <tr>
                             <td class="font_size">単位表</td>
-                            <td class="font_size">総単位数</td>
-                            <td class="font_size">共通教育科目</td>
-                            <td class="font_size">専門共通科目</td>
+                            <td class="font_size">総単位</td>
+                            <td class="font_size">共通</td>
+                            <td class="font_size">専門</td>
                             <td class="font_size">総合A</td>
                             <td class="font_size">総合B</td>
                             <td class="font_size">外国語</td>
                         </tr>
-                        <tr>
-                            <td>１年次</td>
-                            <td>/48</td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                        </tr>
-                        <!-- <tr>
-                              <td>2年次の履修単位</td>
-                              <td>/48</td>
-                              <td>0</td>
-                              <td>0</td>
-                              <td>0</td>
-                              <td>0</td>
-                              <td>0</td>
+                        <template v-for="i in 4">
+                            <tr v-if="grade === i">
+                                <td>{{i}}年</td>
+                                <td>{{year_total_unit(i)}}/48</td>
+                                <td>{{$store.state.unit_list[i]["共通"]}}</td>
+                                <td>{{$store.state.unit_list[i]["専門"]}}</td>
+                                <td>{{$store.state.unit_list[i]["総合A"]}}</td>
+                                <td>{{$store.state.unit_list[i]["総合B"]}}</td>
+                                <td>{{$store.state.unit_list[i]["外国語"]}}</td>
                             </tr>
-                            <tr>
-                              <td>3年次の履修単位</td>
-                              <td>/48</td>
-                              <td>0</td>
-                              <td>0</td>
-                              <td>0</td>
-                              <td>0</td>
-                              <td>0</td>
-                            </tr>
-                            <tr>
-                              <td>4年次の履修単位</td>
-                              <td>/48</td>
-                              <td>0</td>
-                              <td>0</td>
-                              <td>0</td>
-                              <td>0</td>
-                              <td>0</td>
-                        </tr>-->
-                        <tr>
-                            <td>必修</td>
-                            <td>/48</td>
-                            <td>/4</td>
-                            <td>/31</td>
-                            <td>/4</td>
-                            <td>必修はありません</td>
-                            <td>/4</td>
-                        </tr>
+                        </template>
+                        <!--<tr>-->
+                            <!--<td>必修</td>-->
+                            <!--<td>/48</td>-->
+                            <!--<td>/4</td>-->
+                            <!--<td>/31</td>-->
+                            <!--<td>/4</td>-->
+                            <!--<td>必修はありません</td>-->
+                            <!--<td>/4</td>-->
+                        <!--</tr>-->
                         <tr>
                             <td>合計</td>
                             <td>/124</td>
@@ -80,53 +55,19 @@
     export default {
         data() {
             return {
-                grades: ["year1", "year2", "year3", "year4"],
-                semesters: ["first", "second"],
-                days: ["mon", "tue", "wed", "thu", "fri"],
-                times: ["1st", "2nd", "3rd", "4th", "5th", "6th", "7th"]
             };
         },
 
         created() {
-            // this.get_kyoutu_credit('year1')
         },
         components: {
             CreditCalculatorCell
         },
-        props: ["now", "grade"],
+        props: ["grade"],
         methods: {
-            get_credit(obj) {
-                let c = 0;
-                if (typeof obj === "object") {
-                    for (var key in obj) {
-                        if (key == "credit") {
-                            c += obj["credit"];
-                        } else {
-                            c += this.get_credit(obj[key]);
-                        }
-                    }
-                    return c;
-                } else {
-                    return 0;
-                }
-            },
-            getColor(total_unit) {
-                return "red";
+            year_total_unit(grade){
+                return this.$store.state.unit_list[grade]["共通"]+this.$store.state.unit_list[grade]["専門"]+this.$store.state.unit_list[grade]["総合A"]+this.$store.state.unit_list[grade]["総合B"];
             }
-
-            // get_kyoutu_credit: function (grade) {
-            //     let num = 0;
-            //     for (let semester in this.semesters) {
-            //         for(let day in this.days){
-            //             for(let time in this.times){
-            //                 if(this.now[grade][semester][day] !== null) {
-            //                     // num += this.now[grade][semester][day][time]["credit"];
-            //                 }
-            //             }
-            //         }
-            //     }
-            //     this.c = num
-            // }
         }
     };
 </script>
