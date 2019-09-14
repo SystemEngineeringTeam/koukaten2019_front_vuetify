@@ -5,6 +5,7 @@ import ClassSchedule from './pages/ClassSchedule'
 import Config from './pages/Config'
 import Questionnaire from './pages/Questionnaire'
 import Questionnaire_Answer from './pages/Questionnaire_Answer'
+import Initial_Registration from './pages/Initial_Registration'
 
 Vue.use(Router)
 
@@ -36,6 +37,11 @@ export default new Router({
             path: '/Questionnaire_Answer',
             name: 'Questionnaire_Answer',
             component: Questionnaire_Answer
-        }
+        },
+        {
+            path: '/Initial_Registration',
+            name: 'Initial_Registration',
+            component: Initial_Registration
+        },
     ]
 })

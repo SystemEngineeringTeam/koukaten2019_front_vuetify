@@ -9,13 +9,13 @@ Vue.use(Vuex)
 export default new Vuex.Store({
     state: {
         timetables: [
-            {grade: 1, semester: '前期'}, {grade: 1, semester: '後期'},
-            {grade: 2, semester: '前期'}, {grade: 2, semester: '後期'},
-            {grade: 3, semester: '前期'}, {grade: 3, semester: '後期'},
-            {grade: 4, semester: '前期'}, {grade: 4, semester: '後期'},
+            { grade: 1, semester: '前期' }, { grade: 1, semester: '後期' },
+            { grade: 2, semester: '前期' }, { grade: 2, semester: '後期' },
+            { grade: 3, semester: '前期' }, { grade: 3, semester: '後期' },
+            { grade: 4, semester: '前期' }, { grade: 4, semester: '後期' },
         ],
         select_units: {},
-        looking_timetable: {grade: 1, semester: '前期'},
+        looking_timetable: { grade: 1, semester: '前期' },
         registered_lectures: [
             {
                 "subject_code": "k1025",
@@ -154,6 +154,12 @@ export default new Vuex.Store({
                 '外国語': 0,
 
             }
+        },
+        user_info: {
+            'id': "",
+            'grade': "",
+            'semester': "",
+            'token': ""
         }
     },
     mutations: {
@@ -219,21 +225,26 @@ export default new Vuex.Store({
                 }
             };
             state.registered_lectures.forEach(function (lecture) {
-                    if (lecture.classification === '共通') {
-                        state.unit_list[lecture.grade]['共通'] += lecture.unit
-                    } else if (lecture.classification === '専門') {
-                        state.unit_list[lecture.grade]['専門'] += lecture.unit
-                    } else if (lecture.classification === '総合A') {
-                        state.unit_list[lecture.grade]['総合A'] += lecture.unit
-                        if (lecture.isenglish) {
-                            state.unit_list[lecture.grade]['外国語'] += lecture.unit
-                        }
-                    } else if (lecture.classification === '総合B') {
-                        state.unit_list[lecture.grade]['総合B'] += lecture.unit
+                if (lecture.classification === '共通') {
+                    state.unit_list[lecture.grade]['共通'] += lecture.unit
+                } else if (lecture.classification === '専門') {
+                    state.unit_list[lecture.grade]['専門'] += lecture.unit
+                } else if (lecture.classification === '総合A') {
+                    state.unit_list[lecture.grade]['総合A'] += lecture.unit
+                    if (lecture.isenglish) {
+                        state.unit_list[lecture.grade]['外国語'] += lecture.unit
                     }
+                } else if (lecture.classification === '総合B') {
+                    state.unit_list[lecture.grade]['総合B'] += lecture.unit
                 }
-            )
+            });
+        },
+        new_user(state, id, grade, semester) {
+            state.user_info.id = id
+            state.user_info.grade = grade
+            state.user_info.semester = semester
         }
+
     },
     actions: {
         get_can_register_lectures(context, student) {
@@ -247,5 +258,22 @@ export default new Vuex.Store({
                     context.commit('set_can_register_lectures', res.data)
                 });
         },
+        post_new_user(context, id, password, grade, semester) {
+            axios.post(process.env.VUE_APP_URL_CREATE_USERS, {
+                id: id,
+                password: password,
+                grade: grade
+            })
+                .then((res) => {
+                    // console.log(res.data);
+                    if (res.data) {
+                        context.commit('new_user', id, grade, semester)
+                        // trueかfalseを判断する
+                        return '/ClassSchedule';
+                    } else {
+
+                    }
+                })
+        }
     }
 })
