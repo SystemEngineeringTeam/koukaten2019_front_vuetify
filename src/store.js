@@ -120,6 +120,11 @@ export default new Vuex.Store({
                 '外国語': 0,
 
             }
+        },
+        user: {
+            ID: '',
+            semester: '',
+            token: ''
         }
     },
     mutations: {
@@ -134,6 +139,9 @@ export default new Vuex.Store({
         //             Vue.set(this, 'timetable_editor', res.data);
         //         });
         // },
+        set_token(state, data) {
+            Vue.set(state.user, 'token', data.token);
+        },
         set_can_register_lectures(state, data) {
             Vue.set(state, 'can_register_lectures', data);
         },
@@ -208,10 +216,18 @@ export default new Vuex.Store({
                     // ここにクエリパラメータを指定する
                     student: student,
                 },
-            })
-                .then((res) => {
-                    context.commit('set_can_register_lectures', res.data)
-                });
+            }).then((res) => {
+                context.commit('set_can_register_lectures', res.data)
+            });
         },
+        login(context, user_entry) {
+            axios.post(process.env.VUE_APP_URL_LOGIN, {
+                    ID: user_entry.ID,
+                    password: user_entry.password,
+                }
+            ).then((res) => {
+                context.commit('set_token', res.data)
+            });
+        }
     }
 })

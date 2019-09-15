@@ -3,7 +3,6 @@
         <v-form
                 ref="form"
                 v-model="valid"
-                lazy-validation
         >
             <v-text-field
                     v-model="ID"
@@ -15,14 +14,13 @@
 
             <v-text-field
                     v-model="password"
-                    :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
-                    :type="show1 ? 'text' : 'password'"
+                    :append-icon="show_pass ? 'mdi-eye' : 'mdi-eye-off'"
+                    :type="show_pass ? 'text' : 'password'"
                     :rules="PassRules"
                     label="パスワード"
                     counter
-                    @click:append="show1 = !show1"
+                    @click:append="show_pass = !show_pass"
             ></v-text-field>
-
 
             <v-btn
                     :disabled="!valid"
@@ -32,6 +30,7 @@
             >
                 ログインする
             </v-btn>
+
         </v-form>
     </div>
 </template>
@@ -43,6 +42,7 @@
             valid: true,
             ID: '',
             password: '',
+            show_pass: false,
             IDRules: [
                 v => !!v || '学籍番号は必ず入力してください',
                 v => (v && v.length == 8) || '',
@@ -50,13 +50,11 @@
             PassRules:[
                 v => !!v || 'パスワードは必ず入力してください',
             ],
-            checkbox: false,
-            show1: false,
         }),
 
         methods: {
             login(){
-
+                this.$store.dispatch('login', {ID:this.ID, password:this.password})
             },
         },
     }
