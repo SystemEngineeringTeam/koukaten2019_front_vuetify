@@ -1,34 +1,27 @@
 <template>
-    <div >
-        <table class="table table-bordered">
-            <thead class="thead-dark">
-            <tr>
-                <th scope="col">
-                    <template v-if="grade == 'year1'">1</template>
-                    <template v-else-if="grade == 'year2'">2</template>
-                    <template v-else-if="grade == 'year3'">3</template>
-                    <template v-else>4</template>
-                    <br>
-                    <template v-if="semester == 'first'">前期</template>
-                    <template v-else>後期</template>
-                </th>
-                <th scope="col">月</th>
-                <th scope="col">火</th>
-                <th scope="col">水</th>
-                <th scope="col">木</th>
-                <th scope="col">金</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr v-for="(classes,day) in timetable_now['mon']">
-                <th>{{day.slice(0,1)}}</th>
-                <td v-for="piriods in timetable_now">
-                    <TimeTableCell v-if="piriods[day] != null" :now="piriods[day]"></TimeTableCell>
-                </td>
-            </tr>
+    <div>
 
-            </tbody>
-        </table>
+        <template v-for="(day, i) in weekdays">
+            <v-card>
+                <v-card-title class="blue lighten-1">{{days_name[i]}}曜日</v-card-title>
+
+                <v-list>
+                    <template v-for="time in 7">
+                        <v-divider></v-divider>
+                        <v-subheader>{{time}}限目</v-subheader>
+                        <v-list-item>
+                            <TimeTableCell :is_edit="is_edit" :lecture="get_one_lecture(now_register, day, time)"
+                                           :can_register="get_one_time_lectures(can_register, day, time)"
+                                           :day="day" :time="time"
+                            ></TimeTableCell>
+                        </v-list-item>
+
+                    </template>
+                </v-list>
+
+
+            </v-card>
+        </template>
     </div>
 
 
@@ -39,10 +32,36 @@
 
     export default {
         name: "TimeTableShow",
+        data() {
+            return {
+                weekdays: ['mon', 'tue', 'wed', 'thu', 'fry'],
+                days_name: ['月', '火', '水', '木', '金']
+            }
+        },
         components: {
             TimeTableCell,
         },
-        props: ['grade', 'semester', 'timetable_now'],
+        props: ['now_register', 'can_register', 'is_edit'],
+        methods: {
+            get_one_lecture(lectures, day, time) {
+                let c;
+                lectures.forEach(function (obj) {
+                    if (obj.weekday === day && obj.lec_time === time) {
+                        c = obj;
+                    }
+                });
+                return c;
+            },
+            get_one_time_lectures(lectures, day, time) {
+                let c = [];
+                lectures.forEach(function (obj) {
+                    if (obj.weekday === day && obj.lec_time === time) {
+                        c.push(obj)
+                    }
+                });
+                return c;
+            },
+        }
     }
 </script>
 

@@ -1,5 +1,10 @@
 # koukaten2019_front_vuetify
 
+* 実行手順
+    * クローン時にnpm install実行
+    * サーバーを立ち上げる時はnpm run serve実行
+    * 立ち上がったら
+
 ## Project setup
 ```
 npm install

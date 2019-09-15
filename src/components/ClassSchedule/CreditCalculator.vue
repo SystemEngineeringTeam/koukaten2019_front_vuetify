@@ -1,105 +1,95 @@
 <template>
     <div>
-        {{get_credit(now[grade])}}
-        <table class="table table-bordered">
-            <thead class="thead-dark">
+
+        <v-simple-table dence>
+            <thead>
             <tr>
-                <th scope="col">#</th>
-                <th scope="col">合計</th>
-                <th scope="col">総合</th>
-                <th scope="col">専門</th>
-                <th scope="col">専門</th>
+                <th>単位表</th>
+                <th>総単位</th>
+                <th>共通</th>
+                <th>専門</th>
+                <th>総合A</th>
+                <th>総合B</th>
+                <th>外国語</th>
             </tr>
             </thead>
             <tbody>
-
+            <template v-for="i in 4">
+                <tr v-if="grade === i">
+                    <td>{{i}}年</td>
+                    <td>{{grade_total_unit(i)}}/48</td>
+                    <td>{{$store.state.unit_list[i]["共通"]}}</td>
+                    <td>{{$store.state.unit_list[i]["専門"]}}</td>
+                    <td>{{$store.state.unit_list[i]["総合A"]}}</td>
+                    <td>{{$store.state.unit_list[i]["総合B"]}}</td>
+                    <td>{{$store.state.unit_list[i]["外国語"]}}</td>
+                </tr>
+            </template>
             <tr>
-                <th>累計</th>
-                <td v-for="i in 4">
-                    <CreditCalculatorCell :credit_now="i"></CreditCalculatorCell>
-                </td>
+                <td>合計</td>
+                <td>{{total_unit()}}/124</td>
+                <td>{{compulsory_total_unit('共通')}}/10</td>
+                <td>{{compulsory_total_unit('専門')}}/94</td>
+                <td>{{compulsory_total_unit('総合A')}}/8</td>
+                <td>{{compulsory_total_unit('総合B')}}/12</td>
+                <td>{{compulsory_total_unit('外国語')}}/8</td>
             </tr>
-
-            <tr v-for="(a_year_now,f_grade) in now">
-                <th>{{f_grade}}</th>
-                <td v-for="i in 4">
-                    <CreditCalculatorCell :credit_now="i"></CreditCalculatorCell>
-                </td>
-            </tr>
-
             </tbody>
-        </table>
+        </v-simple-table>
+
     </div>
 </template>
 
 <script>
-    import CreditCalculatorCell from './CreditCalculatorCell'
+    import CreditCalculatorCell from "./CreditCalculatorCell";
 
     export default {
         data() {
-            return {
-                grades: ['year1', 'year2', 'year3', 'year4'],
-                semesters: ['first', 'second'],
-                days: ['mon', 'tue', 'wed', 'thu', 'fri'],
-                times: ['1st', '2nd', '3rd', '4th', '5th', '6th', '7th'],
-                // oneyear_full_credit: 0,
-                // oneyear_lowest_full_credit: 48,
-                // oneyear_kyotu_credit: 0,
-                // oneyear_senmon_credit: 0,
-                // oneyear_A_credit: 0,
-                // oneyear_B_credit: 0,
-                // oneyear_gaikoku_credit: 0,
-                // full_credit: 0,
-                // lowest_full_credit: 124,
-                // kyotu_credit: 0,
-                // senmon_credit: 0,
-                // A_credit: 0,
-                // B_credit: 0,
-                // gaikoku_credit: 0,
-            };
+            return {};
         },
+
         created() {
-            // this.get_kyoutu_credit('year1')
         },
         components: {
-            CreditCalculatorCell,
+            CreditCalculatorCell
         },
-        props: [
-            'now',
-            'grade',
-        ],
+        props: ["grade"],
         methods: {
-            get_credit(obj) {
-                let c = 0;
-                if (typeof obj === 'object') {
-                    for (var key in obj) {
-                        if (key == 'credit') {
-                            c += obj['credit'];
-                        } else {
-                            c += this.get_credit(obj[key])
-                        }
-                    }
-                    return c
-                }else {
-                    return 0
+            total_unit() {
+                let total_unit = 0;
+                for (let grade = 1; grade <= 4; grade++) {
+                    total_unit += this.$store.state.unit_list[grade]["共通"] + this.$store.state.unit_list[grade]["専門"] + this.$store.state.unit_list[grade]["総合A"] + this.$store.state.unit_list[grade]["総合B"];
                 }
-            }
-            // get_kyoutu_credit: function (grade) {
-            //     let num = 0;
-            //     for (let semester in this.semesters) {
-            //         for(let day in this.days){
-            //             for(let time in this.times){
-            //                 if(this.now[grade][semester][day] !== null) {
-            //                     // num += this.now[grade][semester][day][time]["credit"];
-            //                 }
-            //             }
-            //         }
-            //     }
-            //     this.c = num
-            // }
+                return total_unit;
+            },
+            grade_total_unit(grade) {
+                return this.$store.state.unit_list[grade]["共通"] + this.$store.state.unit_list[grade]["専門"] + this.$store.state.unit_list[grade]["総合A"] + this.$store.state.unit_list[grade]["総合B"];
+            },
+            compulsory_total_unit(compulsory){
+                let total_unit = 0;
+                for (let grade = 1; grade <= 4; grade++) {
+                    total_unit += this.$store.state.unit_list[grade][compulsory];
+                }
+                return total_unit;
+            },
         }
-    }
+    };
 </script>
 
 <style scoped>
+    table {
+        border-collapse: collapse;
+    }
+
+    .font_size {
+        text-align: center;
+        font-size: 20px;
+    }
+
+    td {
+        text-align: right;
+        border: solid 1px;
+        border-color: rgb(239, 239, 239);
+        padding: 0.5em;
+    }
 </style>
