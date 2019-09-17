@@ -1,6 +1,6 @@
 <template>
-
   <div class="wrapper">
+    <CompulsoryRagister></CompulsoryRagister>
     <v-container>
       <v-row>
         <v-col cols="12">
@@ -86,7 +86,7 @@
 
     import TimeTableShow from "../components/ClassSchedule/TimeTableShow";
     import CreditCalculator from "../components/ClassSchedule/CreditCalculator";
-    import TimeTableEditor from "../components/ClassSchedule/TimeTableEditor";
+    import CompulsoryRagister from "../components/ClassSchedule/CompulsoryRagister";
 
 
     export default {
@@ -116,40 +116,15 @@
         },
         components: {
             TimeTableShow,
-            TimeTableEditor,
+            CompulsoryRagister,
             CreditCalculator
         },
         created() {
-            // // Json取得
-            // this.get_now();
-            // // Json取得後に呼び出される
-            // this.$on('GET_NOW', () => {
-            //     this.timetable = this.get_data();
-            // });
-            // this.get_editor(this.user);
         },
         beforeUpdate() {
           this.$store.commit('unit_calculate');
         },
         methods: {
-            table() {
-                return this.$store.state.registered_lectures;
-            },
-            set_grade(g) {
-                this.looking_grade = g;
-            },
-            set_semester(s) {
-                this.looking_semester = s;
-            },
-            get_grade_lecture(lectures, grade) {
-                let c = [];
-                lectures.forEach(function (obj) {
-                    if (obj.grade === grade) {
-                        c.push(obj);
-                    }
-                });
-                return c;
-            },
             get_grade_half_lectures(lectures, grade, semester) {
                 let c = [];
                 lectures.forEach(function (obj) {
@@ -168,18 +143,6 @@
                     .catch(error => {
                         console.log(error);
                     });
-            },
-            // プロパティ名を指定してデータを取得
-            get_data() {
-                return this.$data["registered_lectures"];
-            },
-            set_now(data) {
-                this.$set(
-                    this.registered_lectures[data["grade"]][data["semester"]][data["day"]],
-                    data["time"],
-                    data["now"]
-                );
-                // this.$emit('GET_NOW');
             },
             put_editor() {
                 return axios
