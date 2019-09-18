@@ -8,7 +8,7 @@
                     v-model="ID"
                     :counter="8"
                     :rules="IDRules"
-                    label="学籍番号"
+                    label="学籍番号(例 k19068kk)"
                     required
             ></v-text-field>
 
