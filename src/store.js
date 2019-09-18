@@ -150,18 +150,6 @@ export default new Vuex.Store({
         },
 
         //時間割関係
-        return_registered_lectures(state) {
-            let data = [];
-            let student_id = state.user.id;
-            state.registered_lectures.forEach(lectures => data.push({
-                student_id: student_id,
-                subject_code: lectures.subject_code,
-                class_code: lectures.class_code,
-                course_grade: lectures.grade,
-                grade_point: 'Future'
-            }))
-            return data;
-        },
         set_registered_lecture(state, lectures) {
             Vue.set(state, "registered_lectures", lectures);
         },
@@ -291,11 +279,10 @@ export default new Vuex.Store({
             });
         },
         put_registered_lectures(context, data) {
-            console.log(data);
-            axios.put(process.env.VUE_APP_URL_EDITOR, data, {
+            let d = {data: data};
+            axios.put(process.env.VUE_APP_URL_EDITOR, d, {
                 headers: {
                     Authorization: `Bearer ${this.state.user.token}`,
-                    "Content-Type": "application/json"
                 },
                 data:{}
             }).then(res => {
