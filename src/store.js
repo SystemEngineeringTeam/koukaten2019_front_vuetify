@@ -15,42 +15,8 @@ export default new Vuex.Store({
             { grade: 4, semester: '前期' }, { grade: 4, semester: '後期' },
         ],
         select_units: {},
-        looking_timetable: { grade: 1, semester: '前期' },
-        registered_lectures: [
-            {
-                "subject_code": "k1025",
-                "class_code": "20",
-                "name": "普通の授業",
-                "teacher_name1": "秦 健心",
-                "teacher_name2": "先 生名",
-                "classification": "総合B",
-                "compulsory": "選択",
-                "isenglish": false,
-                "grade": 1,
-                "semester": "前期",
-                "weekday": "mon",
-                "lec_time": 1,
-                "continuous": 1,
-                "unit": 2,
-                "syllabus": "https://hackmd.io/@8UP5vEhpRieQqC06SyUfsg/S1WpVJSBH",
-            }, {
-                "subject_code": "k1025",
-                "class_code": "20",
-                "name": "普通の授業",
-                "teacher_name1": "秦 健心",
-                "teacher_name2": "先 生名",
-                "classification": "総合B",
-                "compulsory": "選択",
-                "isenglish": false,
-                "grade": 1,
-                "semester": "前期",
-                "weekday": "mon",
-                "lec_time": 1,
-                "continuous": 1,
-                "unit": 2,
-                "syllabus": "https://hackmd.io/@8UP5vEhpRieQqC06SyUfsg/S1WpVJSBH",
-            }
-        ],
+        looking_timetable: {grade: 1, semester: '前期'},
+        registered_lectures: [],
         can_register_lectures: [
             {
                 "subject_code": "k1025",
@@ -155,11 +121,11 @@ export default new Vuex.Store({
 
             }
         },
-        user_info: {
-            'id': "",
-            'grade': "",
-            //'semester': "",
-            //'token': ""
+        user: {
+            ID: '',
+            grade: 0,
+            major: '',
+            token: ''
         }
     },
     mutations: {
@@ -174,6 +140,9 @@ export default new Vuex.Store({
         //             Vue.set(this, 'timetable_editor', res.data);
         //         });
         // },
+        set_token(state, data) {
+            Vue.set(state.user, 'token', data.token);
+        },
         set_can_register_lectures(state, data) {
             Vue.set(state, 'can_register_lectures', data);
         },
@@ -253,10 +222,9 @@ export default new Vuex.Store({
                     // ここにクエリパラメータを指定する
                     student: student,
                 },
-            })
-                .then((res) => {
-                    context.commit('set_can_register_lectures', res.data)
-                });
+            }).then((res) => {
+                context.commit('set_can_register_lectures', res.data)
+            });
         },
         post_new_user(context, user) {
             axios.post(process.env.VUE_APP_URL_CREATE_USERS, {
@@ -274,6 +242,14 @@ export default new Vuex.Store({
 
                     }
                 })
+        login(context, user_entry) {
+            axios.post(process.env.VUE_APP_URL_LOGIN, {
+                    ID: user_entry.ID,
+                    password: user_entry.password,
+                }
+            ).then((res) => {
+                context.commit('set_token', res.data)
+            });
         }
     }
 })

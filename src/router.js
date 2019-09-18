@@ -6,6 +6,7 @@ import Config from './pages/Config'
 import Questionnaire from './pages/Questionnaire'
 import Questionnaire_Answer from './pages/Questionnaire_Answer'
 import Initial_Registration from './pages/Initial_Registration'
+import Login from './pages/Login'
 
 Vue.use(Router)
 
@@ -42,6 +43,11 @@ export default new Router({
             path: '/Initial_Registration',
             name: 'Initial_Registration',
             component: Initial_Registration
+        },
+      {
+            path: '/Login',
+            name: 'Login',
+            component: Login
         },
     ]
 })
