@@ -7,7 +7,9 @@
           <v-col cols="6">
             <v-card height="500">
               <p style="padding-top:100px; padding-bottom:100px;">時間割エディタ</p>
-              <v-btn class="mt-12">新規作成・編集</v-btn>
+              <router-link to="/Initial_Registration">
+                <v-btn class="mt-12">新規作成・編集</v-btn>
+              </router-link>
             </v-card>
           </v-col>
           <v-col cols="6">
@@ -21,9 +23,14 @@
     </v-card>
   </div>
 </template>
+
 <script>
 export default {
-  name: "Home"
+  data() {
+    return {
+      items: [{ title: "新規作成", link: "/Initial_Registration" }]
+    };
+  }
 };
 </script>
 
