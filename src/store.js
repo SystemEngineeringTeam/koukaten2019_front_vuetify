@@ -295,8 +295,10 @@ export default new Vuex.Store({
             console.log(data);
             axios.put(process.env.VUE_APP_URL_EDITOR, data, {
                 headers: {
-                    Authorization: `Bearer ${this.state.user.token}`
-                }
+                    Authorization: `Bearer ${this.state.user.token}`,
+                    "Content-Type": "application/json"
+                },
+                data:{}
             }).then(res => {
                 console.log(res);
             }).catch(error => {

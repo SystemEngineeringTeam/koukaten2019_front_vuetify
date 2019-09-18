@@ -122,9 +122,9 @@
         methods: {
             mold_registered_lectures() {
                 let data = [];
-                let student_id = this.$store.state.user.id;
+                let students_id = this.$store.state.user.id;
                 this.$store.state.registered_lectures.forEach(lectures => data.push({
-                    student_id: student_id,
+                    students_id: students_id,
                     subject_code: lectures.subject_code,
                     class_code: lectures.class_code,
                     course_grade: lectures.grade,
