@@ -1,6 +1,7 @@
 <template>
     <div class="wrapper">
         <v-container>
+            {{mold_registered_lectures()}}
             <v-row>
                 <v-col cols="12">
                     <v-tabs v-model="tabs">
@@ -129,7 +130,7 @@
                     class_code: lectures.class_code,
                     course_grade: lectures.grade,
                     grade_point: 'Future'
-                }))
+                }));
                 return data;
             },
             table() {
