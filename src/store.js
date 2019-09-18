@@ -9,10 +9,10 @@ Vue.use(Vuex)
 export default new Vuex.Store({
     state: {
         timetables: [
-            { grade: 1, semester: '前期' }, { grade: 1, semester: '後期' },
-            { grade: 2, semester: '前期' }, { grade: 2, semester: '後期' },
-            { grade: 3, semester: '前期' }, { grade: 3, semester: '後期' },
-            { grade: 4, semester: '前期' }, { grade: 4, semester: '後期' },
+            {grade: 1, semester: '前期'}, {grade: 1, semester: '後期'},
+            {grade: 2, semester: '前期'}, {grade: 2, semester: '後期'},
+            {grade: 3, semester: '前期'}, {grade: 3, semester: '後期'},
+            {grade: 4, semester: '前期'}, {grade: 4, semester: '後期'},
         ],
         select_units: {},
         looking_timetable: {grade: 1, semester: '前期'},
@@ -249,6 +249,7 @@ export default new Vuex.Store({
 
                     }
                 })
+        },
         login(context, user_entry) {
             axios.post(process.env.VUE_APP_URL_LOGIN, {
                     ID: user_entry.ID,
@@ -278,7 +279,7 @@ export default new Vuex.Store({
                     student: user_id,
                 },
                 headers: {
-                    Authorization: Bearer 
+                    Authorization: Bearer
                 },
             }).then((res) => {
                 context.commit('set_can_register_lectures', res.data)
