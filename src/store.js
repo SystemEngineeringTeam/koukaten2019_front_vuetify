@@ -9,13 +9,13 @@ Vue.use(Vuex)
 export default new Vuex.Store({
     state: {
         timetables: [
-            {grade: 1, semester: '前期'}, {grade: 1, semester: '後期'},
-            {grade: 2, semester: '前期'}, {grade: 2, semester: '後期'},
-            {grade: 3, semester: '前期'}, {grade: 3, semester: '後期'},
-            {grade: 4, semester: '前期'}, {grade: 4, semester: '後期'},
+            { grade: 1, semester: '前期' }, { grade: 1, semester: '後期' },
+            { grade: 2, semester: '前期' }, { grade: 2, semester: '後期' },
+            { grade: 3, semester: '前期' }, { grade: 3, semester: '後期' },
+            { grade: 4, semester: '前期' }, { grade: 4, semester: '後期' },
         ],
         select_units: {},
-        looking_timetable: {grade: 1, semester: '前期'},
+        looking_timetable: { grade: 1, semester: '前期' },
         registered_lectures: [],
         can_register_lectures: [
             {
@@ -142,10 +142,8 @@ export default new Vuex.Store({
         // },
 
         //ユーザー関係
-        new_user(state, user) {
-            state.user_info.id = user.id
-            state.user_info.grade = user.grade
-            //state.user_info.semester = semester
+        set_user(state, data) {
+            Vue.set(state.user, 'id', data.students_id)
         },
         set_token(state, data) {
             Vue.set(state.user, 'token', data.token);
@@ -238,15 +236,15 @@ export default new Vuex.Store({
     },
     actions: {
         post_new_user(context, user) {
-            axios.post(process.env.VUE_APP_URL_CREATE_USERS, {
-                id: user.id,
+            axios.post(process.env.VUE_APP_URL_USERS, {
+                students_id: user.id,
+                grade: user.grade,
                 password: user.password,
-                grade: user.grade
             })
                 .then((res) => {
                     // console.log(res.data);
                     if (res.data) {
-                        context.commit('new_user', user)
+                        context.commit('new_user', res.data)
                         // trueかfalseを判断する
                         return '/ClassSchedule';
                     } else {
@@ -255,12 +253,13 @@ export default new Vuex.Store({
                 })
         },
         login(context, user_entry) {
-            axios.post(process.env.VUE_APP_URL_LOGIN, {
-                    ID: user_entry.ID,
-                    password: user_entry.password,
-                }
+            axios.post(process.env.VUE_APP_URL_SIGN_IN_USERS, {
+                students_id: user_entry.ID,
+                password: user_entry.password,
+            }
             ).then((res) => {
                 context.commit('set_token', res.data)
+                context.commit('set_user', res.data)
             });
         },
         get_registered_lectures(context, user_id) {
