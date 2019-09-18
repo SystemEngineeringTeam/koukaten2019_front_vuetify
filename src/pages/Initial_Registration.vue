@@ -66,7 +66,9 @@
             ></v-select>
           </v-col>
         </v-row>
-        <v-btn @click="$store.dispatch('post_new_user',id,password,grade)  ">登録</v-btn>
+        <v-btn
+          @click="$store.dispatch('post_new_user',{id: id,password: password,grade: grade,semester:semester})"
+        >登録</v-btn>
       </v-container>
     </v-form>
     {{id}}
@@ -80,7 +82,7 @@
 export default {
   data() {
     return {
-      x: { id: id, pass: password },
+      id: "",
       grade: 0,
       semester: "",
       x: false,

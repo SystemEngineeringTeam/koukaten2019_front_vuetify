@@ -158,8 +158,8 @@ export default new Vuex.Store({
         user_info: {
             'id': "",
             'grade': "",
-            'semester': "",
-            'token': ""
+            //'semester': "",
+            //'token': ""
         }
     },
     mutations: {
@@ -239,10 +239,10 @@ export default new Vuex.Store({
                 }
             });
         },
-        new_user(state, id, grade, semester) {
-            state.user_info.id = id
-            state.user_info.grade = grade
-            state.user_info.semester = semester
+        new_user(state, user) {
+            state.user_info.id = user.id
+            state.user_info.grade = user.grade
+            //state.user_info.semester = semester
         }
 
     },
@@ -258,16 +258,16 @@ export default new Vuex.Store({
                     context.commit('set_can_register_lectures', res.data)
                 });
         },
-        post_new_user(context, id, password, grade, semester) {
+        post_new_user(context, user) {
             axios.post(process.env.VUE_APP_URL_CREATE_USERS, {
-                id: id,
-                password: password,
-                grade: grade
+                id: user.id,
+                password: user.password,
+                grade: user.grade
             })
                 .then((res) => {
                     // console.log(res.data);
                     if (res.data) {
-                        context.commit('new_user', id, grade, semester)
+                        context.commit('new_user', user)
                         // trueかfalseを判断する
                         return '/ClassSchedule';
                     } else {
