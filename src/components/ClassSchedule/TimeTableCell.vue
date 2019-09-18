@@ -1,23 +1,25 @@
 <template>
     <div>
-        <div v-if="lecture==null">
-            <v-card-actions v-if="is_edit && can_register.length >= 1">
-                <v-btn @click.stop="dialog = true">授業を登録する</v-btn>
-            </v-card-actions>
-        </div>
+        <!--<v-list-item :color="classification_colors[lecture.classification_colors]">-->
+            <div v-if="lecture==null">
+                <v-card-actions v-if="is_edit && can_register.length >= 1">
+                    <v-btn @click.stop="dialog = true">授業を登録する</v-btn>
+                </v-card-actions>
+            </div>
 
-        <div v-else>
-            <v-card-text><b>{{lecture['name']}}</b> {{lecture["unit"]}}単位</v-card-text>
-            <v-card-actions>
-                <v-btn :href="lecture['syllabus']" target="_blank">シラバス</v-btn>
-            </v-card-actions>
-            <v-card-actions v-if="is_edit && can_register.length >= 1">
-                <v-btn @click.stop="dialog = true">授業を登録する</v-btn>
-                <v-btn v-on:click="$store.commit('delete_registered_lecture', {'weekday':day, 'lec_time':time})">
-                    授業を取り消す
-                </v-btn>
-            </v-card-actions>
-        </div>
+            <div v-else>
+                <v-card-text><b>{{lecture['name']}}</b> {{lecture["unit"]}}単位</v-card-text>
+                <v-card-actions>
+                    <v-btn :href="lecture['syllabus']" target="_blank">シラバス</v-btn>
+                </v-card-actions>
+                <v-card-actions v-if="is_edit && can_register.length >= 1">
+                    <v-btn @click.stop="dialog = true">授業を登録する</v-btn>
+                    <v-btn v-on:click="$store.commit('delete_registered_lecture', {'weekday':day, 'lec_time':time})">
+                        授業を取り消す
+                    </v-btn>
+                </v-card-actions>
+            </div>
+        <!--</v-list-item>-->
 
 
         <!--ダイアログ-->
@@ -67,7 +69,13 @@
         name: "TimeTableCell",
         data() {
             return {
-                dialog: false
+                dialog: false,
+                classification_colors: {
+                    必修: 'success',
+                    専門: 'green',
+                    総合A: 'pink',
+                    総合B: 'yellow'
+                }
             };
         },
         props: ["lecture", "is_edit", "can_register", "day", "time"]

@@ -9,7 +9,7 @@
                     <template v-for="time in 7">
                         <v-divider></v-divider>
                         <v-subheader>{{time}}限目</v-subheader>
-                        <v-list-item>
+                        <v-list-item color="red">
                             <TimeTableCell :is_edit="is_edit" :lecture="get_one_lecture(now_register, day, time)"
                                            :can_register="get_one_time_lectures(can_register, day, time)"
                                            :day="day" :time="time"
