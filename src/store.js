@@ -8,16 +8,11 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
     state: {
-        user: {
-            id: "",
-            token: "",
-            major: "",
-        },
         timetables: [
-            {grade: 1, semester: '前期'}, {grade: 1, semester: '後期'},
-            {grade: 2, semester: '前期'}, {grade: 2, semester: '後期'},
-            {grade: 3, semester: '前期'}, {grade: 3, semester: '後期'},
-            {grade: 4, semester: '前期'}, {grade: 4, semester: '後期'},
+            { grade: 1, semester: '前期' }, { grade: 1, semester: '後期' },
+            { grade: 2, semester: '前期' }, { grade: 2, semester: '後期' },
+            { grade: 3, semester: '前期' }, { grade: 3, semester: '後期' },
+            { grade: 4, semester: '前期' }, { grade: 4, semester: '後期' },
         ],
         select_units: {},
         looking_timetable: {grade: 1, semester: '前期'},
@@ -126,6 +121,12 @@ export default new Vuex.Store({
 
             }
         },
+        user: {
+            ID: '',
+            grade: 0,
+            major: '',
+            token: ''
+        }
     },
     mutations: {
         // get_editor(student) {
@@ -200,23 +201,54 @@ export default new Vuex.Store({
                 }
             };
             state.registered_lectures.forEach(function (lecture) {
-                    if (lecture.classification === '共通') {
-                        state.unit_list[lecture.grade]['共通'] += lecture.unit
-                    } else if (lecture.classification === '専門') {
-                        state.unit_list[lecture.grade]['専門'] += lecture.unit
-                    } else if (lecture.classification === '総合A') {
-                        state.unit_list[lecture.grade]['総合A'] += lecture.unit
-                        if (lecture.isenglish) {
-                            state.unit_list[lecture.grade]['外国語'] += lecture.unit
-                        }
-                    } else if (lecture.classification === '総合B') {
-                        state.unit_list[lecture.grade]['総合B'] += lecture.unit
+                if (lecture.classification === '共通') {
+                    state.unit_list[lecture.grade]['共通'] += lecture.unit
+                } else if (lecture.classification === '専門') {
+                    state.unit_list[lecture.grade]['専門'] += lecture.unit
+                } else if (lecture.classification === '総合A') {
+                    state.unit_list[lecture.grade]['総合A'] += lecture.unit
+                    if (lecture.isenglish) {
+                        state.unit_list[lecture.grade]['外国語'] += lecture.unit
                     }
+                } else if (lecture.classification === '総合B') {
+                    state.unit_list[lecture.grade]['総合B'] += lecture.unit
                 }
-            )
+            });
+        },
+        new_user(state, user) {
+            state.user_info.id = user.id
+            state.user_info.grade = user.grade
+            //state.user_info.semester = semester
         }
+
     },
     actions: {
+        get_can_register_lectures(context, student) {
+            axios.get(process.env.VUE_APP_URL_EDITOR, {
+                params: {
+                    // ここにクエリパラメータを指定する
+                    student: student,
+                },
+            }).then((res) => {
+                context.commit('set_can_register_lectures', res.data)
+            });
+        },
+        post_new_user(context, user) {
+            axios.post(process.env.VUE_APP_URL_CREATE_USERS, {
+                id: user.id,
+                password: user.password,
+                grade: user.grade
+            })
+                .then((res) => {
+                    // console.log(res.data);
+                    if (res.data) {
+                        context.commit('new_user', user)
+                        // trueかfalseを判断する
+                        return '/ClassSchedule';
+                    } else {
+
+                    }
+                })
         login(context, user_entry) {
             axios.post(process.env.VUE_APP_URL_LOGIN, {
                     ID: user_entry.ID,
