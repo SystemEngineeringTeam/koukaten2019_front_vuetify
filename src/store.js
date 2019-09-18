@@ -122,10 +122,10 @@ export default new Vuex.Store({
             }
         },
         user: {
-            ID: '',
-            grade: 0,
+            id: 'k00001kk',
+            grade: 1,
             major: '',
-            token: ''
+            token: 'iuxZGtqdnAtjfgXa4ACLmLi5'
         }
     },
     mutations: {
@@ -142,12 +142,29 @@ export default new Vuex.Store({
         // },
 
         //ユーザー関係
+        new_user(state, user) {
+            state.user_info.id = user.id
+            state.user_info.grade = user.grade
+            //state.user_info.semester = semester
+        },
         set_token(state, data) {
             Vue.set(state.user, 'token', data.token);
         },
 
         //時間割関係
-        set_registerd_lecture(state, lectures) {
+        return_registered_lectures(state) {
+            let data = [];
+            let student_id = state.user.id;
+            state.registered_lectures.forEach(lectures => data.push({
+                student_id: student_id,
+                subject_code: lectures.subject_code,
+                class_code: lectures.class_code,
+                course_grade: lectures.grade,
+                grade_point: 'Future'
+            }))
+            return data;
+        },
+        set_registered_lecture(state, lectures) {
             Vue.set(state, "registered_lectures", lectures);
         },
         set_can_register_lectures(state, data) {
@@ -165,6 +182,8 @@ export default new Vuex.Store({
                 state.registered_lectures.splice(index, 1);
             }
         },
+
+        //単位関係
         unit_calculate(state) {
             state.unit_list = {
                 1: {
@@ -215,24 +234,9 @@ export default new Vuex.Store({
                 }
             });
         },
-        new_user(state, user) {
-            state.user_info.id = user.id
-            state.user_info.grade = user.grade
-            //state.user_info.semester = semester
-        }
 
     },
     actions: {
-        get_can_register_lectures(context, student) {
-            axios.get(process.env.VUE_APP_URL_EDITOR, {
-                params: {
-                    // ここにクエリパラメータを指定する
-                    student: student,
-                },
-            }).then((res) => {
-                context.commit('set_can_register_lectures', res.data)
-            });
-        },
         post_new_user(context, user) {
             axios.post(process.env.VUE_APP_URL_CREATE_USERS, {
                 id: user.id,
@@ -259,14 +263,16 @@ export default new Vuex.Store({
                 context.commit('set_token', res.data)
             });
         },
-        get_register_lectures(context, user_id) {
+        get_registered_lectures(context, user_id) {
             axios.get(process.env.VUE_APP_URL_TIMETABLE, {
                 params: {
                     student: user_id
                 },
-                headers: {},
+                headers: {
+                    Authorization: `Bearer ${this.state.user.token}`
+                },
             }).then(res => {
-                context.commit('set_registerd_lecture', res.data)
+                context.commit('set_registered_lecture', res.data)
             })
                 .catch(error => {
                     console.log(error);
@@ -279,14 +285,23 @@ export default new Vuex.Store({
                     student: user_id,
                 },
                 headers: {
-                    Authorization: Bearer
+                    Authorization: `Bearer ${this.state.user.token}`
                 },
             }).then((res) => {
                 context.commit('set_can_register_lectures', res.data)
             });
         },
-        put_registered_lectures(context, lectures) {
-            axios.put()
+        put_registered_lectures(context, data) {
+            console.log(data);
+            axios.put(process.env.VUE_APP_URL_EDITOR, data, {
+                headers: {
+                    Authorization: `Bearer ${this.state.user.token}`
+                }
+            }).then(res => {
+                console.log(res);
+            }).catch(error => {
+                console.log(error);
+            });
         }
     }
 })
