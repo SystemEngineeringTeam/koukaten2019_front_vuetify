@@ -34,7 +34,7 @@
         name: "TimeTableShow",
         data() {
             return {
-                weekdays: ['mon', 'tue', 'wed', 'thu', 'fry'],
+                weekdays: ['mon', 'tue', 'wed', 'thu', 'fri'],
                 days_name: ['月', '火', '水', '木', '金']
             }
         },

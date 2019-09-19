@@ -122,6 +122,7 @@ export default new Vuex.Store({
             }
         },
         user: {
+            logined: false,
             id: '',
             grade: 0,
             major: '',
@@ -146,7 +147,8 @@ export default new Vuex.Store({
             Vue.set(state.user, 'id', data.students_id);
             Vue.set(state.user, 'token', data.token);
             Vue.set(state.user, 'grade', data.grade);
-            Vue.set(state.user, 'major', data.students_id.slice(0,1))
+            Vue.set(state.user, 'major', data.students_id.slice(0,1));
+            Vue.set(state.user, 'logined', true);
         },
 
         //時間割関係
