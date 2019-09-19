@@ -1,7 +1,6 @@
 <template>
     <div class="wrapper">
         <v-container>
-            {{mold_registered_lectures()}}
             <v-row>
                 <v-col cols="12">
                     <v-tabs v-model="tabs">

@@ -15,7 +15,6 @@
 
       <v-btn :disabled="!valid" color="success" class="mr-4" @click="login">ログインする</v-btn>
     </v-form>
-    {{$store.state.user}}
   </div>
 </template>
 

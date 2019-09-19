@@ -69,12 +69,6 @@
         <v-btn @click="$store.dispatch('post_new_user',{id: id,password: password,grade: grade})">登録</v-btn>
       </v-container>
     </v-form>
-    {{$store.state.user}}
-    {{id}}
-    {{password}}
-    {{repassword}}
-    {{grade}}
-    {{semester}}
   </div>
 </template>
 <script>

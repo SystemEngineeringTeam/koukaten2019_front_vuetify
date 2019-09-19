@@ -122,10 +122,10 @@ export default new Vuex.Store({
             }
         },
         user: {
-            id: 'k00001kk',
-            grade: 1,
+            id: '',
+            grade: 0,
             major: '',
-            token: 'iuxZGtqdnAtjfgXa4ACLmLi5'
+            token: ''
         }
     },
     mutations: {
@@ -143,10 +143,10 @@ export default new Vuex.Store({
 
         //ユーザー関係
         set_user(state, data) {
-            Vue.set(state.user, 'id', data.students_id)
-        },
-        set_token(state, data) {
+            Vue.set(state.user, 'id', data.students_id);
             Vue.set(state.user, 'token', data.token);
+            Vue.set(state.user, 'grade', data.grade);
+            Vue.set(state.user, 'major', data.students_id.slice(0,1))
         },
 
         //時間割関係
@@ -232,7 +232,7 @@ export default new Vuex.Store({
                 .then((res) => {
                     // console.log(res.data);
                     if (res.data) {
-                        context.commit('new_user', res.data)
+                        context.commit('set_user', res.data)
                         // trueかfalseを判断する
                         return '/ClassSchedule';
                     } else {
@@ -246,7 +246,6 @@ export default new Vuex.Store({
                 password: user_entry.password,
             }
             ).then((res) => {
-                context.commit('set_token', res.data)
                 context.commit('set_user', res.data)
             });
         },
