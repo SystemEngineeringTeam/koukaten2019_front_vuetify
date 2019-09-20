@@ -23,7 +23,7 @@
                     <v-text-field
                             v-model="password"
                             :append-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'"
-                            :rules="[rules.required, rules.min ,rules.max]"
+                            :rules="[rules.required, rules.min ,rules.max,rules.passrules]"
                             :type="show2 ? 'text' : 'password'"
                             name="input-10-2"
                             label="パスワード"
@@ -89,9 +89,13 @@
                 rules: {
                     required: value => !!value || "必ず入力してください",
                     min: v => v.length >= 8 || "８文字以上入力してください",
-                    max: v => v.length <= 32 || "１６文字以下までの入力にしてください",
+                    max: v => v.length <= 72 || "７２文字以下までの入力にしてください",
                     equal: v => v.length == 8 || "学籍番号を入力してください",
                     repass: v => v == this.password || "同じパスワードを入力してください",
+                    passrules: v => {
+                      const pattern = /^(?=.*?[a-z])(?=.*?[A-Z])(?=.*?\d)[a-zA-Z\d]{8,72}$/;
+                      return pattern.test(v) || "半角英小文字大文字数字をそれぞれ1種類以上含んでください"
+                    }
                 }
             };
         },

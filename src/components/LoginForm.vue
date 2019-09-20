@@ -38,10 +38,10 @@ export default {
     ],
     PassRules: [
       v => !!v || "パスワードは必ず入力してください",
-      v => (v && v.length >= 8 && v.length <= 72) || "8文字以上72文字以内で入力してください",
+      v => (v && v.length >= 8 && v.length <= 72) || "８文字以上７２文字以内で入力してください",
       v =>  {
         const pattern = /^(?=.*?[a-z])(?=.*?[A-Z])(?=.*?\d)[a-zA-Z\d]{8,72}$/;
-        return pattern.test(v) || "半角英小文字大文字数字をそれぞれ1種類以上含んでください"
+        return pattern.test(v) || "半角英小文字大文字数字をそれぞれ1文字以上含んでください"
       }
     ]
   }),
