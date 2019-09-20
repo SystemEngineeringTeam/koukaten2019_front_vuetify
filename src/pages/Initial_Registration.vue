@@ -1,5 +1,9 @@
 <template>
     <div>
+        <v-alert type="warning" v-if="show_alert">
+          アカウントを作成できませんでした
+        </v-alert>
+
         <v-form ref="form" v-model="valid">
             <v-row>
                 <v-col cols="12" sm="6">
@@ -56,7 +60,7 @@
             <v-row>
                 <v-btn :disabled="!valid"
                        color="success"
-                       @click="$store.dispatch('post_new_user',{id: id,password: password,grade: grade})">登録
+                       @click="signup">登録
                 </v-btn>
                 <div v-if="Screen_transition($store.state.user.logined)"></div>
             </v-row>
@@ -69,6 +73,7 @@
     export default {
         data() {
             return {
+                show_alert: false,
                 valid: true,
                 id: "",
                 grade: 0,
@@ -91,6 +96,12 @@
             };
         },
         methods: {
+            signup(){
+              this.$store.dispatch('post_new_user',{id: this.id, password: this.password, grade: this.grade});
+              if(this.$store.state.user.logined == false){
+                this.show_alert = "true";
+              }
+            },
             Screen_transition(h) {
                 // console.log(h);
                 if (h) {
