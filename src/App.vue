@@ -34,7 +34,7 @@
       <div class="flex-grow-1"></div>
       <div v-if="$store.state.user.logined">
         <b>{{$store.state.user.id}}</b> |
-        <router-link to="/login">ログアウト</router-link>
+        <v-btn @click="$store.commit('logout',)">ログアウト</v-btn>
       </div>
       <div v-else>
         <router-link to="/initial_Registration">ユーザー登録</router-link>|
@@ -83,7 +83,8 @@ export default {
   name: "App",
   components: {
     Header
-  }
+  },
+  methods: {}
 };
 </script>
 
