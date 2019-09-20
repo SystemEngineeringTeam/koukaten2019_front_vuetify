@@ -30,7 +30,13 @@ export default {
       v => !!v || "学籍番号は必ず入力してください",
       v => (v && v.length == 8) || ""
     ],
-    PassRules: [v => !!v || "パスワードは必ず入力してください"]
+    PassRules: [
+      v => !!v || "パスワードは必ず入力してください",
+      v =>  {
+        const pattern = /^(?=.*?[a-z])(?=.*?[A-Z])(?=.*?\d)[a-zA-Z\d]{8,100}$/;
+        return pattern.test(v) || "半角英小文字大文字数字をそれぞれ1種類以上含んでください"
+      }
+    ]
   }),
 
   methods: {
