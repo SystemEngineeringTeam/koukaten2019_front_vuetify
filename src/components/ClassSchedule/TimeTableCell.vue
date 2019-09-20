@@ -13,7 +13,7 @@
             </v-card-actions>
             <v-card-actions v-if="is_edit && can_register.length >= 1">
                 <v-btn @click.stop="dialog = true">授業を登録する</v-btn>
-                <v-btn v-on:click="$store.commit('delete_registered_lecture', {'weekday':day, 'lec_time':time})">
+                <v-btn v-on:click="$store.commit('delete_registered_lecture', {subject_code:lecture['subject_code'], class_code:lecture['class_code']})">
                     授業を取り消す
                 </v-btn>
             </v-card-actions>
@@ -75,32 +75,4 @@
 </script>
 
 <style scoped>
-    .height100 {
-        height: 100%;
-    }
-
-    .register_button {
-        width: 100%;
-        height: 100%;
-        padding: 5%;
-    }
-
-    .pickup_button {
-        border: none;
-        outline: none;
-        /*appearance: none;*/
-        width: 100%;
-        height: 100%;
-        padding: 5%;
-        background-color: white;
-    }
-
-    .amargin {
-        margin-bottom: 300px;
-    }
-
-    .pickup_button:hover {
-        background-color: lightgreen;
-    }
-
 </style>

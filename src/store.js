@@ -164,8 +164,8 @@ export default new Vuex.Store({
         set_looking_timetable(state, timetable) {
             Vue.set(state, 'looking_timetable', timetable);
         },
-        delete_registered_lecture(state, day_time) {
-            let index = state.registered_lectures.findIndex((lecture) => lecture['grade'] === state.looking_timetable.grade && lecture['semester'] === state.looking_timetable.semester && lecture['weekday'] === day_time.weekday && lecture['lec_time'] === day_time.lec_time);
+        delete_registered_lecture(state, codes) {
+            let index = state.registered_lectures.findIndex((lecture) => lecture.subject_code == codes.subject_code && lecture.class_code == codes.class_code);
             if (index >= 0) {
                 state.registered_lectures.splice(index, 1);
             }
@@ -268,7 +268,6 @@ export default new Vuex.Store({
                 context.commit('set_registered_lecture', res.data)
             })
                 .catch(error => {
-                    console.log(error);
                 });
         },
         get_can_register_lectures(context, user_id) {
@@ -292,9 +291,7 @@ export default new Vuex.Store({
                 },
                 data: {}
             }).then(res => {
-                console.log(res);
             }).catch(error => {
-                console.log(error);
             });
         }
     }
