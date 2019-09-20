@@ -14,6 +14,7 @@
       ></v-text-field>
 
       <v-btn :disabled="!valid" color="success" class="mr-4" @click="login">ログインする</v-btn>
+      <div v-if="Screen_transition($store.state.user.logined)"></div>
     </v-form>
   </div>
 </template>
@@ -43,6 +44,15 @@ export default {
   methods: {
     login() {
       this.$store.dispatch("login", { ID: this.ID, password: this.password });
+    },
+    Screen_transition(h) {
+        // console.log(h);
+        if (h) {
+            this.$router.push("ClassSchedule");
+            return true;
+        } else {
+            // console.log(era);
+        }
     }
   }
 };
