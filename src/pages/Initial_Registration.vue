@@ -41,16 +41,6 @@
             ></v-select>
           </v-col>
         </v-row>
-        <v-row align="center">
-          <v-col cols="3">
-            <v-select
-              v-model="semester"
-              :items="semesters"
-              :menu-props="{ top: true, offsetY: true }"
-              label="専攻"
-            ></v-select>
-          </v-col>
-        </v-row>
         <v-btn @click="$store.dispatch('post_new_user',{id: id,password: password,grade: grade})">登録</v-btn>
         <div v-if="Screen_transition($store.state.user.logined)"></div>
       </v-container>
