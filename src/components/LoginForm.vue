@@ -1,5 +1,9 @@
 <template>
   <div>
+    <v-alert type="warning" v-if="show_alert">
+      学席番号かアラートが間違っています
+    </v-alert>
+
     <v-form ref="form" v-model="valid">
       <v-text-field v-model="ID" :counter="8" :rules="IDRules" label="学籍番号(例 k19068kk)" required></v-text-field>
 
@@ -23,6 +27,7 @@
 export default {
   name: "LoginForm",
   data: () => ({
+    show_alert: false,
     valid: true,
     ID: "",
     password: "",
@@ -44,6 +49,9 @@ export default {
   methods: {
     login() {
       this.$store.dispatch("login", { ID: this.ID, password: this.password });
+      if(this.$store.state.user.logined == false){
+        this.show_alert = "true";
+      }
     },
     Screen_transition(h) {
         // console.log(h);
