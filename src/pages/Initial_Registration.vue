@@ -113,6 +113,19 @@
             }
         }
     };
+  },
+  methods: {
+    Screen_transition(h) {
+      // console.log(h);
+      if (h) {
+        this.$router.push("ClassSchedule");
+        return true;
+      } else {
+        // console.log(era);
+      }
+    }
+  }
+};
 </script>
 <style scoped>
 </style>
