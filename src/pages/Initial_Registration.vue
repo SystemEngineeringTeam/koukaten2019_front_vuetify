@@ -101,8 +101,10 @@
             signup(){
               this.$store.dispatch('post_new_user',{id: this.id, password: this.password, grade: this.grade});
               if(this.$store.state.user.logined == false){
-                this.show_alert = "true";
+                setTimeout(this.enable,1500);
               }
+            },enable:function() {
+                this.show_alert = true;
             },
             Screen_transition(h) {
                 // console.log(h);

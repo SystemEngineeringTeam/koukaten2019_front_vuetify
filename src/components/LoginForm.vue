@@ -50,8 +50,10 @@ export default {
     login() {
       this.$store.dispatch("login", { ID: this.ID, password: this.password });
       if(this.$store.state.user.logined == false){
-        this.show_alert = "true";
+        setTimeout(this.enable,1000);
       }
+    },enable:function() {
+        this.show_alert = true;
     },
     Screen_transition(h) {
         // console.log(h);
