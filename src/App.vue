@@ -73,8 +73,6 @@ export default {
         { title: "時間割エディタ", link: "/ClassSchedule" },
         { title: "授業アンケート", link: "/Questionnaire" },
         { title: "設定", link: "/Config" },
-        { title: "ログアウト", link: "/ClassSchedule" },
-        { title: "ログイン", link: "/Login" },
         { title: "ユーザー登録", link: "/initial_Registration" }
       ],
       login: true //true:ログイン済み false:未ログイン
