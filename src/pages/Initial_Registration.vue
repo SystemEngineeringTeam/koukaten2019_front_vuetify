@@ -65,8 +65,6 @@
                 <div v-if="Screen_transition($store.state.user.logined)"></div>
             </v-row>
         </v-form>
-        </v-container>
-        </v-form>
     </div>
 </template>
 <script>
@@ -117,19 +115,6 @@
             }
         }
     };
-  },
-  methods: {
-    Screen_transition(h) {
-      // console.log(h);
-      if (h) {
-        this.$router.push("ClassSchedule");
-        return true;
-      } else {
-        // console.log(era);
-      }
-    }
-  }
-};
 </script>
 <style scoped>
 </style>
