@@ -31,21 +31,6 @@
             ></v-text-field>
           </v-col>
         </v-row>
-        <v-row>
-          <v-col cols="12" sm="6">
-            <v-text-field
-              v-model="repassword"
-              :append-icon="show3 ? 'mdi-eye' : 'mdi-eye-off'"
-              :rules="[rules.required ,rules.min ,rules.max]"
-              :type="show3 ? 'text' : 'password'"
-              name="input-10-3"
-              label="再パスワード"
-              hint="パスワードに設定可能な文字数です"
-              counter
-              @click:append="show3 = !show3"
-            ></v-text-field>
-          </v-col>
-        </v-row>
         <v-row align="center">
           <v-col cols="3">
             <v-select
@@ -67,6 +52,7 @@
           </v-col>
         </v-row>
         <v-btn @click="$store.dispatch('post_new_user',{id: id,password: password,grade: grade})">登録</v-btn>
+        <div v-if="Screen_transition($store.state.user.logined)"></div>
       </v-container>
     </v-form>
   </div>
@@ -104,14 +90,24 @@ export default {
       ],
       rules: {
         required: value => !!value || "必ず入力してください",
-        min: v => v.length >= 9 || "９文字以上入力してください",
-        max: v => v.length <= 16 || "１６文字以下までの入力にしてください",
+        min: v => v.length >= 8 || "８文字以上入力してください",
+        max: v => v.length <= 32 || "１６文字以下までの入力にしてください",
         equal: v => v.length == 8 || "学籍番号を入力してください",
         emailMatch: () => "The email and password you entered don't match"
       }
     };
   },
-  methods: {}
+  methods: {
+    Screen_transition(h) {
+      // console.log(h);
+      if (h) {
+        this.$router.push("ClassSchedule");
+        return true;
+      } else {
+        // console.log(era);
+      }
+    }
+  }
 };
 </script>
 <style scoped>

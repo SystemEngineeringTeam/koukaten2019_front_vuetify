@@ -147,7 +147,7 @@ export default new Vuex.Store({
             Vue.set(state.user, 'id', data.students_id);
             Vue.set(state.user, 'token', data.token);
             Vue.set(state.user, 'grade', data.grade);
-            Vue.set(state.user, 'major', data.students_id.slice(0,1));
+            Vue.set(state.user, 'major', data.students_id.slice(0, 1));
             Vue.set(state.user, 'logined', true);
         },
 
@@ -236,7 +236,6 @@ export default new Vuex.Store({
                     if (res.data) {
                         context.commit('set_user', res.data)
                         // trueかfalseを判断する
-                        return '/ClassSchedule';
                     } else {
 
                     }
@@ -280,12 +279,12 @@ export default new Vuex.Store({
             });
         },
         put_registered_lectures(context, data) {
-            let d = {data: data};
+            let d = { data: data };
             axios.put(process.env.VUE_APP_URL_EDITOR, d, {
                 headers: {
                     Authorization: `Bearer ${this.state.user.token}`,
                 },
-                data:{}
+                data: {}
             }).then(res => {
                 console.log(res);
             }).catch(error => {
