@@ -170,7 +170,13 @@ export default new Vuex.Store({
                 state.registered_lectures.splice(index, 1);
             }
         },
-
+        logout(state) {
+            Vue.set(state.user, 'logined', false);
+            Vue.set(state.user, 'id', '');
+            Vue.set(state.user, 'grade', 0);
+            Vue.set(state.user, 'major', '');
+            Vue.set(state.user, 'taken', '');
+        },
         //単位関係
         unit_calculate(state) {
             state.unit_list = {
