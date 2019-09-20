@@ -35,11 +35,6 @@
             <v-select :items="grade" :menu-props="{ top: true, offsetY: true }" label="学年"></v-select>
           </v-col>
         </v-row>
-        <v-row align="center">
-          <v-col cols="3">
-            <v-select :items="semester" :menu-props="{ top: true, offsetY: true }" label="専攻"></v-select>
-          </v-col>
-        </v-row>
 
         <v-btn class="mr-4" @click="clear">clear</v-btn>
         <v-btn @click="submit">submit</v-btn>
