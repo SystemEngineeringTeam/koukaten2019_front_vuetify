@@ -94,7 +94,7 @@
                     repass: v => v == this.password || "同じパスワードを入力してください",
                     passrules: v => {
                       const pattern = /^(?=.*?[a-z])(?=.*?[A-Z])(?=.*?\d)[a-zA-Z\d]{8,72}$/;
-                      return pattern.test(v) || "半角英小文字大文字数字をそれぞれ1種類以上含んでください"
+                      return pattern.test(v) || "半角英小文字大文字数字をそれぞれ1文字以上含んでください"
                     }
                 }
             };
