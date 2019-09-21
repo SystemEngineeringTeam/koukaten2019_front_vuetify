@@ -27,7 +27,7 @@
 
       <v-toolbar-title>
         <router-link class="a" to="/">
-          <font color="black">未来予想図</font>
+          <font color="black" class="headline font-weight-black">未来予想図</font>
         </router-link>
       </v-toolbar-title>
 
@@ -71,8 +71,7 @@ export default {
       items: [
         { title: "ホーム", link: "/" },
         { title: "時間割エディタ", link: "/ClassSchedule" },
-        { title: "授業アンケート", link: "/Questionnaire" },
-        { title: "設定", link: "/Config" },
+        { title: "ユーザー情報変更", link: "/Config" },
         { title: "ユーザー登録", link: "/initial_Registration" }
       ],
       login: true //true:ログイン済み false:未ログイン
