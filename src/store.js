@@ -239,8 +239,12 @@ export default new Vuex.Store({
             })
                 .then((res) => {
                     // console.log(res.data);
-                    context.commit('set_user', res.data)
-                    // trueかfalseを判断する
+                    if (res.data) {
+                        context.commit('set_user', res.data)
+                        // trueかfalseを判断する
+                    } else {
+
+                    }
                 })
         },
         login(context, user_entry) {
