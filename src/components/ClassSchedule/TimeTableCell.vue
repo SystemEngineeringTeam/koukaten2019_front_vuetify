@@ -2,7 +2,14 @@
   <div>
     <div v-if="lecture==null">
       <v-card-actions v-if="is_edit && can_register.length >= 1">
-        <v-btn @click.stop="dialog = true">授業を登録する</v-btn>
+        <div
+          v-if="'必修'===$store.state.can_register_lectures.forEach(function(lecther){lecther.compulsory})"
+        >
+          <v-btn fab dark small color="pink" @click.stop="dialog = true">授業を登録する</v-btn>
+        </div>
+        <div v-else>
+          <v-btn @click.stop="dialog = true">授業を登録する</v-btn>
+        </div>
       </v-card-actions>
     </div>
 
