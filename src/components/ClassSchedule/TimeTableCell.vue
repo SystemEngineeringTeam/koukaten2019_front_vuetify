@@ -2,6 +2,7 @@
   <div>
     <div v-if="lecture==null">
       <v-card-actions v-if="is_edit && can_register.length >= 1">
+          <div v-if="$store.state.can_register_lectures.forEach(function(lecture){lecture.compulsory==='必修'});">
         <v-btn @click.stop="dialog = true">授業を登録する</v-btn>
       </v-card-actions>
     </div>
@@ -21,7 +22,7 @@
         >授業を取り消す</v-btn>
       </v-card-actions>
     </div>
-
+    
     <!--ダイアログ-->
     <v-dialog v-model="dialog">
       <v-card>
