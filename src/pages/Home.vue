@@ -24,6 +24,7 @@
           <!--</v-col>-->
         </v-row>
       </v-container>
+      <v-btn $cookies.config(expireTimes[,path])  // default: expireTimes = 1d , path=/>aaa</v-btn>
     </v-card>
   </div>
 </template>
