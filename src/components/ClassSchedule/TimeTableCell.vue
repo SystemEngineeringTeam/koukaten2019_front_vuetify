@@ -23,7 +23,7 @@
       <v-card-actions v-if="is_edit && can_register.length >= 1">
         <v-btn @click.stop="dialog = true">授業を登録する</v-btn>
         <v-btn
-          v-on:click="$store.commit('delete_registered_lecture', {subject_code:lecture['subject_code'], class_code:lecture['class_code']})"
+          v-on:click="$store.commit('delete_registered_lecture', lecture)"
         >授業を取り消す</v-btn>
       </v-card-actions>
     </div>
