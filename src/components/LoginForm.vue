@@ -5,14 +5,15 @@
     </v-alert>
 
     <v-form ref="form" v-model="valid">
-      <v-text-field v-model="ID" :counter="8" :rules="IDRules" label="学籍番号(例 k19000)" required></v-text-field>
+      <v-text-field v-model="ID" :counter="6" :rules="id_rules" label="学籍番号(例 k19000)" required></v-text-field>
 
       <v-text-field
         v-model="password"
         :append-icon="show_pass ? 'mdi-eye' : 'mdi-eye-off'"
         :type="show_pass ? 'text' : 'password'"
-        :rules="PassRules"
+        :rules="pass_rules"
         label="パスワード"
+        hint="半角アルファベットで8文字以上、小文字大文字数字をそれぞれ1文字以上含む"
         counter
         @click:append="show_pass = !show_pass"
       ></v-text-field>
@@ -32,21 +33,21 @@ export default {
     ID: "",
     password: "",
     show_pass: false,
-    IDRules: [
-      v => !!v || "学籍番号は必ず入力してください",
-      v => {
-        const pattern = /^[evcbmpdsalthkx][0-9]{5}/;
-        return pattern.test(v) || "学籍番号のフォーマットが違います"
-    },
-    ],
-    PassRules: [
-      v => !!v || "パスワードは必ず入力してください",
-      v => (v && v.length >= 8 && v.length <= 72) || "８文字以上７２文字以内で入力してください",
-      v =>  {
-        const pattern = /^(?=.*?[a-z])(?=.*?[A-Z])(?=.*?\d)[a-zA-Z\d]{8,72}$/;
-        return pattern.test(v) || "半角英小文字大文字数字をそれぞれ1文字以上含んでください"
-      }
-    ]
+      id_rules: [
+          v => !!v || "必ず入力してください",
+          v => {
+              const pattern = /^[evcbmpdsalthkx][0-9]{5}$/;
+              return pattern.test(v) || "学籍番号のフォーマットが違います"
+          },
+      ],
+      pass_rules: [
+          v => !!v || "必ず入力してください",
+          v => (v && v.length >= 8 && v.length <= 72) || "８文字以上７２文字以内で入力してください",
+          v =>  {
+              const pattern = /^(?=.*?[a-z])(?=.*?[A-Z])(?=.*?\d)[a-zA-Z\d]{8,72}$/;
+              return pattern.test(v) || "半角英小文字大文字数字をそれぞれ1文字以上含んでください"
+          }
+      ],
   }),
 
   methods: {

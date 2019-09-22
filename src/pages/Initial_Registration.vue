@@ -7,28 +7,20 @@
         <v-form ref="form" v-model="valid">
             <v-row>
                 <v-col cols="12" sm="6">
-                    <v-text-field
-                            v-model="id"
-                            :rules="[rules.required, rules.equal]"
-                            :type="show1 ? 'text' : 'password'"
-                            name="input-10-1"
-                            label="ID"
-                            counter
-                            @click:append="show1 = !show1"
-                    ></v-text-field>
+                    <v-text-field v-model="id" :counter="6" :rules="id_rules" label="学籍番号(例 k19000)" required></v-text-field>
                 </v-col>
             </v-row>
             <v-row>
                 <v-col cols="12" sm="6">
                     <v-text-field
                             v-model="password"
-                            :append-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'"
-                            :rules="[rules.required, rules.min ,rules.max,rules.passrules]"
-                            :type="show2 ? 'text' : 'password'"
-                            name="input-10-2"
+                            :append-icon="show_pass ? 'mdi-eye' : 'mdi-eye-off'"
+                            :type="show_pass ? 'text' : 'password'"
+                            :rules="pass_rules"
                             label="パスワード"
+                            hint="半角アルファベットで8文字以上、小文字大文字数字をそれぞれ1文字以上含む"
                             counter
-                            @click:append="show2 = !show2"
+                            @click:append="show_pass = !show_pass"
                     ></v-text-field>
                 </v-col>
             </v-row>
@@ -77,13 +69,30 @@
                 grade: 0,
                 semester: "",
                 x: false,
-                show1: true,
-                show2: false,
-                show3: false,
+                show_pass: false,
                 id: "",
                 password: "",
                 repassword: "",
                 grades: ["1", "2", "3", "4"],
+                id_rules: [
+                    v => !!v || "必ず入力してください",
+                    v => {
+                        const pattern = /^[evcbmpdsalthkx][0-9]{5}$/;
+                        return pattern.test(v) || "学籍番号のフォーマットが違います"
+                    },
+                ],
+                pass_rules: [
+                    v => !!v || "必ず入力してください",
+                    v => (v && v.length >= 8 && v.length <= 72) || "８文字以上７２文字以内で入力してください",
+                    v =>  {
+                        const pattern = /^(?=.*?[a-z])(?=.*?[A-Z])(?=.*?\d)[a-zA-Z\d]{8,72}$/;
+                        return pattern.test(v) || "半角英小文字大文字数字をそれぞれ1文字以上含んでください"
+                    }
+                ],
+                repass_rules: [
+                    v => !!v || "必ず入力してください",
+                    v => v == this.password || "同じパスワードを入力してください",
+                ],
                 rules: {
                     required: value => !!value || "必ず入力してください",
                     min: v => v.length >= 8 || "８文字以上入力してください",
