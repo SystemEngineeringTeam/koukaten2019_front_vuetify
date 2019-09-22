@@ -161,7 +161,7 @@ export default new Vuex.Store({
         push_registered_lecture(state, lecture) {
             let index = state.registered_lectures.findIndex((registered_lecture) => registered_lecture.grade == lecture.grade && registered_lecture.semester == lecture.semester && registered_lecture.weekday == lecture.weekday && registered_lecture.lec_time == lecture.lec_time);
             if (index >= 0) {
-              state.registered_lectures.splice(index, 1);
+              state.registered_lectures.splice(index, state.registered_lectures[index].continuous);
             }
             state.registered_lectures.push(lecture);
             if (lecture.continuous == 2) {
@@ -171,7 +171,7 @@ export default new Vuex.Store({
               sublecture.unit = 0;
               let index = state.registered_lectures.findIndex((registered_lecture) => registered_lecture.grade == sublecture.grade && registered_lecture.semester == sublecture.semester && registered_lecture.weekday == sublecture.weekday && registered_lecture.lec_time == sublecture.lec_time);
               if (index >= 0) {
-                state.registered_lectures.splice(index, 1);
+                state.registered_lectures.splice(index, state.registered_lectures[index].continuous);
               }
               state.registered_lectures.push(sublecture);
             }
@@ -182,7 +182,7 @@ export default new Vuex.Store({
         delete_registered_lecture(state, codes) {
             let index = state.registered_lectures.findIndex((lecture) => lecture.subject_code == codes.subject_code && lecture.class_code == codes.class_code);
             if (index >= 0) {
-                state.registered_lectures.splice(index, 1);
+                state.registered_lectures.splice(index, codes.continuous);
             }
         },
         logout(state) {
