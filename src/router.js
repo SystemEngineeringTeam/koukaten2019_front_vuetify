@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import Store from './store'
 import Home from './pages/Home'
 import ClassSchedule from './pages/ClassSchedule'
 import Config from './pages/Config'
@@ -22,7 +23,8 @@ export default new Router({
         {
             path: '/ClassSchedule',
             name: 'class_schedule',
-            component: ClassSchedule
+            component: ClassSchedule,
+            meta: { requiresAuth: true }
         },
         {
             path: '/Config',
@@ -49,5 +51,5 @@ export default new Router({
             name: 'Login',
             component: Login
         },
-    ]
+    ],
 })
