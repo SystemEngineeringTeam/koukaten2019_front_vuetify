@@ -35,8 +35,7 @@
         <v-container>
           <v-row>
             <v-col v-for="c in can_register" cols="3">
-              <div v-if="'必修'=== c.compulsory ||'選択必修' === c.compulsory ">
-                <v-card color="orange">
+                <v-card :class="{'orange': ('必修'=== c.compulsory || '選択必修'=== c.compulsory)}">
                   {{c.name}}
                   <br>
                   {{c.classification}}
@@ -47,30 +46,11 @@
                   <template v-if="c.teacher_name2!=='null'">,他</template>
                   <v-card-actions>
                     <v-btn
-                      v-on:click="$store.commit('push_registered_lecture', c); dialog = false"
+                      v-on:click="register_lecture(c); dialog = false"
                     >登録</v-btn>
                     <v-btn :href="c.syllabus" target="_blank">シラバス</v-btn>
                   </v-card-actions>
                 </v-card>
-              </div>
-              <div v-else>
-                <v-card>
-                  {{c.name}}
-                  <br>
-                  {{c.classification}}
-                  <br>
-                  {{c.compulsory}}
-                  <br>
-                  {{c.teacher_name1}}
-                  <template v-if="c.teacher_name2!=='null'">,他</template>
-                  <v-card-actions>
-                    <v-btn
-                      v-on:click="$store.commit('push_registered_lecture', c); dialog = false"
-                    >登録</v-btn>
-                    <v-btn :href="c.syllabus" target="_blank">シラバス</v-btn>
-                  </v-card-actions>
-                </v-card>
-              </div>
             </v-col>
           </v-row>
           <!--<template v-for="c in can_register">-->
@@ -102,6 +82,12 @@ export default {
     };
   },
   methods: {
+      register_lecture(want_ragister_lectuer){
+          if(this.lecture!=null){
+              this.$store.commit('delete_registered_lecture', this.lecture)
+          }
+          this.$store.commit('push_registered_lecture', want_ragister_lectuer)
+      },
     hanteikun(h) {
       if (h.length <= 0) {
         return false;
