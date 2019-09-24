@@ -150,7 +150,20 @@ export default new Vuex.Store({
             Vue.set(state.user, 'major', data.students_id.slice(0, 1));
             Vue.set(state.user, 'logined', true);
         },
-
+        save(state) {
+            // Json文字列に変換しLocalStorageへ保存
+            localStorage.setItem(('user'), JSON.stringify(state))
+        },
+        load(state) {
+            if (localStorage.getItem('user')) {
+                // LocalStorageから取得したJson文字列をパース
+                const store = JSON.parse(localStorage.getItem('user'))
+                // stateを置き換えます。
+                this.replaceState(Object.assign(state, store))
+                // ※ ちなみに以下はNGです。stateプロパティは読み取り専用なので。
+                // this.state = store
+            }
+        },
         //時間割関係
         set_registered_lecture(state, lectures) {
             Vue.set(state, "registered_lectures", lectures);
@@ -308,6 +321,11 @@ export default new Vuex.Store({
             }).then(res => {
             }).catch(error => {
             });
+        }, doSave({ commit }) {
+            commit('save')
+        },
+        doLoad({ commit }) {
+            commit('load')
         }
     }
 })

@@ -34,7 +34,7 @@
       <div class="flex-grow-1"></div>
       <div v-if="$store.state.user.logined">
         <b>{{$store.state.user.id}}</b> |
-        <v-btn @click="$store.commit('logout',)">ログアウト</v-btn>
+        <v-btn @click="$store.commit('logout',); save()">ログアウト</v-btn>
       </div>
       <div v-else>
         <router-link to="/initial_Registration">ユーザー登録</router-link>|
@@ -82,6 +82,9 @@ export default {
     Header
   },
   methods: {
+    save: function() {
+      this.$store.dispatch("doSave");
+     }
     Screen_transition(h) {
         // console.log(h);
         if (h == false) {
