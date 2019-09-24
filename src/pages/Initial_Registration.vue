@@ -28,9 +28,9 @@
                 <v-col cols="12" sm="6">
                     <v-text-field
                             v-model="repassword"
-                            :append-icon="show3 ? 'mdi-eye' : 'mdi-eye-off'"
-                            :rules="[rules.repass]"
-                            :type="show3 ? 'text' : 'password'"
+                            :append-icon="show_repass ? 'mdi-eye' : 'mdi-eye-off'"
+                            :type="show_repass ? 'text' : 'password'"
+                            :rules="repass_rules"
                             name="input-10-3"
                             label="再パスワード"
                             counter
@@ -70,6 +70,7 @@
                 semester: "",
                 x: false,
                 show_pass: false,
+                show_repass: false,
                 id: "",
                 password: "",
                 repassword: "",
