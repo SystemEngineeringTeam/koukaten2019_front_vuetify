@@ -70,8 +70,8 @@ export default {
       items: [
         { title: "ホーム", link: "/" },
         { title: "時間割エディタ", link: "/ClassSchedule" },
-        { title: "ユーザー情報変更", link: "/Config" },
-        { title: "ユーザー登録", link: "/initial_Registration" }
+        //{ title: "ユーザー情報変更", link: "/Config" },
+        //{ title: "ユーザー登録", link: "/initial_Registration" }
       ],
       login: true //true:ログイン済み false:未ログイン
     };
