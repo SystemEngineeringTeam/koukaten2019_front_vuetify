@@ -1,13 +1,11 @@
 <template>
-  <div>
-    {{ credit_now }}
-  </div>
+  <div>{{ unit }}/{{ enough_unit }}</div>
 </template>
 
 <script>
 export default {
   name: "CreditCalculatorCell",
-  props: ["credit_now"]
+  props: ["unit", "enough_unit"]
 };
 </script>
 

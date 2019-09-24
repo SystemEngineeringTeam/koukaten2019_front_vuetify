@@ -72,13 +72,7 @@
                 elevation="10"
                 color="red"
                 v-else
-                v-on:click="
-                  is_edit = false;
-                  $store.dispatch(
-                    'put_registered_lectures',
-                    mold_registered_lectures()
-                  );
-                "
+                v-on:click="save_lectuers"
               >
                 登録を保存
                 <v-icon dark>mdi-cloud-upload</v-icon>
@@ -108,11 +102,46 @@
         </v-col>
       </v-row>
     </v-container>
+
+    <!--ダイアログ-->
+    <v-dialog v-model="show_dialog" max-width="290">
+      <v-card>
+        <v-card-title>
+          確認
+        </v-card-title>
+
+        <v-card-text>
+          <template v-if="!this.$store.state.is_enough_unit_graduate"
+            >卒業要件を満たしていません</template
+          >
+          <br />
+          <template v-if="!this.$store.state.is_over_unit"
+            >1年間に取得できる単位数をオーバーしています</template
+          >
+          <br />
+          <br />
+          このまま登録しますか？
+        </v-card-text>
+
+        <v-card-actions>
+          <div class="flex-grow-1"></div>
+
+          <v-btn color="green darken-1" text @click="show_dialog = false">
+            キャンセル
+          </v-btn>
+
+          <v-btn color="green darken-1" text @click="register_on_dialog()">
+            登録する
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </div>
 </template>
 
 <script>
-import Vue from "vue";
+import axios from "axios";
+axios.defaults.headers.common["Access-Control-Allow-Origin"] = "*";
 
 import TimeTableShow from "../components/ClassSchedule/TimeTableShow";
 import CreditCalculator from "../components/ClassSchedule/CreditCalculator";
@@ -121,6 +150,7 @@ import TimeTableEditor from "../components/ClassSchedule/TimeTableEditor";
 export default {
   data() {
     return {
+      show_dialog: false,
       tabs: null,
       user: 1,
       is_show: true,
@@ -172,21 +202,6 @@ export default {
     table() {
       return this.$store.state.registered_lectures;
     },
-    set_grade(g) {
-      this.looking_grade = g;
-    },
-    set_semester(s) {
-      this.looking_semester = s;
-    },
-    get_grade_lecture(lectures, grade) {
-      let c = [];
-      lectures.forEach(function(obj) {
-        if (obj.grade === grade) {
-          c.push(obj);
-        }
-      });
-      return c;
-    },
     get_grade_half_lectures(lectures, grade, semester) {
       let c = [];
       lectures.forEach(function(obj) {
@@ -196,53 +211,43 @@ export default {
       });
       return c;
     },
-      get_grade_half_sougouB_lectures(lectures, grade, semester) {
-          let c = [];
-          lectures.forEach(function (obj) {
-              if (obj.semester === semester) {
-                  if (obj.grade === grade) {
-                      c.push(obj);
-                  }
-                  else if(obj.classification === '総合B' && obj.grade <= grade){
-                      c.push(obj);
-                  }
-              }
-          });
-          return c;
-      },
-    get_now() {
-      return axios
-        .get(process.env.VUE_APP_URL_TIMETABLE)
-        .then(res => {
-          Vue.set(this, "timetable", res.data);
-        })
-        .catch(error => {
-          console.log(error);
-        });
+    get_grade_half_sougouB_lectures(lectures, grade, semester) {
+      let c = [];
+      lectures.forEach(function(obj) {
+        if (obj.semester === semester) {
+          if (obj.grade === grade) {
+            c.push(obj);
+          } else if (obj.classification === "総合B" && obj.grade <= grade) {
+            c.push(obj);
+          }
+        }
+      });
+      return c;
     },
-    // プロパティ名を指定してデータを取得
-    get_data() {
-      return this.$data["registered_lectures"];
+    put_registered_lectures(data) {
+      let d = { data: data };
+      axios.put(process.env.VUE_APP_URL_EDITOR, d, {
+        headers: {
+          Authorization: `Bearer ${this.$store.state.user.token}`
+        },
+        data: {}
+      });
     },
-    set_now(data) {
-      this.$set(
-        this.registered_lectures[data["grade"]][data["semester"]][data["day"]],
-        data["time"],
-        data["now"]
-      );
-      // this.$emit('GET_NOW');
+    save_lectuers() {
+      if (
+        !this.$store.state.is_enough_unit_graduate ||
+        !this.$store.state.is_over_unit
+      )
+        this.show_dialog = true;
+      else {
+        this.put_registered_lectures(this.mold_registered_lectures());
+        this.is_edit = false;
+      }
     },
-    put_editor() {
-      return axios
-        .put(URL_BASE + "/editor", "registered_lectures")
-        .then(() => {
-          this.is_show = true;
-          console.log("保存しました");
-        })
-        .catch(error => {
-          this.is_show = true;
-          console.log(error);
-        });
+    register_on_dialog() {
+      this.put_registered_lectures(this.mold_registered_lectures());
+      this.is_edit = false;
+      this.show_dialog = false;
     }
   }
 };
