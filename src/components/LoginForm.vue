@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-alert type="warning" v-if="show_alert">
-      学席番号かアラートが間違っています
+      学席番号かパスワードが間違っています
     </v-alert>
 
     <v-form ref="form" v-model="valid">
