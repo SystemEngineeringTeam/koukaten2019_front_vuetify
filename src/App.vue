@@ -40,7 +40,7 @@
         <router-link to="/initial_Registration">ユーザー登録</router-link>|
         <router-link to="/login">ログイン</router-link>
       </div>
-
+      <div v-if="Screen_transition($store.state.user.logined)"></div>
       <!-- <v-btn>
                           <router-link to="/ClassSchedule">時間割エディタ</router-link>
       </v-btn>-->
@@ -81,7 +81,17 @@ export default {
   components: {
     Header
   },
-  methods: {}
+  methods: {
+    Screen_transition(h) {
+        // console.log(h);
+        if (h == false) {
+            this.$router.push("Login");
+            return true;
+        } else {
+            // console.log(era);
+        }
+    }
+  }
 };
 </script>
 
