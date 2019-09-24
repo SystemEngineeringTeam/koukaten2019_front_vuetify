@@ -15,6 +15,7 @@
                 :is_edit="is_edit"
                 :lecture="get_one_lecture(now_register, day, time)"
                 :can_register="get_one_time_lectures(can_register, day, time)"
+                :grade="grade"
                 :day="day"
                 :time="time"
               ></TimeTableCell>
@@ -40,7 +41,7 @@ export default {
   components: {
     TimeTableCell
   },
-  props: ["now_register", "can_register", "is_edit"],
+  props: ["now_register", "can_register", "is_edit", "grade"],
   methods: {
     get_one_lecture(lectures, day, time) {
       let c;
