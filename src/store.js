@@ -150,7 +150,20 @@ export default new Vuex.Store({
             Vue.set(state.user, 'major', data.students_id.slice(0, 1));
             Vue.set(state.user, 'logined', true);
         },
-
+        save(state) {
+            // Json文字列に変換しLocalStorageへ保存
+            localStorage.setItem(('user'), JSON.stringify(state))
+        },
+        load(state) {
+            if (localStorage.getItem('user')) {
+                // LocalStorageから取得したJson文字列をパース
+                const store = JSON.parse(localStorage.getItem('user'))
+                // stateを置き換えます。
+                this.replaceState(Object.assign(state, store))
+                // ※ ちなみに以下はNGです。stateプロパティは読み取り専用なので。
+                // this.state = store
+            }
+        },
         //時間割関係
         set_registered_lecture(state, lectures) {
             Vue.set(state, "registered_lectures", lectures);
@@ -161,19 +174,19 @@ export default new Vuex.Store({
         push_registered_lecture(state, lecture) {
             let index = state.registered_lectures.findIndex((registered_lecture) => registered_lecture.grade == lecture.grade && registered_lecture.semester == lecture.semester && registered_lecture.weekday == lecture.weekday && registered_lecture.lec_time == lecture.lec_time);
             if (index >= 0) {
-              state.registered_lectures.splice(index, 1);
+                state.registered_lectures.splice(index, 1);
             }
             state.registered_lectures.push(lecture);
             if (lecture.continuous == 2) {
-              let sublecture;
-              sublecture = Vue.util.extend({}, lecture);
-              sublecture.lec_time += 1;
-              sublecture.unit = 0;
-              let index = state.registered_lectures.findIndex((registered_lecture) => registered_lecture.grade == sublecture.grade && registered_lecture.semester == sublecture.semester && registered_lecture.weekday == sublecture.weekday && registered_lecture.lec_time == sublecture.lec_time);
-              if (index >= 0) {
-                state.registered_lectures.splice(index, 1);
-              }
-              state.registered_lectures.push(sublecture);
+                let sublecture;
+                sublecture = Vue.util.extend({}, lecture);
+                sublecture.lec_time += 1;
+                sublecture.unit = 0;
+                let index = state.registered_lectures.findIndex((registered_lecture) => registered_lecture.grade == sublecture.grade && registered_lecture.semester == sublecture.semester && registered_lecture.weekday == sublecture.weekday && registered_lecture.lec_time == sublecture.lec_time);
+                if (index >= 0) {
+                    state.registered_lectures.splice(index, 1);
+                }
+                state.registered_lectures.push(sublecture);
             }
         },
         set_looking_timetable(state, timetable) {
@@ -308,6 +321,11 @@ export default new Vuex.Store({
             }).then(res => {
             }).catch(error => {
             });
+        }, doSave({ commit }) {
+            commit('save')
+        },
+        doLoad({ commit }) {
+            commit('load')
         }
     }
 })

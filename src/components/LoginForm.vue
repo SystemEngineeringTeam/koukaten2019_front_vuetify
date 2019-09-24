@@ -1,8 +1,6 @@
 <template>
   <div>
-    <v-alert type="warning" v-if="show_alert">
-      学席番号かアラートが間違っています
-    </v-alert>
+    <v-alert type="warning" v-if="show_alert">学席番号かアラートが間違っています</v-alert>
 
     <v-form ref="form" v-model="valid">
       <v-text-field v-model="ID" :counter="6" :rules="id_rules" label="学籍番号(例 k19000)" required></v-text-field>
@@ -33,40 +31,50 @@ export default {
     ID: "",
     password: "",
     show_pass: false,
-      id_rules: [
-          v => !!v || "必ず入力してください",
-          v => {
-              const pattern = /^[evcbmpdsalthkx][0-9]{5}$/;
-              return pattern.test(v) || "学籍番号のフォーマットが違います"
-          },
-      ],
-      pass_rules: [
-          v => !!v || "必ず入力してください",
-          v => (v && v.length >= 8 && v.length <= 72) || "８文字以上７２文字以内で入力してください",
-          v =>  {
-              const pattern = /^(?=.*?[a-z])(?=.*?[A-Z])(?=.*?\d)[a-zA-Z\d]{8,72}$/;
-              return pattern.test(v) || "半角英小文字大文字数字をそれぞれ1文字以上含んでください"
-          }
-      ],
+    id_rules: [
+      v => !!v || "必ず入力してください",
+      v => {
+        const pattern = /^[evcbmpdsalthkx][0-9]{5}$/;
+        return pattern.test(v) || "学籍番号のフォーマットが違います";
+      }
+    ],
+    pass_rules: [
+      v => !!v || "必ず入力してください",
+      v =>
+        (v && v.length >= 8 && v.length <= 72) ||
+        "８文字以上７２文字以内で入力してください",
+      v => {
+        const pattern = /^(?=.*?[a-z])(?=.*?[A-Z])(?=.*?\d)[a-zA-Z\d]{8,72}$/;
+        return (
+          pattern.test(v) ||
+          "半角英小文字大文字数字をそれぞれ1文字以上含んでください"
+        );
+      }
+    ]
   }),
 
   methods: {
     login() {
       this.$store.dispatch("login", { ID: this.ID, password: this.password });
-      if(this.$store.state.user.logined == false){
-        setTimeout(this.enable,1500);
+      if (this.$store.state.user.logined == false) {
+        setTimeout(this.enable, 1500);
       }
-    },enable:function() {
-        this.show_alert = true;
+    },
+    enable: function() {
+      this.show_alert = true;
+    },
+    save: function() {
+      this.$store.dispatch("doSave");
     },
     Screen_transition(h) {
-        // console.log(h);
-        if (h) {
-            this.$router.push("ClassSchedule");
-            return true;
-        } else {
-            // console.log(era);
-        }
+      // console.log(h);
+      if (h) {
+        this.$router.push("ClassSchedule");
+        this.save();
+        return true;
+      } else {
+        // console.log(era);
+      }
     }
   }
 };
