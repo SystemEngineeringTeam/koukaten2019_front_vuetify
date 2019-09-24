@@ -34,13 +34,12 @@
       <div class="flex-grow-1"></div>
       <div v-if="$store.state.user.logined">
         <b>{{$store.state.user.id}}</b> |
-        <v-btn @click="$store.commit('logout',)">ログアウト</v-btn>
+        <v-btn @click="$store.commit('logout',); $router.push('/');">ログアウト</v-btn>
       </div>
       <div v-else>
         <router-link to="/initial_Registration">ユーザー登録</router-link>|
         <router-link to="/login">ログイン</router-link>
       </div>
-      <div v-if="Screen_transition($store.state.user.logined)"></div>
       <!-- <v-btn>
                           <router-link to="/ClassSchedule">時間割エディタ</router-link>
       </v-btn>-->
@@ -81,17 +80,7 @@ export default {
   components: {
     Header
   },
-  methods: {
-    Screen_transition(h) {
-        // console.log(h);
-        if (h == false) {
-            this.$router.push("Login");
-            return true;
-        } else {
-            // console.log(era);
-        }
-    }
-  }
+  methods: {}
 };
 </script>
 
