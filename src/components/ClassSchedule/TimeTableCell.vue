@@ -102,7 +102,15 @@ export default {
       if (this.lecture != null) {
         this.$store.commit("delete_registered_lecture", this.lecture);
       }
-      this.$store.commit("push_registered_lecture", want_ragister_lectuer);
+      // this.Vue.set(want_ragister_lectuer, 'grade', this.grade);
+      if(want_ragister_lectuer.classification == '総合B'){
+          let sougouB_lectuer = Object.assign({}, want_ragister_lectuer);
+          sougouB_lectuer.grade = this.grade;
+          this.$store.commit("push_registered_lecture", sougouB_lectuer);
+      }
+      else {
+          this.$store.commit("push_registered_lecture", want_ragister_lectuer);
+      }
     },
     hanteikun(h) {
       if (h.length <= 0) {
@@ -117,7 +125,7 @@ export default {
       return test;
     }
   },
-  props: ["lecture", "is_edit", "can_register", "day", "time"]
+  props: ["lecture", "is_edit", "can_register","grade", "day", "time"]
 };
 </script>
 

@@ -28,12 +28,13 @@
                   )
                 "
                 :can_register="
-                  get_grade_half_lectures(
+                  get_grade_half_sougouB_lectures(
                     $store.state.can_register_lectures,
                     timetable.grade,
                     timetable.semester
                   )
                 "
+                :grade="timetable.grade"
               ></TimeTableShow>
             </v-tab-item>
           </v-tabs-items>
@@ -195,6 +196,20 @@ export default {
       });
       return c;
     },
+      get_grade_half_sougouB_lectures(lectures, grade, semester) {
+          let c = [];
+          lectures.forEach(function (obj) {
+              if (obj.semester === semester) {
+                  if (obj.grade === grade) {
+                      c.push(obj);
+                  }
+                  else if(obj.classification === '総合B' && obj.grade <= grade){
+                      c.push(obj);
+                  }
+              }
+          });
+          return c;
+      },
     get_now() {
       return axios
         .get(process.env.VUE_APP_URL_TIMETABLE)
