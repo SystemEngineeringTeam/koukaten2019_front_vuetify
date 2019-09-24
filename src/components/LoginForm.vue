@@ -5,7 +5,13 @@
     </v-alert>
 
     <v-form ref="form" v-model="valid">
-      <v-text-field v-model="ID" :counter="6" :rules="id_rules" label="学籍番号(例 k19000)" required></v-text-field>
+      <v-text-field
+        v-model="ID"
+        :counter="6"
+        :rules="id_rules"
+        label="学籍番号(例 k19000)"
+        required
+      ></v-text-field>
 
       <v-text-field
         v-model="password"
@@ -18,7 +24,9 @@
         @click:append="show_pass = !show_pass"
       ></v-text-field>
 
-      <v-btn :disabled="!valid" color="success" class="mr-4" @click="login">ログインする</v-btn>
+      <v-btn :disabled="!valid" color="success" class="mr-4" @click="login"
+        >ログインする</v-btn
+      >
       <div v-if="Screen_transition($store.state.user.logined)"></div>
     </v-form>
   </div>
@@ -82,5 +90,4 @@ export default {
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

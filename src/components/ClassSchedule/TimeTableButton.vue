@@ -4,11 +4,11 @@
     <b-button v-if="now == null" v-b-modal="modal_id">授業を登録</b-button>
 
     <b-button v-else v-b-modal="modal_id">
-      {{now['name']}}
-      <br>
-      {{ now["type"]}} {{ now["credit"]}}単位
-      <br>
-      {{ now["teacher1"]}}
+      {{ now["name"] }}
+      <br />
+      {{ now["type"] }} {{ now["credit"] }}単位
+      <br />
+      {{ now["teacher1"] }}
     </b-button>
 
     <!-- モーダルの設定 -->
@@ -17,7 +17,8 @@
         v-on:click="set_ko(null, day, time)"
         @click="$bvModal.hide(modal_id)"
         data-dismiss="modal"
-      >登録を取り消す</b-button>
+        >登録を取り消す</b-button
+      >
       <b-button
         v-for="data in data_list"
         v-bind:key="data.id"
@@ -25,11 +26,11 @@
         @click="$bvModal.hide(modal_id)"
         data-dismiss="modal"
       >
-        {{data['name']}}
-        <br>
-        {{ data["type"]}} {{ data["credit"]}}単位
-        <br>
-        {{ data["teacher1"]}}
+        {{ data["name"] }}
+        <br />
+        {{ data["type"] }} {{ data["credit"] }}単位
+        <br />
+        {{ data["teacher1"] }}
       </b-button>
     </b-modal>
   </div>

@@ -17,7 +17,11 @@
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
-    <v-app-bar-nav-icon color="red accent-4" dark @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+    <v-app-bar-nav-icon
+      color="red accent-4"
+      dark
+      @click.stop="drawer = !drawer"
+    ></v-app-bar-nav-icon>
 
     <v-toolbar-title>
       <v-btn>
@@ -71,5 +75,4 @@ export default {
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

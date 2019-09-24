@@ -1,4 +1,3 @@
-
 <template>
   <div>
     <form>
@@ -32,7 +31,11 @@
         ></v-select>
         <v-row align="center">
           <v-col cols="3">
-            <v-select :items="grade" :menu-props="{ top: true, offsetY: true }" label="学年"></v-select>
+            <v-select
+              :items="grade"
+              :menu-props="{ top: true, offsetY: true }"
+              label="学年"
+            ></v-select>
           </v-col>
         </v-row>
 
@@ -78,5 +81,4 @@ export default {
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

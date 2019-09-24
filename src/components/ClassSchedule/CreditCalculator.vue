@@ -15,23 +15,23 @@
       <tbody>
         <template v-for="i in 4">
           <tr v-if="grade === i">
-            <td>{{i}}年</td>
-            <td>{{grade_total_unit(i)}}/48</td>
-            <td>{{$store.state.unit_list[i]["共通"]}}</td>
-            <td>{{$store.state.unit_list[i]["専門"]}}</td>
-            <td>{{$store.state.unit_list[i]["総合A"]}}</td>
-            <td>{{$store.state.unit_list[i]["総合B"]}}</td>
-            <td>{{$store.state.unit_list[i]["外国語"]}}</td>
+            <td>{{ i }}年</td>
+            <td>{{ grade_total_unit(i) }}/48</td>
+            <td>{{ $store.state.unit_list[i]["共通"] }}</td>
+            <td>{{ $store.state.unit_list[i]["専門"] }}</td>
+            <td>{{ $store.state.unit_list[i]["総合A"] }}</td>
+            <td>{{ $store.state.unit_list[i]["総合B"] }}</td>
+            <td>{{ $store.state.unit_list[i]["外国語"] }}</td>
           </tr>
         </template>
         <tr>
           <td>合計</td>
-          <td>{{total_unit()}}/124</td>
-          <td>{{compulsory_total_unit('共通')}}/10</td>
-          <td>{{compulsory_total_unit('専門')}}/94</td>
-          <td>{{compulsory_total_unit('総合A')}}/8</td>
-          <td>{{compulsory_total_unit('総合B')}}/12</td>
-          <td>{{compulsory_total_unit('外国語')}}/8</td>
+          <td>{{ total_unit() }}/124</td>
+          <td>{{ compulsory_total_unit("共通") }}/10</td>
+          <td>{{ compulsory_total_unit("専門") }}/94</td>
+          <td>{{ compulsory_total_unit("総合A") }}/8</td>
+          <td>{{ compulsory_total_unit("総合B") }}/12</td>
+          <td>{{ compulsory_total_unit("外国語") }}/8</td>
         </tr>
       </tbody>
     </v-simple-table>

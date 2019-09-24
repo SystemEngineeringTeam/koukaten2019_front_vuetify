@@ -23,18 +23,30 @@
     </v-navigation-drawer>
 
     <v-app-bar app>
-      <v-app-bar-nav-icon color="red accent-4" dark @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+      <v-app-bar-nav-icon
+        color="red accent-4"
+        dark
+        @click.stop="drawer = !drawer"
+      ></v-app-bar-nav-icon>
 
       <v-toolbar-title>
         <router-link class="a" to="/">
-          <font color="black" class="headline font-weight-black">未来予想図</font>
+          <font color="black" class="headline font-weight-black"
+            >未来予想図</font
+          >
         </router-link>
       </v-toolbar-title>
 
       <div class="flex-grow-1"></div>
       <div v-if="$store.state.user.logined">
-        <b>{{$store.state.user.id}}</b> |
-        <v-btn @click="$store.commit('logout',); $router.push('/');">ログアウト</v-btn>
+        <b>{{ $store.state.user.id }}</b> |
+        <v-btn
+          @click="
+            $store.commit('logout');
+            $router.push('/');
+          "
+          >ログアウト</v-btn
+        >
       </div>
       <div v-else>
         <router-link to="/initial_Registration">ユーザー登録</router-link>|
@@ -69,7 +81,7 @@ export default {
       drawer: null,
       items: [
         { title: "ホーム", link: "/" },
-        { title: "時間割エディタ", link: "/ClassSchedule" },
+        { title: "時間割エディタ", link: "/ClassSchedule" }
         //{ title: "ユーザー情報変更", link: "/Config" },
         //{ title: "ユーザー登録", link: "/initial_Registration" }
       ],
