@@ -1,5 +1,6 @@
 <template>
   <div>
+    <v-btn v-on:click="">単位マックス</v-btn>
     <v-simple-table dence>
       <thead>
         <tr>
@@ -26,12 +27,16 @@
         </template>
         <tr>
           <td>合計</td>
-          <td>{{ total_unit() }}/124</td>
-          <td>{{ compulsory_total_unit("共通") }}/10</td>
-          <td>{{ compulsory_total_unit("専門") }}/94</td>
-          <td>{{ compulsory_total_unit("総合A") }}/8</td>
-          <td>{{ compulsory_total_unit("総合B") }}/12</td>
-          <td>{{ compulsory_total_unit("外国語") }}/8</td>
+          <td>{{ total_unit() }}/{{ graduate_unit.all }}</td>
+          <td>{{ compulsory_total_unit("共通") }}/{{ graduate_unit.kyotu }}</td>
+          <td>
+            {{ compulsory_total_unit("専門") }}/{{ graduate_unit.senmon }}
+          </td>
+          <td>{{ compulsory_total_unit("総合A") }}/{{ graduate_unit.A }}</td>
+          <td>{{ compulsory_total_unit("総合B") }}/{{ graduate_unit.B }}</td>
+          <td>
+            {{ compulsory_total_unit("外国語") }}/{{ graduate_unit.english }}
+          </td>
         </tr>
       </tbody>
     </v-simple-table>
@@ -43,15 +48,42 @@ import CreditCalculatorCell from "./CreditCalculatorCell";
 
 export default {
   data() {
-    return {};
+    return {
+      graduate_unit: {
+        all: 124,
+        kyotu: 10,
+        senmon: 94,
+        A: 8,
+        B: 12,
+        english: 6
+      }
+    };
   },
 
   created() {},
+  beforeUpdate() {
+    this.$store.commit(
+      "set_is_enough_unit_graduate",
+      this.is_enough_unit_graduate()
+    );
+    this.$store.commit("set_is_over_unit", true);
+  },
   components: {
     CreditCalculatorCell
   },
   props: ["grade"],
   methods: {
+    is_enough_unit_graduate() {
+      return (
+        this.total_unit() >= this.graduate_unit.all &&
+        this.compulsory_total_unit("共通") >= this.graduate_unit.kyotu &&
+        this.compulsory_total_unit("専門") >= this.graduate_unit.senmon &&
+        this.compulsory_total_unit("総合A") >= this.graduate_unit.A &&
+        this.compulsory_total_unit("総合B") >= this.graduate_unit.B &&
+        this.compulsory_total_unit("外国語") >= this.graduate_unit.english
+      );
+    },
+    is_over_unit() {},
     total_unit() {
       let total_unit = 0;
       for (let grade = 1; grade <= 4; grade++) {
@@ -77,6 +109,9 @@ export default {
         total_unit += this.$store.state.unit_list[grade][compulsory];
       }
       return total_unit;
+    },
+    is_not_enough(unit, enough_unit) {
+      return unit < enough_unit;
     }
   }
 };

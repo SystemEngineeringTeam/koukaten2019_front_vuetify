@@ -20,7 +20,76 @@ export default new Vuex.Store({
     ],
     select_units: {},
     looking_timetable: { grade: 1, semester: "前期" },
-    registered_lectures: [],
+    registered_lectures: [
+      {
+        subject_code: "k1025",
+        class_code: "20",
+        name: "普通の授業",
+        teacher_name1: "秦 健心",
+        teacher_name2: "先 生名",
+        classification: "総合B",
+        compulsory: "選択",
+        isenglish: false,
+        grade: 1,
+        semester: "前期",
+        weekday: "mon",
+        lec_time: 1,
+        continuous: 1,
+        unit: 94,
+        syllabus: "https://hackmd.io/@8UP5vEhpRieQqC06SyUfsg/S1WpVJSBH"
+      },
+      {
+        subject_code: "k1025",
+        class_code: "20",
+        name: "英語の授業",
+        teacher_name1: "秦 健心",
+        teacher_name2: "先 生名",
+        classification: "総合A",
+        compulsory: "必修",
+        isenglish: true,
+        grade: 1,
+        semester: "前期",
+        weekday: "tue",
+        lec_time: 2,
+        continuous: 1,
+        unit: 94,
+        syllabus: "https://hackmd.io/@8UP5vEhpRieQqC06SyUfsg/S1WpVJSBH"
+      },
+      {
+        subject_code: "k1025",
+        class_code: "20",
+        name: "2コマの必修授業",
+        teacher_name1: "秦 健心",
+        teacher_name2: "先 生名",
+        classification: "共通",
+        compulsory: "選択",
+        isenglish: false,
+        grade: 1,
+        semester: "前期",
+        weekday: "wed",
+        lec_time: 2,
+        continuous: 2,
+        unit: 94,
+        syllabus: "https://hackmd.io/@8UP5vEhpRieQqC06SyUfsg/S1WpVJSBH"
+      },
+      {
+        subject_code: "k1025",
+        class_code: "20",
+        name: "2コマの選択授業",
+        teacher_name1: "秦 健心",
+        teacher_name2: "先 生名",
+        classification: "専門",
+        compulsory: "選択",
+        isenglish: false,
+        grade: "1",
+        semester: "前期",
+        weekday: "thu",
+        lec_time: 2,
+        continuous: 1,
+        unit: 94,
+        syllabus: "https://connpass.com/dashboard/"
+      }
+    ],
     can_register_lectures: [
       {
         subject_code: "k1025",
@@ -121,6 +190,8 @@ export default new Vuex.Store({
         外国語: 0
       }
     },
+    is_enough_unit_graduate: false,
+    is_over_unit: false,
     user: {
       logined: false,
       id: "",
@@ -142,6 +213,12 @@ export default new Vuex.Store({
     //         });
     // },
 
+    set_is_enough_unit_graduate(state, bool) {
+      Vue.set(state, "is_enough_unit_graduate", bool);
+    },
+    set_is_over_unit(state, bool) {
+      Vue.set(state, "is_is_over_unit", bool);
+    },
     //ユーザー関係
     set_user(state, data) {
       Vue.set(state.user, "id", data.students_id);
@@ -331,18 +408,6 @@ export default new Vuex.Store({
         .then(res => {
           context.commit("set_can_register_lectures", res.data);
         });
-    },
-    put_registered_lectures(context, data) {
-      let d = { data: data };
-      axios
-        .put(process.env.VUE_APP_URL_EDITOR, d, {
-          headers: {
-            Authorization: `Bearer ${this.state.user.token}`
-          },
-          data: {}
-        })
-        .then(res => {})
-        .catch(error => {});
     },
     doSave({ commit }) {
       commit("save");
