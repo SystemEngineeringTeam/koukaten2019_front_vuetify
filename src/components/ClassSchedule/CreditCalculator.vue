@@ -1,6 +1,5 @@
 <template>
   <div>
-    <v-btn v-on:click="">単位マックス</v-btn>
     <v-simple-table dence>
       <thead>
         <tr>
