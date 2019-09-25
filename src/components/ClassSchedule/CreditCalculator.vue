@@ -46,28 +46,28 @@
           </td>
           <td
             :class="{
-              'red--text': is_not_enough(compulsory_total_unit('共通'), graduate_unit.senmon)
+              'red--text': is_not_enough(compulsory_total_unit('専門'), graduate_unit.senmon)
             }"
           >
             {{ compulsory_total_unit('専門') }}/{{ graduate_unit.senmon }}
           </td>
           <td
             :class="{
-              'red--text': is_not_enough(compulsory_total_unit('共通'), graduate_unit.A)
+              'red--text': is_not_enough(compulsory_total_unit('総合A'), graduate_unit.A)
             }"
           >
             {{ compulsory_total_unit('総合A') }}/{{ graduate_unit.A }}
           </td>
           <td
             :class="{
-              'red--text': is_not_enough(compulsory_total_unit('共通'), graduate_unit.B)
+              'red--text': is_not_enough(compulsory_total_unit('総合B'), graduate_unit.B)
             }"
           >
             {{ compulsory_total_unit('総合B') }}/{{ graduate_unit.B }}
           </td>
           <td
             :class="{
-              'red--text': is_not_enough(compulsory_total_unit('共通'), graduate_unit.english)
+              'red--text': is_not_enough(compulsory_total_unit('外国語'), graduate_unit.english)
             }"
           >
             {{ compulsory_total_unit('外国語') }}/{{ graduate_unit.english }}
