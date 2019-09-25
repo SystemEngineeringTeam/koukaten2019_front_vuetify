@@ -1,5 +1,6 @@
 <template>
   <div class="wrapper mx-5">
+    {{$store.state.can_register_lectures}}
     <!--{{ $store.state.registered_lectures }}-->
     <v-container>
       <v-row>

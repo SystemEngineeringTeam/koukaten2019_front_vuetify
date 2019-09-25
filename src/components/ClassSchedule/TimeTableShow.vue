@@ -1,6 +1,6 @@
 <template>
   <v-row>
-    <v-col cols="4" v-for="(day, i) in weekdays">
+    <v-col cols="md-4 sm-12" v-for="(day, i) in weekdays">
       <v-card>
         <v-card-title class="blue lighten-1">{{ days_name[i] }}曜日 </v-card-title>
 
