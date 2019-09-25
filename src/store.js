@@ -191,7 +191,7 @@ export default new Vuex.Store({
             }
         },
         is_enough_unit_graduate: false,
-        is_over_unit: false,
+        is_over_unit: true,
         user: {
             logined: false,
             id: "",
@@ -217,7 +217,7 @@ export default new Vuex.Store({
             Vue.set(state, "is_enough_unit_graduate", bool);
         },
         set_is_over_unit(state, bool) {
-            Vue.set(state, "is_is_over_unit", bool);
+            Vue.set(state, "is_over_unit", bool);
         },
         //ユーザー関係
         set_user(state, data) {
