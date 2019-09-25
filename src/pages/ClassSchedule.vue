@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper">
+  <div class="wrapper mx-5">
     <!--{{ $store.state.registered_lectures }}-->
     <v-container>
       <v-row>
@@ -18,24 +18,24 @@
         <v-col cols="12">
           <v-tabs-items v-model="tabs">
             <v-tab-item v-for="timetable in timetables" :key="timetable.id">
-              <TimeTableShow
-                :is_edit="is_edit"
-                :now_register="
-                  get_grade_half_lectures(
-                    $store.state.registered_lectures,
-                    timetable.grade,
-                    timetable.semester
-                  )
-                "
-                :can_register="
-                  get_grade_half_sougouB_lectures(
-                    $store.state.can_register_lectures,
-                    timetable.grade,
-                    timetable.semester
-                  )
-                "
-                :grade="timetable.grade"
-              ></TimeTableShow>
+                <TimeTableShow
+                  :is_edit="is_edit"
+                  :now_register="
+                    get_grade_half_lectures(
+                      $store.state.registered_lectures,
+                      timetable.grade,
+                      timetable.semester
+                    )
+                  "
+                  :can_register="
+                    get_grade_half_sougouB_lectures(
+                      $store.state.can_register_lectures,
+                      timetable.grade,
+                      timetable.semester
+                    )
+                  "
+                  :grade="timetable.grade"
+                ></TimeTableShow>
             </v-tab-item>
           </v-tabs-items>
         </v-col>
