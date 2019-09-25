@@ -236,7 +236,6 @@ export default new Vuex.Store({
         },
         load(state) {
 
-
             Vue.set(state.user, "logined", localStorage.getItem('logined'));
             Vue.set(state.user, "id", localStorage.getItem('id'));
             Vue.set(state.user, "grade", localStorage.getItem('grade'));
@@ -306,6 +305,11 @@ export default new Vuex.Store({
             Vue.set(state.user, "grade", 0);
             Vue.set(state.user, "major", "");
             Vue.set(state.user, "taken", "");
+            localStorage.removeItem("logined");
+            localStorage.removeItem("id");
+            localStorage.removeItem("grade");
+            localStorage.removeItem("major");
+            localStorage.removeItem("taken");
         },
         //単位関係
         unit_calculate(state) {

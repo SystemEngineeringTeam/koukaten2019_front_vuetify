@@ -2,19 +2,17 @@
   <div>
     <div v-if="lecture == null">
       <v-card-actions v-if="is_edit && can_register.length >= 1">
-        <div v-if="hanteikun(can_register)">
-          <v-btn color="error" @click.stop="dialog = true"
-            >授業を登録する</v-btn
-          >
+        <div v-if="compulsory_decision(can_register)">
+          <v-btn color="error" @click.stop="dialog = true">授業を登録する</v-btn>
         </div>
         <div v-else>
           <v-btn @click.stop="dialog = true">授業を登録する</v-btn>
         </div>
       </v-card-actions>
       {{
-        can_register.forEach(function(lecther) {
-          lecther.compulsory;
-        })
+      can_register.forEach(function(lecther) {
+      lecther.compulsory;
+      })
       }}
     </div>
 
@@ -28,9 +26,7 @@
       </v-card-actions>-->
       <v-card-actions v-if="is_edit && can_register.length >= 1">
         <v-btn @click.stop="dialog = true">授業を登録する</v-btn>
-        <v-btn v-on:click="$store.commit('delete_registered_lecture', lecture)"
-          >授業を取り消す</v-btn
-        >
+        <v-btn v-on:click="$store.commit('delete_registered_lecture', lecture)">授業を取り消す</v-btn>
       </v-card-actions>
     </div>
 
@@ -47,23 +43,19 @@
                 }"
               >
                 {{ c.name }}
-                <br />
+                <br>
                 {{ c.classification }}
-                <br />
+                <br>
                 {{ c.compulsory }}
-                <br />
+                <br>
                 {{ c.teacher_name1 }}
-                <template v-if="c.teacher_name2 !== 'null'"
-                  >,他</template
-                >
+                <template v-if="c.teacher_name2 !== 'null'">,他</template>
                 <v-card-actions>
                   <v-btn
                     v-on:click="
-                      register_lecture(c);
-                      dialog = false;
+                      duplicate_check_decision = duplicate_check(c.subject_code,c)       
                     "
-                    >登録</v-btn
-                  >
+                  >登録</v-btn>
                   <!--<v-btn :href="c.syllabus" target="_blank">シラバス</v-btn>-->
                 </v-card-actions>
               </v-card>
@@ -86,6 +78,13 @@
         </v-container>
       </v-card>
     </v-dialog>
+    <!--ダイアログ-->
+    <v-dialog v-model="duplicate_check_decision">
+      <v-card max-width="250" class="mx-auto">
+        <div>登録しようとしている授業はすでに４年間のどこかで登録されています</div>
+        <v-btn v-on:click=" duplicate_check_decision= false;">OK</v-btn>
+      </v-card>
+    </v-dialog>
   </div>
 </template>
 
@@ -94,6 +93,7 @@ export default {
   name: "TimeTableCell",
   data() {
     return {
+      duplicate_check_decision: false,
       dialog: false
     };
   },
@@ -111,7 +111,7 @@ export default {
         this.$store.commit("push_registered_lecture", want_ragister_lectuer);
       }
     },
-    hanteikun(h) {
+    compulsory_decision(h) {
       if (h.length <= 0) {
         return false;
       }
@@ -122,6 +122,16 @@ export default {
         }
       });
       return test;
+    },
+    duplicate_check(now_lec, c) {
+      for (var i = 0; i < this.$store.state.registered_lectures.length; i++) {
+        if (now_lec == this.$store.state.registered_lectures[i].subject_code) {
+          return true;
+        }
+      }
+      this.register_lecture(c);
+      this.dialog = false;
+      return false;
     }
   },
   props: ["lecture", "is_edit", "can_register", "grade", "day", "time"]
