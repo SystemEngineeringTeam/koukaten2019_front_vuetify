@@ -1,12 +1,12 @@
 <template>
-  <div>
-    <template v-for="(day, i) in weekdays">
+  <v-row>
+    <v-col cols="4" v-for="(day, i) in weekdays">
       <v-card>
         <v-card-title class="blue lighten-1"
-          >{{ days_name[i] }}曜日</v-card-title
-        >
+          >{{ days_name[i] }}曜日
+        </v-card-title>
 
-        <v-list>
+        <v-list class="mx-5 my-5">
           <template v-for="time in 7">
             <v-divider></v-divider>
             <v-subheader>{{ time }}限目</v-subheader>
@@ -23,8 +23,8 @@
           </template>
         </v-list>
       </v-card>
-    </template>
-  </div>
+    </v-col>
+  </v-row>
 </template>
 
 <script>
