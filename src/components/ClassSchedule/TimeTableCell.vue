@@ -2,7 +2,7 @@
   <div>
     <div v-if="lecture == null">
       <v-card-actions v-if="is_edit && can_register.length >= 1">
-        <div v-if="hanteikun(can_register)">
+        <div v-if="compulsory_decision(can_register)">
           <v-btn color="error" @click.stop="dialog = true">授業を登録する</v-btn>
         </div>
         <div v-else>
@@ -53,7 +53,7 @@
                 <v-card-actions>
                   <v-btn
                     v-on:click="
-                      duplicate_check = duplicate_check2(c.subject_code,c)       
+                      duplicate_check_decision = duplicate_check(c.subject_code,c)       
                     "
                   >登録</v-btn>
                   <!--<v-btn :href="c.syllabus" target="_blank">シラバス</v-btn>-->
@@ -79,19 +79,12 @@
       </v-card>
     </v-dialog>
     <!--ダイアログ-->
-    <!-- <div v-if="duplicate_check "> -->
-    <v-dialog v-model="duplicate_check">
-      <v-card>
-        <v-card>
-          <div>登録しようとしている授業はすでに４年間のどこかで登録されています</div>
-          <v-btn v-on:click=" duplicate_check= false;">OK</v-btn>
-          <!-- {{duplicate_check}}
-          {{f}}
-          {{g}}-->
-        </v-card>
+    <v-dialog v-model="duplicate_check_decision">
+      <v-card max-width="250" class="mx-auto">
+        <div>登録しようとしている授業はすでに４年間のどこかで登録されています</div>
+        <v-btn v-on:click=" duplicate_check_decision= false;">OK</v-btn>
       </v-card>
     </v-dialog>
-    <!-- </div> -->
   </div>
 </template>
 
@@ -100,9 +93,7 @@ export default {
   name: "TimeTableCell",
   data() {
     return {
-      f: "",
-      g: "",
-      duplicate_check: false,
+      duplicate_check_decision: false,
       dialog: false
     };
   },
@@ -120,7 +111,7 @@ export default {
         this.$store.commit("push_registered_lecture", want_ragister_lectuer);
       }
     },
-    hanteikun(h) {
+    compulsory_decision(h) {
       if (h.length <= 0) {
         return false;
       }
@@ -132,11 +123,9 @@ export default {
       });
       return test;
     },
-    duplicate_check2(now_lec, c) {
+    duplicate_check(now_lec, c) {
       for (var i = 0; i < this.$store.state.registered_lectures.length; i++) {
         if (now_lec == this.$store.state.registered_lectures[i].subject_code) {
-          this.f = now_lec;
-          this.g = this.$store.state.registered_lectures[i].subject_code;
           return true;
         }
       }
