@@ -24,38 +24,33 @@
 
 <script>
 export default {
-  name: "LoginForm",
+  name: 'LoginForm',
   data: () => ({
     show_alert: false,
     valid: true,
-    ID: "",
-    password: "",
+    ID: '',
+    password: '',
     show_pass: false,
     id_rules: [
-      v => !!v || "必ず入力してください",
+      v => !!v || '必ず入力してください',
       v => {
         const pattern = /^[evcbmpdsalthkx][0-9]{5}$/;
-        return pattern.test(v) || "学籍番号のフォーマットが違います";
+        return pattern.test(v) || '学籍番号のフォーマットが違います';
       }
     ],
     pass_rules: [
-      v => !!v || "必ず入力してください",
-      v =>
-        (v && v.length >= 8 && v.length <= 72) ||
-        "８文字以上７２文字以内で入力してください",
+      v => !!v || '必ず入力してください',
+      v => (v && v.length >= 8 && v.length <= 72) || '８文字以上７２文字以内で入力してください',
       v => {
         const pattern = /^(?=.*?[a-z])(?=.*?[A-Z])(?=.*?\d)[a-zA-Z\d]{8,72}$/;
-        return (
-          pattern.test(v) ||
-          "半角英小文字大文字数字をそれぞれ1文字以上含んでください"
-        );
+        return pattern.test(v) || '半角英小文字大文字数字をそれぞれ1文字以上含んでください';
       }
     ]
   }),
 
   methods: {
     login() {
-      this.$store.dispatch("login", { ID: this.ID, password: this.password });
+      this.$store.dispatch('login', { ID: this.ID, password: this.password });
       if (this.$store.state.user.logined == false) {
         setTimeout(this.enable, 1500);
       }
@@ -64,12 +59,12 @@ export default {
       this.show_alert = true;
     },
     save: function() {
-      this.$store.dispatch("doSave");
+      this.$store.dispatch('doSave');
     },
     Screen_transition(h) {
       // console.log(h);
       if (h) {
-        this.$router.push("ClassSchedule");
+        this.$router.push('ClassSchedule');
         this.save();
         return true;
       } else {
@@ -80,5 +75,4 @@ export default {
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

@@ -34,7 +34,7 @@
 export default {
   data() {
     return {
-      items: [{ title: "新規作成", link: "/Initial_Registration" }]
+      items: [{ title: '新規作成', link: '/Initial_Registration' }]
     };
   }
 };

@@ -7,13 +7,7 @@
     <v-form ref="form" v-model="valid">
       <v-row>
         <v-col cols="12" sm="6">
-          <v-text-field
-            v-model="id"
-            :counter="6"
-            :rules="id_rules"
-            label="学籍番号(例 k19000)"
-            required
-          ></v-text-field>
+          <v-text-field v-model="id" :counter="6" :rules="id_rules" label="学籍番号(例 k19000)" required></v-text-field>
         </v-col>
       </v-row>
       <v-row>
@@ -68,59 +62,48 @@ export default {
     return {
       show_alert: false,
       valid: true,
-      id: "",
+      id: '',
       grade: 0,
-      semester: "",
+      semester: '',
       x: false,
       show_pass: false,
       show_repass: false,
-      id: "",
-      password: "",
-      repassword: "",
-      grades: ["1", "2", "3", "4"],
+      id: '',
+      password: '',
+      repassword: '',
+      grades: ['1', '2', '3', '4'],
       id_rules: [
-        v => !!v || "必ず入力してください",
+        v => !!v || '必ず入力してください',
         v => {
           const pattern = /^[evcbmpdsalthkx][0-9]{5}$/;
-          return pattern.test(v) || "学籍番号のフォーマットが違います";
+          return pattern.test(v) || '学籍番号のフォーマットが違います';
         }
       ],
       pass_rules: [
-        v => !!v || "必ず入力してください",
-        v =>
-          (v && v.length >= 8 && v.length <= 72) ||
-          "８文字以上７２文字以内で入力してください",
+        v => !!v || '必ず入力してください',
+        v => (v && v.length >= 8 && v.length <= 72) || '８文字以上７２文字以内で入力してください',
         v => {
           const pattern = /^(?=.*?[a-z])(?=.*?[A-Z])(?=.*?\d)[a-zA-Z\d]{8,72}$/;
-          return (
-            pattern.test(v) ||
-            "半角英小文字大文字数字をそれぞれ1文字以上含んでください"
-          );
+          return pattern.test(v) || '半角英小文字大文字数字をそれぞれ1文字以上含んでください';
         }
       ],
-      repass_rules: [
-        v => !!v || "必ず入力してください",
-        v => v == this.password || "同じパスワードを入力してください"
-      ],
+      repass_rules: [v => !!v || '必ず入力してください', v => v == this.password || '同じパスワードを入力してください'],
       rules: {
-        required: value => !!value || "必ず入力してください",
-        min: v => v.length >= 8 || "８文字以上入力してください",
-        max: v => v.length <= 72 || "７２文字以下までの入力にしてください",
-        equal: v => v.length == 8 || "学籍番号を入力してください",
-        repass: v => v == this.password || "同じパスワードを入力してください",
+        required: value => !!value || '必ず入力してください',
+        min: v => v.length >= 8 || '８文字以上入力してください',
+        max: v => v.length <= 72 || '７２文字以下までの入力にしてください',
+        equal: v => v.length == 8 || '学籍番号を入力してください',
+        repass: v => v == this.password || '同じパスワードを入力してください',
         passrules: v => {
           const pattern = /^(?=.*?[a-z])(?=.*?[A-Z])(?=.*?\d)[a-zA-Z\d]{8,72}$/;
-          return (
-            pattern.test(v) ||
-            "半角英小文字大文字数字をそれぞれ1文字以上含んでください"
-          );
+          return pattern.test(v) || '半角英小文字大文字数字をそれぞれ1文字以上含んでください';
         }
       }
     };
   },
   methods: {
     signup() {
-      this.$store.dispatch("post_new_user", {
+      this.$store.dispatch('post_new_user', {
         id: this.id,
         password: this.password,
         grade: this.grade
@@ -135,7 +118,7 @@ export default {
     Screen_transition(h) {
       // console.log(h);
       if (h) {
-        this.$router.push("ClassSchedule");
+        this.$router.push('ClassSchedule');
         return true;
       } else {
         // console.log(era);

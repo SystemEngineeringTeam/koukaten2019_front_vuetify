@@ -17,11 +17,7 @@
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
-    <v-app-bar-nav-icon
-      color="red accent-4"
-      dark
-      @click.stop="drawer = !drawer"
-    ></v-app-bar-nav-icon>
+    <v-app-bar-nav-icon color="red accent-4" dark @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
 
     <v-toolbar-title>
       <v-btn>
@@ -61,14 +57,11 @@
 
 <script>
 export default {
-  name: "Header",
+  name: 'Header',
   data() {
     return {
       drawer: null,
-      items: [
-        { title: "Home", icon: "dashboard" },
-        { title: "About", icon: "question_answer" }
-      ],
+      items: [{ title: 'Home', icon: 'dashboard' }, { title: 'About', icon: 'question_answer' }],
       login: true //true:ログイン済み false:未ログイン
     };
   }

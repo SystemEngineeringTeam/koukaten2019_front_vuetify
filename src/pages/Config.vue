@@ -31,11 +31,7 @@
         ></v-select>
         <v-row align="center">
           <v-col cols="3">
-            <v-select
-              :items="grade"
-              :menu-props="{ top: true, offsetY: true }"
-              label="学年"
-            ></v-select>
+            <v-select :items="grade" :menu-props="{ top: true, offsetY: true }" label="学年"></v-select>
           </v-col>
         </v-row>
 
@@ -47,7 +43,7 @@
 </template>
 
 <script>
-import Vue from "vue";
+import Vue from 'vue';
 
 export default {
   data() {
@@ -56,26 +52,11 @@ export default {
       password_new: null,
       password_new_re: null,
       grade: 1,
-      major: "EE",
+      major: 'EE',
       password_false: false,
       password_new_disagree: false,
-      grade: ["1", "2", "3", "4"],
-      semester: [
-        "EE",
-        "EV",
-        "CC",
-        "CB",
-        "MM",
-        "MP",
-        "DD",
-        "DS",
-        "FA",
-        "FL",
-        "HT",
-        "HH",
-        "KK",
-        "KX"
-      ]
+      grade: ['1', '2', '3', '4'],
+      semester: ['EE', 'EV', 'CC', 'CB', 'MM', 'MP', 'DD', 'DS', 'FA', 'FL', 'HT', 'HH', 'KK', 'KX']
     };
   }
 };

@@ -49,19 +49,14 @@
 
     <template v-for="(day, i) in weekdays">
       <v-card>
-        <v-card-title class="blue lighten-1"
-          >{{ days_name[i] }}曜日</v-card-title
-        >
+        <v-card-title class="blue lighten-1">{{ days_name[i] }}曜日</v-card-title>
 
         <v-list>
           <template v-for="time in 7">
             <v-divider></v-divider>
             <v-subheader>{{ time }}限目</v-subheader>
             <v-list-item>
-              <TimeTableCell
-                v-if="now"
-                :lecture="get_one_lecture(now, day, time)"
-              ></TimeTableCell>
+              <TimeTableCell v-if="now" :lecture="get_one_lecture(now, day, time)"></TimeTableCell>
             </v-list-item>
           </template>
         </v-list>
@@ -71,20 +66,20 @@
 </template>
 
 <script>
-import TimeTableCell from "./TimeTableCell";
+import TimeTableCell from './TimeTableCell';
 
 export default {
-  name: "TimeTableEditor",
+  name: 'TimeTableEditor',
   data() {
     return {
-      weekdays: ["mon", "tue", "wed", "thu", "fry"],
-      days_name: ["月", "火", "水", "木", "金"]
+      weekdays: ['mon', 'tue', 'wed', 'thu', 'fry'],
+      days_name: ['月', '火', '水', '木', '金']
     };
   },
   components: {
     TimeTableCell
   },
-  props: ["now", "is_show"],
+  props: ['now', 'is_show'],
   methods: {
     get_one_lecture(lectures, day, time) {
       let c;

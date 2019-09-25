@@ -2,9 +2,7 @@
   <v-row>
     <v-col cols="4" v-for="(day, i) in weekdays">
       <v-card>
-        <v-card-title class="blue lighten-1"
-          >{{ days_name[i] }}曜日
-        </v-card-title>
+        <v-card-title class="blue lighten-1">{{ days_name[i] }}曜日 </v-card-title>
 
         <v-list class="mx-5 my-5">
           <template v-for="time in 7">
@@ -28,20 +26,20 @@
 </template>
 
 <script>
-import TimeTableCell from "./TimeTableCell";
+import TimeTableCell from './TimeTableCell';
 
 export default {
-  name: "TimeTableShow",
+  name: 'TimeTableShow',
   data() {
     return {
-      weekdays: ["mon", "tue", "wed", "thu", "fri"],
-      days_name: ["月", "火", "水", "木", "金"]
+      weekdays: ['mon', 'tue', 'wed', 'thu', 'fri'],
+      days_name: ['月', '火', '水', '木', '金']
     };
   },
   components: {
     TimeTableCell
   },
-  props: ["now_register", "can_register", "is_edit", "grade"],
+  props: ['now_register', 'can_register', 'is_edit', 'grade'],
   methods: {
     get_one_lecture(lectures, day, time) {
       let c;

@@ -23,17 +23,11 @@
     </v-navigation-drawer>
 
     <v-app-bar app>
-      <v-app-bar-nav-icon
-        color="red accent-4"
-        dark
-        @click.stop="drawer = !drawer"
-      ></v-app-bar-nav-icon>
+      <v-app-bar-nav-icon color="red accent-4" dark @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
 
       <v-toolbar-title>
         <router-link class="a" to="/">
-          <font color="black" class="headline font-weight-black"
-            >未来予想図</font
-          >
+          <font color="black" class="headline font-weight-black">未来予想図</font>
         </router-link>
       </v-toolbar-title>
 
@@ -73,22 +67,22 @@
 </template>
 
 <script>
-import Header from "./components/Header";
+import Header from './components/Header';
 
 export default {
   data() {
     return {
       drawer: null,
       items: [
-        { title: "ホーム", link: "/" },
-        { title: "時間割エディタ", link: "/ClassSchedule" }
+        { title: 'ホーム', link: '/' },
+        { title: '時間割エディタ', link: '/ClassSchedule' }
         //{ title: "ユーザー情報変更", link: "/Config" },
         //{ title: "ユーザー登録", link: "/initial_Registration" }
       ],
       login: true //true:ログイン済み false:未ログイン
     };
   },
-  name: "App",
+  name: 'App',
   components: {
     Header
   },
@@ -98,9 +92,8 @@ export default {
 
 <style lang="scss">
 #fontSetting {
-  font-family: "Avenir", "Helvetica Neue", "Helvetica", "Arial", "Hiragino Sans",
-    "ヒラギノ角ゴシック", YuGothic, "Yu Gothic", "メイリオ", Meiryo,
-    "ＭＳ Ｐゴシック", "MS PGothic";
+  font-family: 'Avenir', 'Helvetica Neue', 'Helvetica', 'Arial', 'Hiragino Sans', 'ヒラギノ角ゴシック', YuGothic,
+    'Yu Gothic', 'メイリオ', Meiryo, 'ＭＳ Ｐゴシック', 'MS PGothic';
 }
 
 .a {

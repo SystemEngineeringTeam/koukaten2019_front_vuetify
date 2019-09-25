@@ -18,24 +18,20 @@
         <v-col cols="12">
           <v-tabs-items v-model="tabs">
             <v-tab-item v-for="timetable in timetables" :key="timetable.id">
-                <TimeTableShow
-                  :is_edit="is_edit"
-                  :now_register="
-                    get_grade_half_lectures(
-                      $store.state.registered_lectures,
-                      timetable.grade,
-                      timetable.semester
-                    )
-                  "
-                  :can_register="
-                    get_grade_half_sougouB_lectures(
-                      $store.state.can_register_lectures,
-                      timetable.grade,
-                      timetable.semester
-                    )
-                  "
-                  :grade="timetable.grade"
-                ></TimeTableShow>
+              <TimeTableShow
+                :is_edit="is_edit"
+                :now_register="
+                  get_grade_half_lectures($store.state.registered_lectures, timetable.grade, timetable.semester)
+                "
+                :can_register="
+                  get_grade_half_sougouB_lectures(
+                    $store.state.can_register_lectures,
+                    timetable.grade,
+                    timetable.semester
+                  )
+                "
+                :grade="timetable.grade"
+              ></TimeTableShow>
             </v-tab-item>
           </v-tabs-items>
         </v-col>
@@ -53,27 +49,14 @@
                 v-if="!is_edit"
                 v-on:click="
                   is_edit = true;
-                  $store.dispatch(
-                    'get_can_register_lectures',
-                    $store.state.user.id
-                  );
+                  $store.dispatch('get_can_register_lectures', $store.state.user.id);
                 "
               >
                 授業を登録
                 <v-icon>mdi-pencil</v-icon>
               </v-btn>
 
-              <v-btn
-                fixed
-                large
-                dark
-                right
-                rounded
-                elevation="10"
-                color="red"
-                v-else
-                v-on:click="save_lectuers"
-              >
+              <v-btn fixed large dark right rounded elevation="10" color="red" v-else v-on:click="save_lectuers">
                 登録を保存
                 <v-icon dark>mdi-cloud-upload</v-icon>
               </v-btn>
@@ -94,9 +77,7 @@
         <v-col cols="12">
           <v-footer app>
             <v-col>
-              <CreditCalculator
-                :grade="$store.state.looking_timetable.grade"
-              ></CreditCalculator>
+              <CreditCalculator :grade="$store.state.looking_timetable.grade"></CreditCalculator>
             </v-col>
           </v-footer>
         </v-col>
@@ -140,12 +121,12 @@
 </template>
 
 <script>
-import axios from "axios";
-axios.defaults.headers.common["Access-Control-Allow-Origin"] = "*";
+import axios from 'axios';
+axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
 
-import TimeTableShow from "../components/ClassSchedule/TimeTableShow";
-import CreditCalculator from "../components/ClassSchedule/CreditCalculator";
-import TimeTableEditor from "../components/ClassSchedule/TimeTableEditor";
+import TimeTableShow from '../components/ClassSchedule/TimeTableShow';
+import CreditCalculator from '../components/ClassSchedule/CreditCalculator';
+import TimeTableEditor from '../components/ClassSchedule/TimeTableEditor';
 
 export default {
   data() {
@@ -156,19 +137,19 @@ export default {
       is_show: true,
       is_edit: false,
       looking_grade: 1,
-      looking_semester: "前期",
-      major: "kk",
+      looking_semester: '前期',
+      major: 'kk',
       grades: [1, 2, 3, 4],
-      semesters: ["前期", "後期"],
+      semesters: ['前期', '後期'],
       timetables: [
-        { grade: 1, semester: "前期" },
-        { grade: 1, semester: "後期" },
-        { grade: 2, semester: "前期" },
-        { grade: 2, semester: "後期" },
-        { grade: 3, semester: "前期" },
-        { grade: 3, semester: "後期" },
-        { grade: 4, semester: "前期" },
-        { grade: 4, semester: "後期" }
+        { grade: 1, semester: '前期' },
+        { grade: 1, semester: '後期' },
+        { grade: 2, semester: '前期' },
+        { grade: 2, semester: '後期' },
+        { grade: 3, semester: '前期' },
+        { grade: 3, semester: '後期' },
+        { grade: 4, semester: '前期' },
+        { grade: 4, semester: '後期' }
       ],
       timetable: []
     };
@@ -179,10 +160,10 @@ export default {
     CreditCalculator
   },
   created() {
-    this.$store.dispatch("get_registered_lectures", this.$store.state.user.id);
+    this.$store.dispatch('get_registered_lectures', this.$store.state.user.id);
   },
   beforeUpdate() {
-    this.$store.commit("unit_calculate");
+    this.$store.commit('unit_calculate');
   },
   methods: {
     mold_registered_lectures() {
@@ -194,7 +175,7 @@ export default {
           subject_code: lectures.subject_code,
           class_code: lectures.class_code,
           course_grade: lectures.grade,
-          grade_point: "Future"
+          grade_point: 'Future'
         })
       );
       return data;
@@ -217,7 +198,7 @@ export default {
         if (obj.semester === semester) {
           if (obj.grade === grade) {
             c.push(obj);
-          } else if (obj.classification === "総合B" && obj.grade <= grade) {
+          } else if (obj.classification === '総合B' && obj.grade <= grade) {
             c.push(obj);
           }
         }
@@ -234,11 +215,7 @@ export default {
       });
     },
     save_lectuers() {
-      if (
-        !this.$store.state.is_enough_unit_graduate ||
-        !this.$store.state.is_over_unit
-      )
-        this.show_dialog = true;
+      if (!this.$store.state.is_enough_unit_graduate || !this.$store.state.is_over_unit) this.show_dialog = true;
       else {
         this.put_registered_lectures(this.mold_registered_lectures());
         this.is_edit = false;

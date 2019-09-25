@@ -4,19 +4,16 @@
     <b-button v-if="now == null" v-b-modal="modal_id">授業を登録</b-button>
 
     <b-button v-else v-b-modal="modal_id">
-      {{ now["name"] }}
+      {{ now['name'] }}
       <br />
-      {{ now["type"] }} {{ now["credit"] }}単位
+      {{ now['type'] }} {{ now['credit'] }}単位
       <br />
-      {{ now["teacher1"] }}
+      {{ now['teacher1'] }}
     </b-button>
 
     <!-- モーダルの設定 -->
     <b-modal :id="modal_id" title="授業登録" hide-footer>
-      <b-button
-        v-on:click="set_ko(null, day, time)"
-        @click="$bvModal.hide(modal_id)"
-        data-dismiss="modal"
+      <b-button v-on:click="set_ko(null, day, time)" @click="$bvModal.hide(modal_id)" data-dismiss="modal"
         >登録を取り消す</b-button
       >
       <b-button
@@ -26,11 +23,11 @@
         @click="$bvModal.hide(modal_id)"
         data-dismiss="modal"
       >
-        {{ data["name"] }}
+        {{ data['name'] }}
         <br />
-        {{ data["type"] }} {{ data["credit"] }}単位
+        {{ data['type'] }} {{ data['credit'] }}単位
         <br />
-        {{ data["teacher1"] }}
+        {{ data['teacher1'] }}
       </b-button>
     </b-modal>
   </div>
@@ -38,11 +35,11 @@
 
 <script>
 export default {
-  name: "TimeTableButton",
-  props: ["modal_id", "now", "data_list", "day", "time"],
+  name: 'TimeTableButton',
+  props: ['modal_id', 'now', 'data_list', 'day', 'time'],
   methods: {
     set_ko: function(now, day, time) {
-      this.$emit("set_data", {
+      this.$emit('set_data', {
         now: now,
         day: day,
         time: time

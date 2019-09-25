@@ -15,14 +15,18 @@
       <tbody>
         <tr v-for="i in 4">
           <td>{{ i }}年</td>
-          <td :class="{
+          <td
+            :class="{
               'red--text': !is_not_enough(grade_total_unit(i), max_unit_one_grade)
-            }">{{ grade_total_unit(i) }}/{{ max_unit_one_grade }}</td>
-          <td>{{ $store.state.unit_list[i]["共通"] }}</td>
-          <td>{{ $store.state.unit_list[i]["専門"] }}</td>
-          <td>{{ $store.state.unit_list[i]["総合A"] }}</td>
-          <td>{{ $store.state.unit_list[i]["総合B"] }}</td>
-          <td>{{ $store.state.unit_list[i]["外国語"] }}</td>
+            }"
+          >
+            {{ grade_total_unit(i) }}/{{ max_unit_one_grade }}
+          </td>
+          <td>{{ $store.state.unit_list[i]['共通'] }}</td>
+          <td>{{ $store.state.unit_list[i]['専門'] }}</td>
+          <td>{{ $store.state.unit_list[i]['総合A'] }}</td>
+          <td>{{ $store.state.unit_list[i]['総合B'] }}</td>
+          <td>{{ $store.state.unit_list[i]['外国語'] }}</td>
         </tr>
         <tr>
           <td>合計</td>
@@ -35,53 +39,38 @@
           </td>
           <td
             :class="{
-              'red--text': is_not_enough(
-                compulsory_total_unit('共通'),
-                graduate_unit.kyotu
-              )
+              'red--text': is_not_enough(compulsory_total_unit('共通'), graduate_unit.kyotu)
             }"
           >
-            {{ compulsory_total_unit("共通") }}/{{ graduate_unit.kyotu }}
+            {{ compulsory_total_unit('共通') }}/{{ graduate_unit.kyotu }}
           </td>
           <td
             :class="{
-              'red--text': is_not_enough(
-                compulsory_total_unit('共通'),
-                graduate_unit.senmon
-              )
+              'red--text': is_not_enough(compulsory_total_unit('共通'), graduate_unit.senmon)
             }"
           >
-            {{ compulsory_total_unit("専門") }}/{{ graduate_unit.senmon }}
+            {{ compulsory_total_unit('専門') }}/{{ graduate_unit.senmon }}
           </td>
           <td
             :class="{
-              'red--text': is_not_enough(
-                compulsory_total_unit('共通'),
-                graduate_unit.A
-              )
+              'red--text': is_not_enough(compulsory_total_unit('共通'), graduate_unit.A)
             }"
           >
-            {{ compulsory_total_unit("総合A") }}/{{ graduate_unit.A }}
+            {{ compulsory_total_unit('総合A') }}/{{ graduate_unit.A }}
           </td>
           <td
             :class="{
-              'red--text': is_not_enough(
-                compulsory_total_unit('共通'),
-                graduate_unit.B
-              )
+              'red--text': is_not_enough(compulsory_total_unit('共通'), graduate_unit.B)
             }"
           >
-            {{ compulsory_total_unit("総合B") }}/{{ graduate_unit.B }}
+            {{ compulsory_total_unit('総合B') }}/{{ graduate_unit.B }}
           </td>
           <td
             :class="{
-              'red--text': is_not_enough(
-                compulsory_total_unit('共通'),
-                graduate_unit.english
-              )
+              'red--text': is_not_enough(compulsory_total_unit('共通'), graduate_unit.english)
             }"
           >
-            {{ compulsory_total_unit("外国語") }}/{{ graduate_unit.english }}
+            {{ compulsory_total_unit('外国語') }}/{{ graduate_unit.english }}
           </td>
         </tr>
       </tbody>
@@ -90,7 +79,7 @@
 </template>
 
 <script>
-import CreditCalculatorCell from "./CreditCalculatorCell";
+import CreditCalculatorCell from './CreditCalculatorCell';
 
 export default {
   data() {
@@ -109,25 +98,22 @@ export default {
 
   created() {},
   beforeUpdate() {
-    this.$store.commit(
-      "set_is_enough_unit_graduate",
-      this.is_enough_unit_graduate()
-    );
-    this.$store.commit("set_is_over_unit", this.is_over_unit());
+    this.$store.commit('set_is_enough_unit_graduate', this.is_enough_unit_graduate());
+    this.$store.commit('set_is_over_unit', this.is_over_unit());
   },
   components: {
     CreditCalculatorCell
   },
-  props: ["grade"],
+  props: ['grade'],
   methods: {
     is_enough_unit_graduate() {
       return (
         this.total_unit() >= this.graduate_unit.all &&
-        this.compulsory_total_unit("共通") >= this.graduate_unit.kyotu &&
-        this.compulsory_total_unit("専門") >= this.graduate_unit.senmon &&
-        this.compulsory_total_unit("総合A") >= this.graduate_unit.A &&
-        this.compulsory_total_unit("総合B") >= this.graduate_unit.B &&
-        this.compulsory_total_unit("外国語") >= this.graduate_unit.english
+        this.compulsory_total_unit('共通') >= this.graduate_unit.kyotu &&
+        this.compulsory_total_unit('専門') >= this.graduate_unit.senmon &&
+        this.compulsory_total_unit('総合A') >= this.graduate_unit.A &&
+        this.compulsory_total_unit('総合B') >= this.graduate_unit.B &&
+        this.compulsory_total_unit('外国語') >= this.graduate_unit.english
       );
     },
     is_over_unit() {
@@ -143,19 +129,19 @@ export default {
       let total_unit = 0;
       for (let grade = 1; grade <= 4; grade++) {
         total_unit +=
-          this.$store.state.unit_list[grade]["共通"] +
-          this.$store.state.unit_list[grade]["専門"] +
-          this.$store.state.unit_list[grade]["総合A"] +
-          this.$store.state.unit_list[grade]["総合B"];
+          this.$store.state.unit_list[grade]['共通'] +
+          this.$store.state.unit_list[grade]['専門'] +
+          this.$store.state.unit_list[grade]['総合A'] +
+          this.$store.state.unit_list[grade]['総合B'];
       }
       return total_unit;
     },
     grade_total_unit(grade) {
       return (
-        this.$store.state.unit_list[grade]["共通"] +
-        this.$store.state.unit_list[grade]["専門"] +
-        this.$store.state.unit_list[grade]["総合A"] +
-        this.$store.state.unit_list[grade]["総合B"]
+        this.$store.state.unit_list[grade]['共通'] +
+        this.$store.state.unit_list[grade]['専門'] +
+        this.$store.state.unit_list[grade]['総合A'] +
+        this.$store.state.unit_list[grade]['総合B']
       );
     },
     compulsory_total_unit(compulsory) {

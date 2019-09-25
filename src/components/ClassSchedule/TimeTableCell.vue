@@ -10,16 +10,16 @@
         </div>
       </v-card-actions>
       {{
-      can_register.forEach(function(lecther) {
-      lecther.compulsory;
-      })
+        can_register.forEach(function(lecther) {
+          lecther.compulsory;
+        })
       }}
     </div>
 
     <div v-else>
       <v-card-text>
-        <b>{{ lecture["name"] }}</b>
-        {{ lecture["unit"] }}単位
+        <b>{{ lecture['name'] }}</b>
+        {{ lecture['unit'] }}単位
       </v-card-text>
       <!--<v-card-actions>
         <v-btn :href="lecture['syllabus']" target="_blank">シラバス</v-btn>
@@ -43,19 +43,17 @@
                 }"
               >
                 {{ c.name }}
-                <br>
+                <br />
                 {{ c.classification }}
-                <br>
+                <br />
                 {{ c.compulsory }}
-                <br>
+                <br />
                 {{ c.teacher_name1 }}
-                <template v-if="c.teacher_name2 !== 'null'">,他</template>
+                <template v-if="c.teacher_name2 !== 'null'"
+                  >,他</template
+                >
                 <v-card-actions>
-                  <v-btn
-                    v-on:click="
-                      duplicate_check_decision = duplicate_check(c.subject_code,c)       
-                    "
-                  >登録</v-btn>
+                  <v-btn v-on:click="duplicate_check_decision = duplicate_check(c.subject_code, c)">登録</v-btn>
                   <!--<v-btn :href="c.syllabus" target="_blank">シラバス</v-btn>-->
                 </v-card-actions>
               </v-card>
@@ -82,7 +80,7 @@
     <v-dialog v-model="duplicate_check_decision">
       <v-card max-width="250" class="mx-auto">
         <div>登録しようとしている授業はすでに４年間のどこかで登録されています</div>
-        <v-btn v-on:click=" duplicate_check_decision= false;">OK</v-btn>
+        <v-btn v-on:click="duplicate_check_decision = false">OK</v-btn>
       </v-card>
     </v-dialog>
   </div>
@@ -90,7 +88,7 @@
 
 <script>
 export default {
-  name: "TimeTableCell",
+  name: 'TimeTableCell',
   data() {
     return {
       duplicate_check_decision: false,
@@ -100,15 +98,15 @@ export default {
   methods: {
     register_lecture(want_ragister_lectuer) {
       if (this.lecture != null) {
-        this.$store.commit("delete_registered_lecture", this.lecture);
+        this.$store.commit('delete_registered_lecture', this.lecture);
       }
       // this.Vue.set(want_ragister_lectuer, 'grade', this.grade);
-      if (want_ragister_lectuer.classification == "総合B") {
+      if (want_ragister_lectuer.classification == '総合B') {
         let sougouB_lectuer = Object.assign({}, want_ragister_lectuer);
         sougouB_lectuer.grade = this.grade;
-        this.$store.commit("push_registered_lecture", sougouB_lectuer);
+        this.$store.commit('push_registered_lecture', sougouB_lectuer);
       } else {
-        this.$store.commit("push_registered_lecture", want_ragister_lectuer);
+        this.$store.commit('push_registered_lecture', want_ragister_lectuer);
       }
     },
     compulsory_decision(h) {
@@ -117,7 +115,7 @@ export default {
       }
       let test = false;
       h.forEach(function(lec) {
-        if (lec.compulsory === "必修") {
+        if (lec.compulsory === '必修') {
           test = true;
         }
       });
@@ -134,7 +132,7 @@ export default {
       return false;
     }
   },
-  props: ["lecture", "is_edit", "can_register", "grade", "day", "time"]
+  props: ['lecture', 'is_edit', 'can_register', 'grade', 'day', 'time']
 };
 </script>
 

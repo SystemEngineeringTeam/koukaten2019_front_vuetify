@@ -4,8 +4,8 @@
 
 <script>
 export default {
-  name: "CreditCalculatorCell",
-  props: ["unit", "enough_unit"]
+  name: 'CreditCalculatorCell',
+  props: ['unit', 'enough_unit']
 };
 </script>
 
