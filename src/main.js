@@ -7,23 +7,23 @@ import store from "./store";
 Vue.config.productionTip = false;
 
 new Vue({
-  router,
-  vuetify,
-  store,
-  render: h => h(App),
-  beforeCreate() {
-    // LocalStorageからデータ読込
-    this.$store.dispatch("doLoad");
-  }
+    router,
+    vuetify,
+    store,
+    render: h => h(App),
+    beforeCreate() {
+        // LocalStorageからデータ読込
+        this.$store.dispatch("doLoad");
+    }
 }).$mount("#app");
 
 router.beforeEach((to, from, next) => {
-  if (
-    to.matched.some(record => record.meta.requiresAuth) &&
-    !store.state.user.logined
-  ) {
-    next({ path: "/login", query: { redirect: to.fullPath } });
-  } else {
-    next();
-  }
+    if (
+        to.matched.some(record => record.meta.requiresAuth) &&
+        !store.state.user.logined
+    ) {
+        next({ path: "/login", query: { redirect: to.fullPath } });
+    } else {
+        next();
+    }
 });
