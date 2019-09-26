@@ -1,9 +1,9 @@
 <template>
   <div>
-    <div v-if="lecture == null">
+    <template v-if="lecture == null">
       <v-card-actions v-if="is_edit && can_register.length >= 1">
         <div v-if="compulsory_decision(can_register)">
-          <v-btn color="error" @click.stop="dialog = true">授業を登録する</v-btn>
+          <v-btn class="blue darken-4 white--text" @click.stop="dialog = true">授業を登録する</v-btn>
         </div>
         <div v-else>
           <v-btn @click.stop="dialog = true">授業を登録する</v-btn>
@@ -14,21 +14,32 @@
           lecther.compulsory;
         })
       }}
-    </div>
+    </template>
 
-    <div v-else>
-      <v-card-text>
-        <b>{{ lecture['name'] }}</b>
-        {{ lecture['unit'] }}単位
-      </v-card-text>
-      <!--<v-card-actions>
+    <template v-else>
+      <v-card
+        elevation="5"
+        :class="{
+          'blue darken-4 ': compulsory_decision(can_register)
+        }"
+      >
+        <v-card-text
+          :class="{
+            'white--text': compulsory_decision(can_register)
+          }"
+        >
+          <b>{{ lecture['name'] }}</b>
+          {{ lecture['unit'] }}単位
+        </v-card-text>
+        <!--<v-card-actions>
         <v-btn :href="lecture['syllabus']" target="_blank">シラバス</v-btn>
-      </v-card-actions>-->
-      <v-card-actions v-if="is_edit && can_register.length >= 1">
-        <v-btn @click.stop="dialog = true">授業を登録する</v-btn>
-        <v-btn v-on:click="$store.commit('delete_registered_lecture', lecture)">授業を取り消す</v-btn>
-      </v-card-actions>
-    </div>
+        </v-card-actions>-->
+        <v-card-actions v-if="is_edit && can_register.length >= 1">
+          <v-btn @click.stop="dialog = true">授業を登録する</v-btn>
+          <v-btn v-on:click="$store.commit('delete_registered_lecture', lecture)">授業を取り消す</v-btn>
+        </v-card-actions>
+      </v-card>
+    </template>
 
     <!--ダイアログ-->
     <v-dialog v-model="dialog">
