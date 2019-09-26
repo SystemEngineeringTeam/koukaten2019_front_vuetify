@@ -38,7 +38,7 @@
           ></v-text-field>
         </v-col>
       </v-row>
-      <v-row>
+      <!--<v-row>
         <v-col cols="3">
           <v-select
             v-model="grade"
@@ -48,7 +48,7 @@
             label="学年"
           ></v-select>
         </v-col>
-      </v-row>
+      </v-row>-->
       <v-row>
         <v-btn :disabled="!valid" color="success" @click="signup">登録 </v-btn>
         <div v-if="Screen_transition($store.state.user.logined)"></div>
