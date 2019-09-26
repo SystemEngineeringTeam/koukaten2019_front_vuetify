@@ -50,15 +50,16 @@
     <template v-for="(day, i) in weekdays">
       <v-card>
         <v-card-title class="blue lighten-1">{{ days_name[i] }}曜日</v-card-title>
-
         <v-list>
-          <template v-for="time in 7">
+          <div v-for="time in 7" :key="time">
             <v-divider></v-divider>
             <v-subheader>{{ time }}限目</v-subheader>
-            <v-list-item>
-              <TimeTableCell v-if="now" :lecture="get_one_lecture(now, day, time)"></TimeTableCell>
-            </v-list-item>
-          </template>
+            <v-list-tile class="tile">
+              <v-list-item>
+                <TimeTableCell v-if="now" :lecture="get_one_lecture(now, day, time)"></TimeTableCell>
+              </v-list-item>
+            </v-list-tile>
+          </div>
         </v-list>
       </v-card>
     </template>
@@ -98,7 +99,12 @@ export default {
 table {
   height: 100%;
 }
-
+.tile {
+  background-color: red;
+}
+.tile:active {
+  background: yellow;
+}
 td {
   padding: 0px;
   height: 100%;

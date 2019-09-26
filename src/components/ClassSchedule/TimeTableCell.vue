@@ -10,24 +10,30 @@
         </div>
       </v-card-actions>
       {{
-        can_register.forEach(function(lecther) {
-          lecther.compulsory;
-        })
+      can_register.forEach(function(lecther) {
+      lecther.compulsory;
+      })
       }}
     </div>
 
     <div v-else>
-      <v-card-text>
-        <b>{{ lecture['name'] }}</b>
-        {{ lecture['unit'] }}単位
-      </v-card-text>
-      <!--<v-card-actions>
+      <v-card
+        :class="{
+                  orange: compulsory_decision(can_register)
+                }"
+      >
+        <v-card-text>
+          <b>{{ lecture['name'] }}</b>
+          {{ lecture['unit'] }}単位
+        </v-card-text>
+        <!--<v-card-actions>
         <v-btn :href="lecture['syllabus']" target="_blank">シラバス</v-btn>
-      </v-card-actions>-->
-      <v-card-actions v-if="is_edit && can_register.length >= 1">
-        <v-btn @click.stop="dialog = true">授業を登録する</v-btn>
-        <v-btn v-on:click="$store.commit('delete_registered_lecture', lecture)">授業を取り消す</v-btn>
-      </v-card-actions>
+        </v-card-actions>-->
+        <v-card-actions v-if="is_edit && can_register.length >= 1">
+          <v-btn @click.stop="dialog = true">授業を登録する</v-btn>
+          <v-btn v-on:click="$store.commit('delete_registered_lecture', lecture)">授業を取り消す</v-btn>
+        </v-card-actions>
+      </v-card>
     </div>
 
     <!--ダイアログ-->
@@ -43,17 +49,17 @@
                 }"
               >
                 {{ c.name }}
-                <br />
+                <br>
                 {{ c.classification }}
-                <br />
+                <br>
                 {{ c.compulsory }}
-                <br />
+                <br>
                 {{ c.teacher_name1 }}
-                <template v-if="c.teacher_name2 !== 'null'"
-                  >,他</template
-                >
+                <template v-if="c.teacher_name2 !== 'null'">,他</template>
                 <v-card-actions>
-                  <v-btn v-on:click="duplicate_check_decision = duplicate_check(c.subject_code, c)">登録</v-btn>
+                  <v-btn
+                    v-on:click="duplicate_check_decision = duplicate_check(c.subject_code, c)"
+                  >登録</v-btn>
                   <!--<v-btn :href="c.syllabus" target="_blank">シラバス</v-btn>-->
                 </v-card-actions>
               </v-card>
@@ -91,6 +97,7 @@ export default {
   name: 'TimeTableCell',
   data() {
     return {
+      lec_tile_color: true,
       duplicate_check_decision: false,
       dialog: false
     };
