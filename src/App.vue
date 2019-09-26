@@ -43,7 +43,6 @@
         >
       </div>
       <div v-else>
-        <router-link to="/initial_Registration">ユーザー登録</router-link>|
         <router-link to="/login">ログイン</router-link>
       </div>
       <!-- <v-btn>
@@ -75,9 +74,10 @@ export default {
       drawer: null,
       items: [
         { title: 'ホーム', link: '/' },
-        { title: '時間割エディタ', link: '/ClassSchedule' }
+        { title: '時間割エディタ', link: '/ClassSchedule' },
         //{ title: "ユーザー情報変更", link: "/Config" },
-        //{ title: "ユーザー登録", link: "/initial_Registration" }
+        { title: "ユーザー登録", link: "/Initial_Registration" },
+        { title: "ログイン", link: "/Login" }
       ],
       login: true //true:ログイン済み false:未ログイン
     };
