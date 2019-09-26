@@ -22,8 +22,8 @@
         {{ lecture['unit'] }}単位
       </v-card-text>
       <!--<v-card-actions>
-        <v-btn :href="lecture['syllabus']" target="_blank">シラバス</v-btn>
-      </v-card-actions>-->
+              <v-btn :href="lecture['syllabus']" target="_blank">シラバス</v-btn>
+            </v-card-actions>-->
       <v-card-actions v-if="is_edit && can_register.length >= 1">
         <v-btn @click.stop="dialog = true">授業を登録する</v-btn>
         <v-btn v-on:click="$store.commit('delete_registered_lecture', lecture)">授業を取り消す</v-btn>
@@ -50,10 +50,10 @@
                 <br />
                 {{ c.teacher_name1 }}
                 <template v-if="c.teacher_name2 !== 'null'"
-                  >,他</template
-                >
+                  >,他
+                </template>
                 <v-card-actions>
-                  <v-btn v-on:click="duplicate_check_decision = duplicate_check(c.subject_code, c)">登録</v-btn>
+                  <v-btn v-on:click="duplicate_check_decision = duplicate_check(c)">登録</v-btn>
                   <!--<v-btn :href="c.syllabus" target="_blank">シラバス</v-btn>-->
                 </v-card-actions>
               </v-card>
@@ -77,10 +77,17 @@
       </v-card>
     </v-dialog>
     <!--ダイアログ-->
-    <v-dialog v-model="duplicate_check_decision">
-      <v-card max-width="250" class="mx-auto">
-        <div>登録しようとしている授業はすでに４年間のどこかで登録されています</div>
-        <v-btn v-on:click="duplicate_check_decision = false">OK</v-btn>
+    <v-dialog v-model="duplicate_check_decision" max-width="290">
+      <v-card>
+        <v-card-title>
+          警告
+        </v-card-title>
+        <v-card-text>
+          登録しようとしている授業はすでに４年間のどこかで登録されています
+        </v-card-text>
+        <v-card-actions>
+          <v-btn v-on:click="duplicate_check_decision = false">OK</v-btn>
+        </v-card-actions>
       </v-card>
     </v-dialog>
   </div>
@@ -121,9 +128,12 @@ export default {
       });
       return test;
     },
-    duplicate_check(now_lec, c) {
+    duplicate_check(c) {
       for (var i = 0; i < this.$store.state.registered_lectures.length; i++) {
-        if (now_lec == this.$store.state.registered_lectures[i].subject_code) {
+        if (
+          c.subject_code == this.$store.state.registered_lectures[i].subject_code &&
+          c.class_code == this.$store.state.registered_lectures[i].class_code
+        ) {
           return true;
         }
       }

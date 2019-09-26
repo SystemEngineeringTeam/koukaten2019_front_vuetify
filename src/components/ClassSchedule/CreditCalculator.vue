@@ -52,7 +52,7 @@
             {{ compulsory_total_unit('総合A') }}/{{ graduate_unit.A }}
           </td>
           <td
-                  :class="{
+            :class="{
               'red--text': is_not_enough(compulsory_total_unit('英語'), graduate_unit.english)
             }"
           >
