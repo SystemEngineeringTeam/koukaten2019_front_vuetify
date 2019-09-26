@@ -12,13 +12,24 @@
       <v-divider></v-divider>
 
       <v-list dense>
-        <v-list-item v-for="item in items" :key="item.title" :value="item.link">
-          <v-list-item-content>
-            <v-list-item-title>
-              <router-link :to="item.link">{{ item.title }}</router-link>
-            </v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
+        <div v-if="$store.state.user.logined">
+          <v-list-item v-for="item in unlogin_menu" :key="item.title" :value="item.link">
+            <v-list-item-content>
+              <v-list-item-title>
+                <router-link :to="item.link">{{ item.title }}</router-link>
+              </v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </div>
+        <div v-else>
+          <v-list-item v-for="item in login_menu" :key="item.title" :value="item.link">
+            <v-list-item-content>
+              <v-list-item-title>
+                <router-link :to="item.link">{{ item.title }}</router-link>
+              </v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </div>
       </v-list>
     </v-navigation-drawer>
 
@@ -73,11 +84,15 @@ export default {
   data() {
     return {
       drawer: null,
-      items: [
+      login_menu: [
         { title: 'ホーム', link: '/' },
-        { title: '時間割エディタ', link: '/ClassSchedule' }
-        //{ title: "ユーザー情報変更", link: "/Config" },
-        //{ title: "ユーザー登録", link: "/initial_Registration" }
+        { title: '時間割エディタ', link: '/ClassSchedule' },
+        { title: 'ログイン', link: '/Login' }
+      ],
+      unlogin_menu: [
+        { title: 'ホーム', link: '/' },
+        { title: '時間割エディタ', link: '/ClassSchedule' },
+        { title: 'ログアウト', link: '/' }
       ],
       login: true //true:ログイン済み false:未ログイン
     };
