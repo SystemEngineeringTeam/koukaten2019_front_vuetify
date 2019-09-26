@@ -166,28 +166,28 @@ export default new Vuex.Store({
         専門: 0,
         総合A: 0,
         総合B: 0,
-        外国語: 0
+        英語: 0
       },
       2: {
         共通: 0,
         専門: 0,
         総合A: 0,
         総合B: 0,
-        外国語: 0
+        英語: 0
       },
       3: {
         共通: 0,
         専門: 0,
         総合A: 0,
         総合B: 0,
-        外国語: 0
+        英語: 0
       },
       4: {
         共通: 0,
         専門: 0,
         総合A: 0,
         総合B: 0,
-        外国語: 0
+        英語: 0
       }
     },
     is_enough_unit_graduate: false,
@@ -290,28 +290,28 @@ export default new Vuex.Store({
           専門: 0,
           総合A: 0,
           総合B: 0,
-          外国語: 0
+          英語: 0
         },
         2: {
           共通: 0,
           専門: 0,
           総合A: 0,
           総合B: 0,
-          外国語: 0
+          英語: 0
         },
         3: {
           共通: 0,
           専門: 0,
           総合A: 0,
           総合B: 0,
-          外国語: 0
+          英語: 0
         },
         4: {
           共通: 0,
           専門: 0,
           総合A: 0,
           総合B: 0,
-          外国語: 0
+          英語: 0
         }
       };
       state.registered_lectures.forEach(function(lecture) {
@@ -322,7 +322,7 @@ export default new Vuex.Store({
         } else if (lecture.classification === '総合A') {
           state.unit_list[lecture.grade]['総合A'] += lecture.unit;
           if (lecture.isenglish) {
-            state.unit_list[lecture.grade]['外国語'] += lecture.unit;
+            state.unit_list[lecture.grade]['英語'] += lecture.unit;
           }
         } else if (lecture.classification === '総合B') {
           state.unit_list[lecture.grade]['総合B'] += lecture.unit;
