@@ -8,7 +8,7 @@
           <th>専門</th>
           <th>総合A</th>
           <th>総合B</th>
-          <th>英語</th>
+          <th>総合A(英)</th>
           <th>総単位</th>
         </tr>
       </thead>
