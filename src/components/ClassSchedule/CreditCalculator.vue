@@ -7,8 +7,8 @@
           <th>共通</th>
           <th>専門</th>
           <th>総合A</th>
-          <th>総合B</th>
           <th>総合A(英)</th>
+          <th>総合B</th>
           <th>総単位</th>
         </tr>
       </thead>
@@ -18,8 +18,8 @@
           <td>{{ $store.state.unit_list[i]['共通'] }}</td>
           <td>{{ $store.state.unit_list[i]['専門'] }}</td>
           <td>{{ $store.state.unit_list[i]['総合A'] }}</td>
-          <td>{{ $store.state.unit_list[i]['総合B'] }}</td>
           <td>{{ $store.state.unit_list[i]['英語'] }}</td>
+          <td>{{ $store.state.unit_list[i]['総合B'] }}</td>
           <td
             :class="{
               'red--text': !is_not_enough(grade_total_unit(i), max_unit_one_grade)
@@ -52,18 +52,18 @@
             {{ compulsory_total_unit('総合A') }}/{{ graduate_unit.A }}
           </td>
           <td
+                  :class="{
+              'red--text': is_not_enough(compulsory_total_unit('英語'), graduate_unit.english)
+            }"
+          >
+            {{ compulsory_total_unit('英語') }}/{{ graduate_unit.english }}
+          </td>
+          <td
             :class="{
               'red--text': is_not_enough(compulsory_total_unit('総合B'), graduate_unit.B)
             }"
           >
             {{ compulsory_total_unit('総合B') }}/{{ graduate_unit.B }}
-          </td>
-          <td
-            :class="{
-              'red--text': is_not_enough(compulsory_total_unit('英語'), graduate_unit.english)
-            }"
-          >
-            {{ compulsory_total_unit('英語') }}/{{ graduate_unit.english }}
           </td>
           <td
             :class="{
