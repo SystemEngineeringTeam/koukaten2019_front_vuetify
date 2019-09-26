@@ -54,7 +54,7 @@
         >
       </div>
       <div v-else>
-        <router-link to="/initial_Registration">ユーザー登録</router-link>|
+        <!--<router-link to="/initial_Registration">ユーザー登録</router-link>|-->
         <router-link to="/login">ログイン</router-link>
       </div>
       <!-- <v-btn>
