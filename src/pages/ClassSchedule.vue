@@ -5,7 +5,7 @@
     <v-container>
       <v-row>
         <v-col cols="12">
-          <v-tabs v-model="tabs"  show-arrows grow>
+          <v-tabs v-model="tabs" show-arrows grow>
             <v-tab
               v-for="timetable in $store.state.timetables"
               :key="timetable.id"
@@ -32,11 +32,11 @@
               ></TimeTableShow>
             </v-tab-item>
           </v-tabs-items>
-          <v-tabs v-model="tabs"  show-arrows grow>
+          <v-tabs v-model="tabs" show-arrows grow>
             <v-tab
-                    v-for="timetable in $store.state.timetables"
-                    :key="timetable.id"
-                    v-on:click="$store.commit('set_looking_timetable', timetable)"
+              v-for="timetable in $store.state.timetables"
+              :key="timetable.id"
+              v-on:click="$store.commit('set_looking_timetable', timetable)"
             >
               <b>{{ timetable.grade }}{{ timetable.semester }}</b>
             </v-tab>
