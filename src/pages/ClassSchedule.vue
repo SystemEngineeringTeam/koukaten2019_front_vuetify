@@ -1,11 +1,11 @@
 <template>
   <div class="wrapper mx-5">
+    <!--{{ $store.state.can_register_lectures }}-->
     <!--{{ $store.state.registered_lectures }}-->
     <v-container>
       <v-row>
         <v-col cols="12">
-          <v-tabs v-model="tabs">
-            <v-tabs-slider color="white"></v-tabs-slider>
+          <v-tabs v-model="tabs"  show-arrows grow>
             <v-tab
               v-for="timetable in $store.state.timetables"
               :key="timetable.id"
@@ -14,8 +14,6 @@
               <b>{{ timetable.grade }}{{ timetable.semester }}</b>
             </v-tab>
           </v-tabs>
-        </v-col>
-        <v-col cols="12">
           <v-tabs-items v-model="tabs">
             <v-tab-item v-for="timetable in timetables" :key="timetable.id">
               <TimeTableShow
@@ -34,6 +32,15 @@
               ></TimeTableShow>
             </v-tab-item>
           </v-tabs-items>
+          <v-tabs v-model="tabs"  show-arrows grow>
+            <v-tab
+                    v-for="timetable in $store.state.timetables"
+                    :key="timetable.id"
+                    v-on:click="$store.commit('set_looking_timetable', timetable)"
+            >
+              <b>{{ timetable.grade }}{{ timetable.semester }}</b>
+            </v-tab>
+          </v-tabs>
         </v-col>
         <div>
           <v-row align="center">
@@ -63,17 +70,6 @@
             </v-col>
           </v-row>
         </div>
-        <v-col cols="12">
-          <v-tabs v-model="tabs">
-            <v-tab
-              v-for="timetable in $store.state.timetables"
-              :key="timetable.id"
-              v-on:click="$store.commit('set_looking_timetable', timetable)"
-            >
-              <b>{{ timetable.grade }}{{ timetable.semester }}</b>
-            </v-tab>
-          </v-tabs>
-        </v-col>
         <v-col cols="12">
           <v-footer app>
             <v-col>
