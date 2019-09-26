@@ -45,7 +45,25 @@
         <div>
           <v-row align="center">
             <v-col cols="12">
-              <v-btn fixed large dark right rounded elevation="10" color="red" v-on:click="save_lectuers">
+              <v-btn
+                fixed
+                dark
+                large
+                right
+                rounded
+                elevation="10"
+                color="orange"
+                v-if="!is_edit"
+                v-on:click="
+                  is_edit = true;
+                  $store.dispatch('get_can_register_lectures', $store.state.user.id);
+                "
+              >
+                授業を登録
+                <v-icon>mdi-pencil</v-icon>
+              </v-btn>
+
+              <v-btn fixed large dark right rounded elevation="10" color="red" v-else v-on:click="save_lectuers">
                 登録を保存
                 <v-icon dark>mdi-cloud-upload</v-icon>
               </v-btn>
@@ -104,6 +122,7 @@ axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
 
 import TimeTableShow from '../components/ClassSchedule/TimeTableShow';
 import CreditCalculator from '../components/ClassSchedule/CreditCalculator';
+import TimeTableEditor from '../components/ClassSchedule/TimeTableEditor';
 
 export default {
   data() {
@@ -111,7 +130,8 @@ export default {
       show_dialog: false,
       tabs: null,
       user: 1,
-      is_edit: true,
+      is_show: true,
+      is_edit: false,
       looking_grade: 1,
       looking_semester: '前期',
       major: 'kk',
@@ -132,11 +152,11 @@ export default {
   },
   components: {
     TimeTableShow,
+    TimeTableEditor,
     CreditCalculator
   },
   created() {
     this.$store.dispatch('get_registered_lectures', this.$store.state.user.id);
-    this.$store.dispatch('get_can_register_lectures', this.$store.state.user.id);
   },
   beforeUpdate() {
     this.$store.commit('unit_calculate');
@@ -194,10 +214,12 @@ export default {
       if (!this.$store.state.is_enough_unit_graduate || !this.$store.state.is_over_unit) this.show_dialog = true;
       else {
         this.put_registered_lectures(this.mold_registered_lectures());
+        this.is_edit = false;
       }
     },
     register_on_dialog() {
       this.put_registered_lectures(this.mold_registered_lectures());
+      this.is_edit = false;
       this.show_dialog = false;
     }
   }
