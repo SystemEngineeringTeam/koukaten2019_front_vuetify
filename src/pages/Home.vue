@@ -17,12 +17,12 @@
             </p>
             <router-link to="/Initial_Registration">
               <div class="my-12">
-                <v-btn>ユーザー登録</v-btn>
+                <v-btn rounded block x-large>ユーザー登録</v-btn>
               </div>
             </router-link>
             <router-link to="/Initial_Registration">
               <div class="my-12">
-                <v-btn color="#F99F48">ログイン</v-btn>
+                <v-btn rounded block x-large color="#F99F48">ログイン</v-btn>
               </div>
             </router-link>
           </v-col>
