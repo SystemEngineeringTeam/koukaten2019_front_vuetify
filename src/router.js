@@ -8,6 +8,7 @@ import Questionnaire from './pages/Questionnaire';
 import Questionnaire_Answer from './pages/Questionnaire_Answer';
 import Initial_Registration from './pages/Initial_Registration';
 import Login from './pages/Login';
+import ClassScheduleView from './pages/ClassScheduleView';
 
 Vue.use(Router);
 
@@ -50,6 +51,12 @@ export default new Router({
       path: '/Login',
       name: 'Login',
       component: Login
+    },
+    {
+      path: '/ClassScheduleView',
+      name: 'class_scheduleview',
+      component: ClassScheduleView,
+      meta: { requiresAuth: true }
     }
   ]
 });

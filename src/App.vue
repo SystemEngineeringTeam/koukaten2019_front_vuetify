@@ -93,12 +93,14 @@ export default {
       login_menu: [
         { title: 'ホーム', link: '/' },
         { title: '時間割エディタ', link: '/ClassSchedule' },
+        { title: '時間割ビューア', link: '/ClassScheduleView' },
         { title: 'ユーザー登録', link: '/Initial_Registration' },
         { title: 'ログイン', link: '/Login' }
       ],
       logout_menu: [
         { title: 'ホーム', link: '/' },
         { title: '時間割エディタ', link: '/ClassSchedule' },
+        { title: '時間割ビューア', link: '/ClassScheduleView' },
         { title: 'ログアウト', link: '/' }
       ],
       login: true //true:ログイン済み false:未ログイン
