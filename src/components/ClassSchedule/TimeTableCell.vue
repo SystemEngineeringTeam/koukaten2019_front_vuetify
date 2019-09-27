@@ -129,11 +129,8 @@ export default {
       return test;
     },
     duplicate_check(c) {
-      for (var i = 0; i < this.$store.state.registered_lectures.length; i++) {
-        if (
-          c.subject_code == this.$store.state.registered_lectures[i].subject_code &&
-          c.class_code == this.$store.state.registered_lectures[i].class_code
-        ) {
+      for (let i = 0; i < this.$store.state.registered_lectures.length; i++) {
+        if (c.subject_code == this.$store.state.registered_lectures[i].subject_code) {
           return true;
         }
       }
