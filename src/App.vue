@@ -12,16 +12,7 @@
       <v-divider></v-divider>
 
       <v-list dense>
-        <div v-if="$store.state.user.logined">
-          <v-list-item v-for="item in unlogin_menu" :key="item.title" :value="item.link">
-            <v-list-item-content>
-              <v-list-item-title>
-                <router-link :to="item.link">{{ item.title }}</router-link>
-              </v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
-        </div>
-        <div v-else>
+        <template v-if="!$store.state.user.logined">
           <v-list-item v-for="item in login_menu" :key="item.title" :value="item.link">
             <v-list-item-content>
               <v-list-item-title>
@@ -29,7 +20,22 @@
               </v-list-item-title>
             </v-list-item-content>
           </v-list-item>
-        </div>
+        </template>
+        <template v-else>
+          <v-list-item v-for="item in logout_menu" :key="item.title" :value="item.link">
+            <v-list-item-content>
+              <v-list-item-title>
+                <router-link
+                  v-if="item.title === 'ログアウト'"
+                  @click.native="$store.commit('logout')"
+                  :to="item.link"
+                  >{{ item.title }}</router-link
+                >
+                <router-link v-else :to="item.link">{{ item.title }}</router-link>
+              </v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </template>
       </v-list>
     </v-navigation-drawer>
 
@@ -87,9 +93,10 @@ export default {
       login_menu: [
         { title: 'ホーム', link: '/' },
         { title: '時間割エディタ', link: '/ClassSchedule' },
+        { title: 'ユーザー登録', link: '/Initial_Registration' },
         { title: 'ログイン', link: '/Login' }
       ],
-      unlogin_menu: [
+      logout_menu: [
         { title: 'ホーム', link: '/' },
         { title: '時間割エディタ', link: '/ClassSchedule' },
         { title: 'ログアウト', link: '/' }
