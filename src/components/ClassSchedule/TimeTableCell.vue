@@ -3,10 +3,12 @@
     <div v-if="lecture == null">
       <v-card-actions v-if="is_edit && can_register.length >= 1">
         <div v-if="compulsory_decision(can_register)">
-          <v-btn color="error" @click.stop="dialog = true">授業を登録する</v-btn>
+          <v-btn color="error" @click.stop="dialog = true" rounded>
+            <v-icon>mdi-border-color</v-icon>授業を登録する
+          </v-btn>
         </div>
         <div v-else>
-          <v-btn @click.stop="dialog = true">授業を登録する</v-btn>
+          <v-btn @click.stop="dialog = true" rounded> <v-icon>mdi-border-color</v-icon>授業を登録する </v-btn>
         </div>
       </v-card-actions>
       {{
@@ -17,17 +19,25 @@
     </div>
 
     <div v-else>
-      <v-card-text>
-        <b>{{ lecture['name'] }}</b>
-        {{ lecture['unit'] }}単位
-      </v-card-text>
-      <!--<v-card-actions>
+      <v-card color="blue">
+        <v-col>
+          <v-card-text>
+            <b>{{ lecture['name'] }}</b>
+            {{ lecture['unit'] }}単位
+          </v-card-text>
+          <!--<v-card-actions>
               <v-btn :href="lecture['syllabus']" target="_blank">シラバス</v-btn>
-            </v-card-actions>-->
-      <v-card-actions v-if="is_edit && can_register.length >= 1">
-        <v-btn @click.stop="dialog = true">授業を登録する</v-btn>
-        <v-btn v-on:click="$store.commit('delete_registered_lecture', lecture)">授業を取り消す</v-btn>
-      </v-card-actions>
+          </v-card-actions>-->
+          <v-card-actions v-if="is_edit && can_register.length >= 1">
+            <v-btn @click.stop="dialog = true" small rounded>
+              <v-icon>mdi-border-color</v-icon>
+            </v-btn>
+            <v-btn v-on:click="$store.commit('delete_registered_lecture', lecture)" small rounded>
+              <v-icon>mdi-eraser</v-icon>
+            </v-btn>
+          </v-card-actions>
+        </v-col>
+      </v-card>
     </div>
 
     <!--ダイアログ-->
@@ -50,10 +60,12 @@
                 <br />
                 {{ c.teacher_name1 }}
                 <template v-if="c.teacher_name2 !== 'null'"
-                  >,他
-                </template>
+                  >,他</template
+                >
                 <v-card-actions>
-                  <v-btn v-on:click="duplicate_check_decision = duplicate_check(c)">登録</v-btn>
+                  <v-btn v-on:click="duplicate_check_decision = duplicate_check(c)" rounded>
+                    <v-icon>mdi-border-color</v-icon>登録
+                  </v-btn>
                   <!--<v-btn :href="c.syllabus" target="_blank">シラバス</v-btn>-->
                 </v-card-actions>
               </v-card>
@@ -79,12 +91,8 @@
     <!--ダイアログ-->
     <v-dialog v-model="duplicate_check_decision" max-width="290">
       <v-card>
-        <v-card-title>
-          警告
-        </v-card-title>
-        <v-card-text>
-          登録しようとしている授業はすでに４年間のどこかで登録されています
-        </v-card-text>
+        <v-card-title>警告</v-card-title>
+        <v-card-text>登録しようとしている授業はすでに４年間のどこかで登録されています</v-card-text>
         <v-card-actions>
           <v-btn v-on:click="duplicate_check_decision = false">OK</v-btn>
         </v-card-actions>
