@@ -1,9 +1,8 @@
 <template>
   <v-row>
-    <v-col cols="md-4 sm-12" v-for="(day, i) in weekdays" :key="i">
+    <v-col cols="md-2.5 sm-12" v-for="(day, i) in weekdays" :key="day">
       <v-card>
-        <v-card-title class="blue lighten-1">{{ days_name[i] }}曜日 </v-card-title>
-
+        <v-card-title class="blue lighten-1">{{ days_name[i] }}曜日</v-card-title>
         <v-list class="mx-5 my-5" v-for="time in 7" :key="time">
           <v-divider></v-divider>
           <v-subheader>{{ time }}限目</v-subheader>
