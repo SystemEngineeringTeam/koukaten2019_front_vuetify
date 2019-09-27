@@ -1,13 +1,12 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import Store from './store';
 import Home from './pages/Home';
 import ClassSchedule from './pages/ClassSchedule';
-import Config from './pages/Config';
 import Questionnaire from './pages/Questionnaire';
 import Questionnaire_Answer from './pages/Questionnaire_Answer';
 import Initial_Registration from './pages/Initial_Registration';
 import Login from './pages/Login';
+import ClassScheduleView from './pages/ClassScheduleView';
 
 Vue.use(Router);
 
@@ -25,11 +24,6 @@ export default new Router({
       name: 'class_schedule',
       component: ClassSchedule,
       meta: { requiresAuth: true }
-    },
-    {
-      path: '/Config',
-      name: 'Config',
-      component: Config
     },
     {
       path: '/Questionnaire',
@@ -50,6 +44,12 @@ export default new Router({
       path: '/Login',
       name: 'Login',
       component: Login
+    },
+    {
+      path: '/ClassScheduleView',
+      name: 'class_scheduleview',
+      component: ClassScheduleView,
+      meta: { requiresAuth: true }
     }
   ]
 });

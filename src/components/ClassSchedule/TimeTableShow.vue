@@ -3,22 +3,19 @@
     <v-col cols="md-2.5 sm-12" v-for="(day, i) in weekdays" :key="day">
       <v-card>
         <v-card-title class="blue lighten-1">{{ days_name[i] }}曜日</v-card-title>
-
-        <v-list class="mx-5 my-5">
-          <div v-for="time in 7" :key="time">
-            <v-divider></v-divider>
-            <v-subheader>{{ time }}限目</v-subheader>
-            <v-list-item>
-              <TimeTableCell
-                :is_edit="is_edit"
-                :lecture="get_one_lecture(now_register, day, time)"
-                :can_register="get_one_time_lectures(can_register, day, time)"
-                :grade="grade"
-                :day="day"
-                :time="time"
-              ></TimeTableCell>
-            </v-list-item>
-          </div>
+        <v-list class="mx-5 my-5" v-for="time in 7" :key="time">
+          <v-divider></v-divider>
+          <v-subheader>{{ time }}限目</v-subheader>
+          <v-list-item>
+            <TimeTableCell
+              :is_edit="is_edit"
+              :lecture="get_one_lecture(now_register, day, time)"
+              :can_register="get_one_time_lectures(can_register, day, time)"
+              :grade="grade"
+              :day="day"
+              :time="time"
+            ></TimeTableCell>
+          </v-list-item>
         </v-list>
       </v-card>
     </v-col>
