@@ -19,7 +19,12 @@
     <div v-else>
       <v-card-text>
         <b>{{ lecture['name'] }}</b>
-        {{ lecture['unit'] }}単位
+          <template v-if="lecture['unit']===0">
+              3単位
+          </template>
+          <template v-else>
+              {{ lecture['unit'] }}単位
+          </template>
       </v-card-text>
       <!--<v-card-actions>
               <v-btn :href="lecture['syllabus']" target="_blank">シラバス</v-btn>
