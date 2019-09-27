@@ -343,7 +343,6 @@ export default new Vuex.Store({
           if (res.data) {
             context.commit('set_user', res.data);
             // trueかfalseを判断する
-          } else {
           }
         });
     },
@@ -370,7 +369,6 @@ export default new Vuex.Store({
         .then(res => {
           context.commit('set_registered_lecture', res.data);
         })
-        .catch(error => {});
     },
     get_can_register_lectures(context, user_id) {
       axios

@@ -84,8 +84,6 @@
 </template>
 
 <script>
-import Header from './components/Header';
-
 export default {
   data() {
     return {
@@ -105,9 +103,6 @@ export default {
     };
   },
   name: 'App',
-  components: {
-    Header
-  },
   methods: {}
 };
 </script>

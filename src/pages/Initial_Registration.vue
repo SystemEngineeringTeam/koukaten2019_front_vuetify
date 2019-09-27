@@ -68,7 +68,6 @@ export default {
       x: false,
       show_pass: false,
       show_repass: false,
-      id: '',
       password: '',
       repassword: '',
       grades: ['1', '2', '3', '4'],
