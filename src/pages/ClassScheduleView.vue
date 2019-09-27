@@ -60,7 +60,6 @@ axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
 
 import TimeTableShow from '../components/ClassSchedule/TimeTableShow';
 import CreditCalculator from '../components/ClassSchedule/CreditCalculator';
-import TimeTableEditor from '../components/ClassSchedule/TimeTableEditor';
 
 export default {
   data() {
@@ -90,7 +89,6 @@ export default {
   },
   components: {
     TimeTableShow,
-    TimeTableEditor,
     CreditCalculator
   },
   created() {
