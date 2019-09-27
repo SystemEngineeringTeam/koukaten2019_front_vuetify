@@ -10,11 +10,11 @@ new Vue({
   router,
   vuetify,
   store,
-  render: h => h(App)
-  // beforeCreate() {
-  //   // LocalStorageからデータ読込
-  //   this.$store.dispatch('doLoad');
-  // }
+  render: h => h(App),
+  beforeCreate() {
+    // LocalStorageからデータ読込
+    this.$store.dispatch('doLoad');
+  }
 }).$mount('#app');
 
 router.beforeEach((to, from, next) => {
