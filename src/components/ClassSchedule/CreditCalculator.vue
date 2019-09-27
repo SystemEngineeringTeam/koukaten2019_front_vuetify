@@ -13,7 +13,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="i in 4">
+        <tr v-for="i in 4" :key="i">
           <td>{{ i }}年</td>
           <td>{{ $store.state.unit_list[i]['共通'] }}</td>
           <td>{{ $store.state.unit_list[i]['専門'] }}</td>
@@ -79,8 +79,6 @@
 </template>
 
 <script>
-import CreditCalculatorCell from './CreditCalculatorCell';
-
 export default {
   data() {
     return {
@@ -100,9 +98,6 @@ export default {
   beforeUpdate() {
     this.$store.commit('set_is_enough_unit_graduate', this.is_enough_unit_graduate());
     this.$store.commit('set_is_over_unit', this.is_over_unit());
-  },
-  components: {
-    CreditCalculatorCell
   },
   props: ['grade'],
   methods: {

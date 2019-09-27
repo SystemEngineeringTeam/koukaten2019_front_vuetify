@@ -21,9 +21,6 @@
         <b>{{ lecture['name'] }}</b>
         {{ lecture['unit'] }}単位
       </v-card-text>
-      <!--<v-card-actions>
-              <v-btn :href="lecture['syllabus']" target="_blank">シラバス</v-btn>
-            </v-card-actions>-->
       <v-card-actions v-if="is_edit && can_register.length >= 1">
         <v-btn @click.stop="dialog = true">授業を登録する</v-btn>
         <v-btn v-on:click="$store.commit('delete_registered_lecture', lecture)">授業を取り消す</v-btn>
@@ -36,7 +33,7 @@
         <v-card-title class="headline">授業登録</v-card-title>
         <v-container>
           <v-row>
-            <v-col v-for="c in can_register" cols="3">
+            <v-col v-for="c in can_register" cols="3" :key="c">
               <v-card
                 :class="{
                   orange: '必修' === c.compulsory || '選択必修' === c.compulsory
