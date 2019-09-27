@@ -219,6 +219,20 @@ export default new Vuex.Store({
     set_is_over_unit(state, bool) {
       Vue.set(state, 'is_over_unit', bool);
     },
+    save(state) {
+      localStorage.setItem('logined', state.user.logined);
+      localStorage.setItem('id', state.user.id);
+      localStorage.setItem('grade', state.user.grade);
+      localStorage.setItem('major', state.user.major);
+      localStorage.setItem('token', state.user.token);
+    },
+    load(state) {
+      Vue.set(state.user, 'logined', localStorage.getItem('logined'));
+      Vue.set(state.user, 'id', localStorage.getItem('id'));
+      Vue.set(state.user, 'grade', localStorage.getItem('grade'));
+      Vue.set(state.user, 'major', localStorage.getItem('major'));
+      Vue.set(state.user, 'token', localStorage.getItem('token'));
+    },
     //ユーザー関係
     set_user(state, data) {
       Vue.set(state.user, 'id', data.students_id);
@@ -281,6 +295,11 @@ export default new Vuex.Store({
       Vue.set(state.user, 'grade', 0);
       Vue.set(state.user, 'major', '');
       Vue.set(state.user, 'taken', '');
+      localStorage.removeItem('logined');
+      localStorage.removeItem('id');
+      localStorage.removeItem('grade');
+      localStorage.removeItem('major');
+      localStorage.removeItem('taken');
     },
     //単位関係
     unit_calculate(state) {
@@ -386,6 +405,12 @@ export default new Vuex.Store({
         .then(res => {
           context.commit('set_can_register_lectures', res.data);
         });
+    },
+    doSave({ commit }) {
+      commit('save');
+    },
+    doLoad({ commit }) {
+      commit('load');
     }
   }
 });
