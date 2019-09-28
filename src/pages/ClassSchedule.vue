@@ -13,17 +13,11 @@
         </v-col>
         <v-col cols="12">
           <v-row justify="space-around">
-            <v-checkbox color="success" id="共通" value="共通" v-model="classification" label="共通"></v-checkbox>
-            <v-checkbox color="success" id="専門" value="専門" v-model="classification" label="専門"></v-checkbox>
-            <v-checkbox color="success" id="総合A" value="総合A" v-model="classification" label="総合A"></v-checkbox>
-            <v-checkbox
-              color="success"
-              id="総合A(英)"
-              value="総合A(英)"
-              v-model="classification"
-              label="総合A(英)"
-            ></v-checkbox>
-            <v-checkbox color="success" id="総合B" value="総合B" v-model="classification" label="総合B"></v-checkbox>
+            <v-checkbox color="success" v-model="common" label="共通"></v-checkbox>
+            <v-checkbox color="success" v-model="specialty" label="専門"></v-checkbox>
+            <v-checkbox color="success" v-model="general_A" label="総合A"></v-checkbox>
+            <v-checkbox color="success" v-model="general_A_en" label="総合A(英)"></v-checkbox>
+            <v-checkbox color="success" v-model="general_B" label="総合B"></v-checkbox>
           </v-row>
           <v-tabs v-model="tabs" show-arrows grow>
             <v-tab
@@ -45,7 +39,12 @@
                   get_grade_half_sougouB_lectures(
                     $store.state.can_register_lectures,
                     timetable.grade,
-                    timetable.semester
+                    timetable.semester,
+                    common,
+                    specialty,
+                    general_A,
+                    general_A_en,
+                    general_B
                   )
                 "
                 :grade="timetable.grade"
@@ -131,6 +130,11 @@ import CreditCalculator from '../components/ClassSchedule/CreditCalculator';
 export default {
   data() {
     return {
+      common: true,
+      specialty: true,
+      general_A: true,
+      general_A_en: true,
+      general_B: true,
       show_dialog: false,
       tabs: null,
       user: 1,
@@ -192,13 +196,27 @@ export default {
       });
       return c;
     },
-    get_grade_half_sougouB_lectures(lectures, grade, semester) {
+    get_grade_half_sougouB_lectures(lectures, grade, semester, common, specialty, general_A, general_A_en, general_B) {
       let c = [];
       lectures.forEach(function(obj) {
         if (obj.semester === semester) {
           if (obj.grade === grade) {
-            c.push(obj);
-          } else if (obj.classification === '総合B' && obj.grade <= grade) {
+            if (common == true && obj.classification === '共通') {
+              c.push(obj);
+            }
+            if (specialty == true && obj.classification === '専門') {
+              c.push(obj);
+            }
+            if (general_A == true && obj.classification === '総合A') {
+              c.push(obj);
+            }
+            if (general_A_en == true && obj.classification === '総合A' && obj.isenglish == true) {
+              c.push(obj);
+            }
+            if (general_B == true && obj.classification === '総合B') {
+              c.push(obj);
+            }
+          } else if (general_B == true && obj.classification === '総合B' && obj.grade <= grade) {
             c.push(obj);
           }
         }
