@@ -6,8 +6,8 @@
           <v-col cols="12" sm="8" md="4">
             <v-alert type="warning" v-if="show_alert">学席番号かパスワードが間違っています</v-alert>
             <v-card class="elevation-12">
-              <v-toolbar color="primary" dark flat>
-                <v-toolbar-title>ログイン</v-toolbar-title>
+              <v-toolbar color="#78BBE6">
+                <v-toolbar-title class="white--text">ログイン</v-toolbar-title>
                 <div class="flex-grow-1"></div>
               </v-toolbar>
               <v-card-text>
