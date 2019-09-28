@@ -10,6 +10,8 @@
               計画が立てられたら「登録を保存」ボタンを押して保存してください
             </v-card-text>
           </v-card>
+        </v-col>
+        <v-col cols="12">
           <v-row justify="space-around">
             <v-checkbox color="success" id="共通" value="共通" v-model="classification" label="共通"></v-checkbox>
             <v-checkbox color="success" id="専門" value="専門" v-model="classification" label="専門"></v-checkbox>
@@ -120,9 +122,12 @@
 
 <script>
 import axios from 'axios';
+
 axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
+
 import TimeTableShow from '../components/ClassSchedule/TimeTableShow';
 import CreditCalculator from '../components/ClassSchedule/CreditCalculator';
+
 export default {
   data() {
     return {

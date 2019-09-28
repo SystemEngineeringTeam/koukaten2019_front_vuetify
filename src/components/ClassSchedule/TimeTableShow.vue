@@ -1,11 +1,10 @@
 <template>
   <v-row>
     <v-col cols="md-2.5 sm-12" v-for="(day, i) in weekdays" :key="day">
-      <v-card>
-        <v-card-title class="blue lighten-1">{{ days_name[i] }}曜日</v-card-title>
-        <v-list class="mx-5 my-5" v-for="time in 7" :key="time">
-          <v-divider></v-divider>
-          <v-subheader>{{ time }}限目</v-subheader>
+      <v-card color="#78BBE6">
+        <v-card-title class="indigo white--text">{{ days_name[i] }}曜日</v-card-title>
+        <v-list class="mx-1 my-1" v-for="time in 7" :key="time">
+          <v-subheader class>{{ time }}限目</v-subheader>
           <v-list-item>
             <TimeTableCell
               :is_edit="is_edit"

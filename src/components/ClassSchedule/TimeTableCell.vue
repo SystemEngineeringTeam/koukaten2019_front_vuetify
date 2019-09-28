@@ -3,7 +3,9 @@
     <div v-if="lecture == null">
       <v-card-actions v-if="is_edit && can_register.length >= 1">
         <div v-if="compulsory_decision(can_register)">
-          <v-btn color="error" @click.stop="dialog = true" rounded> <v-icon>mdi-border-color</v-icon>授業を登録 </v-btn>
+          <v-btn class="orange white--text" @click.stop="dialog = true" rounded>
+            <v-icon>mdi-border-color</v-icon>授業を登録
+          </v-btn>
         </div>
         <div v-else>
           <v-btn @click.stop="dialog = true" rounded> <v-icon>mdi-border-color</v-icon>授業を登録 </v-btn>
@@ -17,7 +19,7 @@
     </div>
 
     <div v-else>
-      <v-card color="blue">
+      <v-card class="orange">
         <v-col>
           <v-card-text>
             <b>{{ lecture['name'] }}</b>
