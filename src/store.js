@@ -387,7 +387,7 @@ export default new Vuex.Store({
         })
         .then(res => {
           context.commit('set_registered_lecture', res.data);
-        })
+        });
     },
     get_can_register_lectures(context, user_id) {
       axios

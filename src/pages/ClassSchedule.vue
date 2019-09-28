@@ -14,7 +14,13 @@
             <v-checkbox color="success" id="共通" value="共通" v-model="classification" label="共通"></v-checkbox>
             <v-checkbox color="success" id="専門" value="専門" v-model="classification" label="専門"></v-checkbox>
             <v-checkbox color="success" id="総合A" value="総合A" v-model="classification" label="総合A"></v-checkbox>
-            <v-checkbox color="success" id="総合A(英)" value="総合A(英)" v-model="classification" label="総合A(英)"></v-checkbox>
+            <v-checkbox
+              color="success"
+              id="総合A(英)"
+              value="総合A(英)"
+              v-model="classification"
+              label="総合A(英)"
+            ></v-checkbox>
             <v-checkbox color="success" id="総合B" value="総合B" v-model="classification" label="総合B"></v-checkbox>
           </v-row>
           <v-tabs v-model="tabs" show-arrows grow>
@@ -53,13 +59,6 @@
               <b>{{ timetable.grade }}{{ timetable.semester }}</b>
             </v-tab>
           </v-tabs>
-        </v-col>
-        <v-col cols="12">
-          <v-footer app>
-            <v-col>
-              <CreditCalculator :grade="$store.state.looking_timetable.grade"></CreditCalculator>
-            </v-col>
-          </v-footer>
         </v-col>
       </v-row>
     </v-container>
@@ -103,17 +102,27 @@
       登録を保存
       <v-icon dark>mdi-cloud-upload</v-icon>
     </v-btn>
+
+    <v-bottom-sheet v-model="sheet">
+      <template v-slot:activator="{ on }">
+        <v-btn color="purple" dark v-on="on" fixed left bottom fab>
+          <v-icon>
+            mdi-arrow-up-bold
+          </v-icon>
+        </v-btn>
+      </template>
+      <v-sheet>
+        <CreditCalculator :grade="$store.state.looking_timetable.grade"></CreditCalculator>
+      </v-sheet>
+    </v-bottom-sheet>
   </div>
 </template>
 
 <script>
 import axios from 'axios';
-
 axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
-
 import TimeTableShow from '../components/ClassSchedule/TimeTableShow';
 import CreditCalculator from '../components/ClassSchedule/CreditCalculator';
-
 export default {
   data() {
     return {
@@ -136,7 +145,8 @@ export default {
         { grade: 4, semester: '前期' },
         { grade: 4, semester: '後期' }
       ],
-      timetable: []
+      timetable: [],
+      sheet: false
     };
   },
   components: {
