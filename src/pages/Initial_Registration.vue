@@ -1,44 +1,57 @@
 <template>
   <div>
-    <v-alert type="warning" v-if="show_alert">
-      アカウントを作成できませんでした
-    </v-alert>
+    <v-row justify="center">
+      <v-col cols="12" sm="8" md="4">
+        <v-alert type="warning" v-if="show_alert">アカウントを作成できませんでした</v-alert>
 
-    <v-form ref="form" v-model="valid">
-      <v-row>
-        <v-col cols="12" sm="6">
-          <v-text-field v-model="id" :counter="6" :rules="id_rules" label="学籍番号(例 k19000)" required></v-text-field>
-        </v-col>
-      </v-row>
-      <v-row>
-        <v-col cols="12" sm="6">
-          <v-text-field
-            v-model="password"
-            :append-icon="show_pass ? 'mdi-eye' : 'mdi-eye-off'"
-            :type="show_pass ? 'text' : 'password'"
-            :rules="pass_rules"
-            label="パスワード"
-            hint="半角アルファベットで8文字以上、小文字大文字数字をそれぞれ1文字以上含む"
-            counter
-            @click:append="show_pass = !show_pass"
-          ></v-text-field>
-        </v-col>
-      </v-row>
-      <v-row>
-        <v-col cols="12" sm="6">
-          <v-text-field
-            v-model="repassword"
-            :append-icon="show_repass ? 'mdi-eye' : 'mdi-eye-off'"
-            :type="show_repass ? 'text' : 'password'"
-            :rules="repass_rules"
-            name="input-10-3"
-            label="再パスワード"
-            counter
-            @click:append="show3 = !show3"
-          ></v-text-field>
-        </v-col>
-      </v-row>
-      <!--<v-row>
+        <v-form ref="form" v-model="valid">
+          <v-card class="elevation-12">
+            <v-toolbar color="#78BBE6">
+              <v-toolbar-title class="white--text">ユーザー登録</v-toolbar-title>
+            </v-toolbar>
+            <v-row>
+              <v-col cols="12">
+                <v-text-field
+                  style="width: 80%; margin:5% auto"
+                  v-model="id"
+                  :counter="6"
+                  :rules="id_rules"
+                  label="学籍番号(例 k19000)"
+                  required
+                ></v-text-field>
+              </v-col>
+            </v-row>
+            <v-row>
+              <v-col cols="12">
+                <v-text-field
+                  style="width: 80%; margin:5% auto"
+                  v-model="password"
+                  :append-icon="show_pass ? 'mdi-eye' : 'mdi-eye-off'"
+                  :type="show_pass ? 'text' : 'password'"
+                  :rules="pass_rules"
+                  label="パスワード"
+                  hint="半角アルファベットで8文字以上、小文字大文字数字をそれぞれ1文字以上含む"
+                  counter
+                  @click:append="show_pass = !show_pass"
+                ></v-text-field>
+              </v-col>
+            </v-row>
+            <v-row>
+              <v-col cols="12">
+                <v-text-field
+                  style="width: 80%; margin:5% auto"
+                  v-model="repassword"
+                  :append-icon="show_repass ? 'mdi-eye' : 'mdi-eye-off'"
+                  :type="show_repass ? 'text' : 'password'"
+                  :rules="repass_rules"
+                  name="input-10-3"
+                  label="再パスワード"
+                  counter
+                  @click:append="show3 = !show3"
+                ></v-text-field>
+              </v-col>
+            </v-row>
+            <!--<v-row>
         <v-col cols="3">
           <v-select
             v-model="grade"
@@ -48,12 +61,13 @@
             label="学年"
           ></v-select>
         </v-col>
-      </v-row>-->
-      <v-row>
-        <v-btn :disabled="!valid" color="success" @click="signup">登録 </v-btn>
-        <div v-if="Screen_transition($store.state.user.logined)"></div>
-      </v-row>
-    </v-form>
+            </v-row>-->
+            <v-btn style="width: 80%;  margin:10% " :disabled="!valid" color="success" @click="signup">登録</v-btn>
+            <div v-if="Screen_transition($store.state.user.logined)"></div>
+          </v-card>
+        </v-form>
+      </v-col>
+    </v-row>
   </div>
 </template>
 <script>
