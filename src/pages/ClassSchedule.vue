@@ -12,6 +12,19 @@
           </v-card>
         </v-col>
         <v-col cols="12">
+          <v-row justify="space-around">
+            <v-checkbox color="success" id="共通" value="共通" v-model="classification" label="共通"></v-checkbox>
+            <v-checkbox color="success" id="専門" value="専門" v-model="classification" label="専門"></v-checkbox>
+            <v-checkbox color="success" id="総合A" value="総合A" v-model="classification" label="総合A"></v-checkbox>
+            <v-checkbox
+              color="success"
+              id="総合A(英)"
+              value="総合A(英)"
+              v-model="classification"
+              label="総合A(英)"
+            ></v-checkbox>
+            <v-checkbox color="success" id="総合B" value="総合B" v-model="classification" label="総合B"></v-checkbox>
+          </v-row>
           <v-tabs v-model="tabs" show-arrows grow>
             <v-tab
               v-for="timetable in $store.state.timetables"
