@@ -128,10 +128,14 @@ export default {
     enable: function() {
       this.show_alert = true;
     },
+    save: function() {
+      this.$store.dispatch('doSave');
+    },
     Screen_transition(h) {
       // console.log(h);
       if (h) {
         this.$router.push('ClassSchedule');
+        this.save();
         return true;
       } else {
         // console.log(era);
