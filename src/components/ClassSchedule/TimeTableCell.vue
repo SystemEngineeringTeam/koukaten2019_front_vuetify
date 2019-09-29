@@ -46,7 +46,7 @@
         <v-card-title class="headline">授業登録</v-card-title>
         <v-container>
           <v-row>
-            <v-col v-for="c in can_register" cols="3" :key="c">
+            <v-col v-for="(c, i) in can_register" cols="3" :key="i">
               <v-card
                 :class="{
                   orange: '必修' === c.compulsory || '選択必修' === c.compulsory
