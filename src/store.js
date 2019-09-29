@@ -162,32 +162,78 @@ export default new Vuex.Store({
     ],
     unit_list: {
       1: {
-        共通: 0,
-        専門: 0,
-        総合A: 0,
-        総合B: 0,
-        英語: 0
+        必修: {
+          共通: 0,
+          専門: 0,
+          総合A: 0,
+          総合B: 0
+        },
+        選択: {
+          共通: 0,
+          専門: 0,
+          総合A: 0,
+          総合B: 0
+        }
       },
       2: {
-        共通: 0,
-        専門: 0,
-        総合A: 0,
-        総合B: 0,
-        英語: 0
+        必修: {
+          共通: 0,
+          専門: 0,
+          総合A: 0,
+          総合B: 0
+        },
+        選択: {
+          共通: 0,
+          専門: 0,
+          総合A: 0,
+          総合B: 0
+        }
       },
       3: {
-        共通: 0,
-        専門: 0,
-        総合A: 0,
-        総合B: 0,
-        英語: 0
+        必修: {
+          共通: 0,
+          専門: 0,
+          総合A: 0,
+          総合B: 0
+        },
+        選択: {
+          共通: 0,
+          専門: 0,
+          総合A: 0,
+          総合B: 0
+        }
       },
       4: {
-        共通: 0,
-        専門: 0,
-        総合A: 0,
-        総合B: 0,
-        英語: 0
+        必修: {
+          共通: 0,
+          専門: 0,
+          総合A: 0,
+          総合B: 0
+        },
+        選択: {
+          共通: 0,
+          専門: 0,
+          総合A: 0,
+          総合B: 0
+        }
+      }
+    },
+    english_unit_list: {
+      1: {
+        必修: 0,
+        選択: 0
+      },
+      2: {
+        必修: 0,
+        選択: 0
+      },
+      3: {
+        必修: 0,
+        選択: 0
+      },
+      4: {
+        必修: 0,
+        選択: 0
       }
     },
     is_enough_unit_graduate: false,
@@ -303,50 +349,91 @@ export default new Vuex.Store({
     },
     //単位関係
     unit_calculate(state) {
-      state.unit_list = {
+      let unit_list = {
         1: {
-          共通: 0,
-          専門: 0,
-          総合A: 0,
-          総合B: 0,
-          英語: 0
+          必修: {
+            共通: 0,
+            専門: 0,
+            総合A: 0,
+            総合B: 0
+          },
+          選択: {
+            共通: 0,
+            専門: 0,
+            総合A: 0,
+            総合B: 0
+          }
         },
         2: {
-          共通: 0,
-          専門: 0,
-          総合A: 0,
-          総合B: 0,
-          英語: 0
+          必修: {
+            共通: 0,
+            専門: 0,
+            総合A: 0,
+            総合B: 0
+          },
+          選択: {
+            共通: 0,
+            専門: 0,
+            総合A: 0,
+            総合B: 0
+          }
         },
         3: {
-          共通: 0,
-          専門: 0,
-          総合A: 0,
-          総合B: 0,
-          英語: 0
+          必修: {
+            共通: 0,
+            専門: 0,
+            総合A: 0,
+            総合B: 0
+          },
+          選択: {
+            共通: 0,
+            専門: 0,
+            総合A: 0,
+            総合B: 0
+          }
         },
         4: {
-          共通: 0,
-          専門: 0,
-          総合A: 0,
-          総合B: 0,
-          英語: 0
+          必修: {
+            共通: 0,
+            専門: 0,
+            総合A: 0,
+            総合B: 0
+          },
+          選択: {
+            共通: 0,
+            専門: 0,
+            総合A: 0,
+            総合B: 0
+          }
+        }
+      };
+      let english_unit_list = {
+        1: {
+          必修: 0,
+          選択: 0
+        },
+        2: {
+          必修: 0,
+          選択: 0
+        },
+        3: {
+          必修: 0,
+          選択: 0
+        },
+        4: {
+          必修: 0,
+          選択: 0
         }
       };
       state.registered_lectures.forEach(function(lecture) {
-        if (lecture.classification === '共通') {
-          state.unit_list[lecture.grade]['共通'] += lecture.unit;
-        } else if (lecture.classification === '専門') {
-          state.unit_list[lecture.grade]['専門'] += lecture.unit;
-        } else if (lecture.classification === '総合A') {
-          state.unit_list[lecture.grade]['総合A'] += lecture.unit;
-          if (lecture.isenglish) {
-            state.unit_list[lecture.grade]['英語'] += lecture.unit;
-          }
-        } else if (lecture.classification === '総合B') {
-          state.unit_list[lecture.grade]['総合B'] += lecture.unit;
+        unit_list[lecture.grade][lecture.compulsory][lecture.classification] += lecture.unit;
+        if (lecture.isenglish) {
+          english_unit_list[lecture.grade][lecture.compulsory] += lecture.unit;
         }
       });
+
+      Vue.set(state, 'unit_list', unit_list);
+      Vue.set(state, 'english_unit_list', english_unit_list);
     }
   },
   actions: {
