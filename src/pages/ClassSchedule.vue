@@ -120,7 +120,7 @@
 
     <v-bottom-sheet v-model="sheet">
       <v-sheet>
-        <CreditCalculator :grade="$store.state.looking_timetable.grade"></CreditCalculator>
+        <CreditCalculator></CreditCalculator>
       </v-sheet>
     </v-bottom-sheet>
   </div>

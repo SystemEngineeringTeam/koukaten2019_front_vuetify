@@ -1,6 +1,122 @@
 <template>
   <div>
-    <v-simple-table dense>
+    <v-btn v-on:click="detail = !detail">表示切り替え</v-btn>
+    <v-simple-table v-if="detail" dense>
+      <thead>
+        <tr>
+          <!--<th>単位表</th>-->
+          <!--<th>共通必修</th>-->
+          <!--<th>共通選択</th>-->
+          <!--<th>専門必修</th>-->
+          <!--<th>専門選択</th>-->
+          <!--<th>総合A必修</th>-->
+          <!--<th>総合A選択</th>-->
+          <!--<th>総合A(英)必修</th>-->
+          <!--<th>総合A(英)選択</th>-->
+          <!--<th>総合B必修</th>-->
+          <!--<th>総合B選択</th>-->
+          <!--<th>総単位</th>-->
+          <th>単位表</th>
+          <th>共通必修</th>
+          <th>共通選択</th>
+          <th>専門必修</th>
+          <th>専門選択</th>
+          <th>総合A必修</th>
+          <th>総合A選択</th>
+          <th>総合A(英)</th>
+          <th>総合B</th>
+          <th>総単位</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="i in 4" :key="i">
+          <td>{{ i }}年</td>
+          <td>{{ $store.state.unit_list[i]['必修']['共通'] }}</td>
+          <td>{{ $store.state.unit_list[i]['選択']['共通'] }}</td>
+          <td>{{ $store.state.unit_list[i]['必修']['専門'] }}</td>
+          <td>{{ $store.state.unit_list[i]['選択']['専門'] }}</td>
+          <td>{{ $store.state.unit_list[i]['必修']['総合A'] }}</td>
+          <td>{{ $store.state.unit_list[i]['選択']['総合A'] }}</td>
+          <td>{{ $store.state.english_unit_list[i]['必修'] + $store.state.english_unit_list[i]['選択'] }}</td>
+          <td>{{ $store.state.unit_list[i]['必修']['総合B'] + $store.state.unit_list[i]['選択']['総合B'] }}</td>
+          <td
+            :class="{
+              'red--text': !is_not_enough(grade_total_unit(i), max_unit_one_year)
+            }"
+          >
+            {{ grade_total_unit(i) }}/{{ max_unit_one_year }}
+          </td>
+        </tr>
+        <tr>
+          <td>合計</td>
+          <td
+            :class="{
+              'red--text': is_not_enough(classification_compulsory_total_unit('共通'), graduate_unit.kyotu)
+            }"
+          >
+            {{ classification_compulsory_total_unit('共通') }}/{{ detail_graduate_unit.必修.共通 }}
+          </td>
+          <td
+            :class="{
+              'red--text': is_not_enough(classification_choice_total_unit('共通'), graduate_unit.kyotu)
+            }"
+          >
+            {{ classification_choice_total_unit('共通') }}/{{ detail_graduate_unit.選択.共通 }}
+          </td>
+          <td
+            :class="{
+              'red--text': is_not_enough(classification_compulsory_total_unit('専門'), graduate_unit.senmon)
+            }"
+          >
+            {{ classification_compulsory_total_unit('専門') }}/{{ detail_graduate_unit.必修.専門 }}
+          </td>
+          <td
+            :class="{
+              'red--text': is_not_enough(classification_choice_total_unit('専門'), graduate_unit.senmon)
+            }"
+          >
+            {{ classification_choice_total_unit('専門') }}/{{ detail_graduate_unit.選択.専門 }}
+          </td>
+          <td
+            :class="{
+              'red--text': is_not_enough(classification_compulsory_total_unit('総合A'), graduate_unit.A)
+            }"
+          >
+            {{ classification_compulsory_total_unit('総合A') }}/{{ detail_graduate_unit.必修.総合A }}
+          </td>
+          <td
+            :class="{
+              'red--text': is_not_enough(classification_choice_total_unit('総合A'), graduate_unit.A)
+            }"
+          >
+            {{ classification_choice_total_unit('総合A') }}/{{ detail_graduate_unit.選択.総合A }}
+          </td>
+          <td
+            :class="{
+              'red--text': is_not_enough(classification_total_unit('英語'), graduate_unit.english)
+            }"
+          >
+            {{ classification_total_unit('英語') }}/{{ graduate_unit.english }}
+          </td>
+          <td
+            :class="{
+              'red--text': is_not_enough(classification_total_unit('総合B'), graduate_unit.B)
+            }"
+          >
+            {{ classification_total_unit('総合B') }}/{{ graduate_unit.B }}
+          </td>
+          <td
+            :class="{
+              'red--text': is_not_enough(total_unit(), graduate_unit.all)
+            }"
+          >
+            {{ total_unit() }}/{{ graduate_unit.all }}
+          </td>
+        </tr>
+      </tbody>
+    </v-simple-table>
+
+    <v-simple-table v-else dense>
       <thead>
         <tr>
           <th>単位表</th>
@@ -90,7 +206,20 @@ export default {
         B: 12,
         english: 6
       },
-      max_unit_one_year: 48
+      detail_graduate_unit: {
+        必修: {
+          共通: 4,
+          専門: 46,
+          総合A: 4
+        },
+        選択: {
+          共通: 6,
+          専門: 48,
+          総合A: 4
+        }
+      },
+      max_unit_one_year: 48,
+      detail: false
     };
   },
 
@@ -99,7 +228,7 @@ export default {
     this.$store.commit('set_is_enough_unit_graduate', this.is_enough_unit_graduate());
     this.$store.commit('set_is_over_unit', this.is_over_unit());
   },
-  props: ['grade'],
+  props: [],
   methods: {
     is_enough_unit_graduate() {
       return (
@@ -148,6 +277,32 @@ export default {
       } else {
         for (let grade = 1; grade <= 4; grade++) {
           total_unit += this.$store.state.english_unit_list[grade]['必修'];
+          total_unit += this.$store.state.english_unit_list[grade]['選択'];
+        }
+      }
+      return total_unit;
+    },
+    classification_compulsory_total_unit(classification) {
+      let total_unit = 0;
+      if (classification != '英語') {
+        for (let grade = 1; grade <= 4; grade++) {
+          total_unit += this.$store.state.unit_list[grade]['必修'][classification];
+        }
+      } else {
+        for (let grade = 1; grade <= 4; grade++) {
+          total_unit += this.$store.state.english_unit_list[grade]['必修'];
+        }
+      }
+      return total_unit;
+    },
+    classification_choice_total_unit(classification) {
+      let total_unit = 0;
+      if (classification != '英語') {
+        for (let grade = 1; grade <= 4; grade++) {
+          total_unit += this.$store.state.unit_list[grade]['選択'][classification];
+        }
+      } else {
+        for (let grade = 1; grade <= 4; grade++) {
           total_unit += this.$store.state.english_unit_list[grade]['選択'];
         }
       }
