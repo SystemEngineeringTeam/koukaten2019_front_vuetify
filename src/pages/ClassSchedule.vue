@@ -2,6 +2,7 @@
   <div class="mx-4">
     <!--{{ $store.state.can_register_lectures }}-->
     <!--{{ $store.state.registered_lectures }}-->
+    <!--{{ $store.state.unit_list }}-->
     <v-container>
       <v-row>
         <v-col cols="12">
@@ -99,19 +100,25 @@
     </v-dialog>
 
     <!--登録ボタン-->
-    <v-btn fixed large dark top right rounded elevation="3" color="red" style="top: 90px" v-on:click="save_lectuers">
-      登録を保存
-      <v-icon dark>mdi-cloud-upload</v-icon>
-    </v-btn>
+
+    <v-bottom-navigation fixed>
+      <v-btn value="save" v-on:click="save_lectuers">
+        <span>保存</span>
+        <v-icon>mdi-cloud-upload</v-icon>
+      </v-btn>
+
+      <v-btn value="delete">
+        <span>削除</span>
+        <v-icon>mdi-delete</v-icon>
+      </v-btn>
+
+      <v-btn value="unit" v-on:click="sheet = !sheet">
+        <span>単位確認</span>
+        <v-icon>mdi-numeric</v-icon>
+      </v-btn>
+    </v-bottom-navigation>
 
     <v-bottom-sheet v-model="sheet">
-      <template v-slot:activator="{ on }">
-        <v-btn color="purple" dark v-on="on" fixed left bottom fab>
-          <v-icon>
-            mdi-arrow-up-bold
-          </v-icon>
-        </v-btn>
-      </template>
       <v-sheet>
         <CreditCalculator :grade="$store.state.looking_timetable.grade"></CreditCalculator>
       </v-sheet>
