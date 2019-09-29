@@ -15,55 +15,55 @@
       <tbody>
         <tr v-for="i in 4" :key="i">
           <td>{{ i }}年</td>
-          <td>{{ $store.state.unit_list[i]['共通'] }}</td>
-          <td>{{ $store.state.unit_list[i]['専門'] }}</td>
-          <td>{{ $store.state.unit_list[i]['総合A'] }}</td>
-          <td>{{ $store.state.unit_list[i]['英語'] }}</td>
-          <td>{{ $store.state.unit_list[i]['総合B'] }}</td>
+          <td>{{ $store.state.unit_list[i]['必修']['共通'] + $store.state.unit_list[i]['選択']['共通'] }}</td>
+          <td>{{ $store.state.unit_list[i]['必修']['専門'] + $store.state.unit_list[i]['選択']['専門'] }}</td>
+          <td>{{ $store.state.unit_list[i]['必修']['総合A'] + $store.state.unit_list[i]['選択']['総合A'] }}</td>
+          <td>{{ $store.state.english_unit_list[i]['必修'] + $store.state.english_unit_list[i]['選択'] }}</td>
+          <td>{{ $store.state.unit_list[i]['必修']['総合B'] + $store.state.unit_list[i]['選択']['総合B'] }}</td>
           <td
             :class="{
-              'red--text': !is_not_enough(grade_total_unit(i), max_unit_one_grade)
+              'red--text': !is_not_enough(grade_total_unit(i), max_unit_one_year)
             }"
           >
-            {{ grade_total_unit(i) }}/{{ max_unit_one_grade }}
+            {{ grade_total_unit(i) }}/{{ max_unit_one_year }}
           </td>
         </tr>
         <tr>
           <td>合計</td>
           <td
             :class="{
-              'red--text': is_not_enough(compulsory_total_unit('共通'), graduate_unit.kyotu)
+              'red--text': is_not_enough(classification_total_unit('共通'), graduate_unit.kyotu)
             }"
           >
-            {{ compulsory_total_unit('共通') }}/{{ graduate_unit.kyotu }}
+            {{ classification_total_unit('共通') }}/{{ graduate_unit.kyotu }}
           </td>
           <td
             :class="{
-              'red--text': is_not_enough(compulsory_total_unit('専門'), graduate_unit.senmon)
+              'red--text': is_not_enough(classification_total_unit('専門'), graduate_unit.senmon)
             }"
           >
-            {{ compulsory_total_unit('専門') }}/{{ graduate_unit.senmon }}
+            {{ classification_total_unit('専門') }}/{{ graduate_unit.senmon }}
           </td>
           <td
             :class="{
-              'red--text': is_not_enough(compulsory_total_unit('総合A'), graduate_unit.A)
+              'red--text': is_not_enough(classification_total_unit('総合A'), graduate_unit.A)
             }"
           >
-            {{ compulsory_total_unit('総合A') }}/{{ graduate_unit.A }}
+            {{ classification_total_unit('総合A') }}/{{ graduate_unit.A }}
           </td>
           <td
             :class="{
-              'red--text': is_not_enough(compulsory_total_unit('英語'), graduate_unit.english)
+              'red--text': is_not_enough(classification_total_unit('英語'), graduate_unit.english)
             }"
           >
-            {{ compulsory_total_unit('英語') }}/{{ graduate_unit.english }}
+            {{ classification_total_unit('英語') }}/{{ graduate_unit.english }}
           </td>
           <td
             :class="{
-              'red--text': is_not_enough(compulsory_total_unit('総合B'), graduate_unit.B)
+              'red--text': is_not_enough(classification_total_unit('総合B'), graduate_unit.B)
             }"
           >
-            {{ compulsory_total_unit('総合B') }}/{{ graduate_unit.B }}
+            {{ classification_total_unit('総合B') }}/{{ graduate_unit.B }}
           </td>
           <td
             :class="{
@@ -90,7 +90,7 @@ export default {
         B: 12,
         english: 6
       },
-      max_unit_one_grade: 48
+      max_unit_one_year: 48
     };
   },
 
@@ -104,11 +104,11 @@ export default {
     is_enough_unit_graduate() {
       return (
         this.total_unit() >= this.graduate_unit.all &&
-        this.compulsory_total_unit('共通') >= this.graduate_unit.kyotu &&
-        this.compulsory_total_unit('専門') >= this.graduate_unit.senmon &&
-        this.compulsory_total_unit('総合A') >= this.graduate_unit.A &&
-        this.compulsory_total_unit('総合B') >= this.graduate_unit.B &&
-        this.compulsory_total_unit('英語') >= this.graduate_unit.english
+        this.classification_total_unit('共通') >= this.graduate_unit.kyotu &&
+        this.classification_total_unit('専門') >= this.graduate_unit.senmon &&
+        this.classification_total_unit('総合A') >= this.graduate_unit.A &&
+        this.classification_total_unit('総合B') >= this.graduate_unit.B &&
+        this.classification_total_unit('英語') >= this.graduate_unit.english
       );
     },
     is_over_unit() {
@@ -123,26 +123,33 @@ export default {
     total_unit() {
       let total_unit = 0;
       for (let grade = 1; grade <= 4; grade++) {
-        total_unit +=
-          this.$store.state.unit_list[grade]['共通'] +
-          this.$store.state.unit_list[grade]['専門'] +
-          this.$store.state.unit_list[grade]['総合A'] +
-          this.$store.state.unit_list[grade]['総合B'];
+        total_unit += this.grade_total_unit(grade);
       }
       return total_unit;
     },
     grade_total_unit(grade) {
-      return (
-        this.$store.state.unit_list[grade]['共通'] +
-        this.$store.state.unit_list[grade]['専門'] +
-        this.$store.state.unit_list[grade]['総合A'] +
-        this.$store.state.unit_list[grade]['総合B']
-      );
-    },
-    compulsory_total_unit(compulsory) {
       let total_unit = 0;
-      for (let grade = 1; grade <= 4; grade++) {
-        total_unit += this.$store.state.unit_list[grade][compulsory];
+      const unit_list = this.$store.state.unit_list;
+      for (let key of Object.keys(unit_list[grade]['必修'])) {
+        total_unit += unit_list[grade]['必修'][key];
+      }
+      for (let key of Object.keys(unit_list[grade]['選択'])) {
+        total_unit += unit_list[grade]['選択'][key];
+      }
+      return total_unit;
+    },
+    classification_total_unit(classification) {
+      let total_unit = 0;
+      if (classification != '英語') {
+        for (let grade = 1; grade <= 4; grade++) {
+          total_unit += this.$store.state.unit_list[grade]['必修'][classification];
+          total_unit += this.$store.state.unit_list[grade]['選択'][classification];
+        }
+      } else {
+        for (let grade = 1; grade <= 4; grade++) {
+          total_unit += this.$store.state.english_unit_list[grade]['必修'];
+          total_unit += this.$store.state.english_unit_list[grade]['選択'];
+        }
       }
       return total_unit;
     },
