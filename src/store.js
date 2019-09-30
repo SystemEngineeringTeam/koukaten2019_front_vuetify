@@ -206,7 +206,7 @@ export default new Vuex.Store({
       4: {
         必修: {
           共通: 0,
-          専門: 0,
+          専門: 4,
           総合A: 0,
           総合B: 0
         },
@@ -395,7 +395,7 @@ export default new Vuex.Store({
         4: {
           必修: {
             共通: 0,
-            専門: 0,
+            専門: 4,
             総合A: 0,
             総合B: 0
           },
