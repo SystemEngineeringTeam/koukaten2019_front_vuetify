@@ -47,7 +47,7 @@
                   name="input-10-3"
                   label="再パスワード"
                   counter
-                  @click:append="show3 = !show3"
+                  @click:append="show_repass = !show_repass"
                 ></v-text-field>
               </v-col>
             </v-row>
