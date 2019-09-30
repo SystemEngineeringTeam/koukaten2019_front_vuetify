@@ -14,6 +14,11 @@
         </v-col>
         <v-col cols="12">
           <v-row justify="space-around">
+            <v-checkbox color="success" v-model="compulsory" label="必修"></v-checkbox>
+            <v-checkbox color="success" v-model="required_compulsory" label="選択必修"></v-checkbox>
+            <v-checkbox color="success" v-model="choice" label="選択"></v-checkbox>
+          </v-row>
+          <v-row justify="space-around">
             <v-checkbox color="success" v-model="common" label="共通"></v-checkbox>
             <v-checkbox color="success" v-model="specialty" label="専門"></v-checkbox>
             <v-checkbox color="success" v-model="general_A" label="総合A"></v-checkbox>
@@ -45,7 +50,10 @@
                     specialty,
                     general_A,
                     general_A_en,
-                    general_B
+                    general_B,
+                    compulsory,
+                    required_compulsory,
+                    choice
                   )
                 "
                 :grade="timetable.grade"
@@ -142,6 +150,9 @@ export default {
       general_A: true,
       general_A_en: true,
       general_B: true,
+      compulsory: true,
+      required_compulsory: true,
+      choice: true,
       show_dialog: false,
       tabs: null,
       user: 1,
@@ -203,27 +214,75 @@ export default {
       });
       return c;
     },
-    get_grade_half_sougouB_lectures(lectures, grade, semester, common, specialty, general_A, general_A_en, general_B) {
+    get_grade_half_sougouB_lectures(
+      lectures,
+      grade,
+      semester,
+      common,
+      specialty,
+      general_A,
+      general_A_en,
+      general_B,
+      compulsory,
+      required_compulsory,
+      choice
+    ) {
       let c = [];
       lectures.forEach(function(obj) {
         if (obj.semester === semester) {
           if (obj.grade === grade) {
-            if (common == true && obj.classification === '共通') {
-              c.push(obj);
+            if (compulsory == true && obj.compulsory === '必修') {
+              if (common == true && obj.classification === '共通') {
+                c.push(obj);
+              }
+              if (specialty == true && obj.classification === '専門') {
+                c.push(obj);
+              }
+              if (general_A == true && obj.classification === '総合A') {
+                c.push(obj);
+              }
+              if (general_A_en == true && obj.classification === '総合A' && obj.isenglish == true) {
+                c.push(obj);
+              }
+              if (general_B == true && obj.classification === '総合B') {
+                c.push(obj);
+              }
             }
-            if (specialty == true && obj.classification === '専門') {
-              c.push(obj);
+            if (required_compulsory == true && obj.compulsory === '選択必修') {
+              if (common == true && obj.classification === '共通') {
+                c.push(obj);
+              }
+              if (specialty == true && obj.classification === '専門') {
+                c.push(obj);
+              }
+              if (general_A == true && obj.classification === '総合A') {
+                c.push(obj);
+              }
+              if (general_A_en == true && obj.classification === '総合A' && obj.isenglish == true) {
+                c.push(obj);
+              }
+              if (general_B == true && obj.classification === '総合B') {
+                c.push(obj);
+              }
             }
-            if (general_A == true && obj.classification === '総合A') {
-              c.push(obj);
+            if (choice == true && obj.compulsory === '選択') {
+              if (common == true && obj.classification === '共通') {
+                c.push(obj);
+              }
+              if (specialty == true && obj.classification === '専門') {
+                c.push(obj);
+              }
+              if (general_A == true && obj.classification === '総合A') {
+                c.push(obj);
+              }
+              if (general_A_en == true && obj.classification === '総合A' && obj.isenglish == true) {
+                c.push(obj);
+              }
+              if (general_B == true && obj.classification === '総合B') {
+                c.push(obj);
+              }
             }
-            if (general_A_en == true && obj.classification === '総合A' && obj.isenglish == true) {
-              c.push(obj);
-            }
-            if (general_B == true && obj.classification === '総合B') {
-              c.push(obj);
-            }
-          } else if (general_B == true && obj.classification === '総合B' && obj.grade <= grade) {
+          } else if (general_B == true && obj.classification === '総合B' && obj.grade <= grade && choice == true) {
             c.push(obj);
           }
         }

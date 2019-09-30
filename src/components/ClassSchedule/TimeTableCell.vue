@@ -130,7 +130,7 @@ export default {
       }
       let test = false;
       h.forEach(function(lec) {
-        if (lec.compulsory === '必修') {
+        if (lec.compulsory === '必修' || lec.compulsory === '選択必修') {
           test = true;
         }
       });
