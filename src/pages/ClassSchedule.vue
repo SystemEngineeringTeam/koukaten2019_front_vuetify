@@ -1,7 +1,7 @@
 <template>
   <div class="mx-4">
     <!--{{ $store.state.can_register_lectures }}-->
-    <!--{{ $store.state.registered_lectures }}-->
+    <!-- {{ $store.state.registered_lectures }} -->
     <!--{{ $store.state.unit_list }}-->
     <!--{{ $store.state.user }}-->
     <v-container>
@@ -101,22 +101,14 @@
 
     <v-dialog v-model="warning_delete" max-width="290">
       <v-card>
-        <v-card-title>
-          確認
-        </v-card-title>
+        <v-card-title>確認</v-card-title>
 
-        <v-card-text>
-          全ての登録された授業を取り消します
-        </v-card-text>
+        <v-card-text>全ての登録された授業を取り消します</v-card-text>
 
         <v-card-actions>
           <div class="flex-grow-1"></div>
-          <v-btn color="green darken-1" text @click="warning_delete = false">
-            キャンセル
-          </v-btn>
-          <v-btn color="green darken-1" text @click="delete_registered_lectures()">
-            OK
-          </v-btn>
+          <v-btn color="green darken-1" text @click="warning_delete = false">キャンセル</v-btn>
+          <v-btn color="green darken-1" text @click="delete_registered_lectures()">OK</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -260,7 +252,12 @@ export default {
               if (general_A == true && obj.classification === '総合A') {
                 c.push(obj);
               }
-              if (general_A_en == true && obj.classification === '総合A' && obj.isenglish == true && general_A == false) {
+              if (
+                general_A_en == true &&
+                obj.classification === '総合A' &&
+                obj.isenglish == true &&
+                general_A == false
+              ) {
                 c.push(obj);
               }
               if (general_B == true && obj.classification === '総合B') {
@@ -277,7 +274,12 @@ export default {
               if (general_A == true && obj.classification === '総合A') {
                 c.push(obj);
               }
-              if (general_A_en == true && obj.classification === '総合A' && obj.isenglish == true && general_A == false) {
+              if (
+                general_A_en == true &&
+                obj.classification === '総合A' &&
+                obj.isenglish == true &&
+                general_A == false
+              ) {
                 c.push(obj);
               }
               if (general_B == true && obj.classification === '総合B') {
@@ -294,7 +296,12 @@ export default {
               if (general_A == true && obj.classification === '総合A') {
                 c.push(obj);
               }
-              if (general_A_en == true && obj.classification === '総合A' && obj.isenglish == true && general_A == false) {
+              if (
+                general_A_en == true &&
+                obj.classification === '総合A' &&
+                obj.isenglish == true &&
+                general_A == false
+              ) {
                 c.push(obj);
               }
               if (general_B == true && obj.classification === '総合B') {
