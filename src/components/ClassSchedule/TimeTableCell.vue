@@ -7,8 +7,15 @@
             <v-icon>mdi-border-color</v-icon>授業を登録
           </v-btn>
         </div>
+        <div v-else-if="choice_compulsory_decision(can_register)">
+          <v-btn class="green white--text" @click.stop="dialog = true" rounded>
+            <v-icon>mdi-border-color</v-icon>授業を登録
+          </v-btn>
+        </div>
         <div v-else>
-          <v-btn @click.stop="dialog = true" rounded> <v-icon>mdi-border-color</v-icon>授業を登録 </v-btn>
+          <v-btn class="blue white--text" @click.stop="dialog = true" rounded>
+            <v-icon>mdi-border-color</v-icon>授業を登録
+          </v-btn>
         </div>
       </v-card-actions>
       {{
@@ -19,7 +26,7 @@
     </div>
 
     <div v-else>
-      <v-card class="orange">
+      <v-card :class="{ orange: compulsory_decision(can_register), green: choice_compulsory_decision(can_register) }">
         <v-col>
           <v-card-text>
             <b>{{ lecture['name'] }}</b>
@@ -49,25 +56,28 @@
             <v-col v-for="(c, i) in can_register" cols="3" :key="i">
               <v-card
                 :class="{
-                  orange: '必修' === c.compulsory || '選択必修' === c.compulsory
+                  orange: '必修' === c.compulsory,
+                  green: '選択必修' === c.compulsory,
+                  blue: '選択' === c.compulsory
                 }"
               >
-                {{ c.name }}
-                <br />
-                {{ c.classification }}
-                <br />
-                {{ c.compulsory }}
-                <br />
-                {{ c.teacher_name1 }}
-                <template v-if="c.teacher_name2 !== 'null'"
-                  >,他</template
-                >
-                <v-card-actions>
+                <p class="text-center" style="font-size:28px;">{{ c.name }}</p>
+                <p class="text-center" style="font-size:22px;">
+                  {{ c.classification }}
+                  {{ c.compulsory }}
+                  <br />
+                  {{ c.teacher_name1 }}
+                  <template v-if="c.teacher_name2 !== 'null'"
+                    >,他</template
+                  >
+                </p>
+                <div class="text-center">
                   <v-btn v-on:click="duplicate_check_decision = duplicate_check(c)" rounded>
                     <v-icon>mdi-border-color</v-icon>登録
                   </v-btn>
-                  <!--<v-btn :href="c.syllabus" target="_blank">シラバス</v-btn>-->
-                </v-card-actions>
+                </div>
+                <br />
+                <!--<v-btn :href="c.syllabus" target="_blank">シラバス</v-btn>-->
               </v-card>
             </v-col>
           </v-row>
@@ -130,7 +140,19 @@ export default {
       }
       let test = false;
       h.forEach(function(lec) {
-        if (lec.compulsory === '必修' || lec.compulsory === '選択必修') {
+        if (lec.compulsory === '必修') {
+          test = true;
+        }
+      });
+      return test;
+    },
+    choice_compulsory_decision(h) {
+      if (h.length <= 0) {
+        return false;
+      }
+      let test = false;
+      h.forEach(function(lec) {
+        if (lec.compulsory === '選択必修') {
           test = true;
         }
       });

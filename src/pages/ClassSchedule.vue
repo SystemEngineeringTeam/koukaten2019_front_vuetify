@@ -7,9 +7,7 @@
       <v-row>
         <v-col cols="12">
           <v-card>
-            <v-card-text>
-              計画が立てられたら「登録を保存」ボタンを押して保存してください
-            </v-card-text>
+            <v-card-text>計画が立てられたら「登録を保存」ボタンを押して保存してください</v-card-text>
           </v-card>
         </v-col>
         <v-col cols="12">
@@ -25,7 +23,7 @@
             <v-checkbox color="success" v-model="general_A_en" label="総合A(英)"></v-checkbox>
             <v-checkbox color="success" v-model="general_B" label="総合B"></v-checkbox>
           </v-row>
-          <v-tabs v-model="tabs" show-arrows grow>
+          <v-tabs color="white" background-color="indigo" v-model="tabs" show-arrows grow>
             <v-tab
               v-for="timetable in $store.state.timetables"
               :key="timetable.id"
@@ -76,33 +74,26 @@
     <!--ダイアログ-->
     <v-dialog v-model="show_dialog" max-width="290">
       <v-card>
-        <v-card-title>
-          確認
-        </v-card-title>
+        <v-card-title>確認</v-card-title>
 
         <v-card-text>
           <template v-if="!this.$store.state.is_enough_unit_graduate"
-            >卒業要件を満たしていません
-          </template>
+            >卒業要件を満たしていません</template
+          >
           <br />
           <template v-if="!this.$store.state.is_over_unit"
-            >1年間に取得できる単位数をオーバーしています
-          </template>
+            >1年間に取得できる単位数をオーバーしています</template
+          >
           <br />
-          <br />
-          このまま登録しますか？
+          <br />このまま登録しますか？
         </v-card-text>
 
         <v-card-actions>
           <div class="flex-grow-1"></div>
 
-          <v-btn color="green darken-1" text @click="show_dialog = false">
-            キャンセル
-          </v-btn>
+          <v-btn color="green darken-1" text @click="show_dialog = false">キャンセル</v-btn>
 
-          <v-btn color="green darken-1" text @click="register_on_dialog()">
-            登録する
-          </v-btn>
+          <v-btn color="green darken-1" text @click="register_on_dialog()">登録する</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
