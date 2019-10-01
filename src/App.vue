@@ -39,18 +39,18 @@
       </v-list>
     </v-navigation-drawer>
 
-    <v-app-bar app>
-      <v-app-bar-nav-icon color="red accent-4" dark @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+    <v-app-bar app color="#78BBE6">
+      <v-app-bar-nav-icon color="white" dark @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
 
       <v-toolbar-title>
         <router-link class="a" to="/">
-          <font color="black" class="headline font-weight-black">未来予想図</font>
+          <font class="white--text headline font-weight-black">未来予想図</font>
         </router-link>
       </v-toolbar-title>
 
       <div class="flex-grow-1"></div>
       <div v-if="$store.state.user.logined">
-        <b>{{ $store.state.user.id }}</b>
+        <b class="white--text">{{ $store.state.user.id }}</b>
         <!--<v-btn
           @click="
             $store.commit('logout');
