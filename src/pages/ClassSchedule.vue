@@ -3,6 +3,7 @@
     <!--{{ $store.state.can_register_lectures }}-->
     <!--{{ $store.state.registered_lectures }}-->
     <!--{{ $store.state.unit_list }}-->
+    <!--{{ $store.state.user }}-->
     <v-container>
       <v-row>
         <v-col cols="12">
@@ -268,7 +269,7 @@ export default {
               if (general_A == true && obj.classification === '総合A') {
                 c.push(obj);
               }
-              if (general_A_en == true && obj.classification === '総合A' && obj.isenglish == true) {
+              if (general_A_en == true && obj.classification === '総合A' && obj.isenglish == true && general_A == false) {
                 c.push(obj);
               }
               if (general_B == true && obj.classification === '総合B') {
@@ -285,7 +286,7 @@ export default {
               if (general_A == true && obj.classification === '総合A') {
                 c.push(obj);
               }
-              if (general_A_en == true && obj.classification === '総合A' && obj.isenglish == true) {
+              if (general_A_en == true && obj.classification === '総合A' && obj.isenglish == true && general_A == false) {
                 c.push(obj);
               }
               if (general_B == true && obj.classification === '総合B') {
@@ -302,7 +303,7 @@ export default {
               if (general_A == true && obj.classification === '総合A') {
                 c.push(obj);
               }
-              if (general_A_en == true && obj.classification === '総合A' && obj.isenglish == true) {
+              if (general_A_en == true && obj.classification === '総合A' && obj.isenglish == true && general_A == false) {
                 c.push(obj);
               }
               if (general_B == true && obj.classification === '総合B') {
