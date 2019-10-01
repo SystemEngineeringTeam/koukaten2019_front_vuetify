@@ -25,7 +25,13 @@
       }}
     </div>
     <div v-else>
-      <v-card :class="{ orange: lecture['compulsory'] == '必修', blue: lecture['compulsory'] == '選択' }">
+      <v-card
+        :class="{
+          orange: lecture['compulsory'] == '必修',
+          blue: lecture['compulsory'] == '選択',
+          green: lecture['compulsory'] == '選択必修'
+        }"
+      >
         <v-col>
           <v-card-text>
             <b>{{ lecture['name'] }}</b>
