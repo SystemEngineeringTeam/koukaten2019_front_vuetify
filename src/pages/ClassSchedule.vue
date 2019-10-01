@@ -107,6 +107,28 @@
       </v-card>
     </v-dialog>
 
+    <v-dialog v-model="warning_delete" max-width="290">
+      <v-card>
+        <v-card-title>
+          確認
+        </v-card-title>
+
+        <v-card-text>
+          全ての登録された授業を取り消します
+        </v-card-text>
+
+        <v-card-actions>
+          <div class="flex-grow-1"></div>
+          <v-btn color="green darken-1" text @click="warning_delete = false">
+            キャンセル
+          </v-btn>
+          <v-btn color="green darken-1" text @click="delete_registered_lectures()">
+            OK
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+
     <!--登録ボタン-->
 
     <v-bottom-navigation fixed>
@@ -115,7 +137,7 @@
         <v-icon>mdi-cloud-upload</v-icon>
       </v-btn>
 
-      <v-btn value="delete">
+      <v-btn value="delete" v-on:click="delete_lectuers">
         <span>削除</span>
         <v-icon>mdi-delete</v-icon>
       </v-btn>
@@ -135,9 +157,13 @@
 </template>
 
 <script>
+import Vue from 'vue';
+import Vuex from 'vuex';
 import axios from 'axios';
 
 axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
+
+Vue.use(Vuex);
 
 import TimeTableShow from '../components/ClassSchedule/TimeTableShow';
 import CreditCalculator from '../components/ClassSchedule/CreditCalculator';
@@ -154,6 +180,7 @@ export default {
       required_compulsory: true,
       choice: true,
       show_dialog: false,
+      warning_delete: false,
       tabs: null,
       user: 1,
       is_edit: true,
@@ -303,6 +330,13 @@ export default {
       else {
         this.put_registered_lectures(this.mold_registered_lectures());
       }
+    },
+    delete_lectuers() {
+      this.warning_delete = true;
+    },
+    delete_registered_lectures() {
+      Vue.set(this.$store.state, 'registered_lectures', []);
+      this.warning_delete = false;
     },
     register_on_dialog() {
       this.put_registered_lectures(this.mold_registered_lectures());
