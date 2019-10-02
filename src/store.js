@@ -290,6 +290,17 @@ export default new Vuex.Store({
     //時間割関係
     set_registered_lecture(state, lectures) {
       Vue.set(state, 'registered_lectures', lectures);
+      lectures.forEach(function(lecture) {
+        if (lecture.continuous > 1) {
+          for (let i = 0; i < lecture.continuous; i++) {
+            let sublecture;
+            sublecture = Vue.util.extend({}, lecture);
+            sublecture.lec_time += 1;
+            sublecture.unit = 0;
+            state.registered_lectures.push(sublecture);
+          }
+        }
+      });
     },
     set_can_register_lectures(state, data) {
       Vue.set(state, 'can_register_lectures', data);
