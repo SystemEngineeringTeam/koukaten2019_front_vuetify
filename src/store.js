@@ -238,6 +238,11 @@ export default new Vuex.Store({
     },
     is_enough_unit_graduate: false,
     is_over_unit: true,
+    is_under_unit_kyotu: false,
+    is_under_unit_senmon: false,
+    is_under_unit_A: false,
+    is_under_unit_B: false,
+    is_under_unit_english: false,
     user: {
       logined: false,
       id: '',
@@ -264,6 +269,21 @@ export default new Vuex.Store({
     },
     set_is_over_unit(state, bool) {
       Vue.set(state, 'is_over_unit', bool);
+    },
+    set_is_under_unit_kyotu(state, bool) {
+      Vue.set(state, 'is_under_unit_kyotu', bool);
+    },
+    set_is_under_unit_senmon(state, bool) {
+      Vue.set(state, 'is_under_unit_senmon', bool);
+    },
+    set_is_under_unit_A(state, bool) {
+      Vue.set(state, 'is_under_unit_A', bool);
+    },
+    set_is_under_unit_B(state, bool) {
+      Vue.set(state, 'is_under_unit_B', bool);
+    },
+    set_is_under_unit_english(state, bool) {
+      Vue.set(state, 'is_under_unit_english', bool);
     },
     save(state) {
       localStorage.setItem('logined', state.user.logined);

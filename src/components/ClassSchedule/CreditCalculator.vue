@@ -206,6 +206,11 @@ export default {
         B: 12,
         english: 6
       },
+      advancement_unit: {
+        grade_1: 24,
+        grade_2: 48,
+        grade_3: 96
+      },
       detail_graduate_unit: {
         必修: {
           共通: 4,
@@ -227,9 +232,39 @@ export default {
   beforeUpdate() {
     this.$store.commit('set_is_enough_unit_graduate', this.is_enough_unit_graduate());
     this.$store.commit('set_is_over_unit', this.is_over_unit());
+    this.$store.commit('set_is_under_unit_kyotu', this.is_under_unit_kyotu());
+    this.$store.commit('set_is_under_unit_senmon', this.is_under_unit_senmon());
+    this.$store.commit('set_is_under_unit_A', this.is_under_unit_A());
+    this.$store.commit('set_is_under_unit_B', this.is_under_unit_B());
+    this.$store.commit('set_is_under_unit_english', this.is_under_unit_english());
   },
   props: [],
   methods: {
+    is_under_unit_kyotu() {
+      return(
+        this.classification_total_unit('共通') >= this.graduate_unit.kyotu
+      );
+    },
+    is_under_unit_senmon() {
+      return(
+        this.classification_total_unit('専門') >= this.graduate_unit.senmon
+      );
+    },
+    is_under_unit_A() {
+      return(
+        this.classification_total_unit('総合A') >= this.graduate_unit.A
+      );
+    },
+    is_under_unit_B() {
+      return(
+        this.classification_total_unit('総合B') >= this.graduate_unit.B
+      );
+    },
+    is_under_unit_english() {
+      return(
+        this.classification_total_unit('英語') >= this.graduate_unit.english
+      );
+    },
     is_enough_unit_graduate() {
       return (
         this.total_unit() >= this.graduate_unit.all &&

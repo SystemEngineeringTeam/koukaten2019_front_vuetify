@@ -82,6 +82,26 @@
             >卒業要件を満たしていません</template
           >
           <br />
+          <template v-if="!this.$store.state.is_under_unit_kyotu"
+            >共通の単位が足りていません</template
+          >
+          <br />
+          <template v-if="!this.$store.state.is_under_unit_senmon"
+            >専門の単位が足りていません</template
+          >
+          <br />
+          <template v-if="!this.$store.state.is_under_unit_A"
+            >総合Aの単位が足りていません</template
+          >
+          <br />
+          <template v-if="!this.$store.state.is_under_unit_B"
+            >総合Bの単位が足りていません</template
+          >
+          <br />
+          <template v-if="!this.$store.state.is_under_unit_english"
+            >総合A(英)の単位が足りていません</template
+          >
+          <br />
           <template v-if="!this.$store.state.is_over_unit"
             >1年間に取得できる単位数をオーバーしています</template
           >
