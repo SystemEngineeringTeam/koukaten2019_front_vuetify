@@ -289,6 +289,14 @@ export default new Vuex.Store({
     },
     //時間割関係
     set_registered_lecture(state, lectures) {
+      //登録してる授業がコードだけの時対応版
+      // lectures.forEach(function(lecture) {
+      //   let registed_lectuer = state.can_register_lectures.find(function(can_lectuer){
+      //     return (lecture.subject_code == can_lectuer.subject_code && lecture.class_code == can_lectuer.class_code)
+      //   });
+      //   state.registered_lectures.push(registed_lectuer);
+      // });
+
       Vue.set(state, 'registered_lectures', lectures);
       lectures.forEach(function(lecture) {
         if (lecture.continuous > 1) {
