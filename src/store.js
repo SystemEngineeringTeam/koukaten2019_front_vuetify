@@ -465,6 +465,18 @@ export default new Vuex.Store({
 
       Vue.set(state, 'unit_list', unit_list);
       Vue.set(state, 'english_unit_list', english_unit_list);
+    },
+    set_grade_point(state, lec_and_point) {
+      // lec_and_point.findIndex(lec => lec.subject_code === )
+      // Vue.set(state.registered_lectures, 'grade_points', lec_and_point.grade_point);
+      let index = state.registered_lectures.findIndex(function (registered_lecture) {
+        return (
+          lec_and_point.subject_code == registered_lecture.subject_code &&
+          lec_and_point.class_code == registered_lecture.class_code
+        );
+      });
+      // state.registered_lectures.push(grade_point);
+      Vue.set(state.registered_lectures[index], 'grade_point', lec_and_point.grade_point);
     }
   },
   actions: {

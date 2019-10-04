@@ -214,6 +214,7 @@ export default {
   created() {
     this.$store.dispatch('get_registered_lectures', this.$store.state.user.id);
     this.$store.dispatch('get_can_register_lectures', this.$store.state.user.id);
+    this.$store.dispatch('get_grade_point', this.$store.state.user.id);
   },
   beforeUpdate() {
     this.$store.commit('unit_calculate');
@@ -228,7 +229,7 @@ export default {
           subject_code: lectures.subject_code,
           class_code: lectures.class_code,
           course_grade: lectures.grade,
-          grade_point: 'Future'
+          grade_point: lecture.grade_point
         })
       );
       return data;

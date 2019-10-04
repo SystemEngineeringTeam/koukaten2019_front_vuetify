@@ -48,6 +48,19 @@
               <v-icon>mdi-eraser</v-icon>
             </v-btn>
           </v-card-actions>
+          <v-select
+            style="font-size: 20px;"
+            filled
+            rounded
+            height="10"
+            background-color="white"
+            :items="items"
+            solo
+            label="成績を入力"
+            item-text="a"
+            v-model="select"
+            item-value="i"
+          ></v-select>
         </v-col>
       </v-card>
     </div>
@@ -121,8 +134,18 @@ export default {
   name: 'TimeTableCell',
   data() {
     return {
+      select: ' ',
       duplicate_check_decision: false,
-      dialog: false
+      dialog: false,
+      items: [
+        { a: '秀', i: 'S' },
+        { a: '優', i: 'A' },
+        { a: '良', i: 'B' },
+        { a: '可', i: 'C' },
+        { a: '不可', i: 'F' },
+        { a: '失', i: 'Q' },
+        { a: '成績を入力', i: 'Future' }
+      ]
     };
   },
   methods: {
