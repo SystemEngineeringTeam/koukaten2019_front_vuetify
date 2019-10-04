@@ -522,6 +522,23 @@ export default new Vuex.Store({
           context.commit('set_can_register_lectures', res.data);
         });
     },
+    get_grade_point(context, user_id) {
+      axios
+        .get(process.env.VUE_APP_URL_GRADE_POINT, {
+          params: {
+            student: user_id
+          },
+          headers: {
+            Authorization: `Bearer ${this.state.user.token}`
+          }
+        })
+        .then(res => {
+          console.log(res.data);
+          res.data.forEach(function (lecture) {
+            context.commit('set_grade_point', lecture);
+          });
+        });
+    },
     doSave({ commit }) {
       commit('save');
     },
