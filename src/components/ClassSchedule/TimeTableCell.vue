@@ -19,9 +19,9 @@
         </div>
       </v-card-actions>
       {{
-        can_register.forEach(function(lecther) {
-          lecther.compulsory;
-        })
+      can_register.forEach(function(lecther) {
+      lecther.compulsory;
+      })
       }}
     </div>
     <div v-else>
@@ -83,18 +83,16 @@
                 <p class="text-center" style="font-size:22px;">
                   {{ c.classification }}
                   {{ c.compulsory }}
-                  <br />
+                  <br>
                   {{ c.teacher_name1 }}
-                  <template v-if="c.teacher_name2 !== 'null'"
-                    >,他</template
-                  >
+                  <template v-if="c.teacher_name2 !== 'null'">,他</template>
                 </p>
                 <div class="text-center">
                   <v-btn v-on:click="duplicate_check_decision = duplicate_check(c)" rounded>
                     <v-icon>mdi-border-color</v-icon>登録
                   </v-btn>
                 </div>
-                <br />
+                <br>
                 <!--<v-btn :href="c.syllabus" target="_blank">シラバス</v-btn>-->
               </v-card>
             </v-col>
@@ -132,9 +130,19 @@
 <script>
 export default {
   name: 'TimeTableCell',
+  beforeUpdate() {
+    if (this.lecture != null) {
+      this.$store.commit('set_grade_point', {
+        subject_code: this.lecture.subject_code,
+        class_code: this.lecture.class_code,
+        grade_point: this.select
+      });
+      // console.log(this.select);
+    }
+  },
   data() {
     return {
-      select: ' ',
+      select: 'Future',
       duplicate_check_decision: false,
       dialog: false,
       items: [

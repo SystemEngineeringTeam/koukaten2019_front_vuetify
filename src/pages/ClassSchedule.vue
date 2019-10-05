@@ -78,35 +78,21 @@
         <v-card-title>確認</v-card-title>
 
         <v-card-text>
-          <template v-if="!this.$store.state.is_enough_unit_graduate"
-            >卒業要件を満たしていません</template
-          >
-          <br />
-          <template v-if="!this.$store.state.is_under_unit_kyotu"
-            >共通の単位が足りていません</template
-          >
-          <br />
-          <template v-if="!this.$store.state.is_under_unit_senmon"
-            >専門の単位が足りていません</template
-          >
-          <br />
-          <template v-if="!this.$store.state.is_under_unit_A"
-            >総合Aの単位が足りていません</template
-          >
-          <br />
-          <template v-if="!this.$store.state.is_under_unit_B"
-            >総合Bの単位が足りていません</template
-          >
-          <br />
-          <template v-if="!this.$store.state.is_under_unit_english"
-            >総合A(英)の単位が足りていません</template
-          >
-          <br />
-          <template v-if="!this.$store.state.is_over_unit"
-            >1年間に取得できる単位数をオーバーしています</template
-          >
-          <br />
-          <br />このまま登録しますか？
+          <template v-if="!this.$store.state.is_enough_unit_graduate">卒業要件を満たしていません</template>
+          <br>
+          <template v-if="!this.$store.state.is_under_unit_kyotu">共通の単位が足りていません</template>
+          <br>
+          <template v-if="!this.$store.state.is_under_unit_senmon">専門の単位が足りていません</template>
+          <br>
+          <template v-if="!this.$store.state.is_under_unit_A">総合Aの単位が足りていません</template>
+          <br>
+          <template v-if="!this.$store.state.is_under_unit_B">総合Bの単位が足りていません</template>
+          <br>
+          <template v-if="!this.$store.state.is_under_unit_english">総合A(英)の単位が足りていません</template>
+          <br>
+          <template v-if="!this.$store.state.is_over_unit">1年間に取得できる単位数をオーバーしています</template>
+          <br>
+          <br>このまま登録しますか？
         </v-card-text>
 
         <v-card-actions>
@@ -229,7 +215,7 @@ export default {
           subject_code: lectures.subject_code,
           class_code: lectures.class_code,
           course_grade: lectures.grade,
-          grade_point: lecture.grade_point
+          grade_point: lectures.grade_point
         })
       );
       return data;
