@@ -241,29 +241,19 @@ export default {
   props: [],
   methods: {
     is_under_unit_kyotu() {
-      return(
-        this.classification_total_unit('共通') >= this.graduate_unit.kyotu
-      );
+      return this.classification_total_unit('共通') >= this.graduate_unit.kyotu;
     },
     is_under_unit_senmon() {
-      return(
-        this.classification_total_unit('専門') >= this.graduate_unit.senmon
-      );
+      return this.classification_total_unit('専門') >= this.graduate_unit.senmon;
     },
     is_under_unit_A() {
-      return(
-        this.classification_total_unit('総合A') >= this.graduate_unit.A
-      );
+      return this.classification_total_unit('総合A') >= this.graduate_unit.A;
     },
     is_under_unit_B() {
-      return(
-        this.classification_total_unit('総合B') >= this.graduate_unit.B
-      );
+      return this.classification_total_unit('総合B') >= this.graduate_unit.B;
     },
     is_under_unit_english() {
-      return(
-        this.classification_total_unit('英語') >= this.graduate_unit.english
-      );
+      return this.classification_total_unit('英語') >= this.graduate_unit.english;
     },
     is_enough_unit_graduate() {
       return (

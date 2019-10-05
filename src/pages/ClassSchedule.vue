@@ -136,6 +136,46 @@
     <!--登録ボタン-->
 
     <v-bottom-navigation fixed>
+      <p>共通:</p>
+      <p
+        :class="{
+          'red--text': is_not_enough(classification_total_unit('共通'), graduate_unit.kyotu)
+        }"
+      >
+        {{ diff_unit(classification_total_unit('共通'), graduate_unit.kyotu) }}
+      </p>
+      <p>専門:</p>
+      <p
+        :class="{
+          'red--text': is_not_enough(classification_total_unit('専門'), graduate_unit.kyotu)
+        }"
+      >
+        {{ diff_unit(classification_total_unit('専門'), graduate_unit.senmon) }}
+      </p>
+      <p>総合A:</p>
+      <p
+        :class="{
+          'red--text': is_not_enough(classification_total_unit('総合A'), graduate_unit.kyotu)
+        }"
+      >
+        {{ diff_unit(classification_total_unit('総合A'), graduate_unit.A) }}
+      </p>
+      <p>総合A(英):</p>
+      <p
+        :class="{
+          'red--text': is_not_enough(classification_total_unit('英語'), graduate_unit.kyotu)
+        }"
+      >
+        {{ diff_unit(classification_total_unit('英語'), graduate_unit.english) }}
+      </p>
+      <p>総合B:</p>
+      <p
+        :class="{
+          'red--text': is_not_enough(classification_total_unit('総合B'), graduate_unit.kyotu)
+        }"
+      >
+        {{ diff_unit(classification_total_unit('総合B'), graduate_unit.B) }}
+      </p>
       <v-btn value="save" v-on:click="save_lectuers">
         <span>保存</span>
         <v-icon>mdi-cloud-upload</v-icon>
@@ -175,6 +215,14 @@ import CreditCalculator from '../components/ClassSchedule/CreditCalculator';
 export default {
   data() {
     return {
+      graduate_unit: {
+        all: 124,
+        kyotu: 10,
+        senmon: 94,
+        A: 8,
+        B: 12,
+        english: 6
+      },
       common: true,
       specialty: true,
       general_A: true,
@@ -219,6 +267,31 @@ export default {
     this.$store.commit('unit_calculate');
   },
   methods: {
+    diff_unit(total_unit, enough_unit) {
+      let diff_unit = enough_unit - total_unit;
+      if (diff_unit < 0) {
+        diff_unit = 0;
+      }
+      return diff_unit;
+    },
+    classification_total_unit(classification) {
+      let total_unit = 0;
+      if (classification != '英語') {
+        for (let grade = 1; grade <= 4; grade++) {
+          total_unit += this.$store.state.unit_list[grade]['必修'][classification];
+          total_unit += this.$store.state.unit_list[grade]['選択'][classification];
+        }
+      } else {
+        for (let grade = 1; grade <= 4; grade++) {
+          total_unit += this.$store.state.english_unit_list[grade]['必修'];
+          total_unit += this.$store.state.english_unit_list[grade]['選択'];
+        }
+      }
+      return total_unit;
+    },
+    is_not_enough(unit, enough_unit) {
+      return unit < enough_unit;
+    },
     mold_registered_lectures() {
       let data = [];
       let students_id = this.$store.state.user.id;
