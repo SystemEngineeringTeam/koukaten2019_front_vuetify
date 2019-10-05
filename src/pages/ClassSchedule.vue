@@ -11,21 +11,29 @@
             <v-card-text>計画が立てられたら「登録を保存」ボタンを押して保存してください</v-card-text>
           </v-card>
         </v-col>
+
         <v-col cols="12">
-          <v-row justify="space-around">
-            <v-checkbox color="success" v-model="compulsory" label="必修"></v-checkbox>
-            <v-checkbox color="success" v-model="required_compulsory" label="選択必修"></v-checkbox>
-            <v-checkbox color="success" v-model="choice" label="選択"></v-checkbox>
-          </v-row>
-          <v-row justify="space-around">
-            <v-checkbox color="success" v-model="common" label="共通"></v-checkbox>
-            <v-checkbox color="success" v-model="specialty" label="専門"></v-checkbox>
-            <v-checkbox color="success" v-model="general_A" label="総合A"></v-checkbox>
-            <v-checkbox color="success" v-model="general_A_en" label="総合A(英)"></v-checkbox>
-            <v-checkbox color="success" v-model="general_B" label="総合B"></v-checkbox>
-          </v-row>
-          <v-tabs color="white" background-color="indigo" v-model="tabs" show-arrows grow>
+          <v-card color="#78BBE6" dark>
+            <v-row justify="space-around">
+              <v-checkbox color="success" v-model="compulsory" label="必修"></v-checkbox>
+              <v-checkbox color="success" v-model="required_compulsory" label="選択必修"></v-checkbox>
+              <v-checkbox color="success" v-model="choice" label="選択"></v-checkbox>
+            </v-row>
+          </v-card>
+          <br />
+          <v-card color="#78BBE6">
+            <v-row justify="space-around">
+              <v-checkbox color="success" v-model="common" label="共通"></v-checkbox>
+              <v-checkbox color="success" v-model="specialty" label="専門"></v-checkbox>
+              <v-checkbox color="success" v-model="general_A" label="総合A"></v-checkbox>
+              <v-checkbox color="success" v-model="general_A_en" label="総合A(英)"></v-checkbox>
+              <v-checkbox color="success" v-model="general_B" label="総合B"></v-checkbox>
+            </v-row>
+          </v-card>
+          <br />
+          <v-tabs background-color="indigo" v-model="tabs" show-arrows grow dark>
             <v-tab
+              class="headline"
               v-for="timetable in $store.state.timetables"
               :key="timetable.id"
               v-on:click="$store.commit('set_looking_timetable', timetable)"
@@ -59,15 +67,16 @@
               ></TimeTableShow>
             </v-tab-item>
           </v-tabs-items>
-          <v-tabs v-model="tabs" show-arrows grow>
+          <!-- <v-tabs v-model="tabs" show-arrows grow>
             <v-tab
+              class="headline"
               v-for="timetable in $store.state.timetables"
               :key="timetable.id"
               v-on:click="$store.commit('set_looking_timetable', timetable)"
             >
               <b>{{ timetable.grade }}{{ timetable.semester }}</b>
             </v-tab>
-          </v-tabs>
+          </v-tabs>-->
         </v-col>
       </v-row>
     </v-container>
@@ -136,6 +145,46 @@
     <!--登録ボタン-->
 
     <v-bottom-navigation fixed>
+      <p>共通:</p>
+      <p
+        :class="{
+          'red--text': is_not_enough(classification_total_unit('共通'), graduate_unit.kyotu)
+        }"
+      >
+        {{ diff_unit(classification_total_unit('共通'), graduate_unit.kyotu) }}
+      </p>
+      <p>専門:</p>
+      <p
+        :class="{
+          'red--text': is_not_enough(classification_total_unit('専門'), graduate_unit.kyotu)
+        }"
+      >
+        {{ diff_unit(classification_total_unit('専門'), graduate_unit.senmon) }}
+      </p>
+      <p>総合A:</p>
+      <p
+        :class="{
+          'red--text': is_not_enough(classification_total_unit('総合A'), graduate_unit.kyotu)
+        }"
+      >
+        {{ diff_unit(classification_total_unit('総合A'), graduate_unit.A) }}
+      </p>
+      <p>総合A(英):</p>
+      <p
+        :class="{
+          'red--text': is_not_enough(classification_total_unit('英語'), graduate_unit.kyotu)
+        }"
+      >
+        {{ diff_unit(classification_total_unit('英語'), graduate_unit.english) }}
+      </p>
+      <p>総合B:</p>
+      <p
+        :class="{
+          'red--text': is_not_enough(classification_total_unit('総合B'), graduate_unit.kyotu)
+        }"
+      >
+        {{ diff_unit(classification_total_unit('総合B'), graduate_unit.B) }}
+      </p>
       <v-btn value="save" v-on:click="save_lectuers">
         <span>保存</span>
         <v-icon>mdi-cloud-upload</v-icon>
@@ -175,6 +224,14 @@ import CreditCalculator from '../components/ClassSchedule/CreditCalculator';
 export default {
   data() {
     return {
+      graduate_unit: {
+        all: 124,
+        kyotu: 10,
+        senmon: 94,
+        A: 8,
+        B: 12,
+        english: 6
+      },
       common: true,
       specialty: true,
       general_A: true,
@@ -219,6 +276,31 @@ export default {
     this.$store.commit('unit_calculate');
   },
   methods: {
+    diff_unit(total_unit, enough_unit) {
+      let diff_unit = enough_unit - total_unit;
+      if (diff_unit < 0) {
+        diff_unit = 0;
+      }
+      return diff_unit;
+    },
+    classification_total_unit(classification) {
+      let total_unit = 0;
+      if (classification != '英語') {
+        for (let grade = 1; grade <= 4; grade++) {
+          total_unit += this.$store.state.unit_list[grade]['必修'][classification];
+          total_unit += this.$store.state.unit_list[grade]['選択'][classification];
+        }
+      } else {
+        for (let grade = 1; grade <= 4; grade++) {
+          total_unit += this.$store.state.english_unit_list[grade]['必修'];
+          total_unit += this.$store.state.english_unit_list[grade]['選択'];
+        }
+      }
+      return total_unit;
+    },
+    is_not_enough(unit, enough_unit) {
+      return unit < enough_unit;
+    },
     mold_registered_lectures() {
       let data = [];
       let students_id = this.$store.state.user.id;

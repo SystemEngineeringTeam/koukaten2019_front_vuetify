@@ -2,16 +2,18 @@
   <!-- App.vue -->
 
   <v-app id="fontSetting">
-    <v-navigation-drawer app v-model="drawer" temporary>
+    <v-navigation-drawer app v-model="drawer" temporary color="#78BBE6">
       <v-list-item>
         <v-list-item-content>
-          <v-list-item-title>未来予想図</v-list-item-title>
+          <v-list-item-title>
+            <router-link style="font-size:30px " class="white--text none_text" to="/">未来予想図</router-link>
+          </v-list-item-title>
         </v-list-item-content>
       </v-list-item>
 
       <v-divider></v-divider>
 
-      <v-list dense>
+      <v-list dense class="indigo">
         <template v-if="!$store.state.user.logined">
           <v-list-item v-for="item in login_menu" :key="item.title" :value="item.link">
             <v-list-item-content>
@@ -24,14 +26,17 @@
         <template v-else>
           <v-list-item v-for="item in logout_menu" :key="item.title" :value="item.link">
             <v-list-item-content>
-              <v-list-item-title>
+              <v-list-item-title style="font-size:15px;">
                 <router-link
                   v-if="item.title === 'ログアウト'"
                   @click.native="$store.commit('logout')"
                   :to="item.link"
+                  class="white--text font-weight-black none_text"
                   >{{ item.title }}</router-link
                 >
-                <router-link v-else :to="item.link">{{ item.title }}</router-link>
+                <router-link v-else :to="item.link" class="white--text font-weight-black none_text">{{
+                  item.title
+                }}</router-link>
               </v-list-item-title>
             </v-list-item-content>
           </v-list-item>
@@ -117,6 +122,9 @@ export default {
 
 .a {
   font-size: 38px;
+  text-decoration: none;
+}
+.none_text {
   text-decoration: none;
 }
 </style>
