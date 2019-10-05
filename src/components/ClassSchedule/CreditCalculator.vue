@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-btn v-on:click="detail = !detail">表示切り替え</v-btn>
-    <v-simple-table v-if="detail" dense>
+    <v-simple-table v-if="detail">
       <thead>
         <tr>
           <!--<th>単位表</th>-->
@@ -116,7 +116,7 @@
       </tbody>
     </v-simple-table>
 
-    <v-simple-table v-else dense>
+    <v-simple-table v-else>
       <thead>
         <tr>
           <th>単位表</th>
@@ -358,6 +358,10 @@ table {
 .font_size {
   text-align: center;
   font-size: 20px;
+}
+
+.v-data-table * {
+  font-size: 1.2em;
 }
 
 td {
