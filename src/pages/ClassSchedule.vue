@@ -13,15 +13,13 @@
         </v-col>
 
         <v-col cols="12">
-          <v-card color="#78BBE6" dark>
+          <v-card class="white--text">
             <v-row justify="space-around">
               <v-checkbox color="success" v-model="compulsory" label="必修"></v-checkbox>
               <v-checkbox color="success" v-model="required_compulsory" label="選択必修"></v-checkbox>
               <v-checkbox color="success" v-model="choice" label="選択"></v-checkbox>
             </v-row>
-          </v-card>
-          <br />
-          <v-card color="#78BBE6">
+
             <v-row justify="space-around">
               <v-checkbox color="success" v-model="common" label="共通"></v-checkbox>
               <v-checkbox color="success" v-model="specialty" label="専門"></v-checkbox>
@@ -41,6 +39,7 @@
               <b>{{ timetable.grade }}{{ timetable.semester }}</b>
             </v-tab>
           </v-tabs>
+
           <v-tabs-items v-model="tabs">
             <v-tab-item v-for="timetable in timetables" :key="timetable.id">
               <TimeTableShow
@@ -144,7 +143,7 @@
 
     <!--登録ボタン-->
 
-    <v-bottom-navigation fixed>
+    <v-bottom-navigation fixed dark>
       <v-btn value="save" v-on:click="save_lectuers">
         <span>保存</span>
         <v-icon>mdi-cloud-upload</v-icon>

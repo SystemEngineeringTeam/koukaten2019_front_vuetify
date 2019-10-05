@@ -54,7 +54,7 @@
 
     <!--ダイアログ-->
     <v-dialog v-model="dialog">
-      <v-card color="#78BBE6">
+      <v-card>
         <v-card-title class="headline">授業登録</v-card-title>
         <v-container>
           <v-row>
