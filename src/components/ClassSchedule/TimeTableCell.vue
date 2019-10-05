@@ -33,8 +33,8 @@
         }"
       >
         <v-col>
-          <v-card-text>
-            <b>{{ lecture['name'] }}</b>
+          <v-card-text class="headline">
+            <p><b>{{ lecture['name'] }}</b></p>
             {{ lecture['unit'] }}単位
           </v-card-text>
           <!--<v-card-actions>
@@ -178,4 +178,6 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+
+</style>
