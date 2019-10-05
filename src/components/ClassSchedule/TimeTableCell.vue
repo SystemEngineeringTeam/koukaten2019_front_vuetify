@@ -33,8 +33,9 @@
         }"
       >
         <v-col>
-          <v-card-text class="white--text">
-            <b>{{ lecture['name'] }}</b>
+          <v-card-text class="headline white--text">
+            <p><b>{{ lecture['name'] }}</b></p>
+
             {{ lecture['unit'] }}単位
           </v-card-text>
           <!--<v-card-actions>
@@ -185,6 +186,7 @@ export default {
 </script>
 
 <style scoped>
+
 .text {
   color: #fff;
   text-shadow: 1px 1px 0 #000, -1px 1px 0 #000, 1px -1px 0 #000, -1px -1px 0 #000;
