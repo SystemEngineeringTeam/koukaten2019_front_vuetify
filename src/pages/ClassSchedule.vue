@@ -145,46 +145,57 @@
     <!--登録ボタン-->
 
     <v-bottom-navigation fixed>
-      <p>共通:</p>
-      <p
-        :class="{
-          'red--text': is_not_enough(classification_total_unit('共通'), graduate_unit.kyotu)
-        }"
-      >
-        {{ diff_unit(classification_total_unit('共通'), graduate_unit.kyotu) }}
-      </p>
-      <p>専門:</p>
-      <p
-        :class="{
-          'red--text': is_not_enough(classification_total_unit('専門'), graduate_unit.kyotu)
-        }"
-      >
-        {{ diff_unit(classification_total_unit('専門'), graduate_unit.senmon) }}
-      </p>
-      <p>総合A:</p>
-      <p
-        :class="{
-          'red--text': is_not_enough(classification_total_unit('総合A'), graduate_unit.kyotu)
-        }"
-      >
-        {{ diff_unit(classification_total_unit('総合A'), graduate_unit.A) }}
-      </p>
-      <p>総合A(英):</p>
-      <p
-        :class="{
-          'red--text': is_not_enough(classification_total_unit('英語'), graduate_unit.kyotu)
-        }"
-      >
-        {{ diff_unit(classification_total_unit('英語'), graduate_unit.english) }}
-      </p>
-      <p>総合B:</p>
-      <p
-        :class="{
-          'red--text': is_not_enough(classification_total_unit('総合B'), graduate_unit.kyotu)
-        }"
-      >
-        {{ diff_unit(classification_total_unit('総合B'), graduate_unit.B) }}
-      </p>
+      <v-card>
+        <v-card-text>
+          <span>
+            共通:
+          </span>
+          <span
+            :class="{
+              'yellow--text text--darken-2': is_not_enough(classification_total_unit('共通'), graduate_unit.kyotu)
+            }"
+            class="font-weight-bold"
+          >
+            {{ diff_unit(classification_total_unit('共通'), graduate_unit.kyotu) }}
+          </span>
+          <span>専門:</span>
+          <span
+            :class="{
+              'yellow--text text--darken-2': is_not_enough(classification_total_unit('専門'), graduate_unit.kyotu)
+            }"
+            class="font-weight-bold"
+          >
+            {{ diff_unit(classification_total_unit('専門'), graduate_unit.senmon) }}
+          </span>
+          <span>総合A:</span>
+          <span
+            :class="{
+              'yellow--text text--darken-2': is_not_enough(classification_total_unit('総合A'), graduate_unit.kyotu)
+            }"
+            class="font-weight-bold"
+          >
+            {{ diff_unit(classification_total_unit('総合A'), graduate_unit.A) }}
+          </span>
+          <span>総合A(英):</span>
+          <span
+            :class="{
+              'yellow--text text--darken-2': is_not_enough(classification_total_unit('英語'), graduate_unit.kyotu)
+            }"
+            class="font-weight-bold"
+          >
+            {{ diff_unit(classification_total_unit('英語'), graduate_unit.english) }}
+          </span>
+          <span>総合B:</span>
+          <span
+            :class="{
+              'yellow--text text--darken-2': is_not_enough(classification_total_unit('総合B'), graduate_unit.kyotu)
+            }"
+            class="font-weight-bold"
+          >
+            {{ diff_unit(classification_total_unit('総合B'), graduate_unit.B) }}
+          </span>
+        </v-card-text>
+      </v-card>
       <v-btn value="save" v-on:click="save_lectuers">
         <span>保存</span>
         <v-icon>mdi-cloud-upload</v-icon>
@@ -446,4 +457,11 @@ export default {
   }
 };
 </script>
-<style scoped></style>
+<style scoped>
+.v-bottom-navigation * {
+  font-size: 1.3em;
+}
+.v-bottom-navigation .v-btn * {
+  font-size: 20px;
+}
+</style>
