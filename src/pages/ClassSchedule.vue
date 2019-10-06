@@ -13,7 +13,7 @@
         </v-col>
 
         <v-col cols="12">
-          <v-card color="#78BBE6" dark>
+          <v-card>
             <v-row justify="space-around">
               <v-checkbox color="success" v-model="compulsory" label="必修"></v-checkbox>
               <v-checkbox color="success" v-model="required_compulsory" label="選択必修"></v-checkbox>
@@ -21,7 +21,7 @@
             </v-row>
           </v-card>
           <br />
-          <v-card color="#78BBE6">
+          <v-card>
             <v-row justify="space-around">
               <v-checkbox color="success" v-model="common" label="共通"></v-checkbox>
               <v-checkbox color="success" v-model="specialty" label="専門"></v-checkbox>
@@ -147,53 +147,46 @@
     <v-bottom-navigation fixed>
       <v-card>
         <v-card-text>
-          <span>
-            共通:
-          </span>
+          <span>共通:</span>
           <span
             :class="{
               'yellow--text text--darken-2': is_not_enough(classification_total_unit('共通'), graduate_unit.kyotu)
             }"
             class="font-weight-bold"
+            >{{ diff_unit(classification_total_unit('共通'), graduate_unit.kyotu) }}</span
           >
-            {{ diff_unit(classification_total_unit('共通'), graduate_unit.kyotu) }}
-          </span>
           <span>専門:</span>
           <span
             :class="{
               'yellow--text text--darken-2': is_not_enough(classification_total_unit('専門'), graduate_unit.senmon)
             }"
             class="font-weight-bold"
+            >{{ diff_unit(classification_total_unit('専門'), graduate_unit.senmon) }}</span
           >
-            {{ diff_unit(classification_total_unit('専門'), graduate_unit.senmon) }}
-          </span>
           <span>総合A:</span>
           <span
             :class="{
               'yellow--text text--darken-2': is_not_enough(classification_total_unit('総合A'), graduate_unit.A)
             }"
             class="font-weight-bold"
+            >{{ diff_unit(classification_total_unit('総合A'), graduate_unit.A) }}</span
           >
-            {{ diff_unit(classification_total_unit('総合A'), graduate_unit.A) }}
-          </span>
           <span>総合A(英):</span>
           <span
             :class="{
               'yellow--text text--darken-2': is_not_enough(classification_total_unit('英語'), graduate_unit.english)
             }"
             class="font-weight-bold"
+            >{{ diff_unit(classification_total_unit('英語'), graduate_unit.english) }}</span
           >
-            {{ diff_unit(classification_total_unit('英語'), graduate_unit.english) }}
-          </span>
           <span>総合B:</span>
           <span
             :class="{
               'yellow--text text--darken-2': is_not_enough(classification_total_unit('総合B'), graduate_unit.B)
             }"
             class="font-weight-bold"
+            >{{ diff_unit(classification_total_unit('総合B'), graduate_unit.B) }}</span
           >
-            {{ diff_unit(classification_total_unit('総合B'), graduate_unit.B) }}
-          </span>
         </v-card-text>
       </v-card>
       <v-btn value="save" v-on:click="save_lectuers">
@@ -283,9 +276,9 @@ export default {
     this.$store.dispatch('get_registered_lectures', this.$store.state.user.id);
     this.$store.dispatch('get_can_register_lectures', this.$store.state.user.id);
   },
-  beforeUpdate() {
-    this.$store.commit('unit_calculate');
-  },
+  // beforeUpdate() {
+  //   this.$store.commit('unit_calculate');
+  // },
   methods: {
     diff_unit(total_unit, enough_unit) {
       let diff_unit = enough_unit - total_unit;
