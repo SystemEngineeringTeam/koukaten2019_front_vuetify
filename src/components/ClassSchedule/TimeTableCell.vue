@@ -37,8 +37,12 @@
             <p>
               <b>{{ lecture['name'] }}</b>
             </p>
-
-            {{ lecture['unit'] }}単位
+            <template v-if="lecture.unit == 0">
+              {{ find_unit(lecture) }}単位
+            </template>
+            <template v-else>
+              {{ lecture['unit'] }}単位
+            </template>
           </v-card-text>
           <!--<v-card-actions>
               <v-btn :href="lecture['syllabus']" target="_blank">シラバス</v-btn>
@@ -135,6 +139,12 @@ export default {
     };
   },
   methods: {
+    find_unit(lectuer) {
+      let continuous_lectuer = this.$store.state.registered_lectures.find(function(l) {
+        return l.subject_code == lectuer.subject_code;
+      });
+      return continuous_lectuer.unit;
+    },
     register_lecture(want_ragister_lectuer) {
       if (this.lecture != null) {
         this.$store.commit('delete_registered_lecture', this.lecture);
