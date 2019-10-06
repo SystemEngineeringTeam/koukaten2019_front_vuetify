@@ -156,7 +156,7 @@
       <p>専門:</p>
       <p
         :class="{
-          'red--text': is_not_enough(classification_total_unit('専門'), graduate_unit.kyotu)
+          'red--text': is_not_enough(classification_total_unit('専門'), graduate_unit.senmon)
         }"
       >
         {{ diff_unit(classification_total_unit('専門'), graduate_unit.senmon) }}
@@ -164,7 +164,7 @@
       <p>総合A:</p>
       <p
         :class="{
-          'red--text': is_not_enough(classification_total_unit('総合A'), graduate_unit.kyotu)
+          'red--text': is_not_enough(classification_total_unit('総合A'), graduate_unit.A)
         }"
       >
         {{ diff_unit(classification_total_unit('総合A'), graduate_unit.A) }}
@@ -172,7 +172,7 @@
       <p>総合A(英):</p>
       <p
         :class="{
-          'red--text': is_not_enough(classification_total_unit('英語'), graduate_unit.kyotu)
+          'red--text': is_not_enough(classification_total_unit('英語'), graduate_unit.english)
         }"
       >
         {{ diff_unit(classification_total_unit('英語'), graduate_unit.english) }}
@@ -180,7 +180,7 @@
       <p>総合B:</p>
       <p
         :class="{
-          'red--text': is_not_enough(classification_total_unit('総合B'), graduate_unit.kyotu)
+          'red--text': is_not_enough(classification_total_unit('総合B'), graduate_unit.B)
         }"
       >
         {{ diff_unit(classification_total_unit('総合B'), graduate_unit.B) }}
