@@ -82,40 +82,38 @@
     </v-container>
 
     <!--ダイアログ-->
-    <v-dialog v-model="show_dialog" max-width="290">
+    <v-dialog v-model="show_dialog" max-width="320">
       <v-card>
         <v-card-title>確認</v-card-title>
 
         <v-card-text>
           <template v-if="!this.$store.state.is_enough_unit_graduate"
-            >卒業要件を満たしていません</template
+            >卒業要件を満たしていません<br /></template
           >
-          <br />
-          <template v-if="!this.$store.state.is_under_unit_kyotu"
-            >共通の単位が足りていません</template
+          <template v-if="is_not_enough(classification_total_unit('共通'), graduate_unit.kyotu)||is_not_enough(classification_total_unit('専門'), graduate_unit.senmon)||is_not_enough(classification_total_unit('総合A'), graduate_unit.A)||is_not_enough(classification_total_unit('総合B'), graduate_unit.B)||is_not_enough(classification_total_unit('英語'), graduate_unit.english)"
+            ><br />以下の単位が足りていません<br /></template
           >
-          <br />
-          <template v-if="!this.$store.state.is_under_unit_senmon"
-            >専門の単位が足りていません</template
+          <template v-if="is_not_enough(classification_total_unit('共通'), graduate_unit.kyotu)"
+            >共通 </template
           >
-          <br />
-          <template v-if="!this.$store.state.is_under_unit_A"
-            >総合Aの単位が足りていません</template
+          <template v-if="is_not_enough(classification_total_unit('専門'), graduate_unit.senmon)"
+            >専門 </template
           >
-          <br />
-          <template v-if="!this.$store.state.is_under_unit_B"
-            >総合Bの単位が足りていません</template
+          <template v-if="is_not_enough(classification_total_unit('総合A'), graduate_unit.A)"
+            >総合A </template
           >
-          <br />
-          <template v-if="!this.$store.state.is_under_unit_english"
-            >総合A(英)の単位が足りていません</template
+          <template v-if="is_not_enough(classification_total_unit('英語'), graduate_unit.english)"
+            >総合A(英) </template
+          >
+          <template v-if="is_not_enough(classification_total_unit('総合B'), graduate_unit.B)"
+            >総合B</template
           >
           <br />
           <template v-if="!this.$store.state.is_over_unit"
             >1年間に取得できる単位数をオーバーしています</template
           >
           <br />
-          <br />このまま登録しますか？
+          このまま登録しますか？
         </v-card-text>
 
         <v-card-actions>
