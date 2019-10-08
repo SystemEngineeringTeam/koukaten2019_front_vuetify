@@ -133,11 +133,11 @@
       </v-card>
     </v-dialog>
 
-    <v-dialog v-model="warning_delete" max-width="290">
+    <v-dialog v-model="warning_delete" max-width="460">
       <v-card>
-        <v-card-title>確認</v-card-title>
+        <v-card-title class="display-1 font-weight-bold">確認</v-card-title>
 
-        <v-card-text>全ての登録された授業を取り消します</v-card-text>
+        <v-card-text class="headline font-weight-bold">全ての登録された授業を取り消します</v-card-text>
 
         <v-card-actions>
           <div class="flex-grow-1"></div>
