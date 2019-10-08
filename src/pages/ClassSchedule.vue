@@ -2,7 +2,7 @@
   <div class="mx-4">
     <!--{{ $store.state.can_register_lectures }}-->
     <!-- {{ $store.state.registered_lectures }} -->
-    {{ $store.state.unit_list }}
+    <!-- {{ $store.state.unit_list }} -->
     <!--{{ $store.state.user }}-->
     <v-container>
       <v-row>
