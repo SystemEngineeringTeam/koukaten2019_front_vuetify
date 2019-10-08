@@ -82,29 +82,36 @@
     </v-container>
 
     <!--ダイアログ-->
-    <v-dialog v-model="show_dialog" max-width="320">
+    <v-dialog v-model="show_dialog" max-width="400">
       <v-card>
-        <v-card-title>確認</v-card-title>
+        <v-card-title class="display-1 font-weight-bold">確認</v-card-title>
 
-        <v-card-text>
+        <v-card-text class="headline font-weight-bold">
           <template v-if="!this.$store.state.is_enough_unit_graduate"
-            >卒業要件を満たしていません<br /></template
-          >
-          <template v-if="is_not_enough(classification_total_unit('共通'), graduate_unit.kyotu)||is_not_enough(classification_total_unit('専門'), graduate_unit.senmon)||is_not_enough(classification_total_unit('総合A'), graduate_unit.A)||is_not_enough(classification_total_unit('総合B'), graduate_unit.B)||is_not_enough(classification_total_unit('英語'), graduate_unit.english)"
-            ><br />以下の単位が足りていません<br /></template
-          >
+            >卒業要件を満たしていません<br
+          /></template>
+          <template
+            v-if="
+              is_not_enough(classification_total_unit('共通'), graduate_unit.kyotu) ||
+                is_not_enough(classification_total_unit('専門'), graduate_unit.senmon) ||
+                is_not_enough(classification_total_unit('総合A'), graduate_unit.A) ||
+                is_not_enough(classification_total_unit('総合B'), graduate_unit.B) ||
+                is_not_enough(classification_total_unit('英語'), graduate_unit.english)
+            "
+            ><br />以下の単位が足りていません<br
+          /></template>
           <template v-if="is_not_enough(classification_total_unit('共通'), graduate_unit.kyotu)"
-            >共通 </template
-          >
+            >共通<br />
+          </template>
           <template v-if="is_not_enough(classification_total_unit('専門'), graduate_unit.senmon)"
-            >専門 </template
-          >
+            >専門<br />
+          </template>
           <template v-if="is_not_enough(classification_total_unit('総合A'), graduate_unit.A)"
-            >総合A </template
-          >
+            >総合A<br />
+          </template>
           <template v-if="is_not_enough(classification_total_unit('英語'), graduate_unit.english)"
-            >総合A(英) </template
-          >
+            >総合A(英)<br />
+          </template>
           <template v-if="is_not_enough(classification_total_unit('総合B'), graduate_unit.B)"
             >総合B</template
           >
