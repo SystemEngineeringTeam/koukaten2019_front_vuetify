@@ -37,12 +37,12 @@
             <p>
               <b>{{ lecture['name'] }}</b>
             </p>
-            <template v-if="lecture.unit == 0">
-              {{ find_unit(lecture) }}単位
-            </template>
-            <template v-else>
-              {{ lecture['unit'] }}単位
-            </template>
+            <template v-if="lecture.unit == 0"
+              >{{ find_unit(lecture) }}単位</template
+            >
+            <template v-else
+              >{{ lecture['unit'] }}単位</template
+            >
           </v-card-text>
           <!--<v-card-actions>
               <v-btn :href="lecture['syllabus']" target="_blank">シラバス</v-btn>
@@ -61,8 +61,8 @@
 
     <!--ダイアログ-->
     <v-dialog v-model="dialog">
-      <v-card color="#78BBE6">
-        <v-card-title class="headline">授業登録</v-card-title>
+      <v-card>
+        <v-card-title class="display-1 font-weight-black">授業登録</v-card-title>
         <v-container>
           <v-row>
             <v-col v-for="(c, i) in can_register" cols="12" md="3" :key="i">

@@ -1,6 +1,6 @@
 <template>
   <div class="text-center">
-    <v-card height="700">
+    <v-card height="800">
       <v-card-title class="headline"></v-card-title>
       <v-container>
         <v-row>
@@ -56,11 +56,7 @@
                 <v-stepper-content step="3">
                   <v-col cols="6" class="d-flex">
                     <v-card color="#78BBE6" height="260px">
-                      <v-img
-                        src="../../public/checkbox_setumei_smart.png"
-                        max-width="530"
-                        max-height="300"
-                      ></v-img>
+                      <v-img src="../../public/checkbox_setumei_smart.png" max-width="530" max-height="300"></v-img>
                       <v-col>
                         <v-card>下の画像のようになります</v-card>
                       </v-col>
@@ -68,14 +64,10 @@
                         src="../../public/checkbox_setumei_sin_lec.png"
                         max-width="530"
                         max-height="300"
-                      ></v-img>
-                    </v-card>aaaa
+                      ></v-img> </v-card
+                    >aaaa
                     <v-card color="#78BBE6" height="260px">
-                      <v-img
-                        src="../../public/checkbox_setumei2.png"
-                        max-width="530"
-                        max-height="300"
-                      ></v-img>
+                      <v-img src="../../public/checkbox_setumei2.png" max-width="530" max-height="300"></v-img>
                       <v-col>
                         <v-card>下の画像のようになります</v-card>
                       </v-col>
@@ -99,24 +91,16 @@
             </v-stepper>
             <router-link to="/Initial_Registration" class="none_text">
               <div class="my-12">
-                <v-btn
-                  rounded
-                  block
-                  x-large
-                  color="#78BBE6"
-                  v-if="this.$store.state.user.logined == false"
-                >ユーザー登録</v-btn>
+                <v-btn rounded block x-large color="#78BBE6" v-if="this.$store.state.user.logined == false"
+                  >ユーザー登録</v-btn
+                >
               </div>
             </router-link>
             <router-link to="/Login" class="none_text">
               <div class="my-12">
-                <v-btn
-                  rounded
-                  block
-                  x-large
-                  color="#F99F48"
-                  v-if="this.$store.state.user.logined == false"
-                >ログイン</v-btn>
+                <v-btn rounded block x-large color="#F99F48" v-if="this.$store.state.user.logined == false"
+                  >ログイン</v-btn
+                >
               </div>
             </router-link>
           </v-col>

@@ -5,7 +5,8 @@
     <v-navigation-drawer app v-model="drawer" temporary>
       <v-list-item>
         <v-list-item-content>
-          <v-list-item-title class="headline">未来予想図</v-list-item-title>
+          <v-list-item-title class="headline">{{ $store.state.user.id }}</v-list-item-title>
+          <!-- <v-list-item-title class="headline">未来予想図</v-list-item-title> -->
         </v-list-item-content>
       </v-list-item>
 
@@ -32,9 +33,9 @@
                   class="headline text_none white--text"
                   >{{ item.title }}</router-link
                 >
-                <router-link v-else :to="item.link" class="headline text_none white--text">{{
-                  item.title
-                }}</router-link>
+                <router-link v-else :to="item.link" class="headline text_none white--text">
+                  {{ item.title }}
+                </router-link>
               </v-list-item-title>
             </v-list-item-content>
           </v-list-item>
@@ -47,7 +48,7 @@
 
       <v-toolbar-title>
         <router-link class="a" to="/">
-          <font class="white--text headline font-weight-black">未来予想図</font>
+          <font class="white--text display-1 font-weight-black">未来予想図</font>
         </router-link>
       </v-toolbar-title>
 
