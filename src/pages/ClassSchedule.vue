@@ -2,7 +2,7 @@
   <div class="mx-4">
     <!--{{ $store.state.can_register_lectures }}-->
     <!-- {{ $store.state.registered_lectures }} -->
-    <!--{{ $store.state.unit_list }}-->
+    {{ $store.state.unit_list }}
     <!--{{ $store.state.user }}-->
     <v-container>
       <v-row>
@@ -274,9 +274,9 @@ export default {
     this.$store.dispatch('get_registered_lectures', this.$store.state.user.id);
     this.$store.dispatch('get_can_register_lectures', this.$store.state.user.id);
   },
-  // beforeUpdate() {
-  //   this.$store.commit('unit_calculate');
-  // },
+  beforeUpdate() {
+    this.$store.commit('unit_calculate');
+  },
   methods: {
     diff_unit(total_unit, enough_unit) {
       let diff_unit = enough_unit - total_unit;
