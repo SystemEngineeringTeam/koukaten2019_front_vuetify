@@ -310,7 +310,7 @@ export default new Vuex.Store({
     //時間割関係
     set_registered_lecture(state, lectures) {
       Vue.set(state, 'registered_lectures', lectures);
-      lectures.forEach(function(lecture) {
+      lectures.forEach(function (lecture) {
         if (lecture.continuous > 1) {
           for (let i = 0; i < lecture.continuous; i++) {
             let sublecture;
@@ -456,7 +456,7 @@ export default new Vuex.Store({
           選択: 0
         }
       };
-      state.registered_lectures.forEach(function(lecture) {
+      state.registered_lectures.forEach(function (lecture) {
         unit_list[lecture.grade][lecture.compulsory][lecture.classification] += lecture.unit;
         if (lecture.isenglish) {
           english_unit_list[lecture.grade][lecture.compulsory] += lecture.unit;
@@ -504,6 +504,7 @@ export default new Vuex.Store({
           }
         })
         .then(res => {
+          // console.log(res.data)
           context.commit('set_registered_lecture', res.data);
         });
     },

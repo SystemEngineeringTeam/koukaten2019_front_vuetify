@@ -31,12 +31,11 @@
                   @click.native="$store.commit('logout')"
                   :to="item.link"
                   class="headline text_none white--text"
-                >{{ item.title }}</router-link>
-                <router-link
-                  v-else
-                  :to="item.link"
-                  class="headline text_none white--text"
-                >{{ item.title }}</router-link>
+                  >{{ item.title }}</router-link
+                >
+                <router-link v-else :to="item.link" class="headline text_none white--text">{{
+                  item.title
+                }}</router-link>
               </v-list-item-title>
             </v-list-item-content>
           </v-list-item>
@@ -59,38 +58,58 @@
             <span class="headline">共通:</span>
             <span
               :class="{
-              'yellow--text text--darken-2 headline': is_not_enough(classification_total_unit('共通'), graduate_unit.kyotu)
-            }"
+                'yellow--text text--darken-2 headline': is_not_enough(
+                  classification_total_unit('共通'),
+                  graduate_unit.kyotu
+                )
+              }"
               class="headline font-weight-bold"
-            >{{ diff_unit(classification_total_unit('共通'), graduate_unit.kyotu) }}</span>
+              >{{ diff_unit(classification_total_unit('共通'), graduate_unit.kyotu) }}</span
+            >
             <span class="headline">, 専門:</span>
             <span
               :class="{
-              'yellow--text text--darken-2 headline': is_not_enough(classification_total_unit('専門'), graduate_unit.senmon)
-            }"
+                'yellow--text text--darken-2 headline': is_not_enough(
+                  classification_total_unit('専門'),
+                  graduate_unit.senmon
+                )
+              }"
               class="font-weight-bold headline"
-            >{{ diff_unit(classification_total_unit('専門'), graduate_unit.senmon) }}</span>
+              >{{ diff_unit(classification_total_unit('専門'), graduate_unit.senmon) }}</span
+            >
             <span class="headline">, 総合A:</span>
             <span
               :class="{
-              'yellow--text text--darken-2 headline': is_not_enough(classification_total_unit('総合A'), graduate_unit.A)
-            }"
+                'yellow--text text--darken-2 headline': is_not_enough(
+                  classification_total_unit('総合A'),
+                  graduate_unit.A
+                )
+              }"
               class="font-weight-bold headline"
-            >{{ diff_unit(classification_total_unit('総合A'), graduate_unit.A) }}</span>
+              >{{ diff_unit(classification_total_unit('総合A'), graduate_unit.A) }}</span
+            >
             <span class="headline">, 総合A(英):</span>
             <span
               :class="{
-              'yellow--text text--darken-2 headline': is_not_enough(classification_total_unit('英語'), graduate_unit.english)
-            }"
+                'yellow--text text--darken-2 headline': is_not_enough(
+                  classification_total_unit('英語'),
+                  graduate_unit.english
+                )
+              }"
               class="font-weight-bold headline"
-            >{{ diff_unit(classification_total_unit('英語'), graduate_unit.english) }}</span>
+              >{{ diff_unit(classification_total_unit('英語'), graduate_unit.english) }}</span
+            >
             <span class="headline">, 総合B:</span>
             <span
               :class="{
-              'yellow--text text--darken-2 headline': is_not_enough(classification_total_unit('総合B'), graduate_unit.B)
-            }"
+                'yellow--text text--darken-2 headline': is_not_enough(
+                  classification_total_unit('総合B'),
+                  graduate_unit.B
+                )
+              }"
               class="font-weight-bold headline"
-            >{{ diff_unit(classification_total_unit('総合B'), graduate_unit.B) }}</span>
+              >{{ diff_unit(classification_total_unit('総合B'), graduate_unit.B) }}</span
+            >
           </v-card-text>
         </v-card>
       </v-col>
@@ -102,40 +121,44 @@
           <v-card-text class="headline font-weight-bold">
             <template v-if="!this.$store.state.is_enough_unit_graduate">
               卒業要件を満たしていません
-              <br>
+              <br />
             </template>
             <template
               v-if="
-              is_not_enough(classification_total_unit('共通'), graduate_unit.kyotu) ||
-                is_not_enough(classification_total_unit('専門'), graduate_unit.senmon) ||
-                is_not_enough(classification_total_unit('総合A'), graduate_unit.A) ||
-                is_not_enough(classification_total_unit('総合B'), graduate_unit.B) ||
-                is_not_enough(classification_total_unit('英語'), graduate_unit.english)
-            "
+                is_not_enough(classification_total_unit('共通'), graduate_unit.kyotu) ||
+                  is_not_enough(classification_total_unit('専門'), graduate_unit.senmon) ||
+                  is_not_enough(classification_total_unit('総合A'), graduate_unit.A) ||
+                  is_not_enough(classification_total_unit('総合B'), graduate_unit.B) ||
+                  is_not_enough(classification_total_unit('英語'), graduate_unit.english)
+              "
             >
-              <br>以下の単位が足りていません
-              <br>
+              <br />以下の単位が足りていません
+              <br />
             </template>
             <template v-if="is_not_enough(classification_total_unit('共通'), graduate_unit.kyotu)">
               共通
-              <br>
+              <br />
             </template>
             <template v-if="is_not_enough(classification_total_unit('専門'), graduate_unit.senmon)">
               専門
-              <br>
+              <br />
             </template>
             <template v-if="is_not_enough(classification_total_unit('総合A'), graduate_unit.A)">
               総合A
-              <br>
+              <br />
             </template>
             <template v-if="is_not_enough(classification_total_unit('英語'), graduate_unit.english)">
               総合A(英)
-              <br>
+              <br />
             </template>
-            <template v-if="is_not_enough(classification_total_unit('総合B'), graduate_unit.B)">総合B</template>
-            <br>
-            <template v-if="!this.$store.state.is_over_unit">1年間に取得できる単位数をオーバーしています</template>
-            <br>このまま登録しますか？
+            <template v-if="is_not_enough(classification_total_unit('総合B'), graduate_unit.B)"
+              >総合B</template
+            >
+            <br />
+            <template v-if="!this.$store.state.is_over_unit"
+              >1年間に取得できる単位数をオーバーしています</template
+            >
+            <br />このまま登録しますか？
           </v-card-text>
 
           <v-card-actions>
