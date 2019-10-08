@@ -198,6 +198,7 @@
 export default {
   data() {
     return {
+      max_unit_one_grade: 48,
       graduate_unit: {
         all: 124,
         kyotu: 10,
