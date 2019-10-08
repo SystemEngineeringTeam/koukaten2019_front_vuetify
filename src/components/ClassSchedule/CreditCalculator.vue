@@ -1,6 +1,13 @@
 <template>
   <div>
-    <v-btn v-on:click="detail = !detail">表示切り替え</v-btn>
+    <v-btn v-on:click="detail = !detail">
+      <template v-if="detail">
+        <v-icon>mdi-toggle-switch</v-icon>切り替え
+      </template>
+      <template v-else>
+        <v-icon>mdi-toggle-switch-off</v-icon>切り替え
+      </template>
+    </v-btn>単位表
     <v-simple-table v-if="detail">
       <thead>
         <tr>
@@ -16,16 +23,16 @@
           <!--<th>総合B必修</th>-->
           <!--<th>総合B選択</th>-->
           <!--<th>総単位</th>-->
-          <th>単位表</th>
-          <th>共通必修</th>
-          <th>共通選択</th>
-          <th>専門必修</th>
-          <th>専門選択</th>
-          <th>総合A必修</th>
-          <th>総合A選択</th>
-          <th>総合A(英)</th>
-          <th>総合B</th>
-          <th>総単位</th>
+          <th style="background-color:#3F51B5" class="text-center white--text">単位表</th>
+          <th style="background-color:#3F51B5" class="text-center white--text">共通必修</th>
+          <th style="background-color:#3F51B5" class="text-center white--text">共通選択</th>
+          <th style="background-color:#3F51B5" class="text-center white--text">専門必修</th>
+          <th style="background-color:#3F51B5" class="text-center white--text">専門選択</th>
+          <th style="background-color:#3F51B5" class="text-center white--text">総合A必修</th>
+          <th style="background-color:#3F51B5" class="text-center white--text">総合A選択</th>
+          <th style="background-color:#3F51B5" class="text-center white--text">総合A(英)</th>
+          <th style="background-color:#3F51B5" class="text-center white--text">総合B</th>
+          <th style="background-color:#3F51B5" class="text-center white--text">総単位</th>
         </tr>
       </thead>
       <tbody>
@@ -43,9 +50,7 @@
             :class="{
               'red--text': !is_not_enough(grade_total_unit(i), max_unit_one_year)
             }"
-          >
-            {{ grade_total_unit(i) }}/{{ max_unit_one_year }}
-          </td>
+          >{{ grade_total_unit(i) }}/{{ max_unit_one_year }}</td>
         </tr>
         <tr>
           <td>合計</td>
@@ -53,65 +58,47 @@
             :class="{
               'red--text': is_not_enough(classification_compulsory_total_unit('共通'), graduate_unit.kyotu)
             }"
-          >
-            {{ classification_compulsory_total_unit('共通') }}/{{ detail_graduate_unit.必修.共通 }}
-          </td>
+          >{{ classification_compulsory_total_unit('共通') }}/{{ detail_graduate_unit.必修.共通 }}</td>
           <td
             :class="{
               'red--text': is_not_enough(classification_choice_total_unit('共通'), graduate_unit.kyotu)
             }"
-          >
-            {{ classification_choice_total_unit('共通') }}/{{ detail_graduate_unit.選択.共通 }}
-          </td>
+          >{{ classification_choice_total_unit('共通') }}/{{ detail_graduate_unit.選択.共通 }}</td>
           <td
             :class="{
               'red--text': is_not_enough(classification_compulsory_total_unit('専門'), graduate_unit.senmon)
             }"
-          >
-            {{ classification_compulsory_total_unit('専門') }}/{{ detail_graduate_unit.必修.専門 }}
-          </td>
+          >{{ classification_compulsory_total_unit('専門') }}/{{ detail_graduate_unit.必修.専門 }}</td>
           <td
             :class="{
               'red--text': is_not_enough(classification_choice_total_unit('専門'), graduate_unit.senmon)
             }"
-          >
-            {{ classification_choice_total_unit('専門') }}/{{ detail_graduate_unit.選択.専門 }}
-          </td>
+          >{{ classification_choice_total_unit('専門') }}/{{ detail_graduate_unit.選択.専門 }}</td>
           <td
             :class="{
               'red--text': is_not_enough(classification_compulsory_total_unit('総合A'), graduate_unit.A)
             }"
-          >
-            {{ classification_compulsory_total_unit('総合A') }}/{{ detail_graduate_unit.必修.総合A }}
-          </td>
+          >{{ classification_compulsory_total_unit('総合A') }}/{{ detail_graduate_unit.必修.総合A }}</td>
           <td
             :class="{
               'red--text': is_not_enough(classification_choice_total_unit('総合A'), graduate_unit.A)
             }"
-          >
-            {{ classification_choice_total_unit('総合A') }}/{{ detail_graduate_unit.選択.総合A }}
-          </td>
+          >{{ classification_choice_total_unit('総合A') }}/{{ detail_graduate_unit.選択.総合A }}</td>
           <td
             :class="{
               'red--text': is_not_enough(classification_total_unit('英語'), graduate_unit.english)
             }"
-          >
-            {{ classification_total_unit('英語') }}/{{ graduate_unit.english }}
-          </td>
+          >{{ classification_total_unit('英語') }}/{{ graduate_unit.english }}</td>
           <td
             :class="{
               'red--text': is_not_enough(classification_total_unit('総合B'), graduate_unit.B)
             }"
-          >
-            {{ classification_total_unit('総合B') }}/{{ graduate_unit.B }}
-          </td>
+          >{{ classification_total_unit('総合B') }}/{{ graduate_unit.B }}</td>
           <td
             :class="{
               'red--text': is_not_enough(total_unit(), graduate_unit.all)
             }"
-          >
-            {{ total_unit() }}/{{ graduate_unit.all }}
-          </td>
+          >{{ total_unit() }}/{{ graduate_unit.all }}</td>
         </tr>
       </tbody>
     </v-simple-table>
@@ -119,75 +106,84 @@
     <v-simple-table v-else>
       <thead>
         <tr>
-          <th>単位表</th>
-          <th>共通</th>
-          <th>専門</th>
-          <th>総合A</th>
-          <th>総合A(英)</th>
-          <th>総合B</th>
-          <th>総単位</th>
+          <th style="background-color:#3F51B5" class="text-center white--text">単位表</th>
+          <th style="background-color:#3F51B5" class="text-center white--text">共通</th>
+          <th style="background-color:#3F51B5" class="text-center white--text">専門</th>
+          <th style="background-color:#3F51B5" class="text-center white--text">総合A</th>
+          <th style="background-color:#3F51B5" class="text-center white--text">総合A(英)</th>
+          <th style="background-color:#3F51B5" class="text-center white--text">総合B</th>
+          <th style="background-color:#3F51B5" class="text-center white--text">総単位</th>
         </tr>
       </thead>
       <tbody>
         <tr v-for="i in 4" :key="i">
-          <td>{{ i }}年</td>
-          <td>{{ $store.state.unit_list[i]['必修']['共通'] + $store.state.unit_list[i]['選択']['共通'] }}</td>
-          <td>{{ $store.state.unit_list[i]['必修']['専門'] + $store.state.unit_list[i]['選択']['専門'] }}</td>
-          <td>{{ $store.state.unit_list[i]['必修']['総合A'] + $store.state.unit_list[i]['選択']['総合A'] }}</td>
-          <td>{{ $store.state.english_unit_list[i]['必修'] + $store.state.english_unit_list[i]['選択'] }}</td>
-          <td>{{ $store.state.unit_list[i]['必修']['総合B'] + $store.state.unit_list[i]['選択']['総合B'] }}</td>
+          <td style="background-color:#78BBE6" class="white--text font-weight-black">{{ i }}年</td>
           <td
+            style="background-color:#78BBE6"
+            class="white--text font-weight-black"
+          >{{ $store.state.unit_list[i]['必修']['共通'] + $store.state.unit_list[i]['選択']['共通'] }}</td>
+          <td
+            style="background-color:#78BBE6"
+            class="white--text font-weight-black"
+          >{{ $store.state.unit_list[i]['必修']['専門'] + $store.state.unit_list[i]['選択']['専門'] }}</td>
+          <td
+            style="background-color:#78BBE6"
+            class="white--text font-weight-black"
+          >{{ $store.state.unit_list[i]['必修']['総合A'] + $store.state.unit_list[i]['選択']['総合A'] }}</td>
+          <td
+            style="background-color:#78BBE6"
+            class="white--text font-weight-black"
+          >{{ $store.state.english_unit_list[i]['必修'] + $store.state.english_unit_list[i]['選択'] }}</td>
+          <td
+            style="background-color:#78BBE6"
+            class="white--text font-weight-black"
+          >{{ $store.state.unit_list[i]['必修']['総合B'] + $store.state.unit_list[i]['選択']['総合B'] }}</td>
+          <td
+            style="background-color:#78BBE6"
+            class="white--text font-weight-black"
             :class="{
               'red--text': !is_not_enough(grade_total_unit(i), max_unit_one_year)
             }"
-          >
-            {{ grade_total_unit(i) }}/{{ max_unit_one_year }}
-          </td>
+          >{{ grade_total_unit(i) }}/{{ max_unit_one_year }}</td>
         </tr>
         <tr>
-          <td>合計</td>
+          <td style="background-color:#78BBE6" class="white--text font-weight-black">合計</td>
           <td
+            style="background-color:#78BBE6"
             :class="{
               'red--text': is_not_enough(classification_total_unit('共通'), graduate_unit.kyotu)
             }"
-          >
-            {{ classification_total_unit('共通') }}/{{ graduate_unit.kyotu }}
-          </td>
+          >{{ classification_total_unit('共通') }}/{{ graduate_unit.kyotu }}</td>
           <td
+            style="background-color:#78BBE6"
             :class="{
               'red--text': is_not_enough(classification_total_unit('専門'), graduate_unit.senmon)
             }"
-          >
-            {{ classification_total_unit('専門') }}/{{ graduate_unit.senmon }}
-          </td>
+          >{{ classification_total_unit('専門') }}/{{ graduate_unit.senmon }}</td>
           <td
+            style="background-color:#78BBE6"
             :class="{
               'red--text': is_not_enough(classification_total_unit('総合A'), graduate_unit.A)
             }"
-          >
-            {{ classification_total_unit('総合A') }}/{{ graduate_unit.A }}
-          </td>
+          >{{ classification_total_unit('総合A') }}/{{ graduate_unit.A }}</td>
           <td
+            style="background-color:#78BBE6"
             :class="{
               'red--text': is_not_enough(classification_total_unit('英語'), graduate_unit.english)
             }"
-          >
-            {{ classification_total_unit('英語') }}/{{ graduate_unit.english }}
-          </td>
+          >{{ classification_total_unit('英語') }}/{{ graduate_unit.english }}</td>
           <td
+            style="background-color:#78BBE6"
             :class="{
               'red--text': is_not_enough(classification_total_unit('総合B'), graduate_unit.B)
             }"
-          >
-            {{ classification_total_unit('総合B') }}/{{ graduate_unit.B }}
-          </td>
+          >{{ classification_total_unit('総合B') }}/{{ graduate_unit.B }}</td>
           <td
+            style="background-color:#78BBE6"
             :class="{
               'red--text': is_not_enough(total_unit(), graduate_unit.all)
             }"
-          >
-            {{ total_unit() }}/{{ graduate_unit.all }}
-          </td>
+          >{{ total_unit() }}/{{ graduate_unit.all }}</td>
         </tr>
       </tbody>
     </v-simple-table>
