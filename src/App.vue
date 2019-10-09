@@ -33,9 +33,9 @@
                   class="headline text_none white--text"
                   >{{ item.title }}</router-link
                 >
-                <router-link v-else :to="item.link" class="headline text_none white--text">{{
-                  item.title
-                }}</router-link>
+                <router-link v-else :to="item.link" class="headline text_none white--text">
+                  {{ item.title }}
+                </router-link>
               </v-list-item-title>
             </v-list-item-content>
           </v-list-item>
@@ -53,7 +53,7 @@
         </v-toolbar-title>
       </v-col>
       <v-col cols="5">
-        <v-card>
+        <v-card v-if="this.$store.state.user.logined == true">
           <v-card-text>
             <span class="headline">共通:</span>
             <span
@@ -186,20 +186,20 @@
       </v-dialog>
 
       <v-col cols="1.5">
-        <v-btn x-large value="save" v-on:click="save_lectuers">
+        <v-btn x-large value="save" v-on:click="save_lectuers" v-if="this.$store.state.user.logined == true">
           <v-icon>mdi-cloud-upload</v-icon>
           <span>保存</span>
         </v-btn>
       </v-col>
 
       <v-col cols="1.5">
-        <v-btn x-large value="delete" v-on:click="delete_lectuers">
+        <v-btn x-large value="delete" v-on:click="delete_lectuers" v-if="this.$store.state.user.logined == true">
           <v-icon>mdi-delete</v-icon>
           <span>削除</span>
         </v-btn>
       </v-col>
       <v-col cols="1.5">
-        <v-btn x-large value="unit" v-on:click="sheet = !sheet">
+        <v-btn x-large value="unit" v-on:click="sheet = !sheet" v-if="this.$store.state.user.logined == true">
           <v-icon>mdi-numeric</v-icon>
           <span>単位確認</span>
         </v-btn>

@@ -55,7 +55,7 @@
 
                 <v-stepper-content step="3">
                   <v-col cols="6" class="d-flex">
-                    <v-card color="#78BBE6" height="260px">
+                    <v-card height="260px">
                       <v-img src="../../public/checkbox_setumei_smart.png" max-width="530" max-height="300"></v-img>
                       <v-col>
                         <v-card>下の画像のようになります</v-card>
@@ -66,7 +66,7 @@
                         max-height="300"
                       ></v-img> </v-card
                     >aaaa
-                    <v-card color="#78BBE6" height="260px">
+                    <v-card height="260px">
                       <v-img src="../../public/checkbox_setumei2.png" max-width="530" max-height="300"></v-img>
                       <v-col>
                         <v-card>下の画像のようになります</v-card>
