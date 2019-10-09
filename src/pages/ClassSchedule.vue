@@ -8,7 +8,7 @@
       <v-row>
         <v-col cols="12">
           <v-card>
-            <v-card-text>計画が立てられたら「登録を保存」ボタンを押して保存してください</v-card-text>
+            <v-card-text>計画が立てられたら「保存」ボタンを押して保存してください</v-card-text>
           </v-card>
         </v-col>
 
@@ -155,7 +155,8 @@
           <span>共通:</span>
           <span
             :class="{
-              'yellow--text text--darken-2': is_not_enough(classification_total_unit('共通'), graduate_unit.kyotu)
+              'yellow--text text--darken-2': is_not_enough(classification_total_unit('共通'), graduate_unit.kyotu),
+              'green--text': !is_not_enough(classification_total_unit('共通'), graduate_unit.kyotu)
             }"
             class="font-weight-bold"
             >{{ diff_unit(classification_total_unit('共通'), graduate_unit.kyotu) }}</span
@@ -163,7 +164,8 @@
           <span>専門:</span>
           <span
             :class="{
-              'yellow--text text--darken-2': is_not_enough(classification_total_unit('専門'), graduate_unit.senmon)
+              'yellow--text text--darken-2': is_not_enough(classification_total_unit('専門'), graduate_unit.senmon),
+              'green--text': !is_not_enough(classification_total_unit('専門'), graduate_unit.senmon)
             }"
             class="font-weight-bold"
             >{{ diff_unit(classification_total_unit('専門'), graduate_unit.senmon) }}</span
@@ -171,7 +173,8 @@
           <span>総合A:</span>
           <span
             :class="{
-              'yellow--text text--darken-2': is_not_enough(classification_total_unit('総合A'), graduate_unit.A)
+              'yellow--text text--darken-2': is_not_enough(classification_total_unit('総合A'), graduate_unit.A),
+              'green--text': !is_not_enough(classification_total_unit('総合A'), graduate_unit.A)
             }"
             class="font-weight-bold"
             >{{ diff_unit(classification_total_unit('総合A'), graduate_unit.A) }}</span
@@ -179,7 +182,8 @@
           <span>総合A(英):</span>
           <span
             :class="{
-              'yellow--text text--darken-2': is_not_enough(classification_total_unit('英語'), graduate_unit.english)
+              'yellow--text text--darken-2': is_not_enough(classification_total_unit('英語'), graduate_unit.english),
+              'green--text': !is_not_enough(classification_total_unit('英語'), graduate_unit.english)
             }"
             class="font-weight-bold"
             >{{ diff_unit(classification_total_unit('英語'), graduate_unit.english) }}</span
@@ -187,7 +191,8 @@
           <span>総合B:</span>
           <span
             :class="{
-              'yellow--text text--darken-2': is_not_enough(classification_total_unit('総合B'), graduate_unit.B)
+              'yellow--text text--darken-2': is_not_enough(classification_total_unit('総合B'), graduate_unit.B),
+              'green--text': !is_not_enough(classification_total_unit('総合B'), graduate_unit.B)
             }"
             class="font-weight-bold"
             >{{ diff_unit(classification_total_unit('総合B'), graduate_unit.B) }}</span
@@ -201,7 +206,7 @@
       </v-btn>
 
       <v-btn value="delete" v-on:click="delete_lectuers">
-        <span>削除</span>
+        <span>全削除</span>
         <v-icon>mdi-delete</v-icon>
       </v-btn>
 
