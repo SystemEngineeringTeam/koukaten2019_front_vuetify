@@ -149,7 +149,7 @@
 
     <!--登録ボタン-->
 
-    <v-bottom-navigation fixed>
+    <v-bottom-navigation fixed >
       <v-card>
         <v-card-text>
           <span>共通:</span>
@@ -194,6 +194,7 @@
           >
         </v-card-text>
       </v-card>
+
       <v-btn value="save" v-on:click="save_lectuers">
         <span>保存</span>
         <v-icon>mdi-cloud-upload</v-icon>
@@ -457,9 +458,9 @@ export default {
 </script>
 <style scoped>
 .v-bottom-navigation * {
-  font-size: 1.3em;
+  font-size: 3vw;
 }
 .v-bottom-navigation .v-btn * {
-  font-size: 20px;
+  font-size: 1.7vw;
 }
 </style>
