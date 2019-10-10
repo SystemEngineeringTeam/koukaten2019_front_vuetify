@@ -87,9 +87,10 @@
         <v-card-title class="display-1 font-weight-bold">確認</v-card-title>
 
         <v-card-text class="headline font-weight-bold">
-          <template v-if="!this.$store.state.is_enough_unit_graduate"
-            >卒業要件を満たしていません<br
-          /></template>
+          <template v-if="!this.$store.state.is_enough_unit_graduate">
+            卒業要件を満たしていません
+            <br />
+          </template>
           <template
             v-if="
               is_not_enough(classification_total_unit('共通'), graduate_unit.kyotu) ||
@@ -98,19 +99,25 @@
                 is_not_enough(classification_total_unit('総合B'), graduate_unit.B) ||
                 is_not_enough(classification_total_unit('英語'), graduate_unit.english)
             "
-            ><br />以下の単位が足りていません<br
-          /></template>
-          <template v-if="is_not_enough(classification_total_unit('共通'), graduate_unit.kyotu)"
-            >共通<br />
+          >
+            <br />以下の単位が足りていません
+            <br />
           </template>
-          <template v-if="is_not_enough(classification_total_unit('専門'), graduate_unit.senmon)"
-            >専門<br />
+          <template v-if="is_not_enough(classification_total_unit('共通'), graduate_unit.kyotu)">
+            共通
+            <br />
           </template>
-          <template v-if="is_not_enough(classification_total_unit('総合A'), graduate_unit.A)"
-            >総合A<br />
+          <template v-if="is_not_enough(classification_total_unit('専門'), graduate_unit.senmon)">
+            専門
+            <br />
           </template>
-          <template v-if="is_not_enough(classification_total_unit('英語'), graduate_unit.english)"
-            >総合A(英)<br />
+          <template v-if="is_not_enough(classification_total_unit('総合A'), graduate_unit.A)">
+            総合A
+            <br />
+          </template>
+          <template v-if="is_not_enough(classification_total_unit('英語'), graduate_unit.english)">
+            総合A(英)
+            <br />
           </template>
           <template v-if="is_not_enough(classification_total_unit('総合B'), graduate_unit.B)"
             >総合B</template
@@ -119,8 +126,7 @@
           <template v-if="!this.$store.state.is_over_unit"
             >1年間に取得できる単位数をオーバーしています</template
           >
-          <br />
-          このまま登録しますか？
+          <br />このまま登録しますか？
         </v-card-text>
 
         <v-card-actions>
@@ -149,7 +155,7 @@
 
     <!--登録ボタン-->
 
-    <v-bottom-navigation fixed >
+    <v-bottom-navigation fixed>
       <v-card>
         <v-card-text>
           <span>共通:</span>
@@ -463,9 +469,9 @@ export default {
 </script>
 <style scoped>
 .v-bottom-navigation * {
-  font-size: 3vw;
+  font-size: 2.6vw;
 }
 .v-bottom-navigation .v-btn * {
-  font-size: 1.7vw;
+  font-size: 1.3vw;
 }
 </style>
