@@ -5,18 +5,18 @@
     <v-navigation-drawer app v-model="drawer" temporary>
       <v-list-item>
         <v-list-item-content>
-          <v-list-item-title class="headline">未来予想図</v-list-item-title>
+          <v-list-item-title>未来予想図</v-list-item-title>
         </v-list-item-content>
       </v-list-item>
 
       <v-divider></v-divider>
 
-      <v-list color="#78BBE6" dense>
+      <v-list dense>
         <template v-if="!$store.state.user.logined">
           <v-list-item v-for="item in login_menu" :key="item.title" :value="item.link">
             <v-list-item-content>
               <v-list-item-title>
-                <router-link :to="item.link" class="headline text_none white--text">{{ item.title }}</router-link>
+                <router-link :to="item.link">{{ item.title }}</router-link>
               </v-list-item-title>
             </v-list-item-content>
           </v-list-item>
@@ -29,12 +29,9 @@
                   v-if="item.title === 'ログアウト'"
                   @click.native="$store.commit('logout')"
                   :to="item.link"
-                  class="headline text_none white--text"
                   >{{ item.title }}</router-link
                 >
-                <router-link v-else :to="item.link" class="headline text_none white--text">{{
-                  item.title
-                }}</router-link>
+                <router-link v-else :to="item.link">{{ item.title }}</router-link>
               </v-list-item-title>
             </v-list-item-content>
           </v-list-item>
@@ -64,7 +61,7 @@
       </div>
       <div v-else>
         <!--<router-link to="/initial_Registration">ユーザー登録</router-link>|-->
-        <router-link to="/login" class="text_none">ログイン</router-link>
+        <router-link to="/login">ログイン</router-link>
       </div>
       <!-- <v-btn>
                           <router-link to="/ClassSchedule">時間割エディタ</router-link>
@@ -114,16 +111,12 @@ export default {
 
 <style lang="scss">
 #fontSetting {
-  font-weight: bold;
-  font-family: 'ヒラギノ丸ゴ Pro W4', 'ヒラギノ丸ゴ Pro', 'Hiragino Maru Gothic Pro', 'ヒラギノ角ゴ Pro W3',
-    'Hiragino Kaku Gothic Pro', 'HG丸ｺﾞｼｯｸM-PRO', 'HGMaruGothicMPRO';
+  font-family: 'Avenir', 'Helvetica Neue', 'Helvetica', 'Arial', 'Hiragino Sans', 'ヒラギノ角ゴシック', YuGothic,
+    'Yu Gothic', 'メイリオ', Meiryo, 'ＭＳ Ｐゴシック', 'MS PGothic';
 }
 
 .a {
   font-size: 38px;
-  text-decoration: none;
-}
-.text_none {
   text-decoration: none;
 }
 </style>
