@@ -300,7 +300,7 @@ export default {
     diff_unit(total_unit, enough_unit) {
       let diff_unit = enough_unit - total_unit;
       if (diff_unit < 0) {
-        diff_unit = 0;
+        diff_unit *= -1;
       }
       return diff_unit;
     },
