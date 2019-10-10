@@ -20,9 +20,9 @@
           <v-list-item v-for="item in login_menu" :key="item.title" :value="item.link">
             <v-list-item-content>
               <v-list-item-title>
-                <router-link :to="item.link" class="headline text_none black--text text--black">{{
-                  item.title
-                }}</router-link>
+                <router-link :to="item.link" class="headline text_none black--text text--black">
+                  {{ item.title }}
+                </router-link>
               </v-list-item-title>
             </v-list-item-content>
           </v-list-item>
@@ -38,9 +38,9 @@
                   class="headline text_none black--text text--black"
                   >{{ item.title }}</router-link
                 >
-                <router-link v-else :to="item.link" class="headline text_none black--text text--black">
-                  {{ item.title }}
-                </router-link>
+                <router-link v-else :to="item.link" class="headline text_none black--text text--black">{{
+                  item.title
+                }}</router-link>
               </v-list-item-title>
             </v-list-item-content>
           </v-list-item>
@@ -53,7 +53,7 @@
 
       <v-toolbar-title>
         <router-link class="a" to="/">
-          <font class="white--text headline font-weight-black">時間割作成アプリケーション</font>
+          <font class="white--text display-1 font-weight-black">時間割作成アプリケーション</font>
         </router-link>
       </v-toolbar-title>
 
