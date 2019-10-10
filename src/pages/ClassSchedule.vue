@@ -8,7 +8,9 @@
       <v-row>
         <v-col cols="12">
           <v-card>
-            <v-card-text>計画が立てられたら「保存」ボタンを押して保存してください</v-card-text>
+            <v-card-text class="headline text-center"
+              >計画が立てられたら「保存」ボタンを押して保存してください</v-card-text
+            >
           </v-card>
         </v-col>
 
