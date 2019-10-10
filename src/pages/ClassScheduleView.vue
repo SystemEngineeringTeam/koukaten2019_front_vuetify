@@ -43,11 +43,7 @@
           </v-tabs>
         </v-col>
         <v-col cols="12">
-          <v-footer app>
-            <v-col>
-              <CreditCalculator :grade="$store.state.looking_timetable.grade"></CreditCalculator>
-            </v-col>
-          </v-footer>
+          <CreditCalculator :grade="$store.state.looking_timetable.grade"></CreditCalculator>
         </v-col>
       </v-row>
     </v-container>
