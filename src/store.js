@@ -20,146 +20,8 @@ export default new Vuex.Store({
     ],
     select_units: {},
     looking_timetable: { grade: 1, semester: '前期' },
-    registered_lectures: [
-      {
-        subject_code: 'k1025',
-        class_code: '20',
-        name: '普通の授業',
-        teacher_name1: '秦 健心',
-        teacher_name2: '先 生名',
-        classification: '総合B',
-        compulsory: '選択',
-        isenglish: false,
-        grade: 1,
-        semester: '前期',
-        weekday: 'mon',
-        lec_time: 1,
-        continuous: 1,
-        unit: 94,
-        syllabus: 'https://hackmd.io/@8UP5vEhpRieQqC06SyUfsg/S1WpVJSBH'
-      },
-      {
-        subject_code: 'k1025',
-        class_code: '20',
-        name: '英語の授業',
-        teacher_name1: '秦 健心',
-        teacher_name2: '先 生名',
-        classification: '総合A',
-        compulsory: '必修',
-        isenglish: true,
-        grade: 1,
-        semester: '前期',
-        weekday: 'tue',
-        lec_time: 2,
-        continuous: 1,
-        unit: 94,
-        syllabus: 'https://hackmd.io/@8UP5vEhpRieQqC06SyUfsg/S1WpVJSBH'
-      },
-      {
-        subject_code: 'k1025',
-        class_code: '20',
-        name: '2コマの必修授業',
-        teacher_name1: '秦 健心',
-        teacher_name2: '先 生名',
-        classification: '共通',
-        compulsory: '選択',
-        isenglish: false,
-        grade: 1,
-        semester: '前期',
-        weekday: 'wed',
-        lec_time: 2,
-        continuous: 2,
-        unit: 94,
-        syllabus: 'https://hackmd.io/@8UP5vEhpRieQqC06SyUfsg/S1WpVJSBH'
-      },
-      {
-        subject_code: 'k1025',
-        class_code: '20',
-        name: '2コマの選択授業',
-        teacher_name1: '秦 健心',
-        teacher_name2: '先 生名',
-        classification: '専門',
-        compulsory: '選択',
-        isenglish: false,
-        grade: '1',
-        semester: '前期',
-        weekday: 'thu',
-        lec_time: 2,
-        continuous: 1,
-        unit: 94,
-        syllabus: 'https://connpass.com/dashboard/'
-      }
-    ],
-    can_register_lectures: [
-      {
-        subject_code: 'k1025',
-        class_code: '20',
-        name: '普通の授業',
-        teacher_name1: '秦 健心',
-        teacher_name2: '先 生名',
-        classification: '総合B',
-        compulsory: '選択',
-        isenglish: false,
-        grade: 1,
-        semester: '前期',
-        weekday: 'mon',
-        lec_time: 1,
-        continuous: 1,
-        unit: 2,
-        syllabus: 'https://hackmd.io/@8UP5vEhpRieQqC06SyUfsg/S1WpVJSBH'
-      },
-      {
-        subject_code: 'k1025',
-        class_code: '20',
-        name: '英語の授業',
-        teacher_name1: '秦 健心',
-        teacher_name2: '先 生名',
-        classification: '総合A',
-        compulsory: '必修',
-        isenglish: true,
-        grade: 1,
-        semester: '前期',
-        weekday: 'tue',
-        lec_time: 2,
-        continuous: 1,
-        unit: 2,
-        syllabus: 'https://hackmd.io/@8UP5vEhpRieQqC06SyUfsg/S1WpVJSBH'
-      },
-      {
-        subject_code: 'k1025',
-        class_code: '20',
-        name: '2コマの必修授業',
-        teacher_name1: '秦 健心',
-        teacher_name2: '先 生名',
-        classification: '共通',
-        compulsory: '選択',
-        isenglish: false,
-        grade: 1,
-        semester: '前期',
-        weekday: 'wed',
-        lec_time: 2,
-        continuous: 2,
-        unit: 3,
-        syllabus: 'https://hackmd.io/@8UP5vEhpRieQqC06SyUfsg/S1WpVJSBH'
-      },
-      {
-        subject_code: 'k1025',
-        class_code: '20',
-        name: '2コマの選択授業',
-        teacher_name1: '秦 健心',
-        teacher_name2: '先 生名',
-        classification: '専門',
-        compulsory: '選択',
-        isenglish: false,
-        grade: '1',
-        semester: '前期',
-        weekday: 'thu',
-        lec_time: 2,
-        continuous: 1,
-        unit: 2,
-        syllabus: 'https://connpass.com/dashboard/'
-      }
-    ],
+    registered_lectures: [],
+    can_register_lectures: [],
     unit_list: {
       1: {
         必修: {
@@ -520,11 +382,13 @@ export default new Vuex.Store({
         })
         .then(res => {
           context.commit('set_can_register_lectures', res.data);
-          // res.data.forEach(function(lectuer) {
-          //   if (lectuer.compulsory == '必修') {
-          //     context.commit('push_registered_lecture', lectuer);
-          //   }
-          // });
+          if (this.state.registered_lectures.length <= 0) {
+            this.state.can_register_lectures.forEach(function(lectuer) {
+              if (lectuer.compulsory == '必修') {
+                context.commit('push_registered_lecture', lectuer);
+              }
+            });
+          }
         });
     },
     doSave({ commit }) {

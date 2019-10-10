@@ -1,7 +1,7 @@
 <template>
   <div class="mx-4">
     <!--{{ $store.state.can_register_lectures }}-->
-    <!-- {{ $store.state.registered_lectures }} -->
+    <!--{{ $store.state.registered_lectures }}-->
     <!-- {{ $store.state.unit_list }} -->
     <!--{{ $store.state.user }}-->
     <v-container>
@@ -292,8 +292,8 @@ export default {
     CreditCalculator
   },
   created() {
-    this.$store.dispatch('get_registered_lectures', this.$store.state.user.id);
-    this.$store.dispatch('get_can_register_lectures', this.$store.state.user.id);
+    const promis = this.$store.dispatch('get_registered_lectures', this.$store.state.user.id);
+    promis.then(this.$store.dispatch('get_can_register_lectures', this.$store.state.user.id));
   },
   beforeUpdate() {
     this.$store.commit('unit_calculate');
@@ -327,7 +327,10 @@ export default {
     mold_registered_lectures() {
       let data = [];
       let students_id = this.$store.state.user.id;
-      this.$store.state.registered_lectures.forEach(lectures =>
+      let before_post_registered_lectures = this.$store.state.registered_lectures.filter(function(e, i, self) {
+        return self.findIndex(object => object.subject_code === e.subject_code) === i;
+      });
+      before_post_registered_lectures.forEach(lectures =>
         data.push({
           students_id: students_id,
           subject_code: lectures.subject_code,
