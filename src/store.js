@@ -520,6 +520,11 @@ export default new Vuex.Store({
         })
         .then(res => {
           context.commit('set_can_register_lectures', res.data);
+          // res.data.forEach(function(lectuer) {
+          //   if (lectuer.compulsory == '必修') {
+          //     context.commit('push_registered_lecture', lectuer);
+          //   }
+          // });
         });
     },
     doSave({ commit }) {

@@ -19,14 +19,14 @@
               <br />再読み込みなんかをしてログイン状態じゃなくなったらログインページからログインし直してね
               <p></p>
             </v-sheet>
-            <router-link to="/Initial_Registration">
+            <router-link to="/Initial_Registration" class="none_text">
               <div class="my-12">
-                <v-btn rounded block x-large color="#78BBE6">ユーザー登録</v-btn>
+                <v-btn rounded block x-large color="#78BBE6" v-if="!this.$store.state.user.logined">ユーザー登録</v-btn>
               </div>
             </router-link>
-            <router-link to="/Login">
+            <router-link to="/Login" class="none_text">
               <div class="my-12">
-                <v-btn rounded block x-large color="#F99F48">ログイン</v-btn>
+                <v-btn rounded block x-large color="#F99F48" v-if="!this.$store.state.user.logined">ログイン</v-btn>
               </div>
             </router-link>
           </v-col>
@@ -52,4 +52,8 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style lang="scss">
+.none_text {
+  text-decoration: none;
+}
+</style>

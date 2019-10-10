@@ -33,9 +33,16 @@
         }"
       >
         <v-col>
-          <v-card-text>
-            <b>{{ lecture['name'] }}</b>
-            {{ lecture['unit'] }}単位
+          <v-card-text class="headline white--text">
+            <p>
+              <b>{{ lecture['name'] }}</b>
+            </p>
+            <template v-if="lecture.unit == 0"
+              >{{ find_unit(lecture) }}単位</template
+            >
+            <template v-else
+              >{{ lecture['unit'] }}単位</template
+            >
           </v-card-text>
           <!--<v-card-actions>
               <v-btn :href="lecture['syllabus']" target="_blank">シラバス</v-btn>
@@ -58,8 +65,9 @@
         <v-card-title class="headline">授業登録</v-card-title>
         <v-container>
           <v-row>
-            <v-col v-for="(c, i) in can_register" cols="3" :key="i">
+            <v-col v-for="(c, i) in can_register" cols="12" md="3" :key="i">
               <v-card
+                dark
                 :class="{
                   orange: '必修' === c.compulsory,
                   green: '選択必修' === c.compulsory,
@@ -77,7 +85,12 @@
                   >
                 </p>
                 <div class="text-center">
-                  <v-btn v-on:click="duplicate_check_decision = duplicate_check(c)" rounded>
+                  <v-btn
+                    v-on:click="duplicate_check_decision = duplicate_check(c)"
+                    rounded
+                    color="white"
+                    class="black--text"
+                  >
                     <v-icon>mdi-border-color</v-icon>登録
                   </v-btn>
                 </div>
@@ -126,6 +139,12 @@ export default {
     };
   },
   methods: {
+    find_unit(lectuer) {
+      let continuous_lectuer = this.$store.state.registered_lectures.find(function(l) {
+        return l.subject_code == lectuer.subject_code;
+      });
+      return continuous_lectuer.unit;
+    },
     register_lecture(want_ragister_lectuer) {
       if (this.lecture != null) {
         this.$store.commit('delete_registered_lecture', this.lecture);
@@ -178,4 +197,9 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.text {
+  color: #fff;
+  text-shadow: 1px 1px 0 #000, -1px 1px 0 #000, 1px -1px 0 #000, -1px -1px 0 #000;
+}
+</style>
