@@ -1,13 +1,6 @@
 <template>
   <div>
-    <v-btn v-on:click="detail = !detail">
-      <template v-if="detail">
-        <v-icon>mdi-toggle-switch</v-icon>切り替え
-      </template>
-      <template v-else>
-        <v-icon>mdi-toggle-switch-off</v-icon>切り替え
-      </template>
-    </v-btn>
+    <v-switch v-model="detail" label="表示切り替え"></v-switch>
     <v-simple-table v-if="detail">
       <thead>
         <tr>
@@ -114,7 +107,14 @@
           <td
             class="blue lighten-5"
             :class="{
-              'red--text': is_not_enough(classification_compulsory_total_unit('共通'), graduate_unit.kyotu)
+              'yellow--text text--darken-2': is_not_enough(
+                classification_compulsory_total_unit('共通'),
+                detail_graduate_unit.必修.共通
+              ),
+              'green--text': !is_not_enough(
+                classification_compulsory_total_unit('共通'),
+                detail_graduate_unit.必修.共通
+              )
             }"
           >
             {{ classification_compulsory_total_unit('共通') }}/{{ detail_graduate_unit.必修.共通 }}
@@ -122,7 +122,11 @@
           <td
             class="blue lighten-5"
             :class="{
-              'red--text': is_not_enough(classification_choice_total_unit('共通'), graduate_unit.kyotu)
+              'yellow--text text--darken-2': is_not_enough(
+                classification_choice_total_unit('共通'),
+                detail_graduate_unit.選択.共通
+              ),
+              'green--text': !is_not_enough(classification_choice_total_unit('共通'), detail_graduate_unit.選択.共通)
             }"
           >
             {{ classification_choice_total_unit('共通') }}/{{ detail_graduate_unit.選択.共通 }}
@@ -130,7 +134,14 @@
           <td
             class="blue lighten-5"
             :class="{
-              'red--text': is_not_enough(classification_compulsory_total_unit('専門'), graduate_unit.senmon)
+              'yellow--text text--darken-2': is_not_enough(
+                classification_compulsory_total_unit('専門'),
+                detail_graduate_unit.必修.専門
+              ),
+              'green--text': !is_not_enough(
+                classification_compulsory_total_unit('専門'),
+                detail_graduate_unit.必修.専門
+              )
             }"
           >
             {{ classification_compulsory_total_unit('専門') }}/{{ detail_graduate_unit.必修.専門 }}
@@ -138,7 +149,11 @@
           <td
             class="blue lighten-5"
             :class="{
-              'red--text': is_not_enough(classification_choice_total_unit('専門'), graduate_unit.senmon)
+              'yellow--text text--darken-2': is_not_enough(
+                classification_choice_total_unit('専門'),
+                detail_graduate_unit.選択.専門
+              ),
+              'green--text': !is_not_enough(classification_choice_total_unit('専門'), detail_graduate_unit.選択.専門)
             }"
           >
             {{ classification_choice_total_unit('専門') }}/{{ detail_graduate_unit.選択.専門 }}
@@ -146,7 +161,14 @@
           <td
             class="blue lighten-5"
             :class="{
-              'red--text': is_not_enough(classification_compulsory_total_unit('総合A'), graduate_unit.A)
+              'yellow--text text--darken-2': is_not_enough(
+                classification_compulsory_total_unit('総合A'),
+                detail_graduate_unit.必修.総合A
+              ),
+              'green--text': !is_not_enough(
+                classification_compulsory_total_unit('総合A'),
+                detail_graduate_unit.必修.総合A
+              )
             }"
           >
             {{ classification_compulsory_total_unit('総合A') }}/{{ detail_graduate_unit.必修.総合A }}
@@ -154,7 +176,11 @@
           <td
             class="blue lighten-5"
             :class="{
-              'red--text': is_not_enough(classification_choice_total_unit('総合A'), graduate_unit.A)
+              'yellow--text text--darken-2': is_not_enough(
+                classification_choice_total_unit('総合A'),
+                detail_graduate_unit.選択.総合A
+              ),
+              'green--text': !is_not_enough(classification_choice_total_unit('総合A'), detail_graduate_unit.選択.総合A)
             }"
           >
             {{ classification_choice_total_unit('総合A') }}/{{ detail_graduate_unit.選択.総合A }}
@@ -162,7 +188,8 @@
           <td
             class="blue lighten-5"
             :class="{
-              'red--text': is_not_enough(classification_total_unit('英語'), graduate_unit.english)
+              'yellow--text text--darken-2': is_not_enough(classification_total_unit('英語'), graduate_unit.english),
+              'green--text': !is_not_enough(classification_total_unit('英語'), graduate_unit.english)
             }"
           >
             {{ classification_total_unit('英語') }}/{{ graduate_unit.english }}
@@ -170,7 +197,8 @@
           <td
             class="blue lighten-5"
             :class="{
-              'red--text': is_not_enough(classification_total_unit('総合B'), graduate_unit.B)
+              'yellow--text text--darken-2': is_not_enough(classification_total_unit('総合B'), graduate_unit.B),
+              'green--text': !is_not_enough(classification_total_unit('総合B'), graduate_unit.B)
             }"
           >
             {{ classification_total_unit('総合B') }}/{{ graduate_unit.B }}
@@ -178,7 +206,8 @@
           <td
             class="blue lighten-5"
             :class="{
-              'red--text': is_not_enough(total_unit(), graduate_unit.all)
+              'yellow--text text--darken-2': is_not_enough(total_unit(), graduate_unit.all),
+              'green--text': !is_not_enough(total_unit(), graduate_unit.all)
             }"
           >
             {{ total_unit() }}/{{ graduate_unit.all }}
@@ -302,7 +331,8 @@
           <td
             class="blue lighten-5 font-weight-black"
             :class="{
-              'yellow--text text--darken-2': is_not_enough(total_unit(), graduate_unit.all)
+              'yellow--text text--darken-2': is_not_enough(total_unit(), graduate_unit.all),
+              'green--text': !is_not_enough(total_unit(), graduate_unit.all)
             }"
           >
             {{ total_unit() }}/{{ graduate_unit.all }}
