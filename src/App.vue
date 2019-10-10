@@ -3,20 +3,26 @@
 
   <v-app id="fontSetting">
     <v-navigation-drawer app v-model="drawer" temporary>
-      <v-list-item>
+      <v-list-item class="blue lighten-3">
         <v-list-item-content>
-          <v-list-item-title class="headline">未来予想図</v-list-item-title>
+          <!-- <v-list-item-title class="headline">未来予想図</v-list-item-title> -->
+          <div v-if="$store.state.user.logined">
+            <b class="white--text headline">{{ $store.state.user.id }}</b>
+          </div>
+          <div v-else class="headline">ようこそ</div>
         </v-list-item-content>
       </v-list-item>
 
       <v-divider></v-divider>
 
-      <v-list color="#78BBE6" dense>
+      <v-list dense>
         <template v-if="!$store.state.user.logined">
           <v-list-item v-for="item in login_menu" :key="item.title" :value="item.link">
             <v-list-item-content>
               <v-list-item-title>
-                <router-link :to="item.link" class="headline text_none white--text">{{ item.title }}</router-link>
+                <router-link :to="item.link" class="headline text_none black--text text--black">{{
+                  item.title
+                }}</router-link>
               </v-list-item-title>
             </v-list-item-content>
           </v-list-item>
@@ -29,12 +35,12 @@
                   v-if="item.title === 'ログアウト'"
                   @click.native="$store.commit('logout')"
                   :to="item.link"
-                  class="headline text_none white--text"
+                  class="headline text_none black--text text--black"
                   >{{ item.title }}</router-link
                 >
-                <router-link v-else :to="item.link" class="headline text_none white--text">{{
-                  item.title
-                }}</router-link>
+                <router-link v-else :to="item.link" class="headline text_none black--text text--black">
+                  {{ item.title }}
+                </router-link>
               </v-list-item-title>
             </v-list-item-content>
           </v-list-item>
@@ -47,25 +53,25 @@
 
       <v-toolbar-title>
         <router-link class="a" to="/">
-          <font class="white--text headline font-weight-black">未来予想図</font>
+          <font class="white--text headline font-weight-black">時間割作成アプリケーション</font>
         </router-link>
       </v-toolbar-title>
 
       <div class="flex-grow-1"></div>
-      <div v-if="$store.state.user.logined">
-        <b class="white--text">{{ $store.state.user.id }}</b>
-        <!--<v-btn
+      <!-- <div v-if="$store.state.user.logined">
+      <b class="white--text">{{ $store.state.user.id }}</b>-->
+      <!--<v-btn
           @click="
             $store.commit('logout');
             $router.push('/');
           "
           >ログアウト</v-btn
-        >-->
-      </div>
-      <div v-else>
-        <!--<router-link to="/initial_Registration">ユーザー登録</router-link>|-->
-        <router-link to="/login" class="text_none">ログイン</router-link>
-      </div>
+      >-->
+      <!-- </div>
+      <div v-else>-->
+      <!--<router-link to="/initial_Registration">ユーザー登録</router-link>|-->
+      <!-- <router-link to="/login" class="text_none">ログイン</router-link>
+      </div>-->
       <!-- <v-btn>
                           <router-link to="/ClassSchedule">時間割エディタ</router-link>
       </v-btn>-->
