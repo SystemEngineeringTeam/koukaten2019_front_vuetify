@@ -17,18 +17,18 @@
 
       <v-list dense>
         <template v-if="!$store.state.user.logined">
-          <v-list-item v-for="item in login_menu" :key="item.title" :value="item.link">
+          <v-list-item v-for="item in login_menu" :key="item.title" :value="item.link" @click="">
             <v-list-item-content>
               <v-list-item-title>
-                <router-link :to="item.link" class="headline text_none black--text text--black">
-                  {{ item.title }}
-                </router-link>
+                <router-link :to="item.link" class="headline text_none black--text text--black">{{
+                  item.title
+                }}</router-link>
               </v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </template>
         <template v-else>
-          <v-list-item v-for="item in logout_menu" :key="item.title" :value="item.link">
+          <v-list-item v-for="item in logout_menu" :key="item.title" :value="item.link" @click="">
             <v-list-item-content>
               <v-list-item-title>
                 <router-link
@@ -38,9 +38,9 @@
                   class="headline text_none black--text text--black"
                   >{{ item.title }}</router-link
                 >
-                <router-link v-else :to="item.link" class="headline text_none black--text text--black">{{
-                  item.title
-                }}</router-link>
+                <router-link v-else :to="item.link" class="headline text_none black--text text--black">
+                  {{ item.title }}
+                </router-link>
               </v-list-item-title>
             </v-list-item-content>
           </v-list-item>

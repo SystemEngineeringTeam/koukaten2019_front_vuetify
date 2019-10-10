@@ -1,6 +1,6 @@
 <template>
   <div class="text-center">
-    <v-card height="700">
+    <v-card>
       <v-card-title class="headline"></v-card-title>
       <v-container>
         <v-row>
