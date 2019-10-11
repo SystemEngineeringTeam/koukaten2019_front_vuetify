@@ -27,9 +27,13 @@
     <div v-else>
       <v-card
         :class="{
-          orange: lecture['compulsory'] == '必修',
-          blue: lecture['compulsory'] == '選択',
-          green: lecture['compulsory'] == '選択必修'
+          orange: lecture['compulsory'] === '必修',
+          blue:
+            lecture['classification'] === '専門' ||
+            lecture['classification'] === '共通' ||
+            lecture['classification'] === '総合A',
+          green: lecture['compulsory'] === '選択必修',
+          'blue-grey': lecture['classification'] === '総合B'
         }"
       >
         <v-col>
@@ -71,7 +75,8 @@
                 :class="{
                   orange: '必修' === c.compulsory,
                   green: '選択必修' === c.compulsory,
-                  blue: '選択' === c.compulsory
+                  blue: '専門' === c.classification || '共通' === c.classification || '総合A' === c.classification,
+                  'blue-grey': '総合B' === c.classification
                 }"
               >
                 <p class="text-center" style="font-size:28px;">{{ c.name }}</p>
@@ -119,8 +124,8 @@
     <!--ダイアログ-->
     <v-dialog v-model="duplicate_check_decision" max-width="290">
       <v-card>
-        <v-card-title>警告</v-card-title>
-        <v-card-text>登録しようとしている授業はすでに４年間のどこかで登録されています</v-card-text>
+        <v-card-title class="headline">警告</v-card-title>
+        <v-card-text class="headline">登録しようとしている授業はすでに４年間のどこかで登録されています</v-card-text>
         <v-card-actions>
           <v-btn v-on:click="duplicate_check_decision = false">OK</v-btn>
         </v-card-actions>
