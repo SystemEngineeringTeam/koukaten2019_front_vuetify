@@ -47,8 +47,12 @@
             <template v-else
               >{{ lecture['unit'] }}単位</template
             >
-            <template><br>{{ lecture.teacher_name1 }}</template>
-            <template v-if="lecture.teacher_name2 !== 'null'"> ,他</template>
+            <template
+              ><br />{{ lecture.teacher_name1 }}</template
+            >
+            <template v-if="lecture.teacher_name2 !== 'null'">
+              ,他</template
+            >
           </v-card-text>
           <!--<v-card-actions>
               <v-btn :href="lecture['syllabus']" target="_blank">シラバス</v-btn>
