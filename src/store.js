@@ -143,7 +143,7 @@ export default new Vuex.Store({
     //         });
     // },
     set_unit(state) {
-      if (state.user.id.charAt(0) === 'e') {
+      if (state.user.major === 'e') {
         Vue.set(state.advancement_unit, 'grade_1', 20);
         Vue.set(state.advancement_unit, 'grade_2', 50);
         Vue.set(state.advancement_unit, 'grade_3', 91);
@@ -154,7 +154,7 @@ export default new Vuex.Store({
         Vue.set(state.detail_graduate_unit.選択, '専門', 48);
         Vue.set(state.detail_graduate_unit.選択, '総合A', 4);
       }
-      if (state.user.id.charAt(0) === 'v') {
+      if (state.user.major === 'v') {
         Vue.set(state.advancement_unit, 'grade_1', 20);
         Vue.set(state.advancement_unit, 'grade_2', 50);
         Vue.set(state.advancement_unit, 'grade_3', 91);
@@ -165,7 +165,7 @@ export default new Vuex.Store({
         Vue.set(state.detail_graduate_unit.選択, '専門', 48);
         Vue.set(state.detail_graduate_unit.選択, '総合A', 4);
       }
-      if (state.user.id.charAt(0) === 'c') {
+      if (state.user.major === 'c') {
         Vue.set(state.advancement_unit, 'grade_1', 10);
         Vue.set(state.advancement_unit, 'grade_2', 51);
         Vue.set(state.advancement_unit, 'grade_3', 99);
@@ -176,7 +176,7 @@ export default new Vuex.Store({
         Vue.set(state.detail_graduate_unit.選択, '専門', 53);
         Vue.set(state.detail_graduate_unit.選択, '総合A', 4);
       }
-      if (state.user.id.charAt(0) === 'b') {
+      if (state.user.major === 'b') {
         Vue.set(state.advancement_unit, 'grade_1', 10);
         Vue.set(state.advancement_unit, 'grade_2', 51);
         Vue.set(state.advancement_unit, 'grade_3', 99);
@@ -187,7 +187,7 @@ export default new Vuex.Store({
         Vue.set(state.detail_graduate_unit.選択, '専門', 49);
         Vue.set(state.detail_graduate_unit.選択, '総合A', 4);
       }
-      if (state.user.id.charAt(0) === 'm') {
+      if (state.user.major === 'm') {
         Vue.set(state.advancement_unit, 'grade_1', 20);
         Vue.set(state.advancement_unit, 'grade_2', 52);
         Vue.set(state.advancement_unit, 'grade_3', 100);
@@ -198,7 +198,7 @@ export default new Vuex.Store({
         Vue.set(state.detail_graduate_unit.選択, '専門', 37);
         Vue.set(state.detail_graduate_unit.選択, '総合A', 4);
       }
-      if (state.user.id.charAt(0) === 'p') {
+      if (state.user.major === 'p') {
         Vue.set(state.advancement_unit, 'grade_1', 20);
         Vue.set(state.advancement_unit, 'grade_2', 52);
         Vue.set(state.advancement_unit, 'grade_3', 100);
@@ -209,7 +209,7 @@ export default new Vuex.Store({
         Vue.set(state.detail_graduate_unit.選択, '専門', 37);
         Vue.set(state.detail_graduate_unit.選択, '総合A', 4);
       }
-      if (state.user.id.charAt(0) === 'd') {
+      if (state.user.major === 'd') {
         Vue.set(state.advancement_unit, 'grade_1', 20);
         Vue.set(state.advancement_unit, 'grade_2', 56);
         Vue.set(state.advancement_unit, 'grade_3', 102);
@@ -220,7 +220,7 @@ export default new Vuex.Store({
         Vue.set(state.detail_graduate_unit.選択, '専門', 32);
         Vue.set(state.detail_graduate_unit.選択, '総合A', 4);
       }
-      if (state.user.id.charAt(0) === 's') {
+      if (state.user.major === 's') {
         Vue.set(state.advancement_unit, 'grade_1', 20);
         Vue.set(state.advancement_unit, 'grade_2', 56);
         Vue.set(state.advancement_unit, 'grade_3', 102);
@@ -231,7 +231,7 @@ export default new Vuex.Store({
         Vue.set(state.detail_graduate_unit.選択, '専門', 32);
         Vue.set(state.detail_graduate_unit.選択, '総合A', 4);
       }
-      if (state.user.id.charAt(0) === 'a') {
+      if (state.user.major === 'a') {
         Vue.set(state.advancement_unit, 'grade_1', 20);
         Vue.set(state.advancement_unit, 'grade_2', 51);
         Vue.set(state.advancement_unit, 'grade_3', 94);
@@ -242,62 +242,61 @@ export default new Vuex.Store({
         Vue.set(state.detail_graduate_unit.選択, '専門', 34);
         Vue.set(state.detail_graduate_unit.選択, '総合A', 4);
       }
-      if (state.user.id.charAt(0) === 'l') {
+      if (state.user.major === 'l') {
+        Vue.set(state.advancement_unit, 'grade_1', 20);
+        Vue.set(state.advancement_unit, 'grade_2', 52);
+        Vue.set(state.advancement_unit, 'grade_3', 91);
+        Vue.set(state.detail_graduate_unit.必修, '共通', 1);
+        Vue.set(state.detail_graduate_unit.必修, '専門', 59);
+        Vue.set(state.detail_graduate_unit.必修, '総合A', 4);
+        Vue.set(state.detail_graduate_unit.選択, '共通', 9);
+        Vue.set(state.detail_graduate_unit.選択, '専門', 35);
+        Vue.set(state.detail_graduate_unit.選択, '総合A', 4);
+      }
+      if (state.user.major === 't') {
+        Vue.set(state.advancement_unit, 'grade_1', 20);
+        Vue.set(state.advancement_unit, 'grade_2', 54);
+        Vue.set(state.advancement_unit, 'grade_3', 94);
+        Vue.set(state.detail_graduate_unit.必修, '共通', 4);
+        Vue.set(state.detail_graduate_unit.必修, '専門', 40);
+        Vue.set(state.detail_graduate_unit.必修, '総合A', 4);
+        Vue.set(state.detail_graduate_unit.選択, '共通', 6);
+        Vue.set(state.detail_graduate_unit.選択, '専門', 54);
+        Vue.set(state.detail_graduate_unit.選択, '総合A', 4);
+      }
+      if (state.user.major === 'h') {
+        Vue.set(state.advancement_unit, 'grade_1', 20);
+        Vue.set(state.advancement_unit, 'grade_2', 54);
+        Vue.set(state.advancement_unit, 'grade_3', 94);
+        Vue.set(state.detail_graduate_unit.必修, '共通', 4);
+        Vue.set(state.detail_graduate_unit.必修, '専門', 22);
+        Vue.set(state.detail_graduate_unit.必修, '総合A', 4);
+        Vue.set(state.detail_graduate_unit.選択, '共通', 6);
+        Vue.set(state.detail_graduate_unit.選択, '専門', 72);
+        Vue.set(state.detail_graduate_unit.選択, '総合A', 4);
+      }
+      if (state.user.major === 'k') {
         Vue.set(state.advancement_unit, 'grade_1', 24);
         Vue.set(state.advancement_unit, 'grade_2', 48);
         Vue.set(state.advancement_unit, 'grade_3', 96);
-        Vue.set(state.detail_graduate_unit.必修, '共通', 4);
-        Vue.set(state.detail_graduate_unit.必修, '専門', 46);
+        Vue.set(state.detail_graduate_unit.必修, '共通', 6);
+        Vue.set(state.detail_graduate_unit.必修, '専門', 27);
         Vue.set(state.detail_graduate_unit.必修, '総合A', 4);
         Vue.set(state.detail_graduate_unit.選択, '共通', 6);
-        Vue.set(state.detail_graduate_unit.選択, '専門', 48);
+        Vue.set(state.detail_graduate_unit.選択, '専門', 67);
         Vue.set(state.detail_graduate_unit.選択, '総合A', 4);
       }
-      if (state.user.id.charAt(0) === 't') {
+      if (state.user.major === 'x') {
         Vue.set(state.advancement_unit, 'grade_1', 24);
         Vue.set(state.advancement_unit, 'grade_2', 48);
         Vue.set(state.advancement_unit, 'grade_3', 96);
-        Vue.set(state.detail_graduate_unit.必修, '共通', 4);
-        Vue.set(state.detail_graduate_unit.必修, '専門', 46);
+        Vue.set(state.detail_graduate_unit.必修, '共通', 6);
+        Vue.set(state.detail_graduate_unit.必修, '専門', 31);
         Vue.set(state.detail_graduate_unit.必修, '総合A', 4);
-        Vue.set(state.detail_graduate_unit.選択, '共通', 6);
-        Vue.set(state.detail_graduate_unit.選択, '専門', 48);
+        Vue.set(state.detail_graduate_unit.選択, '共通', 4);
+        Vue.set(state.detail_graduate_unit.選択, '専門', 63);
         Vue.set(state.detail_graduate_unit.選択, '総合A', 4);
       }
-      if (state.user.id.charAt(0) === 'h') {
-        Vue.set(state.advancement_unit, 'grade_1', 24);
-        Vue.set(state.advancement_unit, 'grade_2', 48);
-        Vue.set(state.advancement_unit, 'grade_3', 96);
-        Vue.set(state.detail_graduate_unit.必修, '共通', 4);
-        Vue.set(state.detail_graduate_unit.必修, '専門', 46);
-        Vue.set(state.detail_graduate_unit.必修, '総合A', 4);
-        Vue.set(state.detail_graduate_unit.選択, '共通', 6);
-        Vue.set(state.detail_graduate_unit.選択, '専門', 48);
-        Vue.set(state.detail_graduate_unit.選択, '総合A', 4);
-      }
-      if (state.user.id.charAt(0) === 'x') {
-        Vue.set(state.advancement_unit, 'grade_1', 24);
-        Vue.set(state.advancement_unit, 'grade_2', 48);
-        Vue.set(state.advancement_unit, 'grade_3', 96);
-        Vue.set(state.detail_graduate_unit.必修, '共通', 4);
-        Vue.set(state.detail_graduate_unit.必修, '専門', 46);
-        Vue.set(state.detail_graduate_unit.必修, '総合A', 4);
-        Vue.set(state.detail_graduate_unit.選択, '共通', 6);
-        Vue.set(state.detail_graduate_unit.選択, '専門', 48);
-        Vue.set(state.detail_graduate_unit.選択, '総合A', 4);
-      }
-      if (state.user.id.charAt(0) === 'k') {
-        Vue.set(state.advancement_unit, 'grade_1', 24);
-        Vue.set(state.advancement_unit, 'grade_2', 48);
-        Vue.set(state.advancement_unit, 'grade_3', 96);
-        Vue.set(state.detail_graduate_unit.必修, '共通', 4);
-        Vue.set(state.detail_graduate_unit.必修, '専門', 46);
-        Vue.set(state.detail_graduate_unit.必修, '総合A', 4);
-        Vue.set(state.detail_graduate_unit.選択, '共通', 6);
-        Vue.set(state.detail_graduate_unit.選択, '専門', 48);
-        Vue.set(state.detail_graduate_unit.選択, '総合A', 4);
-      }
-
     },
     set_is_enough_unit_graduate(state, bool) {
       Vue.set(state, 'is_enough_unit_graduate', bool);
@@ -345,7 +344,7 @@ export default new Vuex.Store({
     //時間割関係
     set_registered_lecture(state, lectures) {
       Vue.set(state, 'registered_lectures', lectures);
-      lectures.forEach(function (lecture) {
+      lectures.forEach(function(lecture) {
         if (lecture.continuous > 1) {
           for (let i = 1; i < lecture.continuous; i++) {
             let sublecture;
@@ -491,7 +490,7 @@ export default new Vuex.Store({
           選択: 0
         }
       };
-      state.registered_lectures.forEach(function (lecture) {
+      state.registered_lectures.forEach(function(lecture) {
         unit_list[lecture.grade][lecture.compulsory][lecture.classification] += lecture.unit;
         if (lecture.isenglish) {
           english_unit_list[lecture.grade][lecture.compulsory] += lecture.unit;
@@ -556,7 +555,7 @@ export default new Vuex.Store({
         .then(res => {
           context.commit('set_can_register_lectures', res.data);
           if (this.state.registered_lectures.length <= 0) {
-            this.state.can_register_lectures.forEach(function (lectuer) {
+            this.state.can_register_lectures.forEach(function(lectuer) {
               if (lectuer.compulsory == '必修') {
                 context.commit('push_registered_lecture', lectuer);
               }

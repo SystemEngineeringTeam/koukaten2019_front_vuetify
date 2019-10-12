@@ -31,55 +31,77 @@
       </thead>
       <tbody>
         <tr v-for="i in 4" :key="i">
-          <td :class="{
-              'blue lighten-5': i == 1 || i == 3
-            }">{{ i }}年</td>
           <td
             :class="{
               'blue lighten-5': i == 1 || i == 3
             }"
-          >{{ $store.state.unit_list[i]['必修']['共通'] }}</td>
+          >
+            {{ i }}年
+          </td>
           <td
             :class="{
               'blue lighten-5': i == 1 || i == 3
             }"
-          >{{ $store.state.unit_list[i]['選択']['共通'] }}</td>
+          >
+            {{ $store.state.unit_list[i]['必修']['共通'] }}
+          </td>
           <td
             :class="{
               'blue lighten-5': i == 1 || i == 3
             }"
-          >{{ $store.state.unit_list[i]['必修']['専門'] }}</td>
+          >
+            {{ $store.state.unit_list[i]['選択']['共通'] }}
+          </td>
           <td
             :class="{
               'blue lighten-5': i == 1 || i == 3
             }"
-          >{{ $store.state.unit_list[i]['選択']['専門'] }}</td>
+          >
+            {{ $store.state.unit_list[i]['必修']['専門'] }}
+          </td>
           <td
             :class="{
               'blue lighten-5': i == 1 || i == 3
             }"
-          >{{ $store.state.unit_list[i]['必修']['総合A'] }}</td>
+          >
+            {{ $store.state.unit_list[i]['選択']['専門'] }}
+          </td>
           <td
             :class="{
               'blue lighten-5': i == 1 || i == 3
             }"
-          >{{ $store.state.unit_list[i]['選択']['総合A'] }}</td>
+          >
+            {{ $store.state.unit_list[i]['必修']['総合A'] }}
+          </td>
           <td
             :class="{
               'blue lighten-5': i == 1 || i == 3
             }"
-          >{{ $store.state.english_unit_list[i]['必修'] + $store.state.english_unit_list[i]['選択'] }}</td>
+          >
+            {{ $store.state.unit_list[i]['選択']['総合A'] }}
+          </td>
           <td
             :class="{
               'blue lighten-5': i == 1 || i == 3
             }"
-          >{{ $store.state.unit_list[i]['必修']['総合B'] + $store.state.unit_list[i]['選択']['総合B'] }}</td>
+          >
+            {{ $store.state.english_unit_list[i]['必修'] + $store.state.english_unit_list[i]['選択'] }}
+          </td>
+          <td
+            :class="{
+              'blue lighten-5': i == 1 || i == 3
+            }"
+          >
+            {{ $store.state.unit_list[i]['必修']['総合B'] + $store.state.unit_list[i]['選択']['総合B'] }}
+          </td>
           <td
             :class="{
               'blue lighten-5': i == 1 || i == 3,
               'red--text': !is_not_enough(grade_total_unit(i), max_unit_one_year)
             }"
-          >{{ grade_total_unit(i) }}/{{ max_unit_one_year }}</td>
+          >
+            {{ grade_total_unit(i) }}/{{ max_unit_one_year }}
+          </td>
         </tr>
         <tr>
           <td class="blue lighten-5">合計</td>
@@ -88,91 +110,118 @@
             :class="{
               'yellow--text text--darken-2': is_not_enough(
                 classification_compulsory_total_unit('共通'),
-                $store.detail_graduate_unit.必修.共通
+                $store.state.detail_graduate_unit.必修.共通
               ),
               'green--text': !is_not_enough(
                 classification_compulsory_total_unit('共通'),
-                $store.detail_graduate_unit.必修.共通
+                $store.state.detail_graduate_unit.必修.共通
               )
             }"
-          >{{ classification_compulsory_total_unit('共通') }}/{{ $store.detail_graduate_unit.必修.共通 }}</td>
+          >
+            {{ classification_compulsory_total_unit('共通') }}/{{ $store.state.detail_graduate_unit.必修.共通 }}
+          </td>
           <td
             class="blue lighten-5"
             :class="{
               'yellow--text text--darken-2': is_not_enough(
                 classification_choice_total_unit('共通'),
-                $store.detail_graduate_unit.選択.共通
+                $store.state.detail_graduate_unit.選択.共通
               ),
-              'green--text': !is_not_enough(classification_choice_total_unit('共通'), $store.detail_graduate_unit.選択.共通)
+              'green--text': !is_not_enough(
+                classification_choice_total_unit('共通'),
+                $store.state.detail_graduate_unit.選択.共通
+              )
             }"
-          >{{ classification_choice_total_unit('共通') }}/{{ $store.detail_graduate_unit.選択.共通 }}</td>
+          >
+            {{ classification_choice_total_unit('共通') }}/{{ $store.state.detail_graduate_unit.選択.共通 }}
+          </td>
           <td
             class="blue lighten-5"
             :class="{
               'yellow--text text--darken-2': is_not_enough(
                 classification_compulsory_total_unit('専門'),
-                $store.detail_graduate_unit.必修.専門
+                $store.state.detail_graduate_unit.必修.専門
               ),
               'green--text': !is_not_enough(
                 classification_compulsory_total_unit('専門'),
-                $store.detail_graduate_unit.必修.専門
+                $store.state.detail_graduate_unit.必修.専門
               )
             }"
-          >{{ classification_compulsory_total_unit('専門') }}/{{ $store.detail_graduate_unit.必修.専門 }}</td>
+          >
+            {{ classification_compulsory_total_unit('専門') }}/{{ $store.state.detail_graduate_unit.必修.専門 }}
+          </td>
           <td
             class="blue lighten-5"
             :class="{
               'yellow--text text--darken-2': is_not_enough(
                 classification_choice_total_unit('専門'),
-                $store.detail_graduate_unit.選択.専門
+                $store.state.detail_graduate_unit.選択.専門
               ),
-              'green--text': !is_not_enough(classification_choice_total_unit('専門'), $store.detail_graduate_unit.選択.専門)
+              'green--text': !is_not_enough(
+                classification_choice_total_unit('専門'),
+                $store.state.detail_graduate_unit.選択.専門
+              )
             }"
-          >{{ classification_choice_total_unit('専門') }}/{{ $store.detail_graduate_unit.選択.専門 }}</td>
+          >
+            {{ classification_choice_total_unit('専門') }}/{{ $store.state.detail_graduate_unit.選択.専門 }}
+          </td>
           <td
             class="blue lighten-5"
             :class="{
               'yellow--text text--darken-2': is_not_enough(
                 classification_compulsory_total_unit('総合A'),
-                $store.detail_graduate_unit.必修.総合A
+                $store.state.detail_graduate_unit.必修.総合A
               ),
               'green--text': !is_not_enough(
                 classification_compulsory_total_unit('総合A'),
-                $store.detail_graduate_unit.必修.総合A
+                $store.state.detail_graduate_unit.必修.総合A
               )
             }"
-          >{{ classification_compulsory_total_unit('総合A') }}/{{ $store.detail_graduate_unit.必修.総合A }}</td>
+          >
+            {{ classification_compulsory_total_unit('総合A') }}/{{ $store.state.detail_graduate_unit.必修.総合A }}
+          </td>
           <td
             class="blue lighten-5"
             :class="{
               'yellow--text text--darken-2': is_not_enough(
                 classification_choice_total_unit('総合A'),
-                $store.detail_graduate_unit.選択.総合A
+                $store.state.detail_graduate_unit.選択.総合A
               ),
-              'green--text': !is_not_enough(classification_choice_total_unit('総合A'), $store.detail_graduate_unit.選択.総合A)
+              'green--text': !is_not_enough(
+                classification_choice_total_unit('総合A'),
+                $store.state.detail_graduate_unit.選択.総合A
+              )
             }"
-          >{{ classification_choice_total_unit('総合A') }}/{{ $store.detail_graduate_unit.選択.総合A }}</td>
+          >
+            {{ classification_choice_total_unit('総合A') }}/{{ $store.state.detail_graduate_unit.選択.総合A }}
+          </td>
           <td
             class="blue lighten-5"
             :class="{
               'yellow--text text--darken-2': is_not_enough(classification_total_unit('英語'), graduate_unit.english),
               'green--text': !is_not_enough(classification_total_unit('英語'), graduate_unit.english)
             }"
-          >{{ classification_total_unit('英語') }}/{{ graduate_unit.english }}</td>
+          >
+            {{ classification_total_unit('英語') }}/{{ graduate_unit.english }}
+          </td>
           <td
             class="blue lighten-5"
             :class="{
               'yellow--text text--darken-2': is_not_enough(classification_total_unit('総合B'), graduate_unit.B),
               'green--text': !is_not_enough(classification_total_unit('総合B'), graduate_unit.B)
             }"
-          >{{ classification_total_unit('総合B') }}/{{ graduate_unit.B }}</td>
+          >
+            {{ classification_total_unit('総合B') }}/{{ graduate_unit.B }}
+          </td>
           <td
             class="blue lighten-5"
             :class="{
               'yellow--text text--darken-2': is_not_enough(total_unit(), graduate_unit.all),
               'green--text': !is_not_enough(total_unit(), graduate_unit.all)
             }"
-          >{{ total_unit() }}/{{ graduate_unit.all }}</td>
+          >
+            {{ total_unit() }}/{{ graduate_unit.all }}
+          </td>
         </tr>
       </tbody>
     </v-simple-table>
@@ -191,40 +240,56 @@
       </thead>
       <tbody>
         <tr v-for="i in 4" :key="i">
-          <td :class="{
-              'blue lighten-5': i == 1 || i == 3
-            }">{{ i }}年</td>
           <td
             :class="{
               'blue lighten-5': i == 1 || i == 3
             }"
-          >{{ $store.state.unit_list[i]['必修']['共通'] + $store.state.unit_list[i]['選択']['共通'] }}</td>
+          >
+            {{ i }}年
+          </td>
           <td
             :class="{
               'blue lighten-5': i == 1 || i == 3
             }"
-          >{{ $store.state.unit_list[i]['必修']['専門'] + $store.state.unit_list[i]['選択']['専門'] }}</td>
+          >
+            {{ $store.state.unit_list[i]['必修']['共通'] + $store.state.unit_list[i]['選択']['共通'] }}
+          </td>
           <td
             :class="{
               'blue lighten-5': i == 1 || i == 3
             }"
-          >{{ $store.state.unit_list[i]['必修']['総合A'] + $store.state.unit_list[i]['選択']['総合A'] }}</td>
+          >
+            {{ $store.state.unit_list[i]['必修']['専門'] + $store.state.unit_list[i]['選択']['専門'] }}
+          </td>
           <td
             :class="{
               'blue lighten-5': i == 1 || i == 3
             }"
-          >{{ $store.state.english_unit_list[i]['必修'] + $store.state.english_unit_list[i]['選択'] }}</td>
+          >
+            {{ $store.state.unit_list[i]['必修']['総合A'] + $store.state.unit_list[i]['選択']['総合A'] }}
+          </td>
           <td
             :class="{
               'blue lighten-5': i == 1 || i == 3
             }"
-          >{{ $store.state.unit_list[i]['必修']['総合B'] + $store.state.unit_list[i]['選択']['総合B'] }}</td>
+          >
+            {{ $store.state.english_unit_list[i]['必修'] + $store.state.english_unit_list[i]['選択'] }}
+          </td>
+          <td
+            :class="{
+              'blue lighten-5': i == 1 || i == 3
+            }"
+          >
+            {{ $store.state.unit_list[i]['必修']['総合B'] + $store.state.unit_list[i]['選択']['総合B'] }}
+          </td>
           <td
             :class="{
               'blue lighten-5': i == 1 || i == 3,
               'red--text': !is_not_enough(grade_total_unit(i), max_unit_one_year)
             }"
-          >{{ grade_total_unit(i) }}/{{ max_unit_one_year }}</td>
+          >
+            {{ grade_total_unit(i) }}/{{ max_unit_one_year }}
+          </td>
         </tr>
         <tr>
           <td class="blue lighten-5">合計</td>
@@ -234,42 +299,54 @@
               'yellow--text text--darken-2': is_not_enough(classification_total_unit('共通'), graduate_unit.kyotu),
               'green--text': !is_not_enough(classification_total_unit('共通'), graduate_unit.kyotu)
             }"
-          >{{ classification_total_unit('共通') }}/{{ graduate_unit.kyotu }}</td>
+          >
+            {{ classification_total_unit('共通') }}/{{ graduate_unit.kyotu }}
+          </td>
           <td
             class="blue lighten-5 font-weight-black"
             :class="{
               'yellow--text text--darken-2': is_not_enough(classification_total_unit('専門'), graduate_unit.senmon),
               'green--text': !is_not_enough(classification_total_unit('専門'), graduate_unit.senmon)
             }"
-          >{{ classification_total_unit('専門') }}/{{ graduate_unit.senmon }}</td>
+          >
+            {{ classification_total_unit('専門') }}/{{ graduate_unit.senmon }}
+          </td>
           <td
             class="blue lighten-5 font-weight-black"
             :class="{
               'yellow--text text--darken-2': is_not_enough(classification_total_unit('総合A'), graduate_unit.A),
               'green--text': !is_not_enough(classification_total_unit('総合A'), graduate_unit.A)
             }"
-          >{{ classification_total_unit('総合A') }}/{{ graduate_unit.A }}</td>
+          >
+            {{ classification_total_unit('総合A') }}/{{ graduate_unit.A }}
+          </td>
           <td
             class="blue lighten-5 font-weight-black"
             :class="{
               'yellow--text text--darken-2': is_not_enough(classification_total_unit('英語'), graduate_unit.english),
               'green--text': !is_not_enough(classification_total_unit('英語'), graduate_unit.english)
             }"
-          >{{ classification_total_unit('英語') }}/{{ graduate_unit.english }}</td>
+          >
+            {{ classification_total_unit('英語') }}/{{ graduate_unit.english }}
+          </td>
           <td
             class="blue lighten-5 font-weight-black"
             :class="{
               'yellow--text text--darken-2': is_not_enough(classification_total_unit('総合B'), graduate_unit.B),
               'green--text': !is_not_enough(classification_total_unit('総合B'), graduate_unit.B)
             }"
-          >{{ classification_total_unit('総合B') }}/{{ graduate_unit.B }}</td>
+          >
+            {{ classification_total_unit('総合B') }}/{{ graduate_unit.B }}
+          </td>
           <td
             class="blue lighten-5 font-weight-black"
             :class="{
               'yellow--text text--darken-2': is_not_enough(total_unit(), graduate_unit.all),
               'green--text': !is_not_enough(total_unit(), graduate_unit.all)
             }"
-          >{{ total_unit() }}/{{ graduate_unit.all }}</td>
+          >
+            {{ total_unit() }}/{{ graduate_unit.all }}
+          </td>
         </tr>
       </tbody>
     </v-simple-table>
