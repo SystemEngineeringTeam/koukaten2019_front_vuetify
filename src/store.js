@@ -321,7 +321,11 @@ export default new Vuex.Store({
       // 卒業研究の単位追加
       unit_list['4']['必修']['専門'] += 4;
       state.registered_lectures.forEach(function(lecture) {
-        unit_list[lecture.grade][lecture.compulsory][lecture.classification] += lecture.unit;
+        if (lecture.compulsory == '選択必修') {
+          unit_list[lecture.grade]['選択'][lecture.classification] += lecture.unit;
+        } else {
+          unit_list[lecture.grade][lecture.compulsory][lecture.classification] += lecture.unit;
+        }
         if (lecture.isenglish) {
           english_unit_list[lecture.grade][lecture.compulsory] += lecture.unit;
         }
