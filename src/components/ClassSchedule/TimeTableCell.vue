@@ -50,11 +50,11 @@
             <template
               ><br />{{ lecture.teacher_name1 }}</template
             >
-            <template v-if="lecture.teacher_name2 !== ' '">
-              ,他</template
+            <template v-if="lecture.teacher_name2 !== ' '"
+              > 他</template
             >
             <template v-if="$route.path == '/ClassScheduleView'">
-              {{ lecture.place }}</template
+              <br>{{ lecture.place }}</template
             >
           </v-card-text>
           <!--<v-card-actions>
@@ -95,7 +95,7 @@
                   <br />
                   {{ c.teacher_name1 }}
                   <template v-if="c.teacher_name2 !== ' '"
-                    >,他</template
+                    > 他</template
                   >
                 </p>
                 <div class="text-center">
