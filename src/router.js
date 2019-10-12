@@ -2,8 +2,6 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import Home from './pages/Home';
 import ClassSchedule from './pages/ClassSchedule';
-import Questionnaire from './pages/Questionnaire';
-import Questionnaire_Answer from './pages/Questionnaire_Answer';
 import Initial_Registration from './pages/Initial_Registration';
 import Login from './pages/Login';
 import ClassScheduleView from './pages/ClassScheduleView';
@@ -24,16 +22,6 @@ export default new Router({
       name: 'class_schedule',
       component: ClassSchedule,
       meta: { requiresAuth: true }
-    },
-    {
-      path: '/Questionnaire',
-      name: 'Questionnaire',
-      component: Questionnaire
-    },
-    {
-      path: '/Questionnaire_Answer',
-      name: 'Questionnaire_Answer',
-      component: Questionnaire_Answer
     },
     {
       path: '/Initial_Registration',

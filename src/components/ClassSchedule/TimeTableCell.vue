@@ -53,6 +53,9 @@
             <template v-if="lecture.teacher_name2 !== ' '">
               ,他</template
             >
+            <template v-if="$route.path == '/ClassScheduleView'">
+              {{ lecture.place }}</template
+            >
           </v-card-text>
           <!--<v-card-actions>
               <v-btn :href="lecture['syllabus']" target="_blank">シラバス</v-btn>
