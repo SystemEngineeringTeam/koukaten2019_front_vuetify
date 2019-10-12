@@ -126,13 +126,8 @@
     <!--ダイアログ-->
     <v-dialog v-model="duplicate_check_decision" max-width="290">
       <v-card>
-<<<<<<< HEAD
-        <v-card-title>警告</v-card-title>
-        <v-card-text>選択しようとしている授業はすでに４年間のどこかで選択されています</v-card-text>
-=======
         <v-card-title class="headline">警告</v-card-title>
         <v-card-text class="headline">登録しようとしている授業はすでに４年間のどこかで登録されています</v-card-text>
->>>>>>> b9aea2031fa07081e9b7a2eecdd767779000e9df
         <v-card-actions>
           <v-btn v-on:click="duplicate_check_decision = false">OK</v-btn>
         </v-card-actions>
