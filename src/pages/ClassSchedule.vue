@@ -348,7 +348,7 @@ export default {
     get_grade_half_lectures(lectures, grade, semester) {
       let c = [];
       lectures.forEach(function(obj) {
-        if (obj.grade === grade && obj.semester === semester) {
+        if (obj.grade === grade && (obj.semester === semester || obj.semester === '通年')) {
           c.push(obj);
         }
       });
@@ -369,7 +369,7 @@ export default {
     ) {
       let c = [];
       lectures.forEach(function(obj) {
-        if (obj.semester === semester) {
+        if (obj.semester === semester || obj.semester === '通年') {
           if (obj.grade === grade) {
             if (compulsory == true && obj.compulsory === '必修') {
               if (common == true && obj.classification === '共通') {

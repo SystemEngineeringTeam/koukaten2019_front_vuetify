@@ -174,7 +174,7 @@ export default new Vuex.Store({
       Vue.set(state, 'registered_lectures', lectures);
       lectures.forEach(function(lecture) {
         if (lecture.continuous > 1) {
-          for (let i = 0; i < lecture.continuous; i++) {
+          for (let i = 1; i < lecture.continuous; i++) {
             let sublecture;
             sublecture = Vue.util.extend({}, lecture);
             sublecture.lec_time += 1;
