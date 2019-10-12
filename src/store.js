@@ -78,6 +78,274 @@ export default new Vuex.Store({
           総合A: 0,
           総合B: 0
         }
+      },
+      unit: {
+        e: {
+          advancement_unit: {
+            grade_1: 20,
+            grade_2: 50,
+            grade_3: 91
+          },
+          detail_graduate_unit: {
+            必修: {
+              共通: 4,
+              専門: 46,
+              総合A: 4
+            },
+            選択: {
+              共通: 6,
+              専門: 48,
+              総合A: 4
+            }
+          }
+        },
+        v: {
+          advancement_unit: {
+            grade_1: 20,
+            grade_2: 50,
+            grade_3: 91
+          },
+          detail_graduate_unit: {
+            必修: {
+              共通: 4,
+              専門: 46,
+              総合A: 4
+            },
+            選択: {
+              共通: 6,
+              専門: 48,
+              総合A: 4
+            }
+          }
+        },
+        c: {
+          advancement_unit: {
+            grade_1: 10,
+            grade_2: 51,
+            grade_3: 99
+          },
+          detail_graduate_unit: {
+            必修: {
+              共通: 3,
+              専門: 41,
+              総合A: 4
+            },
+            選択: {
+              共通: 7,
+              専門: 53,
+              総合A: 4
+            }
+          }
+        },
+        b: {
+          advancement_unit: {
+            grade_1: 10,
+            grade_2: 51,
+            grade_3: 99
+          },
+          detail_graduate_unit: {
+            必修: {
+              共通: 3,
+              専門: 45,
+              総合A: 4
+            },
+            選択: {
+              共通: 7,
+              専門: 49,
+              総合A: 4
+            }
+          }
+        },
+        m: {
+          advancement_unit: {
+            grade_1: 20,
+            grade_2: 52,
+            grade_3: 100
+          },
+          detail_graduate_unit: {
+            必修: {
+              共通: 0,
+              専門: 57,
+              総合A: 4
+            },
+            選択: {
+              共通: 10,
+              専門: 48,
+              総合A: 4
+            }
+          }
+        },
+        p: {
+          advancement_unit: {
+            grade_1: 20,
+            grade_2: 52,
+            grade_3: 100
+          },
+          detail_graduate_unit: {
+            必修: {
+              共通: 0,
+              専門: 57,
+              総合A: 4
+            },
+            選択: {
+              共通: 10,
+              専門: 37,
+              総合A: 4
+            }
+          }
+        },
+        d: {
+          advancement_unit: {
+            grade_1: 20,
+            grade_2: 56,
+            grade_3: 102
+          },
+          detail_graduate_unit: {
+            必修: {
+              共通: 4,
+              専門: 62,
+              総合A: 4
+            },
+            選択: {
+              共通: 6,
+              専門: 32,
+              総合A: 4
+            }
+          }
+        },
+        s: {
+          advancement_unit: {
+            grade_1: 20,
+            grade_2: 56,
+            grade_3: 102
+          },
+          detail_graduate_unit: {
+            必修: {
+              共通: 4,
+              専門: 62,
+              総合A: 4
+            },
+            選択: {
+              共通: 6,
+              専門: 32,
+              総合A: 4
+            }
+          }
+        },
+        a: {
+          advancement_unit: {
+            grade_1: 20,
+            grade_2: 51,
+            grade_3: 94
+          },
+          detail_graduate_unit: {
+            必修: {
+              共通: 1,
+              専門: 60,
+              総合A: 4
+            },
+            選択: {
+              共通: 9,
+              専門: 34,
+              総合A: 4
+            }
+          }
+        },
+        l: {
+          advancement_unit: {
+            grade_1: 24,
+            grade_2: 48,
+            grade_3: 96
+          },
+          detail_graduate_unit: {
+            必修: {
+              共通: 4,
+              専門: 46,
+              総合A: 4
+            },
+            選択: {
+              共通: 6,
+              専門: 48,
+              総合A: 4
+            }
+          }
+        },
+        t: {
+          advancement_unit: {
+            grade_1: 24,
+            grade_2: 48,
+            grade_3: 96
+          },
+          detail_graduate_unit: {
+            必修: {
+              共通: 4,
+              専門: 46,
+              総合A: 4
+            },
+            選択: {
+              共通: 6,
+              専門: 48,
+              総合A: 4
+            }
+          }
+        },
+        h: {
+          advancement_unit: {
+            grade_1: 24,
+            grade_2: 48,
+            grade_3: 96
+          },
+          detail_graduate_unit: {
+            必修: {
+              共通: 4,
+              専門: 46,
+              総合A: 4
+            },
+            選択: {
+              共通: 6,
+              専門: 48,
+              総合A: 4
+            }
+          }
+        },
+        x: {
+          advancement_unit: {
+            grade_1: 24,
+            grade_2: 48,
+            grade_3: 96
+          },
+          detail_graduate_unit: {
+            必修: {
+              共通: 4,
+              専門: 46,
+              総合A: 4
+            },
+            選択: {
+              共通: 6,
+              専門: 48,
+              総合A: 4
+            }
+          }
+        },
+        k: {
+          advancement_unit: {
+            grade_1: 24,
+            grade_2: 48,
+            grade_3: 96
+          },
+          detail_graduate_unit: {
+            必修: {
+              共通: 6,
+              専門: 46,
+              総合A: 4
+            },
+            選択: {
+              共通: 4,
+              専門: 48,
+              総合A: 4
+            }
+          }
+        }
       }
     },
     english_unit_list: {
@@ -125,7 +393,9 @@ export default new Vuex.Store({
     //             Vue.set(this, 'timetable_editor', res.data);
     //         });
     // },
+    get_unit(state, id) {
 
+    },
     set_is_enough_unit_graduate(state, bool) {
       Vue.set(state, 'is_enough_unit_graduate', bool);
     },
@@ -172,7 +442,7 @@ export default new Vuex.Store({
     //時間割関係
     set_registered_lecture(state, lectures) {
       Vue.set(state, 'registered_lectures', lectures);
-      lectures.forEach(function(lecture) {
+      lectures.forEach(function (lecture) {
         if (lecture.continuous > 1) {
           for (let i = 1; i < lecture.continuous; i++) {
             let sublecture;
@@ -318,7 +588,7 @@ export default new Vuex.Store({
           選択: 0
         }
       };
-      state.registered_lectures.forEach(function(lecture) {
+      state.registered_lectures.forEach(function (lecture) {
         unit_list[lecture.grade][lecture.compulsory][lecture.classification] += lecture.unit;
         if (lecture.isenglish) {
           english_unit_list[lecture.grade][lecture.compulsory] += lecture.unit;
@@ -383,7 +653,7 @@ export default new Vuex.Store({
         .then(res => {
           context.commit('set_can_register_lectures', res.data);
           if (this.state.registered_lectures.length <= 0) {
-            this.state.can_register_lectures.forEach(function(lectuer) {
+            this.state.can_register_lectures.forEach(function (lectuer) {
               if (lectuer.compulsory == '必修') {
                 context.commit('push_registered_lecture', lectuer);
               }

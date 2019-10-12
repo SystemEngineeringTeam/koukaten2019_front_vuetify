@@ -1,5 +1,6 @@
 <template>
   <div>
+    {{ unit['k']['advancement_unit']['grade_1'] }}
     <v-switch v-model="detail" label="表示切り替え"></v-switch>
     <v-simple-table v-if="detail">
       <thead>
@@ -30,77 +31,55 @@
       </thead>
       <tbody>
         <tr v-for="i in 4" :key="i">
+          <td :class="{
+              'blue lighten-5': i == 1 || i == 3
+            }">{{ i }}年</td>
           <td
             :class="{
               'blue lighten-5': i == 1 || i == 3
             }"
-          >
-            {{ i }}年
-          </td>
+          >{{ $store.state.unit_list[i]['必修']['共通'] }}</td>
           <td
             :class="{
               'blue lighten-5': i == 1 || i == 3
             }"
-          >
-            {{ $store.state.unit_list[i]['必修']['共通'] }}
-          </td>
+          >{{ $store.state.unit_list[i]['選択']['共通'] }}</td>
           <td
             :class="{
               'blue lighten-5': i == 1 || i == 3
             }"
-          >
-            {{ $store.state.unit_list[i]['選択']['共通'] }}
-          </td>
+          >{{ $store.state.unit_list[i]['必修']['専門'] }}</td>
           <td
             :class="{
               'blue lighten-5': i == 1 || i == 3
             }"
-          >
-            {{ $store.state.unit_list[i]['必修']['専門'] }}
-          </td>
+          >{{ $store.state.unit_list[i]['選択']['専門'] }}</td>
           <td
             :class="{
               'blue lighten-5': i == 1 || i == 3
             }"
-          >
-            {{ $store.state.unit_list[i]['選択']['専門'] }}
-          </td>
+          >{{ $store.state.unit_list[i]['必修']['総合A'] }}</td>
           <td
             :class="{
               'blue lighten-5': i == 1 || i == 3
             }"
-          >
-            {{ $store.state.unit_list[i]['必修']['総合A'] }}
-          </td>
+          >{{ $store.state.unit_list[i]['選択']['総合A'] }}</td>
           <td
             :class="{
               'blue lighten-5': i == 1 || i == 3
             }"
-          >
-            {{ $store.state.unit_list[i]['選択']['総合A'] }}
-          </td>
+          >{{ $store.state.english_unit_list[i]['必修'] + $store.state.english_unit_list[i]['選択'] }}</td>
           <td
             :class="{
               'blue lighten-5': i == 1 || i == 3
             }"
-          >
-            {{ $store.state.english_unit_list[i]['必修'] + $store.state.english_unit_list[i]['選択'] }}
-          </td>
-          <td
-            :class="{
-              'blue lighten-5': i == 1 || i == 3
-            }"
-          >
-            {{ $store.state.unit_list[i]['必修']['総合B'] + $store.state.unit_list[i]['選択']['総合B'] }}
-          </td>
+          >{{ $store.state.unit_list[i]['必修']['総合B'] + $store.state.unit_list[i]['選択']['総合B'] }}</td>
           <td
             :class="{
               'blue lighten-5': i == 1 || i == 3,
               'red--text': !is_not_enough(grade_total_unit(i), max_unit_one_year)
             }"
-          >
-            {{ grade_total_unit(i) }}/{{ max_unit_one_year }}
-          </td>
+          >{{ grade_total_unit(i) }}/{{ max_unit_one_year }}</td>
         </tr>
         <tr>
           <td class="blue lighten-5">合計</td>
@@ -116,9 +95,7 @@
                 detail_graduate_unit.必修.共通
               )
             }"
-          >
-            {{ classification_compulsory_total_unit('共通') }}/{{ detail_graduate_unit.必修.共通 }}
-          </td>
+          >{{ classification_compulsory_total_unit('共通') }}/{{ detail_graduate_unit.必修.共通 }}</td>
           <td
             class="blue lighten-5"
             :class="{
@@ -128,9 +105,7 @@
               ),
               'green--text': !is_not_enough(classification_choice_total_unit('共通'), detail_graduate_unit.選択.共通)
             }"
-          >
-            {{ classification_choice_total_unit('共通') }}/{{ detail_graduate_unit.選択.共通 }}
-          </td>
+          >{{ classification_choice_total_unit('共通') }}/{{ detail_graduate_unit.選択.共通 }}</td>
           <td
             class="blue lighten-5"
             :class="{
@@ -143,9 +118,7 @@
                 detail_graduate_unit.必修.専門
               )
             }"
-          >
-            {{ classification_compulsory_total_unit('専門') }}/{{ detail_graduate_unit.必修.専門 }}
-          </td>
+          >{{ classification_compulsory_total_unit('専門') }}/{{ detail_graduate_unit.必修.専門 }}</td>
           <td
             class="blue lighten-5"
             :class="{
@@ -155,9 +128,7 @@
               ),
               'green--text': !is_not_enough(classification_choice_total_unit('専門'), detail_graduate_unit.選択.専門)
             }"
-          >
-            {{ classification_choice_total_unit('専門') }}/{{ detail_graduate_unit.選択.専門 }}
-          </td>
+          >{{ classification_choice_total_unit('専門') }}/{{ detail_graduate_unit.選択.専門 }}</td>
           <td
             class="blue lighten-5"
             :class="{
@@ -170,9 +141,7 @@
                 detail_graduate_unit.必修.総合A
               )
             }"
-          >
-            {{ classification_compulsory_total_unit('総合A') }}/{{ detail_graduate_unit.必修.総合A }}
-          </td>
+          >{{ classification_compulsory_total_unit('総合A') }}/{{ detail_graduate_unit.必修.総合A }}</td>
           <td
             class="blue lighten-5"
             :class="{
@@ -182,36 +151,28 @@
               ),
               'green--text': !is_not_enough(classification_choice_total_unit('総合A'), detail_graduate_unit.選択.総合A)
             }"
-          >
-            {{ classification_choice_total_unit('総合A') }}/{{ detail_graduate_unit.選択.総合A }}
-          </td>
+          >{{ classification_choice_total_unit('総合A') }}/{{ detail_graduate_unit.選択.総合A }}</td>
           <td
             class="blue lighten-5"
             :class="{
               'yellow--text text--darken-2': is_not_enough(classification_total_unit('英語'), graduate_unit.english),
               'green--text': !is_not_enough(classification_total_unit('英語'), graduate_unit.english)
             }"
-          >
-            {{ classification_total_unit('英語') }}/{{ graduate_unit.english }}
-          </td>
+          >{{ classification_total_unit('英語') }}/{{ graduate_unit.english }}</td>
           <td
             class="blue lighten-5"
             :class="{
               'yellow--text text--darken-2': is_not_enough(classification_total_unit('総合B'), graduate_unit.B),
               'green--text': !is_not_enough(classification_total_unit('総合B'), graduate_unit.B)
             }"
-          >
-            {{ classification_total_unit('総合B') }}/{{ graduate_unit.B }}
-          </td>
+          >{{ classification_total_unit('総合B') }}/{{ graduate_unit.B }}</td>
           <td
             class="blue lighten-5"
             :class="{
               'yellow--text text--darken-2': is_not_enough(total_unit(), graduate_unit.all),
               'green--text': !is_not_enough(total_unit(), graduate_unit.all)
             }"
-          >
-            {{ total_unit() }}/{{ graduate_unit.all }}
-          </td>
+          >{{ total_unit() }}/{{ graduate_unit.all }}</td>
         </tr>
       </tbody>
     </v-simple-table>
@@ -230,56 +191,40 @@
       </thead>
       <tbody>
         <tr v-for="i in 4" :key="i">
+          <td :class="{
+              'blue lighten-5': i == 1 || i == 3
+            }">{{ i }}年</td>
           <td
             :class="{
               'blue lighten-5': i == 1 || i == 3
             }"
-          >
-            {{ i }}年
-          </td>
+          >{{ $store.state.unit_list[i]['必修']['共通'] + $store.state.unit_list[i]['選択']['共通'] }}</td>
           <td
             :class="{
               'blue lighten-5': i == 1 || i == 3
             }"
-          >
-            {{ $store.state.unit_list[i]['必修']['共通'] + $store.state.unit_list[i]['選択']['共通'] }}
-          </td>
+          >{{ $store.state.unit_list[i]['必修']['専門'] + $store.state.unit_list[i]['選択']['専門'] }}</td>
           <td
             :class="{
               'blue lighten-5': i == 1 || i == 3
             }"
-          >
-            {{ $store.state.unit_list[i]['必修']['専門'] + $store.state.unit_list[i]['選択']['専門'] }}
-          </td>
+          >{{ $store.state.unit_list[i]['必修']['総合A'] + $store.state.unit_list[i]['選択']['総合A'] }}</td>
           <td
             :class="{
               'blue lighten-5': i == 1 || i == 3
             }"
-          >
-            {{ $store.state.unit_list[i]['必修']['総合A'] + $store.state.unit_list[i]['選択']['総合A'] }}
-          </td>
+          >{{ $store.state.english_unit_list[i]['必修'] + $store.state.english_unit_list[i]['選択'] }}</td>
           <td
             :class="{
               'blue lighten-5': i == 1 || i == 3
             }"
-          >
-            {{ $store.state.english_unit_list[i]['必修'] + $store.state.english_unit_list[i]['選択'] }}
-          </td>
-          <td
-            :class="{
-              'blue lighten-5': i == 1 || i == 3
-            }"
-          >
-            {{ $store.state.unit_list[i]['必修']['総合B'] + $store.state.unit_list[i]['選択']['総合B'] }}
-          </td>
+          >{{ $store.state.unit_list[i]['必修']['総合B'] + $store.state.unit_list[i]['選択']['総合B'] }}</td>
           <td
             :class="{
               'blue lighten-5': i == 1 || i == 3,
               'red--text': !is_not_enough(grade_total_unit(i), max_unit_one_year)
             }"
-          >
-            {{ grade_total_unit(i) }}/{{ max_unit_one_year }}
-          </td>
+          >{{ grade_total_unit(i) }}/{{ max_unit_one_year }}</td>
         </tr>
         <tr>
           <td class="blue lighten-5">合計</td>
@@ -289,54 +234,42 @@
               'yellow--text text--darken-2': is_not_enough(classification_total_unit('共通'), graduate_unit.kyotu),
               'green--text': !is_not_enough(classification_total_unit('共通'), graduate_unit.kyotu)
             }"
-          >
-            {{ classification_total_unit('共通') }}/{{ graduate_unit.kyotu }}
-          </td>
+          >{{ classification_total_unit('共通') }}/{{ graduate_unit.kyotu }}</td>
           <td
             class="blue lighten-5 font-weight-black"
             :class="{
               'yellow--text text--darken-2': is_not_enough(classification_total_unit('専門'), graduate_unit.senmon),
               'green--text': !is_not_enough(classification_total_unit('専門'), graduate_unit.senmon)
             }"
-          >
-            {{ classification_total_unit('専門') }}/{{ graduate_unit.senmon }}
-          </td>
+          >{{ classification_total_unit('専門') }}/{{ graduate_unit.senmon }}</td>
           <td
             class="blue lighten-5 font-weight-black"
             :class="{
               'yellow--text text--darken-2': is_not_enough(classification_total_unit('総合A'), graduate_unit.A),
               'green--text': !is_not_enough(classification_total_unit('総合A'), graduate_unit.A)
             }"
-          >
-            {{ classification_total_unit('総合A') }}/{{ graduate_unit.A }}
-          </td>
+          >{{ classification_total_unit('総合A') }}/{{ graduate_unit.A }}</td>
           <td
             class="blue lighten-5 font-weight-black"
             :class="{
               'yellow--text text--darken-2': is_not_enough(classification_total_unit('英語'), graduate_unit.english),
               'green--text': !is_not_enough(classification_total_unit('英語'), graduate_unit.english)
             }"
-          >
-            {{ classification_total_unit('英語') }}/{{ graduate_unit.english }}
-          </td>
+          >{{ classification_total_unit('英語') }}/{{ graduate_unit.english }}</td>
           <td
             class="blue lighten-5 font-weight-black"
             :class="{
               'yellow--text text--darken-2': is_not_enough(classification_total_unit('総合B'), graduate_unit.B),
               'green--text': !is_not_enough(classification_total_unit('総合B'), graduate_unit.B)
             }"
-          >
-            {{ classification_total_unit('総合B') }}/{{ graduate_unit.B }}
-          </td>
+          >{{ classification_total_unit('総合B') }}/{{ graduate_unit.B }}</td>
           <td
             class="blue lighten-5 font-weight-black"
             :class="{
               'yellow--text text--darken-2': is_not_enough(total_unit(), graduate_unit.all),
               'green--text': !is_not_enough(total_unit(), graduate_unit.all)
             }"
-          >
-            {{ total_unit() }}/{{ graduate_unit.all }}
-          </td>
+          >{{ total_unit() }}/{{ graduate_unit.all }}</td>
         </tr>
       </tbody>
     </v-simple-table>
@@ -348,6 +281,8 @@ export default {
   data() {
     return {
       max_unit_one_grade: 48,
+      max_unit_one_year: 48,
+      detail: false,
       graduate_unit: {
         all: 124,
         kyotu: 10,
@@ -357,9 +292,11 @@ export default {
         english: 6
       },
       advancement_unit: {
-        grade_1: 24,
-        grade_2: 48,
-        grade_3: 96
+        // grade_1: 48,
+        // grade_1: this.unit[this.$store.state.user.id.slice(0, 1)]['advancement_unit']['grade_1'],
+        // grade_1: this.$store.state.unit['k']['advancement_unit']['grade_1'],
+        grade_2: 50,
+        grade_3: 91
       },
       detail_graduate_unit: {
         必修: {
@@ -373,8 +310,274 @@ export default {
           総合A: 4
         }
       },
-      max_unit_one_year: 48,
-      detail: false
+      unit: {
+        e: {
+          advancement_unit: {
+            grade_1: 20,
+            grade_2: 50,
+            grade_3: 91
+          },
+          detail_graduate_unit: {
+            必修: {
+              共通: 4,
+              専門: 46,
+              総合A: 4
+            },
+            選択: {
+              共通: 6,
+              専門: 48,
+              総合A: 4
+            }
+          }
+        },
+        v: {
+          advancement_unit: {
+            grade_1: 24,
+            grade_2: 48,
+            grade_3: 96
+          },
+          detail_graduate_unit: {
+            必修: {
+              共通: 4,
+              専門: 46,
+              総合A: 4
+            },
+            選択: {
+              共通: 6,
+              専門: 48,
+              総合A: 4
+            }
+          }
+        },
+        c: {
+          advancement_unit: {
+            grade_1: 24,
+            grade_2: 48,
+            grade_3: 96
+          },
+          detail_graduate_unit: {
+            必修: {
+              共通: 4,
+              専門: 46,
+              総合A: 4
+            },
+            選択: {
+              共通: 6,
+              専門: 48,
+              総合A: 4
+            }
+          }
+        },
+        b: {
+          advancement_unit: {
+            grade_1: 24,
+            grade_2: 48,
+            grade_3: 96
+          },
+          detail_graduate_unit: {
+            必修: {
+              共通: 4,
+              専門: 46,
+              総合A: 4
+            },
+            選択: {
+              共通: 6,
+              専門: 48,
+              総合A: 4
+            }
+          }
+        },
+        m: {
+          advancement_unit: {
+            grade_1: 24,
+            grade_2: 48,
+            grade_3: 96
+          },
+          detail_graduate_unit: {
+            必修: {
+              共通: 4,
+              専門: 46,
+              総合A: 4
+            },
+            選択: {
+              共通: 6,
+              専門: 48,
+              総合A: 4
+            }
+          }
+        },
+        p: {
+          advancement_unit: {
+            grade_1: 24,
+            grade_2: 48,
+            grade_3: 96
+          },
+          detail_graduate_unit: {
+            必修: {
+              共通: 4,
+              専門: 46,
+              総合A: 4
+            },
+            選択: {
+              共通: 6,
+              専門: 48,
+              総合A: 4
+            }
+          }
+        },
+        d: {
+          advancement_unit: {
+            grade_1: 24,
+            grade_2: 48,
+            grade_3: 96
+          },
+          detail_graduate_unit: {
+            必修: {
+              共通: 4,
+              専門: 46,
+              総合A: 4
+            },
+            選択: {
+              共通: 6,
+              専門: 48,
+              総合A: 4
+            }
+          }
+        },
+        s: {
+          advancement_unit: {
+            grade_1: 24,
+            grade_2: 48,
+            grade_3: 96
+          },
+          detail_graduate_unit: {
+            必修: {
+              共通: 4,
+              専門: 46,
+              総合A: 4
+            },
+            選択: {
+              共通: 6,
+              専門: 48,
+              総合A: 4
+            }
+          }
+        },
+        a: {
+          advancement_unit: {
+            grade_1: 24,
+            grade_2: 48,
+            grade_3: 96
+          },
+          detail_graduate_unit: {
+            必修: {
+              共通: 4,
+              専門: 46,
+              総合A: 4
+            },
+            選択: {
+              共通: 6,
+              専門: 48,
+              総合A: 4
+            }
+          }
+        },
+        l: {
+          advancement_unit: {
+            grade_1: 24,
+            grade_2: 48,
+            grade_3: 96
+          },
+          detail_graduate_unit: {
+            必修: {
+              共通: 4,
+              専門: 46,
+              総合A: 4
+            },
+            選択: {
+              共通: 6,
+              専門: 48,
+              総合A: 4
+            }
+          }
+        },
+        t: {
+          advancement_unit: {
+            grade_1: 24,
+            grade_2: 48,
+            grade_3: 96
+          },
+          detail_graduate_unit: {
+            必修: {
+              共通: 4,
+              専門: 46,
+              総合A: 4
+            },
+            選択: {
+              共通: 6,
+              専門: 48,
+              総合A: 4
+            }
+          }
+        },
+        h: {
+          advancement_unit: {
+            grade_1: 24,
+            grade_2: 48,
+            grade_3: 96
+          },
+          detail_graduate_unit: {
+            必修: {
+              共通: 4,
+              専門: 46,
+              総合A: 4
+            },
+            選択: {
+              共通: 6,
+              専門: 48,
+              総合A: 4
+            }
+          }
+        },
+        x: {
+          advancement_unit: {
+            grade_1: 24,
+            grade_2: 48,
+            grade_3: 96
+          },
+          detail_graduate_unit: {
+            必修: {
+              共通: 6,
+              専門: 31,
+              総合A: 4
+            },
+            選択: {
+              共通: 4,
+              専門: 63,
+              総合A: 4
+            }
+          }
+        },
+        k: {
+          advancement_unit: {
+            grade_1: 24,
+            grade_2: 48,
+            grade_3: 96
+          },
+          detail_graduate_unit: {
+            必修: {
+              共通: 6,
+              専門: 27,
+              総合A: 4
+            },
+            選択: {
+              共通: 4,
+              専門: 67,
+              総合A: 4
+            }
+          }
+        }
+      }
     };
   },
 
