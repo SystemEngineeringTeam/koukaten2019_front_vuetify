@@ -319,7 +319,7 @@ export default new Vuex.Store({
         }
       };
       // 卒業研究の単位追加
-      unit_list['4']['必修']['専門'] += 4;
+      // unit_list['4']['必修']['専門'] += 4; バックエンドの授業の中に必修で卒業研究入ってるから単位二重になっちゃうから消した
       state.registered_lectures.forEach(function(lecture) {
         if (lecture.compulsory == '選択必修') {
           unit_list[lecture.grade]['選択'][lecture.classification] += lecture.unit;
