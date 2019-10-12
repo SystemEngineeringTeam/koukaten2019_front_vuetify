@@ -96,7 +96,7 @@
           <td
             :class="{
               'blue lighten-5': i == 1 || i == 3,
-              'red--text': !is_not_enough(grade_total_unit(i), max_unit_one_year)
+              'red--text': !is_not_enough(grade_total_unit(i), max_unit_one_year+1)
             }"
           >
             {{ grade_total_unit(i) }}/{{ max_unit_one_year }}
@@ -275,7 +275,7 @@
           <td
             :class="{
               'blue lighten-5': i == 1 || i == 3,
-              'red--text': !is_not_enough(grade_total_unit(i), max_unit_one_year)
+              'red--text': !is_not_enough(grade_total_unit(i), max_unit_one_year+1)
             }"
           >
             {{ grade_total_unit(i) }}/{{ max_unit_one_year }}
