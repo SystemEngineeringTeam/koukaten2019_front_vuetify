@@ -50,7 +50,7 @@
             <template
               ><br />{{ lecture.teacher_name1 }}</template
             >
-            <template v-if="lecture.teacher_name2 !== 'null'">
+            <template v-if="lecture.teacher_name2 !== ' '">
               ,他</template
             >
           </v-card-text>
@@ -91,7 +91,7 @@
                   {{ c.compulsory }}
                   <br />
                   {{ c.teacher_name1 }}
-                  <template v-if="c.teacher_name2 !== 'null'"
+                  <template v-if="c.teacher_name2 !== ' '"
                     >,他</template
                   >
                 </p>
