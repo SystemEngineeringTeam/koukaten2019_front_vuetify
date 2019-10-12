@@ -4,17 +4,17 @@
       <v-card-actions v-if="is_edit && can_register.length >= 1">
         <div v-if="compulsory_decision(can_register)">
           <v-btn class="orange white--text" @click.stop="dialog = true" rounded>
-            <v-icon>mdi-border-color</v-icon>授業を登録
+            <v-icon>mdi-border-color</v-icon>授業を表示
           </v-btn>
         </div>
         <div v-else-if="choice_compulsory_decision(can_register)">
           <v-btn class="green white--text" @click.stop="dialog = true" rounded>
-            <v-icon>mdi-border-color</v-icon>授業を登録
+            <v-icon>mdi-border-color</v-icon>授業を表示
           </v-btn>
         </div>
         <div v-else>
           <v-btn class="blue white--text" @click.stop="dialog = true" rounded>
-            <v-icon>mdi-border-color</v-icon>授業を登録
+            <v-icon>mdi-border-color</v-icon>授業を表示
           </v-btn>
         </div>
       </v-card-actions>
@@ -43,6 +43,8 @@
             <template v-else
               >{{ lecture['unit'] }}単位</template
             >
+            <template><br>{{ lecture.teacher_name1 }}</template>
+            <template v-if="lecture.teacher_name2 !== 'null'"> ,他</template>
           </v-card-text>
           <!--<v-card-actions>
               <v-btn :href="lecture['syllabus']" target="_blank">シラバス</v-btn>
@@ -62,7 +64,7 @@
     <!--ダイアログ-->
     <v-dialog v-model="dialog">
       <v-card>
-        <v-card-title class="headline">授業登録</v-card-title>
+        <v-card-title class="headline">授業選択</v-card-title>
         <v-container>
           <v-row>
             <v-col v-for="(c, i) in can_register" cols="12" md="3" :key="i">
@@ -91,7 +93,7 @@
                     color="white"
                     class="black--text"
                   >
-                    <v-icon>mdi-border-color</v-icon>登録
+                    <v-icon>mdi-border-color</v-icon>選択
                   </v-btn>
                 </div>
                 <br />
@@ -108,7 +110,7 @@
           <!--{{c.compulsory}}-->
           <!--<v-card-actions>-->
           <!--<v-btn v-on:click="$store.commit('push_registered_lecture', c); dialog = false">-->
-          <!--登録-->
+          <!--選択-->
           <!--</v-btn>-->
           <!--</v-card-actions>-->
           <!--</v-crad>-->
@@ -120,7 +122,7 @@
     <v-dialog v-model="duplicate_check_decision" max-width="290">
       <v-card>
         <v-card-title>警告</v-card-title>
-        <v-card-text>登録しようとしている授業はすでに４年間のどこかで登録されています</v-card-text>
+        <v-card-text>選択しようとしている授業はすでに４年間のどこかで選択されています</v-card-text>
         <v-card-actions>
           <v-btn v-on:click="duplicate_check_decision = false">OK</v-btn>
         </v-card-actions>

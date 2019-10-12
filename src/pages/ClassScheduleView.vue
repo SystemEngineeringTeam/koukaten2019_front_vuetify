@@ -2,10 +2,11 @@
   <div class="wrapper mx-5">
     <!--{{ $store.state.can_register_lectures }}-->
     <!--{{ $store.state.registered_lectures }}-->
+    <!-- {{ $router.routes }} -->
     <v-container>
       <v-row>
         <v-col cols="12">
-          <v-tabs v-model="tabs" show-arrows grow　>
+          <v-tabs v-model="tabs" show-arrows grow>
             <v-tab
               v-for="timetable in $store.state.timetables"
               :key="timetable.id"

@@ -1,9 +1,10 @@
 <template>
   <div class="mx-4">
     <!--{{ $store.state.can_register_lectures }}-->
-    <!--{{ $store.state.registered_lectures }}-->
+    {{ $store.state.registered_lectures }}
     <!-- {{ $store.state.unit_list }} -->
-    <!--{{ $store.state.user }}-->
+    <!-- {{ $store.state.user }} -->
+    <!-- {{ $router.routes }} -->
     <v-container>
       <v-row>
         <v-col cols="12">
