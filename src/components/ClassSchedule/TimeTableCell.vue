@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="height_240">
     <div v-if="lecture == null">
       <v-card-actions v-if="is_edit && can_register.length >= 1">
         <div v-if="compulsory_decision(can_register)">
@@ -215,5 +215,9 @@ export default {
 .text {
   color: #fff;
   text-shadow: 1px 1px 0 #000, -1px 1px 0 #000, 1px -1px 0 #000, -1px -1px 0 #000;
+}
+
+.height_240 {
+  height: 240px;
 }
 </style>
