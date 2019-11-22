@@ -7,6 +7,9 @@
     <!-- {{ $route.path }} -->
     <v-container>
       <v-row>
+        <v-card v-if="test" @click="show_click_down()">aa</v-card>
+        <v-card v-else @click="show_click_up()">aaaaaa</v-card>
+
         <v-col cols="12">
           <v-card>
             <v-card-text class="headline text-center"
@@ -256,6 +259,7 @@ export default {
         B: 12,
         english: 6
       },
+      test: true,
       common: true,
       specialty: true,
       general_A: true,
@@ -300,6 +304,12 @@ export default {
     this.$store.commit('unit_calculate');
   },
   methods: {
+    show_click_up() {
+      this.test = true;
+    },
+    show_click_down() {
+      this.test = false;
+    },
     diff_unit(total_unit, enough_unit) {
       let diff_unit = enough_unit - total_unit;
       if (diff_unit < 0) {

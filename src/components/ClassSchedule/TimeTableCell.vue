@@ -38,24 +38,37 @@
       >
         <v-col>
           <v-card-text class="headline white--text">
-            <p>
-              <b>{{ lecture['name'] }}</b>
-            </p>
-            <template v-if="lecture.unit == 0"
-              >{{ find_unit(lecture) }}単位</template
-            >
+            <!-- <p v-if="lecture['name'].length <= 10"> -->
+            <b>{{ lecture['name'] }}</b>
+            <!-- </p> -->
+
+            <template v-if="lecture['name'].length <= 15">
+              <br />
+              <template v-if="lecture.unit == 0"
+                >{{ find_unit(lecture) }}単位</template
+              >
+              <template v-else
+                >{{ lecture['unit'] }}単位</template
+              >
+            </template>
+            <!-- <template v-if="lecture.unit == 0">{{ find_unit(lecture) }}単位</template>
+            <template v-else>{{ lecture['unit'] }}単位</template>-->
+            <template v-if="lecture['name'].length <= 10">
+              <br />
+              <template v-if="lecture.teacher_name1.length <= 5">{{ lecture.teacher_name1 }}</template>
+              <template v-else
+                >...</template
+              >
+            </template>
+
             <template v-else
-              >{{ lecture['unit'] }}単位</template
+              >&nbsp;&nbsp;&nbsp;...</template
             >
-            <template
-              ><br />{{ lecture.teacher_name1 }}</template
-            >
-            <template v-if="lecture.teacher_name2 !== ' '">
-              他</template
-            >
+            <!-- <template v-if="lecture.teacher_name2 !== ' '">他</template> -->
             <template v-if="$route.path == '/ClassScheduleView'">
-              <br />{{ lecture.place }}</template
-            >
+              <br />
+              {{ lecture.place }}
+            </template>
           </v-card-text>
           <!--<v-card-actions>
               <v-btn :href="lecture['syllabus']" target="_blank">シラバス</v-btn>
@@ -94,8 +107,8 @@
                   {{ c.compulsory }}
                   <br />
                   {{ c.teacher_name1 }}
-                  <template v-if="c.teacher_name2 !== ' '">
-                    他</template
+                  <template v-if="c.teacher_name2 !== ' '"
+                    >他</template
                   >
                 </p>
                 <div class="text-center">
