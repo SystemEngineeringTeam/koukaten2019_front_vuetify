@@ -25,6 +25,8 @@
       }}
     </div>
     <div v-else>
+      <!-- <v-card v-if="test" @click="show_click_down()">aa</v-card> -->
+
       <v-card
         :class="{
           orange: lecture['compulsory'] === '必修',
@@ -35,12 +37,12 @@
           green: lecture['compulsory'] === '選択必修',
           'blue-grey': lecture['classification'] === '総合B'
         }"
+        v-if="test"
+        @click="show_click_down()"
       >
         <v-col>
           <v-card-text class="headline white--text">
-            <!-- <p v-if="lecture['name'].length <= 10"> -->
             <b>{{ lecture['name'] }}</b>
-            <!-- </p> -->
 
             <template v-if="lecture['name'].length <= 15">
               <br />
@@ -64,6 +66,53 @@
             <template v-else
               >&nbsp;&nbsp;&nbsp;...</template
             >
+            <!-- <template v-if="lecture.teacher_name2 !== ' '">他</template> -->
+            <template v-if="$route.path == '/ClassScheduleView'">
+              <br />
+              {{ lecture.place }}
+            </template>
+          </v-card-text>
+          <!--<v-card-actions>
+              <v-btn :href="lecture['syllabus']" target="_blank">シラバス</v-btn>
+          </v-card-actions>-->
+          <v-card-actions v-if="is_edit && can_register.length >= 1">
+            <v-btn @click.stop="dialog = true" small rounded>
+              <v-icon>mdi-border-color</v-icon>
+            </v-btn>
+            <v-btn v-on:click="$store.commit('delete_registered_lecture', lecture)" small rounded>
+              <v-icon>mdi-eraser</v-icon>
+            </v-btn>
+          </v-card-actions>
+        </v-col>
+      </v-card>
+      <v-card
+        :class="{
+          orange: lecture['compulsory'] === '必修',
+          blue:
+            lecture['classification'] === '専門' ||
+            lecture['classification'] === '共通' ||
+            lecture['classification'] === '総合A',
+          green: lecture['compulsory'] === '選択必修',
+          'blue-grey': lecture['classification'] === '総合B'
+        }"
+        v-else
+        @click="show_click_up()"
+      >
+        <v-col>
+          <v-card-text class="headline white--text">
+            <b>{{ lecture['name'] }}</b>
+            <br />
+            <template v-if="lecture.unit == 0"
+              >{{ find_unit(lecture) }}単位</template
+            >
+            <template v-else
+              >{{ lecture['unit'] }}単位</template
+            >
+
+            <!-- <template v-if="lecture.unit == 0">{{ find_unit(lecture) }}単位</template>
+            <template v-else>{{ lecture['unit'] }}単位</template>-->
+            <br />
+            {{ lecture.teacher_name1 }}
             <!-- <template v-if="lecture.teacher_name2 !== ' '">他</template> -->
             <template v-if="$route.path == '/ClassScheduleView'">
               <br />
@@ -161,11 +210,18 @@ export default {
   name: 'TimeTableCell',
   data() {
     return {
+      test: true,
       duplicate_check_decision: false,
       dialog: false
     };
   },
   methods: {
+    show_click_up() {
+      this.test = true;
+    },
+    show_click_down() {
+      this.test = false;
+    },
     find_unit(lectuer) {
       let continuous_lectuer = this.$store.state.registered_lectures.find(function(l) {
         return l.subject_code == lectuer.subject_code;
