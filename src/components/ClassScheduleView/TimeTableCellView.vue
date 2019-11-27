@@ -207,7 +207,7 @@
 
 <script>
 export default {
-  name: 'TimeTableCell',
+  name: 'TimeTableCellView',
   data() {
     return {
       test: true,
