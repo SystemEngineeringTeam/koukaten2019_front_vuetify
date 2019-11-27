@@ -18,7 +18,7 @@
           </v-tabs>
           <v-tabs-items v-model="tabs">
             <v-tab-item v-for="timetable in timetables" :key="timetable.id">
-              <TimeTableShow
+              <TimeTableShowView
                 :is_edit="is_edit"
                 :now_register="
                   get_grade_half_lectures($store.state.registered_lectures, timetable.grade, timetable.semester)
@@ -31,7 +31,7 @@
                   )
                 "
                 :grade="timetable.grade"
-              ></TimeTableShow>
+              ></TimeTableShowView>
             </v-tab-item>
           </v-tabs-items>
         </v-col>
@@ -47,7 +47,7 @@
 import axios from 'axios';
 axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
 
-import TimeTableShow from '../components/ClassSchedule/TimeTableShow';
+import TimeTableShowView from '../components/ClassScheduleView/TimeTableShowView';
 import CreditCalculator from '../components/ClassSchedule/CreditCalculator';
 
 export default {
@@ -77,7 +77,7 @@ export default {
     };
   },
   components: {
-    TimeTableShow,
+    TimeTableShowView,
     CreditCalculator
   },
   created() {

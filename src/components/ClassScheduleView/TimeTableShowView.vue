@@ -8,14 +8,14 @@
         <v-list class="mx-1 my-1" v-for="time in 7" :key="time">
           <v-subheader class="headline">{{ time }}限目</v-subheader>
           <v-list-item>
-            <TimeTableCell
+            <TimeTableCellView
               :is_edit="is_edit"
               :lecture="get_one_lecture(now_register, day, time)"
               :can_register="get_one_time_lectures(can_register, day, time)"
               :grade="grade"
               :day="day"
               :time="time"
-            ></TimeTableCell>
+            ></TimeTableCellView>
           </v-list-item>
         </v-list>
       </v-card>
@@ -24,10 +24,10 @@
 </template>
 
 <script>
-import TimeTableCell from './TimeTableCell';
+import TimeTableCellView from './TimeTableCellView';
 
 export default {
-  name: 'TimeTableShow',
+  name: 'TimeTableShowView',
   data() {
     return {
       weekdays: ['mon', 'tue', 'wed', 'thu', 'fri'],
@@ -35,7 +35,7 @@ export default {
     };
   },
   components: {
-    TimeTableCell
+    TimeTableCellView
   },
   props: ['now_register', 'can_register', 'is_edit', 'grade'],
   methods: {
