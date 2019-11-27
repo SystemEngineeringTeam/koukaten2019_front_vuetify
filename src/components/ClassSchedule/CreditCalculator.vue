@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!-- {{ unit['k']['advancement_unit']['grade_1'] }} -->
     <v-switch v-model="detail" label="表示切り替え"></v-switch>
     <v-simple-table v-if="detail">
       <thead>
@@ -109,81 +110,90 @@
             :class="{
               'yellow--text text--darken-2': is_not_enough(
                 classification_compulsory_total_unit('共通'),
-                detail_graduate_unit.必修.共通
+                $store.state.detail_graduate_unit.必修.共通
               ),
               'green--text': !is_not_enough(
                 classification_compulsory_total_unit('共通'),
-                detail_graduate_unit.必修.共通
+                $store.state.detail_graduate_unit.必修.共通
               )
             }"
           >
-            {{ classification_compulsory_total_unit('共通') }}/{{ detail_graduate_unit.必修.共通 }}
+            {{ classification_compulsory_total_unit('共通') }}/{{ $store.state.detail_graduate_unit.必修.共通 }}
           </td>
           <td
             class="blue lighten-5"
             :class="{
               'yellow--text text--darken-2': is_not_enough(
                 classification_choice_total_unit('共通'),
-                detail_graduate_unit.選択.共通
+                $store.state.detail_graduate_unit.選択.共通
               ),
-              'green--text': !is_not_enough(classification_choice_total_unit('共通'), detail_graduate_unit.選択.共通)
+              'green--text': !is_not_enough(
+                classification_choice_total_unit('共通'),
+                $store.state.detail_graduate_unit.選択.共通
+              )
             }"
           >
-            {{ classification_choice_total_unit('共通') }}/{{ detail_graduate_unit.選択.共通 }}
+            {{ classification_choice_total_unit('共通') }}/{{ $store.state.detail_graduate_unit.選択.共通 }}
           </td>
           <td
             class="blue lighten-5"
             :class="{
               'yellow--text text--darken-2': is_not_enough(
                 classification_compulsory_total_unit('専門'),
-                detail_graduate_unit.必修.専門
+                $store.state.detail_graduate_unit.必修.専門
               ),
               'green--text': !is_not_enough(
                 classification_compulsory_total_unit('専門'),
-                detail_graduate_unit.必修.専門
+                $store.state.detail_graduate_unit.必修.専門
               )
             }"
           >
-            {{ classification_compulsory_total_unit('専門') }}/{{ detail_graduate_unit.必修.専門 }}
+            {{ classification_compulsory_total_unit('専門') }}/{{ $store.state.detail_graduate_unit.必修.専門 }}
           </td>
           <td
             class="blue lighten-5"
             :class="{
               'yellow--text text--darken-2': is_not_enough(
                 classification_choice_total_unit('専門'),
-                detail_graduate_unit.選択.専門
+                $store.state.detail_graduate_unit.選択.専門
               ),
-              'green--text': !is_not_enough(classification_choice_total_unit('専門'), detail_graduate_unit.選択.専門)
+              'green--text': !is_not_enough(
+                classification_choice_total_unit('専門'),
+                $store.state.detail_graduate_unit.選択.専門
+              )
             }"
           >
-            {{ classification_choice_total_unit('専門') }}/{{ detail_graduate_unit.選択.専門 }}
+            {{ classification_choice_total_unit('専門') }}/{{ $store.state.detail_graduate_unit.選択.専門 }}
           </td>
           <td
             class="blue lighten-5"
             :class="{
               'yellow--text text--darken-2': is_not_enough(
                 classification_compulsory_total_unit('総合A'),
-                detail_graduate_unit.必修.総合A
+                $store.state.detail_graduate_unit.必修.総合A
               ),
               'green--text': !is_not_enough(
                 classification_compulsory_total_unit('総合A'),
-                detail_graduate_unit.必修.総合A
+                $store.state.detail_graduate_unit.必修.総合A
               )
             }"
           >
-            {{ classification_compulsory_total_unit('総合A') }}/{{ detail_graduate_unit.必修.総合A }}
+            {{ classification_compulsory_total_unit('総合A') }}/{{ $store.state.detail_graduate_unit.必修.総合A }}
           </td>
           <td
             class="blue lighten-5"
             :class="{
               'yellow--text text--darken-2': is_not_enough(
                 classification_choice_total_unit('総合A'),
-                detail_graduate_unit.選択.総合A
+                $store.state.detail_graduate_unit.選択.総合A
               ),
-              'green--text': !is_not_enough(classification_choice_total_unit('総合A'), detail_graduate_unit.選択.総合A)
+              'green--text': !is_not_enough(
+                classification_choice_total_unit('総合A'),
+                $store.state.detail_graduate_unit.選択.総合A
+              )
             }"
           >
-            {{ classification_choice_total_unit('総合A') }}/{{ detail_graduate_unit.選択.総合A }}
+            {{ classification_choice_total_unit('総合A') }}/{{ $store.state.detail_graduate_unit.選択.総合A }}
           </td>
           <td
             class="blue lighten-5"
@@ -348,6 +358,8 @@ export default {
   data() {
     return {
       max_unit_one_grade: 48,
+      max_unit_one_year: 48,
+      detail: false,
       graduate_unit: {
         all: 124,
         kyotu: 10,
@@ -355,30 +367,13 @@ export default {
         A: 8,
         B: 12,
         english: 6
-      },
-      advancement_unit: {
-        grade_1: 24,
-        grade_2: 48,
-        grade_3: 96
-      },
-      detail_graduate_unit: {
-        必修: {
-          共通: 4,
-          専門: 46,
-          総合A: 4
-        },
-        選択: {
-          共通: 6,
-          専門: 48,
-          総合A: 4
-        }
-      },
-      max_unit_one_year: 48,
-      detail: false
+      }
     };
   },
 
-  created() {},
+  created() {
+    this.$store.commit('set_unit');
+  },
   beforeUpdate() {
     this.$store.commit('set_is_enough_unit_graduate', this.is_enough_unit_graduate());
     this.$store.commit('set_is_over_unit', this.is_over_unit());

@@ -80,6 +80,23 @@ export default new Vuex.Store({
         }
       }
     },
+    advancement_unit: {
+      grade_1: 0,
+      grade_2: 0,
+      grade_3: 0
+    },
+    detail_graduate_unit: {
+      必修: {
+        共通: 0,
+        専門: 0,
+        総合A: 0
+      },
+      選択: {
+        共通: 0,
+        専門: 0,
+        総合A: 0
+      }
+    },
     english_unit_list: {
       1: {
         必修: 0,
@@ -125,7 +142,162 @@ export default new Vuex.Store({
     //             Vue.set(this, 'timetable_editor', res.data);
     //         });
     // },
-
+    set_unit(state) {
+      if (state.user.major === 'e') {
+        Vue.set(state.advancement_unit, 'grade_1', 20);
+        Vue.set(state.advancement_unit, 'grade_2', 50);
+        Vue.set(state.advancement_unit, 'grade_3', 91);
+        Vue.set(state.detail_graduate_unit.必修, '共通', 4);
+        Vue.set(state.detail_graduate_unit.必修, '専門', 46);
+        Vue.set(state.detail_graduate_unit.必修, '総合A', 4);
+        Vue.set(state.detail_graduate_unit.選択, '共通', 6);
+        Vue.set(state.detail_graduate_unit.選択, '専門', 48);
+        Vue.set(state.detail_graduate_unit.選択, '総合A', 4);
+      }
+      if (state.user.major === 'v') {
+        Vue.set(state.advancement_unit, 'grade_1', 20);
+        Vue.set(state.advancement_unit, 'grade_2', 50);
+        Vue.set(state.advancement_unit, 'grade_3', 91);
+        Vue.set(state.detail_graduate_unit.必修, '共通', 4);
+        Vue.set(state.detail_graduate_unit.必修, '専門', 46);
+        Vue.set(state.detail_graduate_unit.必修, '総合A', 4);
+        Vue.set(state.detail_graduate_unit.選択, '共通', 6);
+        Vue.set(state.detail_graduate_unit.選択, '専門', 48);
+        Vue.set(state.detail_graduate_unit.選択, '総合A', 4);
+      }
+      if (state.user.major === 'c') {
+        Vue.set(state.advancement_unit, 'grade_1', 10);
+        Vue.set(state.advancement_unit, 'grade_2', 51);
+        Vue.set(state.advancement_unit, 'grade_3', 99);
+        Vue.set(state.detail_graduate_unit.必修, '共通', 3);
+        Vue.set(state.detail_graduate_unit.必修, '専門', 41);
+        Vue.set(state.detail_graduate_unit.必修, '総合A', 4);
+        Vue.set(state.detail_graduate_unit.選択, '共通', 7);
+        Vue.set(state.detail_graduate_unit.選択, '専門', 53);
+        Vue.set(state.detail_graduate_unit.選択, '総合A', 4);
+      }
+      if (state.user.major === 'b') {
+        Vue.set(state.advancement_unit, 'grade_1', 10);
+        Vue.set(state.advancement_unit, 'grade_2', 51);
+        Vue.set(state.advancement_unit, 'grade_3', 99);
+        Vue.set(state.detail_graduate_unit.必修, '共通', 3);
+        Vue.set(state.detail_graduate_unit.必修, '専門', 45);
+        Vue.set(state.detail_graduate_unit.必修, '総合A', 4);
+        Vue.set(state.detail_graduate_unit.選択, '共通', 7);
+        Vue.set(state.detail_graduate_unit.選択, '専門', 49);
+        Vue.set(state.detail_graduate_unit.選択, '総合A', 4);
+      }
+      if (state.user.major === 'm') {
+        Vue.set(state.advancement_unit, 'grade_1', 20);
+        Vue.set(state.advancement_unit, 'grade_2', 52);
+        Vue.set(state.advancement_unit, 'grade_3', 100);
+        Vue.set(state.detail_graduate_unit.必修, '共通', 0);
+        Vue.set(state.detail_graduate_unit.必修, '専門', 57);
+        Vue.set(state.detail_graduate_unit.必修, '総合A', 4);
+        Vue.set(state.detail_graduate_unit.選択, '共通', 10);
+        Vue.set(state.detail_graduate_unit.選択, '専門', 37);
+        Vue.set(state.detail_graduate_unit.選択, '総合A', 4);
+      }
+      if (state.user.major === 'p') {
+        Vue.set(state.advancement_unit, 'grade_1', 20);
+        Vue.set(state.advancement_unit, 'grade_2', 52);
+        Vue.set(state.advancement_unit, 'grade_3', 100);
+        Vue.set(state.detail_graduate_unit.必修, '共通', 0);
+        Vue.set(state.detail_graduate_unit.必修, '専門', 57);
+        Vue.set(state.detail_graduate_unit.必修, '総合A', 4);
+        Vue.set(state.detail_graduate_unit.選択, '共通', 10);
+        Vue.set(state.detail_graduate_unit.選択, '専門', 37);
+        Vue.set(state.detail_graduate_unit.選択, '総合A', 4);
+      }
+      if (state.user.major === 'd') {
+        Vue.set(state.advancement_unit, 'grade_1', 20);
+        Vue.set(state.advancement_unit, 'grade_2', 56);
+        Vue.set(state.advancement_unit, 'grade_3', 102);
+        Vue.set(state.detail_graduate_unit.必修, '共通', 4);
+        Vue.set(state.detail_graduate_unit.必修, '専門', 62);
+        Vue.set(state.detail_graduate_unit.必修, '総合A', 4);
+        Vue.set(state.detail_graduate_unit.選択, '共通', 6);
+        Vue.set(state.detail_graduate_unit.選択, '専門', 32);
+        Vue.set(state.detail_graduate_unit.選択, '総合A', 4);
+      }
+      if (state.user.major === 's') {
+        Vue.set(state.advancement_unit, 'grade_1', 20);
+        Vue.set(state.advancement_unit, 'grade_2', 56);
+        Vue.set(state.advancement_unit, 'grade_3', 102);
+        Vue.set(state.detail_graduate_unit.必修, '共通', 4);
+        Vue.set(state.detail_graduate_unit.必修, '専門', 62);
+        Vue.set(state.detail_graduate_unit.必修, '総合A', 4);
+        Vue.set(state.detail_graduate_unit.選択, '共通', 6);
+        Vue.set(state.detail_graduate_unit.選択, '専門', 32);
+        Vue.set(state.detail_graduate_unit.選択, '総合A', 4);
+      }
+      if (state.user.major === 'a') {
+        Vue.set(state.advancement_unit, 'grade_1', 20);
+        Vue.set(state.advancement_unit, 'grade_2', 51);
+        Vue.set(state.advancement_unit, 'grade_3', 94);
+        Vue.set(state.detail_graduate_unit.必修, '共通', 1);
+        Vue.set(state.detail_graduate_unit.必修, '専門', 60);
+        Vue.set(state.detail_graduate_unit.必修, '総合A', 4);
+        Vue.set(state.detail_graduate_unit.選択, '共通', 9);
+        Vue.set(state.detail_graduate_unit.選択, '専門', 34);
+        Vue.set(state.detail_graduate_unit.選択, '総合A', 4);
+      }
+      if (state.user.major === 'l') {
+        Vue.set(state.advancement_unit, 'grade_1', 20);
+        Vue.set(state.advancement_unit, 'grade_2', 52);
+        Vue.set(state.advancement_unit, 'grade_3', 91);
+        Vue.set(state.detail_graduate_unit.必修, '共通', 1);
+        Vue.set(state.detail_graduate_unit.必修, '専門', 59);
+        Vue.set(state.detail_graduate_unit.必修, '総合A', 4);
+        Vue.set(state.detail_graduate_unit.選択, '共通', 9);
+        Vue.set(state.detail_graduate_unit.選択, '専門', 35);
+        Vue.set(state.detail_graduate_unit.選択, '総合A', 4);
+      }
+      if (state.user.major === 't') {
+        Vue.set(state.advancement_unit, 'grade_1', 20);
+        Vue.set(state.advancement_unit, 'grade_2', 54);
+        Vue.set(state.advancement_unit, 'grade_3', 94);
+        Vue.set(state.detail_graduate_unit.必修, '共通', 4);
+        Vue.set(state.detail_graduate_unit.必修, '専門', 40);
+        Vue.set(state.detail_graduate_unit.必修, '総合A', 4);
+        Vue.set(state.detail_graduate_unit.選択, '共通', 6);
+        Vue.set(state.detail_graduate_unit.選択, '専門', 54);
+        Vue.set(state.detail_graduate_unit.選択, '総合A', 4);
+      }
+      if (state.user.major === 'h') {
+        Vue.set(state.advancement_unit, 'grade_1', 20);
+        Vue.set(state.advancement_unit, 'grade_2', 54);
+        Vue.set(state.advancement_unit, 'grade_3', 94);
+        Vue.set(state.detail_graduate_unit.必修, '共通', 4);
+        Vue.set(state.detail_graduate_unit.必修, '専門', 22);
+        Vue.set(state.detail_graduate_unit.必修, '総合A', 4);
+        Vue.set(state.detail_graduate_unit.選択, '共通', 6);
+        Vue.set(state.detail_graduate_unit.選択, '専門', 72);
+        Vue.set(state.detail_graduate_unit.選択, '総合A', 4);
+      }
+      if (state.user.major === 'k') {
+        Vue.set(state.advancement_unit, 'grade_1', 24);
+        Vue.set(state.advancement_unit, 'grade_2', 48);
+        Vue.set(state.advancement_unit, 'grade_3', 96);
+        Vue.set(state.detail_graduate_unit.必修, '共通', 6);
+        Vue.set(state.detail_graduate_unit.必修, '専門', 27);
+        Vue.set(state.detail_graduate_unit.必修, '総合A', 4);
+        Vue.set(state.detail_graduate_unit.選択, '共通', 6);
+        Vue.set(state.detail_graduate_unit.選択, '専門', 67);
+        Vue.set(state.detail_graduate_unit.選択, '総合A', 4);
+      }
+      if (state.user.major === 'x') {
+        Vue.set(state.advancement_unit, 'grade_1', 24);
+        Vue.set(state.advancement_unit, 'grade_2', 48);
+        Vue.set(state.advancement_unit, 'grade_3', 96);
+        Vue.set(state.detail_graduate_unit.必修, '共通', 6);
+        Vue.set(state.detail_graduate_unit.必修, '専門', 31);
+        Vue.set(state.detail_graduate_unit.必修, '総合A', 4);
+        Vue.set(state.detail_graduate_unit.選択, '共通', 4);
+        Vue.set(state.detail_graduate_unit.選択, '専門', 63);
+        Vue.set(state.detail_graduate_unit.選択, '総合A', 4);
+      }
+    },
     set_is_enough_unit_graduate(state, bool) {
       Vue.set(state, 'is_enough_unit_graduate', bool);
     },
