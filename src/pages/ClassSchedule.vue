@@ -305,9 +305,7 @@ export default {
     this.$store.commit('unit_calculate');
   },
   methods: {
-    template_lectuers(){
-
-    },
+    template_lectuers() {},
     diff_unit(total_unit, enough_unit) {
       let diff_unit = enough_unit - total_unit;
       if (diff_unit < 0) {
