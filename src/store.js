@@ -330,7 +330,6 @@ export default new Vuex.Store({
           english_unit_list[lecture.grade][lecture.compulsory] += lecture.unit;
         }
       });
-
       Vue.set(state, 'unit_list', unit_list);
       Vue.set(state, 'english_unit_list', english_unit_list);
     }
@@ -395,6 +394,17 @@ export default new Vuex.Store({
               }
             });
           }
+        });
+    },
+    get_template(context) {
+      axios
+        .get(process.env.VUE_APP_URL_TEMPLATE + '?tmp=tmpk01', {
+          headers: {
+            Authorization: `Bearer ${this.state.user.token}`
+          }
+        })
+        .then(res => {
+          context.commit('set_registered_lecture', res.data);
         });
     },
     doSave({ commit }) {
