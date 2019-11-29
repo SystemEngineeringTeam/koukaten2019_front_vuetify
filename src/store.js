@@ -397,6 +397,17 @@ export default new Vuex.Store({
           }
         });
     },
+    get_template(context) {
+      axios
+        .get(process.env.VUE_APP_URL_TEMPLATE + '?tmp=tmpk01', {
+          headers: {
+            Authorization: `Bearer ${this.state.user.token}`
+          }
+        })
+        .then(res => {
+          context.commit('set_registered_lecture', res.data);
+        });
+    },
     doSave({ commit }) {
       commit('save');
     },
