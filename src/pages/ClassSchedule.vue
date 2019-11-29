@@ -1,7 +1,7 @@
 <template>
   <div class="mx-4">
     <!--{{ $store.state.can_register_lectures }}-->
-    <!-- {{ $store.state.registered_lectures }} -->
+    {{ $store.state.registered_lectures }}
     <!-- {{ $store.state.unit_list }} -->
     <!-- {{ $store.state.user }} -->
     <!-- {{ $route.path }} -->
@@ -305,7 +305,9 @@ export default {
     this.$store.commit('unit_calculate');
   },
   methods: {
-    template_lectuers() {},
+    template_lectuers() {
+      this.$store.dispatch('get_template');
+    },
     diff_unit(total_unit, enough_unit) {
       let diff_unit = enough_unit - total_unit;
       if (diff_unit < 0) {
