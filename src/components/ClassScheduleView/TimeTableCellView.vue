@@ -1,5 +1,5 @@
 <template>
-  <div class="height_240">
+  <div class="height_320">
     <div v-if="lecture == null">
       <v-card-actions v-if="is_edit && can_register.length >= 1">
         <div v-if="compulsory_decision(can_register)">
@@ -26,7 +26,6 @@
     </div>
     <div v-else>
       <!-- <v-card v-if="test" @click="show_click_down()">aa</v-card> -->
-
       <v-card
         :class="{
           orange: lecture['compulsory'] === '必修',
@@ -37,66 +36,6 @@
           green: lecture['compulsory'] === '選択必修',
           'blue-grey': lecture['classification'] === '総合B'
         }"
-        v-if="test"
-        @click="show_click_down()"
-      >
-        <v-col>
-          <v-card-text class="headline white--text">
-            <b>{{ lecture['name'] }}</b>
-
-            <template v-if="lecture['name'].length <= 15">
-              <br />
-              <template v-if="lecture.unit == 0"
-                >{{ find_unit(lecture) }}単位</template
-              >
-              <template v-else
-                >{{ lecture['unit'] }}単位</template
-              >
-            </template>
-            <!-- <template v-if="lecture.unit == 0">{{ find_unit(lecture) }}単位</template>
-            <template v-else>{{ lecture['unit'] }}単位</template>-->
-            <template v-if="lecture['name'].length <= 10">
-              <br />
-              <template v-if="lecture.teacher_name1.length <= 5">{{ lecture.teacher_name1 }}</template>
-              <template v-else
-                >...</template
-              >
-            </template>
-
-            <template v-else
-              >&nbsp;&nbsp;&nbsp;...</template
-            >
-            <!-- <template v-if="lecture.teacher_name2 !== ' '">他</template> -->
-            <template v-if="$route.path == '/ClassScheduleView'">
-              <br />
-              {{ lecture.place }}
-            </template>
-          </v-card-text>
-          <!--<v-card-actions>
-              <v-btn :href="lecture['syllabus']" target="_blank">シラバス</v-btn>
-          </v-card-actions>-->
-          <v-card-actions v-if="is_edit && can_register.length >= 1">
-            <v-btn @click.stop="dialog = true" small rounded>
-              <v-icon>mdi-border-color</v-icon>
-            </v-btn>
-            <v-btn v-on:click="$store.commit('delete_registered_lecture', lecture)" small rounded>
-              <v-icon>mdi-eraser</v-icon>
-            </v-btn>
-          </v-card-actions>
-        </v-col>
-      </v-card>
-      <v-card
-        :class="{
-          orange: lecture['compulsory'] === '必修',
-          blue:
-            lecture['classification'] === '専門' ||
-            lecture['classification'] === '共通' ||
-            lecture['classification'] === '総合A',
-          green: lecture['compulsory'] === '選択必修',
-          'blue-grey': lecture['classification'] === '総合B'
-        }"
-        v-else
-        @click="show_click_up()"
       >
         <v-col>
           <v-card-text class="headline white--text">
@@ -286,7 +225,7 @@ export default {
   text-shadow: 1px 1px 0 #000, -1px 1px 0 #000, 1px -1px 0 #000, -1px -1px 0 #000;
 }
 
-.height_240 {
-  height: 240px;
+.height_320 {
+  height: 320px;
 }
 </style>
