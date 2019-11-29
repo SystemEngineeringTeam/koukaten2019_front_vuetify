@@ -223,6 +223,11 @@
         <span>単位確認</span>
         <v-icon>mdi-numeric</v-icon>
       </v-btn>
+
+      <v-btn value="unit" v-on:click="template_lectuers">
+        <span>テンプレート</span>
+        <v-icon>mdi-pencil</v-icon>
+      </v-btn>
     </v-bottom-navigation>
 
     <v-bottom-sheet v-model="sheet">
@@ -300,6 +305,9 @@ export default {
     this.$store.commit('unit_calculate');
   },
   methods: {
+    template_lectuers(){
+
+    },
     diff_unit(total_unit, enough_unit) {
       let diff_unit = enough_unit - total_unit;
       if (diff_unit < 0) {
