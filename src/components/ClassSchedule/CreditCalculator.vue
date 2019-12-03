@@ -364,7 +364,7 @@ export default {
       detail_graduate_unit: {
         必修: {
           共通: 4,
-          専門: 46,
+          専門: 16,
           総合A: 4
         },
         選択: {
