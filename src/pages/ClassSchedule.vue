@@ -4,8 +4,9 @@
     <!-- {{ $store.state.registered_lectures }} -->
     <!-- {{ $store.state.unit_list }} -->
     <!-- {{ $store.state.user }} -->
-    <!-- {{ $store.state.failure}} -->
+    {{ $store.state.failure }}
     <!-- {{ $route.path }} -->
+
     <v-container>
       <v-row>
         <v-col cols="12">
@@ -72,15 +73,15 @@
             </v-tab-item>
           </v-tabs-items>
           <!-- <v-tabs v-model="tabs" show-arrows grow>
-            <v-tab
-              class="headline"
-              v-for="timetable in $store.state.timetables"
-              :key="timetable.id"
-              v-on:click="$store.commit('set_looking_timetable', timetable)"
-            >
-              <b>{{ timetable.grade }}{{ timetable.semester }}</b>
-            </v-tab>
-          </v-tabs>-->
+        <v-tab
+        class="headline"
+        v-for="timetable in $store.state.timetables"
+        :key="timetable.id"
+        v-on:click="$store.commit('set_looking_timetable', timetable)"
+        >
+        <b>{{ timetable.grade }}{{ timetable.semester }}</b>
+      </v-tab>
+    </v-tabs>-->
         </v-col>
       </v-row>
     </v-container>
@@ -342,7 +343,7 @@ export default {
         return self.findIndex(object => object.subject_code === e.subject_code) === i;
       });
 
-      before_post_registered_lectures.forEach(lectures =>{
+      before_post_registered_lectures.forEach(lectures => {
         this.$store.state.failure.forEach(failures => {
           // console.log(lectures.subject_code, failures.subject_code);
           // console.log(lectures.class_code, failures.class_code);
@@ -356,21 +357,21 @@ export default {
             });
             flag = false;
             // console.log(1);
-            console.log(flag);
+            // console.log(flag);
           }
         });
         // console.log(flag);
         if (flag) {
-        data.push({
-          students_id: students_id,
-          subject_code: lectures.subject_code,
-          class_code: lectures.class_code,
-          course_grade: lectures.grade,
-          grade_point: 'Future'
-           });
-          }
-          flag = true;
-        });
+          data.push({
+            students_id: students_id,
+            subject_code: lectures.subject_code,
+            class_code: lectures.class_code,
+            course_grade: lectures.grade,
+            grade_point: 'Future'
+          });
+        }
+        flag = true;
+      });
 
       return data;
     },
