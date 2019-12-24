@@ -111,7 +111,9 @@ export default new Vuex.Store({
       grade: 0,
       major: '',
       token: ''
-    }
+    },
+    discouraged_lecture: {},
+    failure: []
   },
   mutations: {
     // get_editor(student) {
@@ -125,7 +127,9 @@ export default new Vuex.Store({
     //             Vue.set(this, 'timetable_editor', res.data);
     //         });
     // },
-
+    set_failure(state, failures) {
+      state.failure.push(failures);
+    },
     set_is_enough_unit_graduate(state, bool) {
       Vue.set(state, 'is_enough_unit_graduate', bool);
     },
@@ -227,6 +231,9 @@ export default new Vuex.Store({
       if (index >= 0) {
         state.registered_lectures.splice(index, codes.continuous);
       }
+    },
+    set_discouraged_lecture(state, discouraged_lecture) {
+      Vue.set(state, 'discouraged_lecture', discouraged_lecture);
     },
     logout(state) {
       Vue.set(state.user, 'logined', false);
