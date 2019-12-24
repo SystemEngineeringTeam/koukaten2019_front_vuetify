@@ -83,6 +83,11 @@
               <v-icon>mdi-eraser</v-icon>
             </v-btn>
           </v-card-actions>
+          <v-card-actions v-if="is_edit && can_register.length >= 1">
+            <v-btn v-on:click="click_failure(lecture.subject_code, lecture.class_code)" small rounded>落</v-btn>
+          </v-card-actions>
+          <!-- {{lecture.subject_code}}
+          {{lecture.class_code}}-->
         </v-col>
       </v-card>
       <v-card
@@ -221,6 +226,9 @@ export default {
     },
     show_click_down() {
       this.test = false;
+    },
+    click_failure(subject_code, class_code) {
+      this.$store.commit('set_failure', { subject_code: subject_code, class_code: class_code });
     },
     find_unit(lectuer) {
       let continuous_lectuer = this.$store.state.registered_lectures.find(function(l) {
