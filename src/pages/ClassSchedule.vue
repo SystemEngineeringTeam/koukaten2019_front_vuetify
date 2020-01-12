@@ -344,24 +344,24 @@ export default {
       });
 
       before_post_registered_lectures.forEach(lectures => {
-        this.$store.state.failure.forEach(failures => {
-          // console.log(lectures.subject_code, failures.subject_code);
-          // console.log(lectures.class_code, failures.class_code);
-          if (lectures.subject_code === failures.subject_code && lectures.class_code === failures.class_code) {
-            data.push({
-              students_id: students_id,
-              subject_code: lectures.subject_code,
-              class_code: lectures.class_code,
-              course_grade: lectures.grade,
-              grade_point: 'F'
-            });
-            flag = false;
-            // console.log(1);
-            // console.log(flag);
-          }
-        });
+        // this.$store.state.failure.forEach(failures => {
+        //   // console.log(lectures.subject_code, failures.subject_code);
+        //   // console.log(lectures.class_code, failures.class_code);
+        //   if (lectures.subject_code === failures.subject_code && lectures.class_code === failures.class_code) {
+        //     data.push({
+        //       students_id: students_id,
+        //       subject_code: lectures.subject_code,
+        //       class_code: lectures.class_code,
+        //       course_grade: lectures.grade,
+        //       grade_point: 'F'
+        //     });
+        //     flag = false;
+        //     // console.log(1);
+        //     // console.log(flag);
+        //   }
+        // });
         // console.log(flag);
-        if (flag) {
+        // if (flag) {
           data.push({
             students_id: students_id,
             subject_code: lectures.subject_code,
@@ -369,8 +369,8 @@ export default {
             course_grade: lectures.grade,
             grade_point: 'Future'
           });
-        }
-        flag = true;
+        // }
+        // flag = true;
       });
 
       return data;
