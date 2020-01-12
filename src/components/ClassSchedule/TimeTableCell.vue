@@ -83,11 +83,11 @@
               <v-icon>mdi-eraser</v-icon>
             </v-btn>
           </v-card-actions>
-          <v-card-actions v-if="is_edit && can_register.length >= 1">
+          <!-- <v-card-actions v-if="is_edit && can_register.length >= 1">
             <v-btn v-on:click="click_failure(lecture.subject_code, lecture.class_code)" small rounded>落</v-btn>
           </v-card-actions>
-          <!-- {{lecture.subject_code}}
-          {{lecture.class_code}}-->
+          {{lecture.subject_code}}
+          {{lecture.class_code}} -->
         </v-col>
       </v-card>
       <v-card
