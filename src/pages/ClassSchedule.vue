@@ -4,7 +4,7 @@
     <!-- {{ $store.state.registered_lectures }} -->
     <!-- {{ $store.state.unit_list }} -->
     <!-- {{ $store.state.user }} -->
-    {{ $store.state.failure }}
+    <!-- {{ $store.state.failure }} -->
     <!-- {{ $route.path }} -->
 
     <v-container>
